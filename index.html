@@ -404,6 +404,168 @@
   <!-- ══════════════════════════════════════════════════
        BOSS BODIES
   ══════════════════════════════════════════════════ -->
+  <div class="card card--on" id="card-on">
+    <div class="card-header">
+      <div class="brand-tag">
+        <div class="brand-icon">ON</div>
+        <div class="brand-info">
+          <h2>ONEST Health</h2>
+          <div class="tagline">Supplements &amp; Retail</div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <span class="last-updated">Last updated</span>
+        <span class="last-updated-time" id="ts-on">—</span>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="kpi-grid">
+
+        <!-- Monthly Revenue -->
+        <div class="kpi" id="kpi-on-revenue" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-on-revenue"></span>
+            Monthly Revenue
+          </div>
+          <div class="kpi-value-row">
+            <span style="font-size:18px;color:var(--muted);align-self:center">$</span>
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-on-revenue"
+              data-key="on-revenue"
+              data-type="currency"
+              data-target=""
+              data-dir="none"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+          </div>
+          <div class="kpi-target">Tracking only</div>
+        </div>
+
+        <!-- Retail partners -->
+        <div class="kpi" id="kpi-on-partners" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-on-partners"></span>
+            Retail Partners
+          </div>
+          <div class="kpi-value-row">
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-on-partners"
+              data-key="on-partners"
+              data-type="number"
+              data-target="350"
+              data-dir="gte"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >350</div>
+          </div>
+          <div class="kpi-target">Currently 350+</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill neutral" id="bar-on-partners" style="width:0%"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+      <div class="section-label">Status &amp; Campaigns</div>
+
+      <div class="field-group">
+        <div class="field-item">
+          <label class="field-label" for="val-on-us">🇺🇸 US Expansion Status</label>
+          <input
+            class="field-input"
+            type="text"
+            id="val-on-us"
+            data-key="on-us"
+            data-card="on"
+            placeholder="e.g. In progress — launch Q2 2026…"
+            oninput="saveField(this)"
+          />
+        </div>
+        <div class="field-item">
+          <label class="field-label" for="val-on-campaign">📣 Current Campaign</label>
+          <input
+            class="field-input"
+            type="text"
+            id="val-on-campaign"
+            data-key="on-campaign"
+            data-card="on"
+            placeholder="e.g. Retailers Summer Push…"
+            oninput="saveField(this)"
+          />
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="card card--nu" id="card-nu">
+    <div class="card-header">
+      <div class="brand-tag">
+        <div class="brand-icon">NU</div>
+        <div class="brand-info">
+          <h2>NewU</h2>
+          <div class="tagline">App Platform</div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <span class="last-updated">Last updated</span>
+        <span class="last-updated-time" id="ts-nu">—</span>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="kpi-grid">
+        <div class="kpi" id="kpi-nu-build" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-nu-build"></span>
+            App Build Status
+          </div>
+          <div class="kpi-value-row">
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-nu-build"
+              data-key="nu-build"
+              data-type="percent"
+              data-target="100"
+              data-dir="gte"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
+          </div>
+          <div class="kpi-target">Target: 100% complete</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill neutral" id="bar-nu-build" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="section-label">Notes</div>
+
+      <div class="field-group">
+        <div class="field-item">
+          <textarea
+            class="field-input"
+            id="val-nu-notes"
+            data-key="nu-notes"
+            data-card="nu"
+            placeholder="Add notes here…"
+            oninput="saveField(this)"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <div class="card card--bb" id="card-bb">
     <div class="card-header">
       <div class="brand-tag">
@@ -610,116 +772,68 @@
 
     </div>
   </div>
-
-
-  <!-- ══════════════════════════════════════════════════
-       ONEST HEALTH
-  ══════════════════════════════════════════════════ -->
-  <div class="card card--on" id="card-on">
+  <div class="card card--pf" id="card-pf">
     <div class="card-header">
       <div class="brand-tag">
-        <div class="brand-icon">ON</div>
+        <div class="brand-icon">PC</div>
         <div class="brand-info">
-          <h2>ONEST Health</h2>
-          <div class="tagline">Supplements &amp; Retail</div>
+          <h2>Perform Creative</h2>
+          <div class="tagline">Creative Platform</div>
         </div>
       </div>
       <div class="card-meta">
         <span class="last-updated">Last updated</span>
-        <span class="last-updated-time" id="ts-on">—</span>
+        <span class="last-updated-time" id="ts-pf">—</span>
       </div>
     </div>
     <div class="card-body">
 
       <div class="kpi-grid">
-
-        <!-- Monthly Revenue -->
-        <div class="kpi" id="kpi-on-revenue" onclick="focusKpi(this)">
+        <div class="kpi" id="kpi-pf-build" onclick="focusKpi(this)">
           <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-on-revenue"></span>
-            Monthly Revenue
-          </div>
-          <div class="kpi-value-row">
-            <span style="font-size:18px;color:var(--muted);align-self:center">$</span>
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-on-revenue"
-              data-key="on-revenue"
-              data-type="currency"
-              data-target=""
-              data-dir="none"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-          </div>
-          <div class="kpi-target">Tracking only</div>
-        </div>
-
-        <!-- Retail partners -->
-        <div class="kpi" id="kpi-on-partners" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-on-partners"></span>
-            Retail Partners
+            <span class="status-dot neutral" id="dot-pf-build"></span>
+            Build Status
           </div>
           <div class="kpi-value-row">
             <div
               class="kpi-value"
               contenteditable="true"
-              id="val-on-partners"
-              data-key="on-partners"
-              data-type="number"
-              data-target="350"
+              id="val-pf-build"
+              data-key="pf-build"
+              data-type="percent"
+              data-target="100"
               data-dir="gte"
               onblur="saveKpi(this)"
               oninput="updateKpiStatus(this)"
-            >350</div>
+            >0</div>
+            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
           </div>
-          <div class="kpi-target">Currently 350+</div>
+          <div class="kpi-target">Target: 100% complete</div>
           <div class="progress-bar-wrap">
-            <div class="progress-bar-fill neutral" id="bar-on-partners" style="width:0%"></div>
+            <div class="progress-bar-fill neutral" id="bar-pf-build" style="width:0%"></div>
           </div>
         </div>
-
       </div>
 
       <div class="divider"></div>
-      <div class="section-label">Status &amp; Campaigns</div>
+      <div class="section-label">Notes</div>
 
       <div class="field-group">
         <div class="field-item">
-          <label class="field-label" for="val-on-us">🇺🇸 US Expansion Status</label>
-          <input
+          <textarea
             class="field-input"
-            type="text"
-            id="val-on-us"
-            data-key="on-us"
-            data-card="on"
-            placeholder="e.g. In progress — launch Q2 2026…"
+            id="val-pf-notes"
+            data-key="pf-notes"
+            data-card="pf"
+            placeholder="Add notes here…"
             oninput="saveField(this)"
-          />
-        </div>
-        <div class="field-item">
-          <label class="field-label" for="val-on-campaign">📣 Current Campaign</label>
-          <input
-            class="field-input"
-            type="text"
-            id="val-on-campaign"
-            data-key="on-campaign"
-            data-card="on"
-            placeholder="e.g. Retailers Summer Push…"
-            oninput="saveField(this)"
-          />
+            rows="4"
+          ></textarea>
         </div>
       </div>
 
     </div>
   </div>
-
-
-  <!-- ══════════════════════════════════════════════════
-       BEPRIME
-  ══════════════════════════════════════════════════ -->
   <div class="card card--bp" id="card-bp">
     <div class="card-header">
       <div class="brand-tag">
@@ -798,140 +912,6 @@
             id="val-bp-notes"
             data-key="bp-notes"
             data-card="bp"
-            placeholder="Add notes here…"
-            oninput="saveField(this)"
-            rows="4"
-          ></textarea>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <!-- ══════════════════════════════════════════════════
-       NewU
-  ══════════════════════════════════════════════════ -->
-  <div class="card card--nu" id="card-nu">
-    <div class="card-header">
-      <div class="brand-tag">
-        <div class="brand-icon">NU</div>
-        <div class="brand-info">
-          <h2>NewU</h2>
-          <div class="tagline">App Platform</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="last-updated">Last updated</span>
-        <span class="last-updated-time" id="ts-nu">—</span>
-      </div>
-    </div>
-    <div class="card-body">
-
-      <div class="kpi-grid">
-        <div class="kpi" id="kpi-nu-build" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-nu-build"></span>
-            App Build Status
-          </div>
-          <div class="kpi-value-row">
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-nu-build"
-              data-key="nu-build"
-              data-type="percent"
-              data-target="100"
-              data-dir="gte"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
-          </div>
-          <div class="kpi-target">Target: 100% complete</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill neutral" id="bar-nu-build" style="width:0%"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-      <div class="section-label">Notes</div>
-
-      <div class="field-group">
-        <div class="field-item">
-          <textarea
-            class="field-input"
-            id="val-nu-notes"
-            data-key="nu-notes"
-            data-card="nu"
-            placeholder="Add notes here…"
-            oninput="saveField(this)"
-            rows="4"
-          ></textarea>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <!-- ══════════════════════════════════════════════════
-       PERFORM CREATIVE
-  ══════════════════════════════════════════════════ -->
-  <div class="card card--pf" id="card-pf">
-    <div class="card-header">
-      <div class="brand-tag">
-        <div class="brand-icon">PC</div>
-        <div class="brand-info">
-          <h2>Perform Creative</h2>
-          <div class="tagline">Creative Platform</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="last-updated">Last updated</span>
-        <span class="last-updated-time" id="ts-pf">—</span>
-      </div>
-    </div>
-    <div class="card-body">
-
-      <div class="kpi-grid">
-        <div class="kpi" id="kpi-pf-build" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-pf-build"></span>
-            Build Status
-          </div>
-          <div class="kpi-value-row">
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-pf-build"
-              data-key="pf-build"
-              data-type="percent"
-              data-target="100"
-              data-dir="gte"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
-          </div>
-          <div class="kpi-target">Target: 100% complete</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill neutral" id="bar-pf-build" style="width:0%"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-      <div class="section-label">Notes</div>
-
-      <div class="field-group">
-        <div class="field-item">
-          <textarea
-            class="field-input"
-            id="val-pf-notes"
-            data-key="pf-notes"
-            data-card="pf"
             placeholder="Add notes here…"
             oninput="saveField(this)"
             rows="4"
