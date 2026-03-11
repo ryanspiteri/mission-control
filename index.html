@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mission Control — Ryan Spiteri</title>
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a0a;
+      --surface:     #111111;
+      --surface2:    #181818;
+      --border:      #242424;
+      --border-glow: #333333;
+      --text:        #f0f0f0;
+      --muted:       #666666;
+      --subtle:      #2a2a2a;
+
+      /* Status colours */
+      --green:  #22c55e;
+      --amber:  #f59e0b;
+      --red:    #ef4444;
+      --green-bg: rgba(34,197,94,.1);
+      --amber-bg: rgba(245,158,11,.1);
+      --red-bg:   rgba(239,68,68,.1);
+
+      /* Brand — Boss Bodies */
+      --bb-red:    #e01e37;
+      --bb-red-d:  #a01020;
+
+      /* Brand — BEPRIME */
+      --bp-terra:  #c4714a;
+      --bp-sage:   #7a9e7e;
+      --bp-cream:  #e8dcc8;
+
+      /* Brand — ONEST */
+      --on-blue:   #2563eb;
+      --on-blue-d: #1e40af;
+
+      /* Brand — NewU */
+      --nu-purple: #7c3aed;
+
+      /* Brand — Perform */
+      --pf-gold:   #d97706;
+
+      --radius: 14px;
+      --card-pad: 28px;
+      --transition: .18s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* ─── Header ──────────────────────────────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,10,.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+
+    .header-left {
+      display: flex; align-items: center; gap: 14px;
+    }
+
+    .logo-mark {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; color: #000;
+      letter-spacing: -1px;
+    }
+
+    .header-title {
+      font-size: 17px; font-weight: 600; letter-spacing: -.3px;
+      color: var(--text);
+    }
+
+    .header-title span {
+      color: var(--muted);
+      font-weight: 400;
+      font-size: 14px;
+      margin-left: 8px;
+    }
+
+    .header-right {
+      display: flex; align-items: center; gap: 20px;
+    }
+
+    .live-clock {
+      font-size: 13px; color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .5px;
+    }
+
+    .reset-all-btn {
+      font-size: 12px; color: var(--muted);
+      background: none; border: 1px solid var(--border);
+      padding: 5px 12px; border-radius: 6px;
+      cursor: pointer; transition: var(--transition);
+    }
+    .reset-all-btn:hover { border-color: var(--red); color: var(--red); }
+
+    /* ─── Layout ──────────────────────────────────────────────────────── */
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 36px 24px 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 24px;
+    }
+
+    /* ─── Card ────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    .card:hover {
+      border-color: var(--border-glow);
+      box-shadow: 0 0 0 1px var(--border-glow), 0 8px 40px rgba(0,0,0,.5);
+    }
+
+    /* accent stripe at top */
+    .card::before {
+      content: '';
+      display: block; height: 3px; width: 100%;
+      background: var(--accent-gradient);
+    }
+
+    /* Boss Bodies wide card */
+    .card--bb { --accent-gradient: linear-gradient(90deg, var(--bb-red-d), var(--bb-red), #ff4d6d); }
+    .card--bb { grid-column: span 2; }
+
+    .card--on { --accent-gradient: linear-gradient(90deg, var(--on-blue-d), var(--on-blue), #60a5fa); }
+    .card--bp { --accent-gradient: linear-gradient(90deg, var(--bp-terra), var(--bp-sage)); }
+    .card--nu { --accent-gradient: linear-gradient(90deg, var(--nu-purple), #a78bfa); }
+    .card--pf { --accent-gradient: linear-gradient(90deg, var(--pf-gold), #fbbf24, #fde68a); }
+
+    /* ─── Card Header ─────────────────────────────────────────────────── */
+    .card-header {
+      padding: 22px var(--card-pad) 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand-tag {
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .brand-icon {
+      width: 36px; height: 36px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; font-weight: 800; letter-spacing: -1px;
+      flex-shrink: 0;
+    }
+
+    .card--bb .brand-icon { background: var(--bb-red); color: #fff; }
+    .card--on .brand-icon { background: var(--on-blue); color: #fff; }
+    .card--bp .brand-icon { background: var(--bp-terra); color: #fff; }
+    .card--nu .brand-icon { background: var(--nu-purple); color: #fff; }
+    .card--pf .brand-icon { background: var(--pf-gold); color: #000; }
+
+    .brand-info h2 {
+      font-size: 16px; font-weight: 700; letter-spacing: -.3px;
+      line-height: 1.2;
+    }
+    .brand-info .tagline {
+      font-size: 11.5px; color: var(--muted); margin-top: 1px;
+    }
+
+    .card-meta {
+      text-align: right;
+    }
+    .last-updated {
+      font-size: 11px; color: var(--muted);
+      display: block; margin-bottom: 4px;
+    }
+    .last-updated-time {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ─── Card Body ───────────────────────────────────────────────────── */
+    .card-body { padding: var(--card-pad); }
+
+    /* ─── KPI Grid ────────────────────────────────────────────────────── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .kpi {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      position: relative;
+      transition: border-color var(--transition);
+      cursor: pointer;
+    }
+    .kpi:hover { border-color: var(--border-glow); }
+
+    .kpi-label {
+      font-size: 11px; font-weight: 500; letter-spacing: .5px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 5px;
+    }
+
+    .kpi-value-row {
+      display: flex; align-items: baseline; gap: 8px;
+    }
+
+    .kpi-value {
+      font-size: 26px; font-weight: 700; letter-spacing: -1px;
+      line-height: 1;
+      outline: none;
+      background: transparent;
+      border: none;
+      color: inherit;
+      width: 100%;
+      cursor: text;
+      font-family: inherit;
+      caret-color: var(--text);
+    }
+    .kpi-value:focus {
+      color: #fff;
+    }
+
+    .kpi-target {
+      font-size: 11px; color: var(--muted); margin-top: 6px;
+      white-space: nowrap;
+    }
+
+    /* Status dot */
+    .status-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      display: inline-block; flex-shrink: 0;
+    }
+    .status-dot.green { background: var(--green); box-shadow: 0 0 6px var(--green); }
+    .status-dot.amber { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+    .status-dot.red   { background: var(--red);   box-shadow: 0 0 6px var(--red); }
+    .status-dot.neutral { background: var(--muted); }
+
+    /* Status tint on kpi background */
+    .kpi.s-green { border-color: rgba(34,197,94,.3); background: rgba(34,197,94,.04); }
+    .kpi.s-amber { border-color: rgba(245,158,11,.3); background: rgba(245,158,11,.04); }
+    .kpi.s-red   { border-color: rgba(239,68,68,.3);  background: rgba(239,68,68,.04); }
+
+    /* ─── Progress bar ─────────────────────────────────────────────────── */
+    .progress-bar-wrap {
+      height: 3px; background: var(--subtle);
+      border-radius: 2px; margin-top: 10px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; border-radius: 2px;
+      transition: width .4s ease;
+    }
+    .progress-bar-fill.green { background: var(--green); }
+    .progress-bar-fill.amber { background: var(--amber); }
+    .progress-bar-fill.red   { background: var(--red); }
+
+    /* ─── Text / Select Fields ─────────────────────────────────────────── */
+    .field-group {
+      display: flex; flex-direction: column; gap: 12px;
+      margin-top: 4px;
+    }
+
+    .field-item {
+      display: flex; flex-direction: column; gap: 5px;
+    }
+
+    .field-label {
+      font-size: 11px; font-weight: 500; letter-spacing: .5px;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    .field-input {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      padding: 9px 12px;
+      resize: none;
+      outline: none;
+      transition: border-color var(--transition);
+      width: 100%;
+    }
+    .field-input:focus { border-color: var(--border-glow); }
+    .field-input::placeholder { color: var(--muted); }
+
+    textarea.field-input { min-height: 72px; }
+
+    /* Status select */
+    .status-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 30px;
+      cursor: pointer;
+    }
+
+    /* ─── Divider ─────────────────────────────────────────────────────── */
+    .divider {
+      height: 1px; background: var(--border);
+      margin: 20px 0;
+    }
+
+    /* ─── Section label ───────────────────────────────────────────────── */
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* ─── Active Clients badge ────────────────────────────────────────── */
+    .clients-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 9px 14px;
+      font-size: 24px; font-weight: 700; letter-spacing: -1px;
+    }
+    .clients-badge-label { font-size: 12px; color: var(--muted); font-weight: 400; }
+
+    /* ─── Edit hint ───────────────────────────────────────────────────── */
+    .edit-hint {
+      font-size: 11px; color: var(--muted);
+      display: flex; align-items: center; gap: 5px;
+      margin-top: 18px;
+    }
+    .edit-hint svg { opacity: .5; }
+
+    /* ─── Responsive ──────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .card--bb { grid-column: span 1; }
+      main { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Toast ───────────────────────────────────────────────────────── */
+    #toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(60px);
+      background: var(--surface2); border: 1px solid var(--border-glow);
+      color: var(--text); font-size: 13px; padding: 10px 20px;
+      border-radius: 99px; opacity: 0;
+      transition: opacity .2s, transform .2s;
+      pointer-events: none; z-index: 999;
+      white-space: nowrap;
+    }
+    #toast.show {
+      opacity: 1; transform: translateX(-50%) translateY(0);
+    }
+
+    /* ─── Scrollbar ───────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ─── Selection ───────────────────────────────────────────────────── */
+    ::selection { background: rgba(255,255,255,.15); }
+  </style>
+</head>
+<body>
+
+<!-- ─── Header ──────────────────────────────────────────────────────────── -->
+<header>
+  <div class="header-left">
+    <div class="logo-mark">MC</div>
+    <div class="header-title">
+      Mission Control
+      <span>Ryan Spiteri</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="live-clock" id="clock"></div>
+    <button class="reset-all-btn" onclick="resetAll()">Reset All Data</button>
+  </div>
+</header>
+
+<!-- ─── Main Grid ────────────────────────────────────────────────────────── -->
+<main id="dashboard">
+
+  <!-- ══════════════════════════════════════════════════
+       BOSS BODIES
+  ══════════════════════════════════════════════════ -->
+  <div class="card card--bb" id="card-bb">
+    <div class="card-header">
+      <div class="brand-tag">
+        <div class="brand-icon">BB</div>
+        <div class="brand-info">
+          <h2>Boss Bodies</h2>
+          <div class="tagline">Online Fitness Coaching</div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <span class="last-updated">Last updated</span>
+        <span class="last-updated-time" id="ts-bb">—</span>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="section-label">KPI Metrics</div>
+      <div class="kpi-grid">
+
+        <!-- Revenue -->
+        <div class="kpi" id="kpi-bb-revenue" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-bb-revenue"></span>
+            Revenue / Month
+          </div>
+          <div class="kpi-value-row">
+            <span style="font-size:18px;color:var(--muted);align-self:center">$</span>
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-bb-revenue"
+              data-key="bb-revenue"
+              data-type="currency"
+              data-target="100000"
+              data-dir="gte"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+          </div>
+          <div class="kpi-target">Target: $100K / month</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill neutral" id="bar-bb-revenue" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Cost per lead -->
+        <div class="kpi" id="kpi-bb-cpl" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-bb-cpl"></span>
+            Cost Per Lead
+          </div>
+          <div class="kpi-value-row">
+            <span style="font-size:18px;color:var(--muted);align-self:center">$</span>
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-bb-cpl"
+              data-key="bb-cpl"
+              data-type="currency"
+              data-target="15"
+              data-dir="lte"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+          </div>
+          <div class="kpi-target">Target: &lt;$15</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill neutral" id="bar-bb-cpl" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- DM-to-call booking rate -->
+        <div class="kpi" id="kpi-bb-dmcall" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-bb-dmcall"></span>
+            DM → Call Rate
+          </div>
+          <div class="kpi-value-row">
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-bb-dmcall"
+              data-key="bb-dmcall"
+              data-type="percent"
+              data-target="40"
+              data-dir="gte"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
+          </div>
+          <div class="kpi-target">Target: 40%</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill neutral" id="bar-bb-dmcall" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Call show rate -->
+        <div class="kpi" id="kpi-bb-showrate" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-bb-showrate"></span>
+            Call Show Rate
+          </div>
+          <div class="kpi-value-row">
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-bb-showrate"
+              data-key="bb-showrate"
+              data-type="percent"
+              data-target="60"
+              data-dir="gte"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
+          </div>
+          <div class="kpi-target">Target: &gt;60%</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill neutral" id="bar-bb-showrate" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Close rate -->
+        <div class="kpi" id="kpi-bb-close" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-bb-close"></span>
+            Close Rate
+          </div>
+          <div class="kpi-value-row">
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-bb-close"
+              data-key="bb-close"
+              data-type="percent"
+              data-target="30"
+              data-dir="gte"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
+          </div>
+          <div class="kpi-target">Target: &gt;30%</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill neutral" id="bar-bb-close" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Client retention 90d -->
+        <div class="kpi" id="kpi-bb-retention" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-bb-retention"></span>
+            Retention @ 90d
+          </div>
+          <div class="kpi-value-row">
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-bb-retention"
+              data-key="bb-retention"
+              data-type="percent"
+              data-target="85"
+              data-dir="gte"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
+          </div>
+          <div class="kpi-target">Target: &gt;85%</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill neutral" id="bar-bb-retention" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Active clients -->
+        <div class="kpi" id="kpi-bb-clients" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-bb-clients"></span>
+            Active Clients
+          </div>
+          <div class="kpi-value-row">
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-bb-clients"
+              data-key="bb-clients"
+              data-type="number"
+              data-target=""
+              data-dir="none"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+          </div>
+          <div class="kpi-target">Tracking only</div>
+        </div>
+
+      </div><!-- /kpi-grid -->
+
+      <div class="edit-hint">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Click any metric to edit — changes save automatically
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       ONEST HEALTH
+  ══════════════════════════════════════════════════ -->
+  <div class="card card--on" id="card-on">
+    <div class="card-header">
+      <div class="brand-tag">
+        <div class="brand-icon">ON</div>
+        <div class="brand-info">
+          <h2>ONEST Health</h2>
+          <div class="tagline">Supplements &amp; Retail</div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <span class="last-updated">Last updated</span>
+        <span class="last-updated-time" id="ts-on">—</span>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="kpi-grid">
+
+        <!-- Monthly Revenue -->
+        <div class="kpi" id="kpi-on-revenue" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-on-revenue"></span>
+            Monthly Revenue
+          </div>
+          <div class="kpi-value-row">
+            <span style="font-size:18px;color:var(--muted);align-self:center">$</span>
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-on-revenue"
+              data-key="on-revenue"
+              data-type="currency"
+              data-target=""
+              data-dir="none"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+          </div>
+          <div class="kpi-target">Tracking only</div>
+        </div>
+
+        <!-- Retail partners -->
+        <div class="kpi" id="kpi-on-partners" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-on-partners"></span>
+            Retail Partners
+          </div>
+          <div class="kpi-value-row">
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-on-partners"
+              data-key="on-partners"
+              data-type="number"
+              data-target="350"
+              data-dir="gte"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >350</div>
+          </div>
+          <div class="kpi-target">Currently 350+</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill neutral" id="bar-on-partners" style="width:0%"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+      <div class="section-label">Status &amp; Campaigns</div>
+
+      <div class="field-group">
+        <div class="field-item">
+          <label class="field-label" for="val-on-us">🇺🇸 US Expansion Status</label>
+          <input
+            class="field-input"
+            type="text"
+            id="val-on-us"
+            data-key="on-us"
+            data-card="on"
+            placeholder="e.g. In progress — launch Q2 2026…"
+            oninput="saveField(this)"
+          />
+        </div>
+        <div class="field-item">
+          <label class="field-label" for="val-on-campaign">📣 Current Campaign</label>
+          <input
+            class="field-input"
+            type="text"
+            id="val-on-campaign"
+            data-key="on-campaign"
+            data-card="on"
+            placeholder="e.g. Retailers Summer Push…"
+            oninput="saveField(this)"
+          />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       BEPRIME
+  ══════════════════════════════════════════════════ -->
+  <div class="card card--bp" id="card-bp">
+    <div class="card-header">
+      <div class="brand-tag">
+        <div class="brand-icon">BP</div>
+        <div class="brand-info">
+          <h2>BEPRIME</h2>
+          <div class="tagline">Premium Coaching Platform</div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <span class="last-updated">Last updated</span>
+        <span class="last-updated-time" id="ts-bp">—</span>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="kpi-grid">
+
+        <!-- Portal build -->
+        <div class="kpi" id="kpi-bp-portal" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-bp-portal"></span>
+            Portal Build
+          </div>
+          <div class="kpi-value-row">
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-bp-portal"
+              data-key="bp-portal"
+              data-type="percent"
+              data-target="100"
+              data-dir="gte"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
+          </div>
+          <div class="kpi-target">Target: 100% complete</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill neutral" id="bar-bp-portal" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Active clients -->
+        <div class="kpi" id="kpi-bp-clients" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-bp-clients"></span>
+            Active Clients
+          </div>
+          <div class="kpi-value-row">
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-bp-clients"
+              data-key="bp-clients"
+              data-type="number"
+              data-target=""
+              data-dir="none"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+          </div>
+          <div class="kpi-target">Tracking only</div>
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+      <div class="section-label">Notes</div>
+
+      <div class="field-group">
+        <div class="field-item">
+          <textarea
+            class="field-input"
+            id="val-bp-notes"
+            data-key="bp-notes"
+            data-card="bp"
+            placeholder="Add notes here…"
+            oninput="saveField(this)"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       NewU
+  ══════════════════════════════════════════════════ -->
+  <div class="card card--nu" id="card-nu">
+    <div class="card-header">
+      <div class="brand-tag">
+        <div class="brand-icon">NU</div>
+        <div class="brand-info">
+          <h2>NewU</h2>
+          <div class="tagline">App Platform</div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <span class="last-updated">Last updated</span>
+        <span class="last-updated-time" id="ts-nu">—</span>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="kpi-grid">
+        <div class="kpi" id="kpi-nu-build" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-nu-build"></span>
+            App Build Status
+          </div>
+          <div class="kpi-value-row">
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-nu-build"
+              data-key="nu-build"
+              data-type="percent"
+              data-target="100"
+              data-dir="gte"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
+          </div>
+          <div class="kpi-target">Target: 100% complete</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill neutral" id="bar-nu-build" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="section-label">Notes</div>
+
+      <div class="field-group">
+        <div class="field-item">
+          <textarea
+            class="field-input"
+            id="val-nu-notes"
+            data-key="nu-notes"
+            data-card="nu"
+            placeholder="Add notes here…"
+            oninput="saveField(this)"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       PERFORM CREATIVE
+  ══════════════════════════════════════════════════ -->
+  <div class="card card--pf" id="card-pf">
+    <div class="card-header">
+      <div class="brand-tag">
+        <div class="brand-icon">PC</div>
+        <div class="brand-info">
+          <h2>Perform Creative</h2>
+          <div class="tagline">Creative Platform</div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <span class="last-updated">Last updated</span>
+        <span class="last-updated-time" id="ts-pf">—</span>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="kpi-grid">
+        <div class="kpi" id="kpi-pf-build" onclick="focusKpi(this)">
+          <div class="kpi-label">
+            <span class="status-dot neutral" id="dot-pf-build"></span>
+            Build Status
+          </div>
+          <div class="kpi-value-row">
+            <div
+              class="kpi-value"
+              contenteditable="true"
+              id="val-pf-build"
+              data-key="pf-build"
+              data-type="percent"
+              data-target="100"
+              data-dir="gte"
+              onblur="saveKpi(this)"
+              oninput="updateKpiStatus(this)"
+            >0</div>
+            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
+          </div>
+          <div class="kpi-target">Target: 100% complete</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill neutral" id="bar-pf-build" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="section-label">Notes</div>
+
+      <div class="field-group">
+        <div class="field-item">
+          <textarea
+            class="field-input"
+            id="val-pf-notes"
+            data-key="pf-notes"
+            data-card="pf"
+            placeholder="Add notes here…"
+            oninput="saveField(this)"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- ─── Toast ─────────────────────────────────────────────────────────────── -->
+<div id="toast"></div>
+
+<!-- ─── Scripts ───────────────────────────────────────────────────────────── -->
+<script>
+/* ═══════════════════════════════════════════════════════════
+   STORAGE
+═══════════════════════════════════════════════════════════ */
+const LS_KEY = 'mc_data_v2';
+
+function loadData() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
+  catch { return {}; }
+}
+
+function saveData(data) {
+  localStorage.setItem(LS_KEY, JSON.stringify(data));
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CARD TIMESTAMPS
+═══════════════════════════════════════════════════════════ */
+const cardKeys = {
+  'bb': ['bb-revenue','bb-cpl','bb-dmcall','bb-showrate','bb-close','bb-retention','bb-clients'],
+  'on': ['on-revenue','on-partners','on-us','on-campaign'],
+  'bp': ['bp-portal','bp-clients','bp-notes'],
+  'nu': ['nu-build','nu-notes'],
+  'pf': ['pf-build','pf-notes'],
+};
+
+function touchCard(cardId) {
+  const data = loadData();
+  const ts = Date.now();
+  data[`__ts_${cardId}`] = ts;
+  saveData(data);
+  renderTimestamp(cardId, ts);
+}
+
+function renderTimestamp(cardId, ts) {
+  const el = document.getElementById(`ts-${cardId}`);
+  if (!el) return;
+  if (!ts) { el.textContent = '—'; return; }
+  const d = new Date(ts);
+  el.textContent = d.toLocaleString('en-AU', {
+    day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: true
+  });
+}
+
+function cardForKey(key) {
+  for (const [card, keys] of Object.entries(cardKeys)) {
+    if (keys.includes(key)) return card;
+  }
+  return null;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   KPI STATUS LOGIC
+═══════════════════════════════════════════════════════════ */
+function getStatus(value, target, dir) {
+  if (!dir || dir === 'none' || target === '' || isNaN(value)) return 'neutral';
+  const v = parseFloat(value);
+  const t = parseFloat(target);
+
+  if (dir === 'gte') {
+    if (v >= t) return 'green';
+    if (v >= t * 0.8) return 'amber';
+    return 'red';
+  }
+  if (dir === 'lte') {
+    if (v <= t) return 'green';
+    if (v <= t * 1.3) return 'amber';
+    return 'red';
+  }
+  return 'neutral';
+}
+
+function getProgressPct(value, target, dir) {
+  const v = parseFloat(value);
+  const t = parseFloat(target);
+  if (isNaN(v) || isNaN(t) || t === 0) return 0;
+
+  if (dir === 'gte') return Math.min((v / t) * 100, 100);
+  if (dir === 'lte') {
+    // lower is better; progress = how close to target (inverted ratio)
+    if (v === 0) return 100;
+    return Math.min((t / v) * 100, 100);
+  }
+  return 0;
+}
+
+function updateKpiStatus(el) {
+  const key  = el.dataset.key;
+  const dir  = el.dataset.dir;
+  const target = el.dataset.target;
+  const raw  = el.textContent.trim().replace(/[^0-9.]/g, '');
+  const val  = parseFloat(raw) || 0;
+
+  const status = getStatus(val, target, dir);
+  const pct    = getProgressPct(val, target, dir);
+
+  // dot
+  const dot = document.getElementById(`dot-${key}`);
+  if (dot) {
+    dot.className = `status-dot ${status}`;
+  }
+
+  // card tint
+  const kpiEl = document.getElementById(`kpi-${key}`);
+  if (kpiEl) {
+    kpiEl.className = `kpi s-${status}`;
+  }
+
+  // progress bar
+  const bar = document.getElementById(`bar-${key}`);
+  if (bar) {
+    bar.style.width = pct + '%';
+    bar.className = `progress-bar-fill ${status}`;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   KPI SAVE
+═══════════════════════════════════════════════════════════ */
+function saveKpi(el) {
+  const key = el.dataset.key;
+  const val = el.textContent.trim();
+  const data = loadData();
+  data[key] = val;
+  saveData(data);
+
+  const card = cardForKey(key);
+  if (card) touchCard(card);
+
+  updateKpiStatus(el);
+  showToast('Saved ✓');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FIELD SAVE (text inputs / textareas)
+═══════════════════════════════════════════════════════════ */
+function saveField(el) {
+  const key = el.dataset.key;
+  const card = el.dataset.card;
+  const val = el.value;
+  const data = loadData();
+  data[key] = val;
+  saveData(data);
+  if (card) touchCard(card);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FOCUS HELPER
+═══════════════════════════════════════════════════════════ */
+function focusKpi(kpiEl) {
+  const editable = kpiEl.querySelector('[contenteditable]');
+  if (editable) {
+    editable.focus();
+    // move cursor to end
+    const range = document.createRange();
+    range.selectNodeContents(editable);
+    range.collapse(false);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INIT — LOAD FROM LOCALSTORAGE
+═══════════════════════════════════════════════════════════ */
+function init() {
+  const data = loadData();
+
+  // KPI fields (contenteditable)
+  document.querySelectorAll('[data-key][contenteditable]').forEach(el => {
+    const key = el.dataset.key;
+    if (data[key] !== undefined) {
+      el.textContent = data[key];
+    }
+    updateKpiStatus(el);
+  });
+
+  // Text fields (input/textarea)
+  document.querySelectorAll('input[data-key], textarea[data-key]').forEach(el => {
+    const key = el.dataset.key;
+    if (data[key] !== undefined) {
+      el.value = data[key];
+    }
+  });
+
+  // Timestamps
+  for (const cardId of Object.keys(cardKeys)) {
+    renderTimestamp(cardId, data[`__ts_${cardId}`] || null);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════════════════════ */
+function resetAll() {
+  if (!confirm('⚠️ This will clear ALL data. Are you sure?')) return;
+  localStorage.removeItem(LS_KEY);
+  location.reload();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════════════════ */
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1400);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CLOCK
+═══════════════════════════════════════════════════════════ */
+function updateClock() {
+  const el = document.getElementById('clock');
+  if (!el) return;
+  const now = new Date();
+  el.textContent = now.toLocaleTimeString('en-AU', {
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    hour12: true, timeZone: 'Australia/Brisbane'
+  }) + ' AEST';
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+/* ═══════════════════════════════════════════════════════════
+   PREVENT NEWLINES IN CONTENTEDITABLE KPIs
+═══════════════════════════════════════════════════════════ */
+document.querySelectorAll('.kpi-value').forEach(el => {
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      el.blur();
+    }
+  });
+  // only allow numeric input
+  el.addEventListener('keypress', e => {
+    if (!/[\d.]/.test(e.key)) e.preventDefault();
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   BOOT
+═══════════════════════════════════════════════════════════ */
+init();
+</script>
+</body>
+</html>
