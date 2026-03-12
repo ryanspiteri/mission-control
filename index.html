@@ -5,53 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mission Control — Ryan Spiteri</title>
   <style>
-    /* ─── Reset & Base ─────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:          #0a0a0a;
-      --surface:     #111111;
-      --surface2:    #181818;
-      --border:      #242424;
-      --border-glow: #333333;
-      --text:        #f0f0f0;
-      --muted:       #666666;
-      --subtle:      #2a2a2a;
+      --bg:        #080808;
+      --surface:   #111111;
+      --surface2:  #181818;
+      --border:    #1e1e1e;
+      --border-hi: #2e2e2e;
+      --text:      #efefef;
+      --muted:     #555;
+      --subtle:    #222;
 
-      /* Status colours */
-      --green:  #22c55e;
-      --amber:  #f59e0b;
-      --red:    #ef4444;
-      --green-bg: rgba(34,197,94,.1);
-      --amber-bg: rgba(245,158,11,.1);
-      --red-bg:   rgba(239,68,68,.1);
+      --green:     #22c55e;
+      --amber:     #f59e0b;
+      --red:       #ef4444;
+      --blue:      #3b82f6;
+      --purple:    #8b5cf6;
 
-      /* Brand — Boss Bodies */
-      --bb-red:    #e01e37;
-      --bb-red-d:  #a01020;
+      --green-bg:  rgba(34,197,94,.08);
+      --amber-bg:  rgba(245,158,11,.08);
+      --red-bg:    rgba(239,68,68,.08);
+      --blue-bg:   rgba(59,130,246,.08);
 
-      /* Brand — BEPRIME */
-      --bp-terra:  #c4714a;
-      --bp-sage:   #7a9e7e;
-      --bp-cream:  #e8dcc8;
+      /* Brand accents */
+      --onest:   #2563eb;
+      --bb:      #e01e37;
+      --beprime: #c4714a;
+      --newu:    #7c3aed;
+      --perform: #d97706;
+      --trading: #22c55e;
+      --brand:   #8b5cf6;
 
-      /* Brand — ONEST */
-      --on-blue:   #2563eb;
-      --on-blue-d: #1e40af;
-
-      /* Brand — NewU */
-      --nu-purple: #7c3aed;
-
-      /* Brand — Perform */
-      --pf-gold:   #d97706;
-
-      --radius: 14px;
-      --card-pad: 28px;
-      --transition: .18s ease;
+      --r: 12px;
+      --pad: 24px;
+      --gap: 20px;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
       background: var(--bg);
@@ -60,1335 +51,1012 @@
       line-height: 1.5;
     }
 
-    /* ─── Header ──────────────────────────────────────────────────────── */
+    /* ── Header ──────────────────────────────────────────────────── */
     header {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(10,10,10,.85);
-      backdrop-filter: blur(20px);
+      background: rgba(8,8,8,.92);
+      backdrop-filter: blur(24px);
       border-bottom: 1px solid var(--border);
       padding: 0 32px;
       display: flex; align-items: center; justify-content: space-between;
-      height: 64px;
+      height: 60px;
     }
-
-    .header-left {
-      display: flex; align-items: center; gap: 14px;
-    }
-
-    .logo-mark {
-      width: 34px; height: 34px;
-      background: linear-gradient(135deg, #fff 0%, #aaa 100%);
-      border-radius: 8px;
+    .hdr-left { display: flex; align-items: center; gap: 12px; }
+    .hdr-mark {
+      width: 30px; height: 30px;
+      background: linear-gradient(135deg, #fff 0%, #999 100%);
+      border-radius: 7px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 800; color: #000;
-      letter-spacing: -1px;
+      font-size: 14px; font-weight: 900; color: #000;
     }
-
-    .header-title {
-      font-size: 17px; font-weight: 600; letter-spacing: -.3px;
-      color: var(--text);
-    }
-
-    .header-title span {
-      color: var(--muted);
-      font-weight: 400;
-      font-size: 14px;
-      margin-left: 8px;
-    }
-
-    .header-right {
-      display: flex; align-items: center; gap: 20px;
-    }
-
-    .live-clock {
-      font-size: 13px; color: var(--muted);
-      font-variant-numeric: tabular-nums;
-      letter-spacing: .5px;
-    }
-
-    .reset-all-btn {
-      font-size: 12px; color: var(--muted);
+    .hdr-title { font-size: 15px; font-weight: 600; letter-spacing: -.2px; }
+    .hdr-title span { color: var(--muted); font-weight: 400; font-size: 13px; margin-left: 6px; }
+    .hdr-right { display: flex; align-items: center; gap: 16px; }
+    .clock { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: .5px; }
+    .refresh-btn {
+      font-size: 11px; color: var(--muted);
       background: none; border: 1px solid var(--border);
-      padding: 5px 12px; border-radius: 6px;
-      cursor: pointer; transition: var(--transition);
+      padding: 4px 10px; border-radius: 5px; cursor: pointer;
+      transition: .15s;
     }
-    .reset-all-btn:hover { border-color: var(--red); color: var(--red); }
+    .refresh-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .live-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
-    /* ─── Layout ──────────────────────────────────────────────────────── */
+    /* ── Layout ───────────────────────────────────────────────────── */
     main {
-      max-width: 1380px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 36px 24px 80px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-      gap: 24px;
+      padding: 32px 24px 80px;
     }
 
-    /* ─── Card ────────────────────────────────────────────────────────── */
+    /* ── Hero Stats Row ───────────────────────────────────────────── */
+    .hero-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--gap);
+      margin-bottom: var(--gap);
+    }
+    .hero-stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 20px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-stat::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--accent, var(--blue));
+    }
+    .hero-stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
+    .hero-stat-value { font-size: 28px; font-weight: 700; letter-spacing: -.5px; color: var(--text); line-height: 1; }
+    .hero-stat-sub   { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .hero-stat-value.green { color: var(--green); }
+    .hero-stat-value.red   { color: var(--red); }
+    .hero-stat-value.amber { color: var(--amber); }
+
+    /* ── Grid ─────────────────────────────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap);
+    }
+    .grid-2col { grid-template-columns: repeat(2, 1fr); }
+    .span2 { grid-column: span 2; }
+    .span3 { grid-column: span 3; }
+
+    /* Section label */
+    .section-label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--muted); margin: 28px 0 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* ── Card ─────────────────────────────────────────────────────── */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: var(--r);
       overflow: hidden;
-      transition: border-color var(--transition), box-shadow var(--transition);
       position: relative;
     }
-    .card:hover {
-      border-color: var(--border-glow);
-      box-shadow: 0 0 0 1px var(--border-glow), 0 8px 40px rgba(0,0,0,.5);
-    }
-
-    /* accent stripe at top */
     .card::before {
       content: '';
-      display: block; height: 3px; width: 100%;
-      background: var(--accent-gradient);
+      display: block; height: 2px; width: 100%;
+      background: var(--accent, linear-gradient(90deg, #333, #555));
     }
-
-    /* Boss Bodies wide card */
-    .card--bb { --accent-gradient: linear-gradient(90deg, var(--bb-red-d), var(--bb-red), #ff4d6d); }
-    .card--bb { grid-column: span 2; }
-
-    .card--on { --accent-gradient: linear-gradient(90deg, var(--on-blue-d), var(--on-blue), #60a5fa); }
-    .card--bp { --accent-gradient: linear-gradient(90deg, var(--bp-terra), var(--bp-sage)); }
-    .card--nu { --accent-gradient: linear-gradient(90deg, var(--nu-purple), #a78bfa); }
-    .card--pf { --accent-gradient: linear-gradient(90deg, var(--pf-gold), #fbbf24, #fde68a); }
-
-    /* ─── Card Header ─────────────────────────────────────────────────── */
-    .card-header {
-      padding: 22px var(--card-pad) 16px;
+    .card-head {
       display: flex; align-items: center; justify-content: space-between;
-      border-bottom: 1px solid var(--border);
+      padding: 18px var(--pad) 0;
     }
+    .card-title {
+      font-size: 13px; font-weight: 600; letter-spacing: -.1px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-badge {
+      font-size: 10px; padding: 2px 7px; border-radius: 100px;
+      font-weight: 500; letter-spacing: .3px;
+    }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red   { background: var(--red-bg);   color: var(--red);   }
+    .badge-amber { background: var(--amber-bg); color: var(--amber); }
+    .badge-blue  { background: var(--blue-bg);  color: var(--blue);  }
+    .badge-muted { background: var(--subtle); color: var(--muted); }
+    .card-body   { padding: var(--pad); }
+    .card-body-sm{ padding: 16px var(--pad); }
 
-    .brand-tag {
-      display: flex; align-items: center; gap: 10px;
-    }
-
-    .brand-icon {
-      width: 36px; height: 36px; border-radius: 9px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 17px; font-weight: 800; letter-spacing: -1px;
-      flex-shrink: 0;
-    }
-
-    .card--bb .brand-icon { background: var(--bb-red); color: #fff; }
-    .card--on .brand-icon { background: var(--on-blue); color: #fff; }
-    .card--bp .brand-icon { background: var(--bp-terra); color: #fff; }
-    .card--nu .brand-icon { background: var(--nu-purple); color: #fff; }
-    .card--pf .brand-icon { background: var(--pf-gold); color: #000; }
-
-    .brand-info h2 {
-      font-size: 16px; font-weight: 700; letter-spacing: -.3px;
-      line-height: 1.2;
-    }
-    .brand-info .tagline {
-      font-size: 11.5px; color: var(--muted); margin-top: 1px;
-    }
-
-    .card-meta {
-      text-align: right;
-    }
-    .last-updated {
-      font-size: 11px; color: var(--muted);
-      display: block; margin-bottom: 4px;
-    }
-    .last-updated-time {
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* ─── Card Body ───────────────────────────────────────────────────── */
-    .card-body { padding: var(--card-pad); }
-
-    /* ─── KPI Grid ────────────────────────────────────────────────────── */
+    /* ── KPI Grid inside card ─────────────────────────────────────── */
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-      gap: 14px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 16px;
     }
-
+    .kpi-grid-3 { grid-template-columns: repeat(3, 1fr); }
     .kpi {
       background: var(--surface2);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 16px;
-      position: relative;
-      transition: border-color var(--transition);
+      border-radius: 8px;
+      padding: 12px 14px;
       cursor: pointer;
+      transition: border-color .15s;
     }
-    .kpi:hover { border-color: var(--border-glow); }
-
-    .kpi-label {
-      font-size: 11px; font-weight: 500; letter-spacing: .5px;
-      text-transform: uppercase; color: var(--muted);
-      margin-bottom: 8px;
-      display: flex; align-items: center; gap: 5px;
-    }
-
-    .kpi-value-row {
-      display: flex; align-items: baseline; gap: 8px;
-    }
-
-    .kpi-value {
-      font-size: 26px; font-weight: 700; letter-spacing: -1px;
-      line-height: 1;
-      outline: none;
-      background: transparent;
-      border: none;
-      color: inherit;
-      width: 100%;
-      cursor: text;
-      font-family: inherit;
-      caret-color: var(--text);
-    }
-    .kpi-value:focus {
-      color: #fff;
-    }
-
-    .kpi-target {
-      font-size: 11px; color: var(--muted); margin-top: 6px;
-      white-space: nowrap;
-    }
-
-    /* Status dot */
-    .status-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      display: inline-block; flex-shrink: 0;
-    }
-    .status-dot.green { background: var(--green); box-shadow: 0 0 6px var(--green); }
-    .status-dot.amber { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
-    .status-dot.red   { background: var(--red);   box-shadow: 0 0 6px var(--red); }
-    .status-dot.neutral { background: var(--muted); }
-
-    /* Status tint on kpi background */
+    .kpi:hover { border-color: var(--border-hi); }
     .kpi.s-green { border-color: rgba(34,197,94,.3); background: rgba(34,197,94,.04); }
     .kpi.s-amber { border-color: rgba(245,158,11,.3); background: rgba(245,158,11,.04); }
     .kpi.s-red   { border-color: rgba(239,68,68,.3);  background: rgba(239,68,68,.04); }
-
-    /* ─── Progress bar ─────────────────────────────────────────────────── */
-    .progress-bar-wrap {
-      height: 3px; background: var(--subtle);
-      border-radius: 2px; margin-top: 10px; overflow: hidden;
+    .kpi-label   { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 4px; }
+    .kpi-val-row { display: flex; align-items: baseline; gap: 4px; }
+    .kpi-value {
+      font-size: 22px; font-weight: 700; letter-spacing: -.3px;
+      outline: none; min-width: 20px;
     }
-    .progress-bar-fill {
-      height: 100%; border-radius: 2px;
-      transition: width .4s ease;
+    .kpi-value:focus { color: var(--blue); }
+    .kpi-unit { font-size: 14px; color: var(--muted); }
+    .kpi-target { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+    /* Progress bar */
+    .prog-wrap { height: 3px; background: var(--subtle); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+    .prog-fill  { height: 100%; border-radius: 2px; transition: width .4s; }
+    .prog-fill.green  { background: var(--green); }
+    .prog-fill.amber  { background: var(--amber); }
+    .prog-fill.red    { background: var(--red); }
+    .prog-fill.blue   { background: var(--blue); }
+    .prog-fill.neutral{ background: var(--muted); }
+
+    /* Status dot */
+    .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .dot.green  { background: var(--green); }
+    .dot.amber  { background: var(--amber); }
+    .dot.red    { background: var(--red); }
+    .dot.neutral{ background: var(--muted); }
+
+    /* ── Combine Progress Bar ─────────────────────────────────────── */
+    .combine-bar-wrap {
+      background: var(--subtle);
+      border-radius: 8px; height: 12px;
+      overflow: hidden; margin-top: 12px;
     }
-    .progress-bar-fill.green { background: var(--green); }
-    .progress-bar-fill.amber { background: var(--amber); }
-    .progress-bar-fill.red   { background: var(--red); }
-
-    /* ─── Text / Select Fields ─────────────────────────────────────────── */
-    .field-group {
-      display: flex; flex-direction: column; gap: 12px;
-      margin-top: 4px;
+    .combine-bar-fill {
+      height: 100%; border-radius: 8px;
+      background: linear-gradient(90deg, var(--trading), #86efac);
+      transition: width .6s cubic-bezier(.4,0,.2,1);
     }
-
-    .field-item {
-      display: flex; flex-direction: column; gap: 5px;
-    }
-
-    .field-label {
-      font-size: 11px; font-weight: 500; letter-spacing: .5px;
-      text-transform: uppercase; color: var(--muted);
-    }
-
-    .field-input {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-family: inherit;
-      font-size: 14px;
-      padding: 9px 12px;
-      resize: none;
-      outline: none;
-      transition: border-color var(--transition);
-      width: 100%;
-    }
-    .field-input:focus { border-color: var(--border-glow); }
-    .field-input::placeholder { color: var(--muted); }
-
-    textarea.field-input { min-height: 72px; }
-
-    /* Status select */
-    .status-select {
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      padding-right: 30px;
-      cursor: pointer;
+    .combine-labels {
+      display: flex; justify-content: space-between;
+      font-size: 10px; color: var(--muted); margin-top: 4px;
     }
 
-    /* ─── Divider ─────────────────────────────────────────────────────── */
-    .divider {
-      height: 1px; background: var(--border);
-      margin: 20px 0;
-    }
-
-    /* ─── Section label ───────────────────────────────────────────────── */
-    .section-label {
-      font-size: 11px; font-weight: 600; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--muted);
-      margin-bottom: 14px;
-    }
-
-    /* ─── Active Clients badge ────────────────────────────────────────── */
-    .clients-badge {
-      display: inline-flex; align-items: center; gap: 8px;
+    /* ── Service list ─────────────────────────────────────────────── */
+    .svc-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+    .svc-row  {
+      display: flex; align-items: center; justify-content: space-between;
       background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 8px; padding: 9px 14px;
-      font-size: 24px; font-weight: 700; letter-spacing: -1px;
+      border-radius: 7px; padding: 9px 14px;
     }
-    .clients-badge-label { font-size: 12px; color: var(--muted); font-weight: 400; }
-
-    /* ─── Edit hint ───────────────────────────────────────────────────── */
-    .edit-hint {
-      font-size: 11px; color: var(--muted);
+    .svc-name { font-size: 13px; }
+    .svc-status {
+      font-size: 11px; font-weight: 600; letter-spacing: .3px;
       display: flex; align-items: center; gap: 5px;
-      margin-top: 18px;
-    }
-    .edit-hint svg { opacity: .5; }
-
-    /* ─── Responsive ──────────────────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .card--bb { grid-column: span 1; }
-      main { grid-template-columns: 1fr; }
     }
 
-    /* ─── Toast ───────────────────────────────────────────────────────── */
-    #toast {
-      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(60px);
-      background: var(--surface2); border: 1px solid var(--border-glow);
-      color: var(--text); font-size: 13px; padding: 10px 20px;
-      border-radius: 99px; opacity: 0;
-      transition: opacity .2s, transform .2s;
-      pointer-events: none; z-index: 999;
-      white-space: nowrap;
+    /* ── Pipeline steps ───────────────────────────────────────────── */
+    .pipeline {
+      display: flex; gap: 0; margin-top: 14px;
+      border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--border);
     }
-    #toast.show {
-      opacity: 1; transform: translateX(-50%) translateY(0);
+    .pipe-step {
+      flex: 1; text-align: center; padding: 12px 8px;
+      background: var(--surface2);
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .pipe-step:last-child { border-right: none; }
+    .pipe-step-num  { font-size: 20px; font-weight: 700; color: var(--text); }
+    .pipe-step-label{ font-size: 9px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin-top: 2px; }
+    .pipe-step.has-items .pipe-step-num { color: var(--blue); }
+
+    /* ── Ideas list ───────────────────────────────────────────────── */
+    .idea-list { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+    .idea-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 7px; padding: 10px 14px; font-size: 12px;
+    }
+    .idea-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Log tail ─────────────────────────────────────────────────── */
+    .log-tail {
+      font-family: 'SF Mono', 'Menlo', monospace;
+      font-size: 11px; color: var(--muted);
+      background: var(--subtle); border-radius: 6px;
+      padding: 10px 12px; margin-top: 12px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
 
-    /* ─── Scrollbar ───────────────────────────────────────────────────── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    /* ── Timestamp ────────────────────────────────────────────────── */
+    .ts { font-size: 10px; color: var(--muted); }
 
-    /* ─── Selection ───────────────────────────────────────────────────── */
-    ::selection { background: rgba(255,255,255,.15); }
+    /* ── Textarea / Input in card ─────────────────────────────────── */
+    .card-textarea, .card-input {
+      width: 100%; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 7px;
+      color: var(--text); font-size: 13px;
+      padding: 10px 12px; resize: vertical; outline: none;
+      font-family: inherit; margin-top: 8px; line-height: 1.5;
+      transition: border-color .15s;
+    }
+    .card-textarea:focus, .card-input:focus { border-color: var(--blue); }
+
+    /* ── Divider ──────────────────────────────────────────────────── */
+    .divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+    /* ── Last updated ─────────────────────────────────────────────── */
+    .data-freshness {
+      font-size: 10px; color: var(--muted);
+      text-align: right; margin-top: 6px;
+    }
+
+    /* ── Responsive ───────────────────────────────────────────────── */
+    @media (max-width: 1100px) { .grid { grid-template-columns: repeat(2, 1fr); } .span3 { grid-column: span 2; } }
+    @media (max-width: 700px)  { .grid, .hero-row, .grid-2col { grid-template-columns: 1fr; } .span2, .span3 { grid-column: 1; } }
   </style>
 </head>
 <body>
 
-<!-- ─── Header ──────────────────────────────────────────────────────────── -->
+<!-- ════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════ -->
 <header>
-  <div class="header-left">
-    <div class="logo-mark">MC</div>
-    <div class="header-title">
-      Mission Control
-      <span>Ryan Spiteri</span>
-    </div>
+  <div class="hdr-left">
+    <div class="hdr-mark">RS</div>
+    <div class="hdr-title">Mission Control <span>Ryan Spiteri</span></div>
   </div>
-  <div class="header-right">
-    <div class="live-clock" id="clock"></div>
-    <button class="reset-all-btn" onclick="resetAll()">Reset All Data</button>
+  <div class="hdr-right">
+    <div class="live-dot" id="liveIndicator" title="Data status"></div>
+    <div class="clock" id="clock">—</div>
+    <button class="refresh-btn" onclick="forceRefresh()">↻ Refresh</button>
   </div>
 </header>
 
-<!-- ─── Main Grid ────────────────────────────────────────────────────────── -->
-<main id="dashboard">
+<!-- ════════════════════════════════════════════════════
+     MAIN
+════════════════════════════════════════════════════ -->
+<main>
 
-  <!-- ══════════════════════════════════════════════════
-       BOSS BODIES
-  ══════════════════════════════════════════════════ -->
-  <div class="card card--on" id="card-on">
-    <div class="card-header">
-      <div class="brand-tag">
-        <div class="brand-icon">ON</div>
-        <div class="brand-info">
-          <h2>ONEST Health</h2>
-          <div class="tagline">Supplements &amp; Retail</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="last-updated">Last updated</span>
-        <span class="last-updated-time" id="ts-on">—</span>
-      </div>
+  <!-- ── Hero Stats Row ─────────────────────────────── -->
+  <div class="hero-row">
+    <div class="hero-stat" style="--accent:var(--trading)">
+      <div class="hero-stat-label">Combine Balance</div>
+      <div class="hero-stat-value" id="h-balance">$—</div>
+      <div class="hero-stat-sub" id="h-balance-sub">Loading…</div>
     </div>
-    <div class="card-body">
-
-      <div class="kpi-grid">
-
-        <!-- Monthly Revenue -->
-        <div class="kpi" id="kpi-on-revenue" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-on-revenue"></span>
-            Monthly Revenue
-          </div>
-          <div class="kpi-value-row">
-            <span style="font-size:18px;color:var(--muted);align-self:center">$</span>
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-on-revenue"
-              data-key="on-revenue"
-              data-type="currency"
-              data-target=""
-              data-dir="none"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-          </div>
-          <div class="kpi-target">Tracking only</div>
-        </div>
-
-        <!-- Retail partners -->
-        <div class="kpi" id="kpi-on-partners" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-on-partners"></span>
-            Retail Partners
-          </div>
-          <div class="kpi-value-row">
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-on-partners"
-              data-key="on-partners"
-              data-type="number"
-              data-target="350"
-              data-dir="gte"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >350</div>
-          </div>
-          <div class="kpi-target">Currently 350+</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill neutral" id="bar-on-partners" style="width:0%"></div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="divider"></div>
-      <div class="section-label">Status &amp; Campaigns</div>
-
-      <div class="field-group">
-        <div class="field-item">
-          <label class="field-label" for="val-on-us">🇺🇸 US Expansion Status</label>
-          <input
-            class="field-input"
-            type="text"
-            id="val-on-us"
-            data-key="on-us"
-            data-card="on"
-            placeholder="e.g. In progress — launch Q2 2026…"
-            oninput="saveField(this)"
-          />
-        </div>
-        <div class="field-item">
-          <label class="field-label" for="val-on-campaign">📣 Current Campaign</label>
-          <input
-            class="field-input"
-            type="text"
-            id="val-on-campaign"
-            data-key="on-campaign"
-            data-card="on"
-            placeholder="e.g. Retailers Summer Push…"
-            oninput="saveField(this)"
-          />
-        </div>
-      </div>
-
+    <div class="hero-stat" style="--accent:var(--trading)">
+      <div class="hero-stat-label">Combine Progress</div>
+      <div class="hero-stat-value" id="h-combine-pct">—%</div>
+      <div class="hero-stat-sub" id="h-combine-sub">$49,988 → $53,000 target</div>
     </div>
-  </div>
-  <div class="card card--nu" id="card-nu">
-    <div class="card-header">
-      <div class="brand-tag">
-        <div class="brand-icon">NU</div>
-        <div class="brand-info">
-          <h2>NewU</h2>
-          <div class="tagline">App Platform</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="last-updated">Last updated</span>
-        <span class="last-updated-time" id="ts-nu">—</span>
-      </div>
+    <div class="hero-stat" style="--accent:var(--brand)">
+      <div class="hero-stat-label">Content Pipeline</div>
+      <div class="hero-stat-value" id="h-content">—</div>
+      <div class="hero-stat-sub">ideas + scripts queued</div>
     </div>
-    <div class="card-body">
-
-      <div class="kpi-grid">
-        <div class="kpi" id="kpi-nu-build" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-nu-build"></span>
-            App Build Status
-          </div>
-          <div class="kpi-value-row">
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-nu-build"
-              data-key="nu-build"
-              data-type="percent"
-              data-target="100"
-              data-dir="gte"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
-          </div>
-          <div class="kpi-target">Target: 100% complete</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill neutral" id="bar-nu-build" style="width:0%"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-      <div class="section-label">Notes</div>
-
-      <div class="field-group">
-        <div class="field-item">
-          <textarea
-            class="field-input"
-            id="val-nu-notes"
-            data-key="nu-notes"
-            data-card="nu"
-            placeholder="Add notes here…"
-            oninput="saveField(this)"
-            rows="4"
-          ></textarea>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <div class="card card--bb" id="card-bb">
-    <div class="card-header">
-      <div class="brand-tag">
-        <div class="brand-icon">BB</div>
-        <div class="brand-info">
-          <h2>Boss Bodies</h2>
-          <div class="tagline">Online Fitness Coaching</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="last-updated">Last updated</span>
-        <span class="last-updated-time" id="ts-bb">—</span>
-      </div>
-    </div>
-    <div class="card-body">
-
-      <div class="section-label">KPI Metrics</div>
-      <div class="kpi-grid">
-
-        <!-- Revenue -->
-        <div class="kpi" id="kpi-bb-revenue" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-bb-revenue"></span>
-            Revenue / Month
-          </div>
-          <div class="kpi-value-row">
-            <span style="font-size:18px;color:var(--muted);align-self:center">$</span>
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-bb-revenue"
-              data-key="bb-revenue"
-              data-type="currency"
-              data-target="100000"
-              data-dir="gte"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-          </div>
-          <div class="kpi-target">Target: $100K / month</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill neutral" id="bar-bb-revenue" style="width:0%"></div>
-          </div>
-        </div>
-
-        <!-- Cost per lead -->
-        <div class="kpi" id="kpi-bb-cpl" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-bb-cpl"></span>
-            Cost Per Lead
-          </div>
-          <div class="kpi-value-row">
-            <span style="font-size:18px;color:var(--muted);align-self:center">$</span>
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-bb-cpl"
-              data-key="bb-cpl"
-              data-type="currency"
-              data-target="15"
-              data-dir="lte"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-          </div>
-          <div class="kpi-target">Target: &lt;$15</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill neutral" id="bar-bb-cpl" style="width:0%"></div>
-          </div>
-        </div>
-
-        <!-- DM-to-call booking rate -->
-        <div class="kpi" id="kpi-bb-dmcall" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-bb-dmcall"></span>
-            DM → Call Rate
-          </div>
-          <div class="kpi-value-row">
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-bb-dmcall"
-              data-key="bb-dmcall"
-              data-type="percent"
-              data-target="40"
-              data-dir="gte"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
-          </div>
-          <div class="kpi-target">Target: 40%</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill neutral" id="bar-bb-dmcall" style="width:0%"></div>
-          </div>
-        </div>
-
-        <!-- Call show rate -->
-        <div class="kpi" id="kpi-bb-showrate" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-bb-showrate"></span>
-            Call Show Rate
-          </div>
-          <div class="kpi-value-row">
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-bb-showrate"
-              data-key="bb-showrate"
-              data-type="percent"
-              data-target="60"
-              data-dir="gte"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
-          </div>
-          <div class="kpi-target">Target: &gt;60%</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill neutral" id="bar-bb-showrate" style="width:0%"></div>
-          </div>
-        </div>
-
-        <!-- Close rate -->
-        <div class="kpi" id="kpi-bb-close" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-bb-close"></span>
-            Close Rate
-          </div>
-          <div class="kpi-value-row">
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-bb-close"
-              data-key="bb-close"
-              data-type="percent"
-              data-target="30"
-              data-dir="gte"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
-          </div>
-          <div class="kpi-target">Target: &gt;30%</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill neutral" id="bar-bb-close" style="width:0%"></div>
-          </div>
-        </div>
-
-        <!-- Client retention 90d -->
-        <div class="kpi" id="kpi-bb-retention" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-bb-retention"></span>
-            Retention @ 90d
-          </div>
-          <div class="kpi-value-row">
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-bb-retention"
-              data-key="bb-retention"
-              data-type="percent"
-              data-target="85"
-              data-dir="gte"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
-          </div>
-          <div class="kpi-target">Target: &gt;85%</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill neutral" id="bar-bb-retention" style="width:0%"></div>
-          </div>
-        </div>
-
-        <!-- Active clients -->
-        <div class="kpi" id="kpi-bb-clients" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-bb-clients"></span>
-            Active Clients
-          </div>
-          <div class="kpi-value-row">
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-bb-clients"
-              data-key="bb-clients"
-              data-type="number"
-              data-target=""
-              data-dir="none"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-          </div>
-          <div class="kpi-target">Tracking only</div>
-        </div>
-
-      </div><!-- /kpi-grid -->
-
-      <div class="edit-hint">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        Click any metric to edit — changes save automatically
-      </div>
-
-    </div>
-  </div>
-  <div class="card card--pf" id="card-pf">
-    <div class="card-header">
-      <div class="brand-tag">
-        <div class="brand-icon">PC</div>
-        <div class="brand-info">
-          <h2>Perform Creative</h2>
-          <div class="tagline">Creative Platform</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="last-updated">Last updated</span>
-        <span class="last-updated-time" id="ts-pf">—</span>
-      </div>
-    </div>
-    <div class="card-body">
-
-      <div class="kpi-grid">
-        <div class="kpi" id="kpi-pf-build" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-pf-build"></span>
-            Build Status
-          </div>
-          <div class="kpi-value-row">
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-pf-build"
-              data-key="pf-build"
-              data-type="percent"
-              data-target="100"
-              data-dir="gte"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
-          </div>
-          <div class="kpi-target">Target: 100% complete</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill neutral" id="bar-pf-build" style="width:0%"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-      <div class="section-label">Notes</div>
-
-      <div class="field-group">
-        <div class="field-item">
-          <textarea
-            class="field-input"
-            id="val-pf-notes"
-            data-key="pf-notes"
-            data-card="pf"
-            placeholder="Add notes here…"
-            oninput="saveField(this)"
-            rows="4"
-          ></textarea>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <div class="card card--bp" id="card-bp">
-    <div class="card-header">
-      <div class="brand-tag">
-        <div class="brand-icon">BP</div>
-        <div class="brand-info">
-          <h2>BEPRIME</h2>
-          <div class="tagline">Telehealth — Peptides & Hormone Performance</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="last-updated">Last updated</span>
-        <span class="last-updated-time" id="ts-bp">—</span>
-      </div>
-    </div>
-    <div class="card-body">
-
-      <div class="kpi-grid">
-
-        <!-- Portal build -->
-        <div class="kpi" id="kpi-bp-portal" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-bp-portal"></span>
-            Portal Build
-          </div>
-          <div class="kpi-value-row">
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-bp-portal"
-              data-key="bp-portal"
-              data-type="percent"
-              data-target="100"
-              data-dir="gte"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-            <span style="font-size:18px;color:var(--muted);align-self:center">%</span>
-          </div>
-          <div class="kpi-target">Target: 100% complete</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill neutral" id="bar-bp-portal" style="width:0%"></div>
-          </div>
-        </div>
-
-        <!-- Active clients -->
-        <div class="kpi" id="kpi-bp-clients" onclick="focusKpi(this)">
-          <div class="kpi-label">
-            <span class="status-dot neutral" id="dot-bp-clients"></span>
-            Active Clients
-          </div>
-          <div class="kpi-value-row">
-            <div
-              class="kpi-value"
-              contenteditable="true"
-              id="val-bp-clients"
-              data-key="bp-clients"
-              data-type="number"
-              data-target=""
-              data-dir="none"
-              onblur="saveKpi(this)"
-              oninput="updateKpiStatus(this)"
-            >0</div>
-          </div>
-          <div class="kpi-target">Tracking only</div>
-        </div>
-
-      </div>
-
-      <div class="divider"></div>
-      <div class="section-label">Notes</div>
-
-      <div class="field-group">
-        <div class="field-item">
-          <textarea
-            class="field-input"
-            id="val-bp-notes"
-            data-key="bp-notes"
-            data-card="bp"
-            placeholder="Add notes here…"
-            oninput="saveField(this)"
-            rows="4"
-          ></textarea>
-        </div>
-      </div>
-
+    <div class="hero-stat" style="--accent:var(--onest)">
+      <div class="hero-stat-label">Boss Bodies Target</div>
+      <div class="hero-stat-value">$100K</div>
+      <div class="hero-stat-sub">Monthly revenue goal</div>
     </div>
   </div>
 
-  <!-- ─── API Cost Tracker ──────────────────────────────────────────────── -->
-  <div class="card" style="grid-column: 1 / -1; border-color: var(--border-glow);">
-    <div class="card-header">
-      <div style="width:36px;height:36px;border-radius:10px;background:rgba(16,185,129,.15);display:flex;align-items:center;justify-content:center;font-size:18px;">💸</div>
-      <div>
-        <h2>API Spend Tracker</h2>
+  <!-- ════════ TRADING ════════ -->
+  <div class="section-label">⚡ Trading Bot — 50K Combine</div>
+  <div class="grid grid-2col">
+
+    <!-- Combine Progress -->
+    <div class="card" style="--accent:linear-gradient(90deg,#166534,var(--trading),#86efac)">
+      <div class="card-head">
+        <div class="card-title">50K Combine Progress</div>
+        <span class="card-badge" id="botBadge">Loading…</span>
       </div>
-      <div class="card-meta" style="margin-left:auto;">
-        <span style="font-size:11px;color:var(--muted);">Update monthly · AUD estimates</span>
+      <div class="card-body">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
+          <span style="font-size:32px;font-weight:700;letter-spacing:-.5px" id="combineBalance">$—</span>
+          <span style="font-size:13px;color:var(--muted)">Target: <strong style="color:var(--green)">$53,000</strong></span>
+        </div>
+        <div class="combine-bar-wrap">
+          <div class="combine-bar-fill" id="combineBarFill" style="width:0%"></div>
+        </div>
+        <div class="combine-labels">
+          <span>$50,000 start</span>
+          <span id="combinePct">0%</span>
+          <span>$53,000 target</span>
+        </div>
+        <div class="divider"></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+          <div>
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Today P&L</div>
+            <div style="font-size:18px;font-weight:700" id="todayPnl">$0</div>
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Trades Today</div>
+            <div style="font-size:18px;font-weight:700" id="tradesToday">0/3</div>
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Needed</div>
+            <div style="font-size:18px;font-weight:700;color:var(--amber)" id="neededAmount">$—</div>
+          </div>
+        </div>
+        <div class="log-tail" id="botLogTail">Waiting for bot data…</div>
+        <div class="data-freshness" id="tradingFreshness"></div>
       </div>
     </div>
-    <div class="card-body">
 
-      <div class="section-label">Monthly API Costs</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:20px;">
-
-        <!-- Anthropic -->
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:12px;font-weight:700;color:var(--text);">Anthropic (Claude)</span>
-            <span style="font-size:10px;padding:2px 8px;background:rgba(99,102,241,.15);color:#818cf8;border-radius:20px;">Usage</span>
-          </div>
-          <input
-            id="cost-anthropic"
-            type="text"
-            placeholder="$0.00"
-            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
-            oninput="saveCost(this)"
-          />
-          <div style="font-size:10px;color:var(--muted);margin-top:6px;">claude.ai/settings/billing</div>
-        </div>
-
-        <!-- OpenAI -->
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:12px;font-weight:700;color:var(--text);">OpenAI</span>
-            <span style="font-size:10px;padding:2px 8px;background:rgba(99,102,241,.15);color:#818cf8;border-radius:20px;">Usage</span>
-          </div>
-          <input
-            id="cost-openai"
-            type="text"
-            placeholder="$0.00"
-            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
-            oninput="saveCost(this)"
-          />
-          <div style="font-size:10px;color:var(--muted);margin-top:6px;">platform.openai.com/usage</div>
-        </div>
-
-        <!-- ElevenLabs -->
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:12px;font-weight:700;color:var(--text);">ElevenLabs</span>
-            <span style="font-size:10px;padding:2px 8px;background:rgba(245,158,11,.15);color:var(--amber);border-radius:20px;">Subscription</span>
-          </div>
-          <input
-            id="cost-elevenlabs"
-            type="text"
-            placeholder="$0.00"
-            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
-            oninput="saveCost(this)"
-          />
-          <div style="font-size:10px;color:var(--muted);margin-top:6px;">elevenlabs.io/subscription</div>
-        </div>
-
-        <!-- Gemini -->
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:12px;font-weight:700;color:var(--text);">Gemini / Google</span>
-            <span style="font-size:10px;padding:2px 8px;background:rgba(99,102,241,.15);color:#818cf8;border-radius:20px;">Usage</span>
-          </div>
-          <input
-            id="cost-gemini"
-            type="text"
-            placeholder="$0.00"
-            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
-            oninput="saveCost(this)"
-          />
-          <div style="font-size:10px;color:var(--muted);margin-top:6px;">console.cloud.google.com/billing</div>
-        </div>
-
-        <!-- Magic Hour -->
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:12px;font-weight:700;color:var(--text);">Magic Hour</span>
-            <span style="font-size:10px;padding:2px 8px;background:rgba(99,102,241,.15);color:#818cf8;border-radius:20px;">Usage</span>
-          </div>
-          <input
-            id="cost-magichour"
-            type="text"
-            placeholder="$0.00"
-            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
-            oninput="saveCost(this)"
-          />
-          <div style="font-size:10px;color:var(--muted);margin-top:6px;">$1.08 / 30s video</div>
-        </div>
-
-        <!-- HeyGen -->
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:12px;font-weight:700;color:var(--text);">HeyGen</span>
-            <span style="font-size:10px;padding:2px 8px;background:rgba(245,158,11,.15);color:var(--amber);border-radius:20px;">Subscription</span>
-          </div>
-          <input
-            id="cost-heygen"
-            type="text"
-            placeholder="$0.00"
-            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
-            oninput="saveCost(this)"
-          />
-          <div style="font-size:10px;color:var(--muted);margin-top:6px;">app.heygen.com/subscription</div>
-        </div>
-
-        <!-- Higgsfield -->
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:12px;font-weight:700;color:var(--text);">Higgsfield</span>
-            <span style="font-size:10px;padding:2px 8px;background:rgba(245,158,11,.15);color:var(--amber);border-radius:20px;">Subscription</span>
-          </div>
-          <input
-            id="cost-higgsfield"
-            type="text"
-            placeholder="$0.00"
-            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
-            oninput="saveCost(this)"
-          />
-          <div style="font-size:10px;color:var(--muted);margin-top:6px;">higgsfield.ai/account</div>
-        </div>
-
-        <!-- Manus AI -->
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:12px;font-weight:700;color:var(--text);">Manus AI</span>
-            <span style="font-size:10px;padding:2px 8px;background:rgba(245,158,11,.15);color:var(--amber);border-radius:20px;">Subscription</span>
-          </div>
-          <input
-            id="cost-manus"
-            type="text"
-            placeholder="$0.00"
-            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
-            oninput="saveCost(this)"
-          />
-          <div style="font-size:10px;color:var(--muted);margin-top:6px;">manus.im/account</div>
-        </div>
-
-        <!-- OpenClaw -->
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:12px;font-weight:700;color:var(--text);">OpenClaw</span>
-            <span style="font-size:10px;padding:2px 8px;background:rgba(245,158,11,.15);color:var(--amber);border-radius:20px;">Subscription</span>
-          </div>
-          <input
-            id="cost-openclaw"
-            type="text"
-            placeholder="$0.00"
-            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
-            oninput="saveCost(this)"
-          />
-          <div style="font-size:10px;color:var(--muted);margin-top:6px;">openclaw.ai/billing</div>
-        </div>
-
+    <!-- System Health -->
+    <div class="card" style="--accent:linear-gradient(90deg,#1e3a5f,var(--blue))">
+      <div class="card-head">
+        <div class="card-title">System Health</div>
+        <span class="card-badge badge-muted" id="sysHealthBadge">—</span>
       </div>
-
-      <!-- Total -->
-      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--subtle);border:1px solid var(--border-glow);border-radius:10px;padding:16px 20px;">
-        <span style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Total Monthly AI Spend</span>
-        <span id="cost-total" style="font-size:24px;font-weight:700;color:#10b981;">$0.00</span>
+      <div class="card-body">
+        <div class="svc-list" id="svcList">
+          <div class="svc-row">
+            <span class="svc-name">Loading services…</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.7">
+          <div>iMac Tailscale: <strong style="color:var(--text)">100.105.163.93</strong></div>
+          <div>Dashboard: <a href="http://100.105.163.93:8080" target="_blank" style="color:var(--blue)">:8080</a></div>
+          <div>Ryan Clone: <a href="http://100.105.163.93:8090" target="_blank" style="color:var(--blue)">:8090</a></div>
+        </div>
       </div>
-
-      <div style="font-size:10px;color:var(--muted);margin-top:10px;text-align:right;">
-        Values saved locally in your browser · Update at the start of each month
-      </div>
-
     </div>
+  </div>
+
+  <!-- ════════ PERSONAL BRAND ════════ -->
+  <div class="section-label">🎥 Personal Brand Content Pipeline</div>
+  <div class="grid">
+
+    <!-- Content Pipeline -->
+    <div class="card span2" style="--accent:linear-gradient(90deg,#4c1d95,var(--brand),#a78bfa)">
+      <div class="card-head">
+        <div class="card-title">Content Pipeline</div>
+        <span class="card-badge badge-blue">Live ClickUp</span>
+      </div>
+      <div class="card-body">
+        <div class="pipeline" id="contentPipeline">
+          <div class="pipe-step">
+            <div class="pipe-step-num" id="pp-ideas">—</div>
+            <div class="pipe-step-label">💡 Ideas</div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-step-num" id="pp-approved">—</div>
+            <div class="pipe-step-label">✅ Approved</div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-step-num" id="pp-scripts">—</div>
+            <div class="pipe-step-label">✍️ Scripts</div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-step-num" id="pp-production">—</div>
+            <div class="pipe-step-label">🎬 Production</div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-step-num" id="pp-ready">—</div>
+            <div class="pipe-step-label">🚀 Ready</div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-step-num" id="pp-scheduled">—</div>
+            <div class="pipe-step-label">📅 Scheduled</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;font-size:12px;color:var(--muted)">
+          Platforms: TikTok + Instagram (1.8M followers) · Daily brief at 8AM AEST via Telegram
+        </div>
+      </div>
+    </div>
+
+    <!-- Ideas Backlog -->
+    <div class="card" style="--accent:linear-gradient(90deg,#3b1f6e,var(--purple))">
+      <div class="card-head">
+        <div class="card-title">Ideas Backlog</div>
+        <span class="card-badge badge-muted" id="ideasCount">0</span>
+      </div>
+      <div class="card-body-sm">
+        <div class="idea-list" id="ideaList">
+          <div class="idea-item"><span class="idea-icon">💡</span>Loading…</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════ BUSINESSES ════════ -->
+  <div class="section-label">🏢 Business Portfolio</div>
+  <div class="grid">
+
+    <!-- ONEST Health -->
+    <div class="card span2" style="--accent:linear-gradient(90deg,#1e3a8a,var(--onest),#60a5fa)">
+      <div class="card-head">
+        <div class="card-title">⚡ ONEST Health</div>
+        <span class="card-badge badge-blue">Flagship · AU + US</span>
+      </div>
+      <div class="card-body">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:12px">
+          Premium Australian supplements · 350+ AU retailers · "Made of Greatness" · Target: $50M revenue
+        </div>
+        <div class="kpi-grid kpi-grid-3">
+          <div class="kpi" id="kpi-on-revenue" onclick="focusKpi(this)">
+            <div class="kpi-label">Monthly Revenue</div>
+            <div class="kpi-val-row">
+              <span class="kpi-unit">$</span>
+              <div class="kpi-value" contenteditable="true" id="val-on-revenue"
+                data-key="on-revenue" data-type="currency" data-target="416666" data-dir="gte"
+                onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
+              <span class="kpi-unit">K</span>
+            </div>
+            <div class="kpi-target">Target: $417K/mo ($5M/yr run rate)</div>
+            <div class="prog-wrap"><div class="prog-fill neutral" id="bar-on-revenue" style="width:0%"></div></div>
+          </div>
+          <div class="kpi" id="kpi-on-us" onclick="focusKpi(this)">
+            <div class="kpi-label">US Revenue</div>
+            <div class="kpi-val-row">
+              <span class="kpi-unit">$</span>
+              <div class="kpi-value" contenteditable="true" id="val-on-us"
+                data-key="on-us" data-type="currency" data-target="50000" data-dir="gte"
+                onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
+              <span class="kpi-unit">K</span>
+            </div>
+            <div class="kpi-target">Target: Growing</div>
+            <div class="prog-wrap"><div class="prog-fill neutral" id="bar-on-us" style="width:0%"></div></div>
+          </div>
+          <div class="kpi" id="kpi-on-retailers" onclick="focusKpi(this)">
+            <div class="kpi-label">AU Retailers</div>
+            <div class="kpi-val-row">
+              <div class="kpi-value" contenteditable="true" id="val-on-retailers"
+                data-key="on-retailers" data-type="number" data-target="350" data-dir="gte"
+                onblur="saveKpi(this)" oninput="updateKpiStatus(this)">350</div>
+            </div>
+            <div class="kpi-target">Target: 500+</div>
+            <div class="prog-wrap"><div class="prog-fill neutral" id="bar-on-retailers" style="width:0%"></div></div>
+          </div>
+        </div>
+        <div style="margin-top:14px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px">Notes / Active Campaigns</div>
+          <textarea class="card-textarea" rows="2" data-key="on-notes" data-card="onest"
+            onblur="saveField(this)" placeholder="Campaign updates, priorities, notes…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Boss Bodies -->
+    <div class="card" style="--accent:linear-gradient(90deg,var(--bb),#ff4d6d)">
+      <div class="card-head">
+        <div class="card-title">💪 Boss Bodies</div>
+        <span class="card-badge badge-red">High-ticket coaching</span>
+      </div>
+      <div class="card-body">
+        <div class="kpi-grid">
+          <div class="kpi" id="kpi-bb-revenue" onclick="focusKpi(this)">
+            <div class="kpi-label">Monthly Revenue</div>
+            <div class="kpi-val-row">
+              <span class="kpi-unit">$</span>
+              <div class="kpi-value" contenteditable="true" id="val-bb-revenue"
+                data-key="bb-revenue" data-type="currency" data-target="100000" data-dir="gte"
+                onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
+            </div>
+            <div class="kpi-target">Target: $100K/mo</div>
+            <div class="prog-wrap"><div class="prog-fill neutral" id="bar-bb-revenue" style="width:0%"></div></div>
+          </div>
+          <div class="kpi" id="kpi-bb-cpl" onclick="focusKpi(this)">
+            <div class="kpi-label">Cost Per Lead</div>
+            <div class="kpi-val-row">
+              <span class="kpi-unit">$</span>
+              <div class="kpi-value" contenteditable="true" id="val-bb-cpl"
+                data-key="bb-cpl" data-type="currency" data-target="15" data-dir="lte"
+                onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
+            </div>
+            <div class="kpi-target">Target: &lt;$15</div>
+            <div class="prog-wrap"><div class="prog-fill neutral" id="bar-bb-cpl" style="width:0%"></div></div>
+          </div>
+          <div class="kpi" id="kpi-bb-close" onclick="focusKpi(this)">
+            <div class="kpi-label">Close Rate</div>
+            <div class="kpi-val-row">
+              <div class="kpi-value" contenteditable="true" id="val-bb-close"
+                data-key="bb-close" data-type="percent" data-target="30" data-dir="gte"
+                onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
+              <span class="kpi-unit">%</span>
+            </div>
+            <div class="kpi-target">Target: &gt;30%</div>
+            <div class="prog-wrap"><div class="prog-fill neutral" id="bar-bb-close" style="width:0%"></div></div>
+          </div>
+          <div class="kpi" id="kpi-bb-retention" onclick="focusKpi(this)">
+            <div class="kpi-label">90-Day Retention</div>
+            <div class="kpi-val-row">
+              <div class="kpi-value" contenteditable="true" id="val-bb-retention"
+                data-key="bb-retention" data-type="percent" data-target="85" data-dir="gte"
+                onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
+              <span class="kpi-unit">%</span>
+            </div>
+            <div class="kpi-target">Target: &gt;85%</div>
+            <div class="prog-wrap"><div class="prog-fill neutral" id="bar-bb-retention" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEPRIME + NewU side by side -->
+    <div class="card" style="--accent:linear-gradient(90deg,#5c2d1e,var(--beprime))">
+      <div class="card-head">
+        <div class="card-title">🧬 BEPRIME</div>
+        <span class="card-badge badge-amber">Active build</span>
+      </div>
+      <div class="card-body-sm">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px">
+          Telehealth · Peptides + hormones · 50% Ryan / 50% Chris<br>Portal: Terracotta/sage/cream · HIMSS UX
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi" id="kpi-bp-clients" onclick="focusKpi(this)">
+            <div class="kpi-label">Active Clients</div>
+            <div class="kpi-val-row">
+              <div class="kpi-value" contenteditable="true" id="val-bp-clients"
+                data-key="bp-clients" data-type="number" data-target="50" data-dir="gte"
+                onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
+            </div>
+            <div class="kpi-target">Target: 50+</div>
+            <div class="prog-wrap"><div class="prog-fill neutral" id="bar-bp-clients" style="width:0%"></div></div>
+          </div>
+          <div class="kpi" id="kpi-bp-revenue" onclick="focusKpi(this)">
+            <div class="kpi-label">Monthly Revenue</div>
+            <div class="kpi-val-row">
+              <span class="kpi-unit">$</span>
+              <div class="kpi-value" contenteditable="true" id="val-bp-revenue"
+                data-key="bp-revenue" data-type="currency" data-target="20000" data-dir="gte"
+                onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
+            </div>
+            <div class="kpi-target">Target: $20K/mo</div>
+            <div class="prog-wrap"><div class="prog-fill neutral" id="bar-bp-revenue" style="width:0%"></div></div>
+          </div>
+        </div>
+        <textarea class="card-textarea" rows="2" data-key="bp-notes" data-card="beprime"
+          onblur="saveField(this)" placeholder="Portal progress, blockers…"></textarea>
+      </div>
+    </div>
+
+    <div class="card" style="--accent:linear-gradient(90deg,#2e1065,var(--newu))">
+      <div class="card-head">
+        <div class="card-title">🟣 NewU</div>
+        <span class="card-badge badge-muted">Active build</span>
+      </div>
+      <div class="card-body-sm">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px">
+          Coaching platform / app · Ryan owns code · Boss Bodies migration target
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi" id="kpi-nu-users" onclick="focusKpi(this)">
+            <div class="kpi-label">Active Users</div>
+            <div class="kpi-val-row">
+              <div class="kpi-value" contenteditable="true" id="val-nu-users"
+                data-key="nu-users" data-type="number" data-target="100" data-dir="gte"
+                onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
+            </div>
+            <div class="kpi-target">Target: 100+</div>
+            <div class="prog-wrap"><div class="prog-fill neutral" id="bar-nu-users" style="width:0%"></div></div>
+          </div>
+          <div class="kpi" id="kpi-nu-mrr" onclick="focusKpi(this)">
+            <div class="kpi-label">MRR</div>
+            <div class="kpi-val-row">
+              <span class="kpi-unit">$</span>
+              <div class="kpi-value" contenteditable="true" id="val-nu-mrr"
+                data-key="nu-mrr" data-type="currency" data-target="10000" data-dir="gte"
+                onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
+            </div>
+            <div class="kpi-target">Target: $10K MRR</div>
+            <div class="prog-wrap"><div class="prog-fill neutral" id="bar-nu-mrr" style="width:0%"></div></div>
+          </div>
+        </div>
+        <textarea class="card-textarea" rows="2" data-key="nu-notes" data-card="newu"
+          onblur="saveField(this)" placeholder="App build progress, milestones…"></textarea>
+      </div>
+    </div>
+
+    <!-- Perform Creative -->
+    <div class="card" style="--accent:linear-gradient(90deg,#78350f,var(--perform))">
+      <div class="card-head">
+        <div class="card-title">🎯 Perform Creative</div>
+        <span class="card-badge badge-amber">SaaS Potential</span>
+      </div>
+      <div class="card-body-sm">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px">
+          AI-powered ad creative platform · Built via Manus AI · Domains: HookLab.io / WinningCreatives.io / AdFire.io
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi" id="kpi-pf-mrr" onclick="focusKpi(this)">
+            <div class="kpi-label">MRR</div>
+            <div class="kpi-val-row">
+              <span class="kpi-unit">$</span>
+              <div class="kpi-value" contenteditable="true" id="val-pf-mrr"
+                data-key="pf-mrr" data-type="currency" data-target="10000" data-dir="gte"
+                onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
+            </div>
+            <div class="kpi-target">Target: $10K MRR</div>
+            <div class="prog-wrap"><div class="prog-fill neutral" id="bar-pf-mrr" style="width:0%"></div></div>
+          </div>
+          <div class="kpi" id="kpi-pf-users" onclick="focusKpi(this)">
+            <div class="kpi-label">Users</div>
+            <div class="kpi-val-row">
+              <div class="kpi-value" contenteditable="true" id="val-pf-users"
+                data-key="pf-users" data-type="number" data-target="100" data-dir="gte"
+                onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
+            </div>
+            <div class="kpi-target">Target: 100 beta users</div>
+            <div class="prog-wrap"><div class="prog-fill neutral" id="bar-pf-users" style="width:0%"></div></div>
+          </div>
+        </div>
+        <textarea class="card-textarea" rows="2" data-key="pf-notes" data-card="perform"
+          onblur="saveField(this)" placeholder="Build status, domain decision…"></textarea>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- ════════ FOUNDER INTELLIGENCE ════════ -->
+  <div class="section-label">🧠 Founder Intelligence</div>
+  <div class="grid grid-2col">
+
+    <!-- Priority + Focus -->
+    <div class="card" style="--accent:linear-gradient(90deg,#1a1a2e,#3b82f6)">
+      <div class="card-head">
+        <div class="card-title">Current Focus & Priorities</div>
+      </div>
+      <div class="card-body">
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">This Week's Priority Stack</div>
+        <div style="display:flex;flex-direction:column;gap:6px" id="priorityStack">
+          <div style="display:flex;gap:10px;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:10px 14px">
+            <span style="font-size:11px;font-weight:700;color:var(--amber);min-width:18px">1</span>
+            <span style="font-size:13px">ONEST Health — US expansion + marketing</span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:10px 14px">
+            <span style="font-size:11px;font-weight:700;color:var(--amber);min-width:18px">2</span>
+            <span style="font-size:13px">Perform Creative — platform build</span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:10px 14px">
+            <span style="font-size:11px;font-weight:700;color:var(--amber);min-width:18px">3</span>
+            <span style="font-size:13px">NewU — coaching app launch</span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:10px 14px">
+            <span style="font-size:11px;font-weight:700;color:var(--amber);min-width:18px">4</span>
+            <span style="font-size:13px">Personal Brand — content machine activation</span>
+          </div>
+        </div>
+        <div style="margin-top:14px">
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Ryan's Focus Today</div>
+          <textarea class="card-textarea" rows="3" data-key="today-focus"
+            onblur="saveField(this)" placeholder="What's the #1 thing today? Key decisions, blocks, notes…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Cost Tracker -->
+    <div class="card" style="--accent:linear-gradient(90deg,#0f172a,#334155)">
+      <div class="card-head">
+        <div class="card-title">AI / API Cost Tracker</div>
+        <span style="font-size:18px;font-weight:700;color:var(--text)" id="cost-total">$0.00</span>
+      </div>
+      <div class="card-body">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+          <div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">Anthropic</div>
+            <input class="card-input" style="margin-top:0" id="cost-anthropic" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">OpenAI</div>
+            <input class="card-input" style="margin-top:0" id="cost-openai" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">ElevenLabs</div>
+            <input class="card-input" style="margin-top:0" id="cost-elevenlabs" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">Gemini</div>
+            <input class="card-input" style="margin-top:0" id="cost-gemini" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">HeyGen</div>
+            <input class="card-input" style="margin-top:0" id="cost-heygen" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">Manus AI</div>
+            <input class="card-input" style="margin-top:0" id="cost-manus" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">Magic Hour</div>
+            <input class="card-input" style="margin-top:0" id="cost-magichour" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">Higgsfield</div>
+            <input class="card-input" style="margin-top:0" id="cost-higgsfield" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">OpenClaw</div>
+            <input class="card-input" style="margin-top:0" id="cost-openclaw" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
+          </div>
+        </div>
+        <div style="margin-top:14px">
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Notes</div>
+          <textarea class="card-textarea" rows="2" data-key="cost-notes"
+            onblur="saveField(this)" placeholder="Budget notes, billing dates…"></textarea>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <div style="text-align:center;padding-top:32px;font-size:11px;color:var(--muted)">
+    Mission Control — Ryan Spiteri · Powered by Elara ⚡ · <span id="footerTs">—</span>
   </div>
 
 </main>
 
-<!-- ─── Toast ─────────────────────────────────────────────────────────────── -->
-<div id="toast"></div>
-
-<!-- ─── Scripts ───────────────────────────────────────────────────────────── -->
+<!-- ════════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════ -->
 <script>
-/* ═══════════════════════════════════════════════════════════
-   STORAGE
-═══════════════════════════════════════════════════════════ */
-const LS_KEY = 'mc_data_v2';
+/* ─── Config ────────────────────────────────────────── */
+const LS_KEY      = 'mc_v3';
+const API_BASE    = 'http://100.105.163.93:8080';  // iMac Tailscale
+const REFRESH_MS  = 90000;  // 90s auto-refresh
 
+/* ─── Clock ─────────────────────────────────────────── */
+function tickClock() {
+  const now = new Date();
+  const opts = { timeZone: 'Australia/Brisbane', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+  const time = now.toLocaleTimeString('en-AU', opts);
+  const date = now.toLocaleDateString('en-AU', { timeZone: 'Australia/Brisbane', weekday: 'short', day: 'numeric', month: 'short' });
+  document.getElementById('clock').textContent = `${date}  ${time} AEST`;
+}
+setInterval(tickClock, 1000);
+tickClock();
+
+/* ─── LocalStorage ───────────────────────────────────── */
 function loadData() {
-  try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
-  catch { return {}; }
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch { return {}; }
+}
+function saveData(d) {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(d)); } catch {}
 }
 
-function saveData(data) {
-  localStorage.setItem(LS_KEY, JSON.stringify(data));
-}
-
-/* ═══════════════════════════════════════════════════════════
-   CARD TIMESTAMPS
-═══════════════════════════════════════════════════════════ */
-const cardKeys = {
-  'bb': ['bb-revenue','bb-cpl','bb-dmcall','bb-showrate','bb-close','bb-retention','bb-clients'],
-  'on': ['on-revenue','on-partners','on-us','on-campaign'],
-  'bp': ['bp-portal','bp-clients','bp-notes'],
-  'nu': ['nu-build','nu-notes'],
-  'pf': ['pf-build','pf-notes'],
-};
-
-function touchCard(cardId) {
-  const data = loadData();
-  const ts = Date.now();
-  data[`__ts_${cardId}`] = ts;
-  saveData(data);
-  renderTimestamp(cardId, ts);
-}
-
-function renderTimestamp(cardId, ts) {
-  const el = document.getElementById(`ts-${cardId}`);
-  if (!el) return;
-  if (!ts) { el.textContent = '—'; return; }
-  const d = new Date(ts);
-  el.textContent = d.toLocaleString('en-AU', {
-    day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: true
-  });
-}
-
-function cardForKey(key) {
-  for (const [card, keys] of Object.entries(cardKeys)) {
-    if (keys.includes(key)) return card;
-  }
-  return null;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   KPI STATUS LOGIC
-═══════════════════════════════════════════════════════════ */
-function getStatus(value, target, dir) {
-  if (!dir || dir === 'none' || target === '' || isNaN(value)) return 'neutral';
-  const v = parseFloat(value);
-  const t = parseFloat(target);
-
+/* ─── KPI logic ─────────────────────────────────────── */
+function getStatus(val, target, dir) {
+  const v = parseFloat(val), t = parseFloat(target);
+  if (isNaN(v) || !t) return 'neutral';
   if (dir === 'gte') {
-    if (v >= t) return 'green';
-    if (v >= t * 0.8) return 'amber';
+    if (v >= t)        return 'green';
+    if (v >= t * 0.75) return 'amber';
     return 'red';
   }
   if (dir === 'lte') {
-    if (v <= t) return 'green';
-    if (v <= t * 1.3) return 'amber';
+    if (v <= t)        return 'green';
+    if (v <= t * 1.5)  return 'amber';
     return 'red';
   }
   return 'neutral';
 }
-
-function getProgressPct(value, target, dir) {
-  const v = parseFloat(value);
-  const t = parseFloat(target);
-  if (isNaN(v) || isNaN(t) || t === 0) return 0;
-
-  if (dir === 'gte') return Math.min((v / t) * 100, 100);
-  if (dir === 'lte') {
-    // lower is better; progress = how close to target (inverted ratio)
-    if (v === 0) return 100;
-    return Math.min((t / v) * 100, 100);
-  }
+function getProgressPct(val, target, dir) {
+  const v = parseFloat(val), t = parseFloat(target);
+  if (isNaN(v) || !t) return 0;
+  if (dir === 'gte') return Math.min(100, Math.round(v / t * 100));
+  if (dir === 'lte') return v <= t ? 100 : Math.max(0, Math.round((2*t - v) / t * 100));
   return 0;
 }
-
 function updateKpiStatus(el) {
-  const key  = el.dataset.key;
-  const dir  = el.dataset.dir;
-  const target = el.dataset.target;
-  const raw  = el.textContent.trim().replace(/[^0-9.]/g, '');
-  const val  = parseFloat(raw) || 0;
-
+  const key = el.dataset.key, val = el.textContent.trim();
+  const target = el.dataset.target, dir = el.dataset.dir;
   const status = getStatus(val, target, dir);
   const pct    = getProgressPct(val, target, dir);
-
-  // dot
-  const dot = document.getElementById(`dot-${key}`);
-  if (dot) {
-    dot.className = `status-dot ${status}`;
-  }
-
-  // card tint
-  const kpiEl = document.getElementById(`kpi-${key}`);
-  if (kpiEl) {
-    kpiEl.className = `kpi s-${status}`;
-  }
-
-  // progress bar
-  const bar = document.getElementById(`bar-${key}`);
-  if (bar) {
-    bar.style.width = pct + '%';
-    bar.className = `progress-bar-fill ${status}`;
-  }
+  const dot    = document.getElementById(`dot-${key}`);
+  const bar    = document.getElementById(`bar-${key}`);
+  const kpiEl  = document.getElementById(`kpi-${key}`);
+  if (dot)   dot.className   = `dot ${status}`;
+  if (kpiEl) kpiEl.className = `kpi s-${status}`;
+  if (bar) { bar.style.width = pct + '%'; bar.className = `prog-fill ${status}`; }
 }
-
-/* ═══════════════════════════════════════════════════════════
-   KPI SAVE
-═══════════════════════════════════════════════════════════ */
 function saveKpi(el) {
-  const key = el.dataset.key;
-  const val = el.textContent.trim();
-  const data = loadData();
-  data[key] = val;
-  saveData(data);
-
-  const card = cardForKey(key);
-  if (card) touchCard(card);
-
+  const key = el.dataset.key, val = el.textContent.trim();
+  const d = loadData(); d[key] = val; saveData(d);
   updateKpiStatus(el);
-  showToast('Saved ✓');
+  showToast('Saved');
+}
+function focusKpi(kpiEl) {
+  const ed = kpiEl.querySelector('[contenteditable]');
+  if (!ed) return;
+  ed.focus();
+  const r = document.createRange(); r.selectNodeContents(ed); r.collapse(false);
+  const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   FIELD SAVE (text inputs / textareas)
-═══════════════════════════════════════════════════════════ */
-/* ═══════════════════════════════════════════════════════════
-   API COST TRACKER
-═══════════════════════════════════════════════════════════ */
-const COST_IDS = [
-  'cost-anthropic','cost-openai','cost-elevenlabs','cost-gemini',
-  'cost-magichour','cost-heygen','cost-higgsfield','cost-manus','cost-openclaw'
-];
+/* ─── Fields ─────────────────────────────────────────── */
+function saveField(el) {
+  const d = loadData(); d[el.dataset.key] = el.value; saveData(d);
+}
 
+/* ─── Cost tracker ───────────────────────────────────── */
+const COST_IDS = ['cost-anthropic','cost-openai','cost-elevenlabs','cost-gemini',
+                  'cost-magichour','cost-heygen','cost-higgsfield','cost-manus','cost-openclaw'];
 function saveCost(el) {
-  const data = loadData();
-  data[el.id] = el.value;
-  saveData(data);
-  updateCostTotal();
+  const d = loadData(); d[el.id] = el.value; saveData(d);
 }
-
 function updateCostTotal() {
-  let total = 0;
+  let t = 0;
   COST_IDS.forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
-    const raw = el.value.replace(/[^0-9.]/g, '');
-    const num = parseFloat(raw);
-    if (!isNaN(num)) total += num;
+    const n = parseFloat(el.value.replace(/[^0-9.]/g,''));
+    if (!isNaN(n)) t += n;
   });
-  const totalEl = document.getElementById('cost-total');
-  if (totalEl) totalEl.textContent = '$' + total.toLocaleString('en-AU', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const el = document.getElementById('cost-total');
+  if (el) el.textContent = '$' + t.toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2});
 }
 
-function loadCosts() {
-  const data = loadData();
-  COST_IDS.forEach(id => {
-    const el = document.getElementById(id);
-    if (el && data[id] !== undefined) el.value = data[id];
-  });
-  updateCostTotal();
+/* ─── Toast ──────────────────────────────────────────── */
+let _toastTimer;
+function showToast(msg) {
+  let t = document.getElementById('_toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = '_toast';
+    Object.assign(t.style, {
+      position:'fixed', bottom:'24px', right:'24px',
+      background:'#222', border:'1px solid #333', borderRadius:'8px',
+      padding:'10px 16px', fontSize:'12px', color:'#eee',
+      zIndex:'9999', opacity:'0', transition:'opacity .2s',
+      pointerEvents:'none'
+    });
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => { t.style.opacity = '0'; }, 2000);
 }
 
-function saveField(el) {
-  const key = el.dataset.key;
-  const card = el.dataset.card;
-  const val = el.value;
-  const data = loadData();
-  data[key] = val;
-  saveData(data);
-  if (card) touchCard(card);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   FOCUS HELPER
-═══════════════════════════════════════════════════════════ */
-function focusKpi(kpiEl) {
-  const editable = kpiEl.querySelector('[contenteditable]');
-  if (editable) {
-    editable.focus();
-    // move cursor to end
-    const range = document.createRange();
-    range.selectNodeContents(editable);
-    range.collapse(false);
-    const sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
+/* ─── Live Data fetch ───────────────────────────────── */
+async function fetchMissionControl() {
+  try {
+    const res = await fetch(`${API_BASE}/api/mission-control`, { signal: AbortSignal.timeout(10000) });
+    if (!res.ok) throw new Error(res.status);
+    const d = await res.json();
+    renderLiveData(d);
+    document.getElementById('liveIndicator').style.background = 'var(--green)';
+    document.getElementById('liveIndicator').style.boxShadow  = '0 0 6px var(--green)';
+    document.getElementById('footerTs').textContent = `Data updated ${new Date().toLocaleTimeString('en-AU', {timeZone:'Australia/Brisbane', hour:'2-digit', minute:'2-digit'})} AEST`;
+  } catch(e) {
+    document.getElementById('liveIndicator').style.background = 'var(--amber)';
+    document.getElementById('liveIndicator').style.boxShadow  = '0 0 6px var(--amber)';
+    // graceful: keep whatever was in localStorage
   }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   INIT — LOAD FROM LOCALSTORAGE
-═══════════════════════════════════════════════════════════ */
-function init() {
-  loadCosts();
-  const data = loadData();
+function renderLiveData(d) {
+  /* ── Trading ── */
+  const t = d.trading || {};
+  if (t.balance) {
+    const bal = t.balance;
+    const needed = Math.max(0, 53000 - bal);
+    const pct    = Math.min(100, Math.max(0, (bal - 50000) / 3000 * 100));
+    document.getElementById('h-balance').textContent      = '$' + bal.toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2});
+    document.getElementById('h-balance-sub').textContent  = t.can_trade ? '✅ Can trade' : '⛔ Cannot trade';
+    document.getElementById('combineBalance').textContent = '$' + bal.toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2});
+    document.getElementById('combineBarFill').style.width = pct + '%';
+    document.getElementById('combinePct').textContent     = pct.toFixed(1) + '%';
+    document.getElementById('h-combine-pct').textContent  = pct.toFixed(1) + '%';
+    document.getElementById('neededAmount').textContent   = '$' + needed.toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
 
-  // KPI fields (contenteditable)
+  /* ── Bot ── */
+  const b = d.bot || {};
+  const running = b.running;
+  document.getElementById('botBadge').textContent  = running ? '● LIVE' : '○ OFFLINE';
+  document.getElementById('botBadge').className    = 'card-badge ' + (running ? 'badge-green' : 'badge-red');
+  if (b.log_tail)   document.getElementById('botLogTail').textContent = b.log_tail;
+  if (b.daily_pnl !== undefined) {
+    const pnl = b.daily_pnl || 0;
+    const pnlEl = document.getElementById('todayPnl');
+    pnlEl.textContent = (pnl >= 0 ? '+$' : '-$') + Math.abs(pnl).toLocaleString('en-AU', {minimumFractionDigits:2});
+    pnlEl.style.color = pnl > 0 ? 'var(--green)' : pnl < 0 ? 'var(--red)' : 'var(--text)';
+  }
+  if (b.trades_today !== undefined) {
+    document.getElementById('tradesToday').textContent = b.trades_today + '/3';
+  }
+
+  /* ── Services ── */
+  const svcs = d.services || {};
+  const svcDefs = [
+    { key: 'trading_bot',  name: '🤖 Trading Bot'     },
+    { key: 'dashboard',    name: '📊 Dashboard Server' },
+    { key: 'ryan_clone',   name: '💬 ONEST AI Bot'     },
+    { key: 'ngrok',        name: '🌐 ngrok Tunnel'     },
+  ];
+  const svcList = document.getElementById('svcList');
+  const healthyCount = svcDefs.filter(s => svcs[s.key]).length;
+  svcList.innerHTML = svcDefs.map(s => `
+    <div class="svc-row">
+      <span class="svc-name">${s.name}</span>
+      <span class="svc-status" style="color:${svcs[s.key] ? 'var(--green)' : 'var(--red)'}">
+        <span class="dot ${svcs[s.key] ? 'green' : 'red'}"></span>
+        ${svcs[s.key] ? 'RUNNING' : 'OFFLINE'}
+      </span>
+    </div>`).join('');
+  const badge = document.getElementById('sysHealthBadge');
+  badge.textContent = `${healthyCount}/${svcDefs.length} services`;
+  badge.className   = 'card-badge ' + (healthyCount === svcDefs.length ? 'badge-green' : healthyCount >= 2 ? 'badge-amber' : 'badge-red');
+
+  /* ── Personal Brand ── */
+  const pb = d.personal_brand || {};
+  if (pb.ideas_total !== undefined) {
+    document.getElementById('pp-ideas').textContent      = pb.ideas_total || 0;
+    document.getElementById('pp-approved').textContent   = pb.ideas_approved || 0;
+    document.getElementById('pp-scripts').textContent    = pb.scripts_total || 0;
+    document.getElementById('pp-production').textContent = pb.production_total || 0;
+    document.getElementById('pp-ready').textContent      = pb.ready_to_post || 0;
+    document.getElementById('pp-scheduled').textContent  = pb.scheduled_total || 0;
+    document.getElementById('h-content').textContent     = ((pb.ideas_total || 0) + (pb.scripts_total || 0));
+  }
+
+  /* ── Ideas backlog ── */
+  const ideas = d.ideas || [];
+  const il = document.getElementById('ideaList');
+  document.getElementById('ideasCount').textContent = ideas.length;
+  il.innerHTML = ideas.length
+    ? ideas.map(i => `<div class="idea-item"><span class="idea-icon">💡</span><span style="font-size:12px">${i}</span></div>`).join('')
+    : '<div class="idea-item" style="color:var(--muted)">No ideas yet — say "idea: ..." to Elara</div>';
+}
+
+async function forceRefresh() {
+  try { await fetch(`${API_BASE}/api/mission-control/refresh`, { method:'POST' }); } catch {}
+  fetchMissionControl();
+}
+
+/* ─── Init ───────────────────────────────────────────── */
+function init() {
+  // Load costs
+  const d = loadData();
+  COST_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && d[id]) el.value = d[id];
+  });
+  updateCostTotal();
+
+  // Load KPI fields
   document.querySelectorAll('[data-key][contenteditable]').forEach(el => {
-    const key = el.dataset.key;
-    if (data[key] !== undefined) {
-      el.textContent = data[key];
-    }
+    const v = d[el.dataset.key];
+    if (v !== undefined) el.textContent = v;
     updateKpiStatus(el);
   });
 
-  // Text fields (input/textarea)
+  // Load text fields
   document.querySelectorAll('input[data-key], textarea[data-key]').forEach(el => {
-    const key = el.dataset.key;
-    if (data[key] !== undefined) {
-      el.value = data[key];
-    }
+    const v = d[el.dataset.key];
+    if (v !== undefined) el.value = v;
   });
 
-  // Timestamps
-  for (const cardId of Object.keys(cardKeys)) {
-    renderTimestamp(cardId, data[`__ts_${cardId}`] || null);
-  }
+  // Fetch live data
+  fetchMissionControl();
+  setInterval(fetchMissionControl, REFRESH_MS);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   RESET
-═══════════════════════════════════════════════════════════ */
-function resetAll() {
-  if (!confirm('⚠️ This will clear ALL data. Are you sure?')) return;
-  localStorage.removeItem(LS_KEY);
-  location.reload();
-}
-
-/* ═══════════════════════════════════════════════════════════
-   TOAST
-═══════════════════════════════════════════════════════════ */
-let toastTimer;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 1400);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   CLOCK
-═══════════════════════════════════════════════════════════ */
-function updateClock() {
-  const el = document.getElementById('clock');
-  if (!el) return;
-  const now = new Date();
-  el.textContent = now.toLocaleTimeString('en-AU', {
-    hour: '2-digit', minute: '2-digit', second: '2-digit',
-    hour12: true, timeZone: 'Australia/Brisbane'
-  }) + ' AEST';
-}
-updateClock();
-setInterval(updateClock, 1000);
-
-/* ═══════════════════════════════════════════════════════════
-   PREVENT NEWLINES IN CONTENTEDITABLE KPIs
-═══════════════════════════════════════════════════════════ */
-document.querySelectorAll('.kpi-value').forEach(el => {
-  el.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      el.blur();
-    }
-  });
-  // only allow numeric input
-  el.addEventListener('keypress', e => {
-    if (!/[\d.]/.test(e.key)) e.preventDefault();
-  });
-});
-
-/* ═══════════════════════════════════════════════════════════
-   BOOT
-═══════════════════════════════════════════════════════════ */
-init();
+window.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>
