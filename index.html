@@ -922,6 +922,181 @@
     </div>
   </div>
 
+  <!-- ─── API Cost Tracker ──────────────────────────────────────────────── -->
+  <div class="card" style="grid-column: 1 / -1; border-color: var(--border-glow);">
+    <div class="card-header">
+      <div style="width:36px;height:36px;border-radius:10px;background:rgba(16,185,129,.15);display:flex;align-items:center;justify-content:center;font-size:18px;">💸</div>
+      <div>
+        <h2>API Spend Tracker</h2>
+      </div>
+      <div class="card-meta" style="margin-left:auto;">
+        <span style="font-size:11px;color:var(--muted);">Update monthly · AUD estimates</span>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="section-label">Monthly API Costs</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:20px;">
+
+        <!-- Anthropic -->
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:12px;font-weight:700;color:var(--text);">Anthropic (Claude)</span>
+            <span style="font-size:10px;padding:2px 8px;background:rgba(99,102,241,.15);color:#818cf8;border-radius:20px;">Usage</span>
+          </div>
+          <input
+            id="cost-anthropic"
+            type="text"
+            placeholder="$0.00"
+            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
+            oninput="saveCost(this)"
+          />
+          <div style="font-size:10px;color:var(--muted);margin-top:6px;">claude.ai/settings/billing</div>
+        </div>
+
+        <!-- OpenAI -->
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:12px;font-weight:700;color:var(--text);">OpenAI</span>
+            <span style="font-size:10px;padding:2px 8px;background:rgba(99,102,241,.15);color:#818cf8;border-radius:20px;">Usage</span>
+          </div>
+          <input
+            id="cost-openai"
+            type="text"
+            placeholder="$0.00"
+            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
+            oninput="saveCost(this)"
+          />
+          <div style="font-size:10px;color:var(--muted);margin-top:6px;">platform.openai.com/usage</div>
+        </div>
+
+        <!-- ElevenLabs -->
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:12px;font-weight:700;color:var(--text);">ElevenLabs</span>
+            <span style="font-size:10px;padding:2px 8px;background:rgba(245,158,11,.15);color:var(--amber);border-radius:20px;">Subscription</span>
+          </div>
+          <input
+            id="cost-elevenlabs"
+            type="text"
+            placeholder="$0.00"
+            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
+            oninput="saveCost(this)"
+          />
+          <div style="font-size:10px;color:var(--muted);margin-top:6px;">elevenlabs.io/subscription</div>
+        </div>
+
+        <!-- Gemini -->
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:12px;font-weight:700;color:var(--text);">Gemini / Google</span>
+            <span style="font-size:10px;padding:2px 8px;background:rgba(99,102,241,.15);color:#818cf8;border-radius:20px;">Usage</span>
+          </div>
+          <input
+            id="cost-gemini"
+            type="text"
+            placeholder="$0.00"
+            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
+            oninput="saveCost(this)"
+          />
+          <div style="font-size:10px;color:var(--muted);margin-top:6px;">console.cloud.google.com/billing</div>
+        </div>
+
+        <!-- Magic Hour -->
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:12px;font-weight:700;color:var(--text);">Magic Hour</span>
+            <span style="font-size:10px;padding:2px 8px;background:rgba(99,102,241,.15);color:#818cf8;border-radius:20px;">Usage</span>
+          </div>
+          <input
+            id="cost-magichour"
+            type="text"
+            placeholder="$0.00"
+            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
+            oninput="saveCost(this)"
+          />
+          <div style="font-size:10px;color:var(--muted);margin-top:6px;">$1.08 / 30s video</div>
+        </div>
+
+        <!-- HeyGen -->
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:12px;font-weight:700;color:var(--text);">HeyGen</span>
+            <span style="font-size:10px;padding:2px 8px;background:rgba(245,158,11,.15);color:var(--amber);border-radius:20px;">Subscription</span>
+          </div>
+          <input
+            id="cost-heygen"
+            type="text"
+            placeholder="$0.00"
+            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
+            oninput="saveCost(this)"
+          />
+          <div style="font-size:10px;color:var(--muted);margin-top:6px;">app.heygen.com/subscription</div>
+        </div>
+
+        <!-- Higgsfield -->
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:12px;font-weight:700;color:var(--text);">Higgsfield</span>
+            <span style="font-size:10px;padding:2px 8px;background:rgba(245,158,11,.15);color:var(--amber);border-radius:20px;">Subscription</span>
+          </div>
+          <input
+            id="cost-higgsfield"
+            type="text"
+            placeholder="$0.00"
+            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
+            oninput="saveCost(this)"
+          />
+          <div style="font-size:10px;color:var(--muted);margin-top:6px;">higgsfield.ai/account</div>
+        </div>
+
+        <!-- Manus AI -->
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:12px;font-weight:700;color:var(--text);">Manus AI</span>
+            <span style="font-size:10px;padding:2px 8px;background:rgba(245,158,11,.15);color:var(--amber);border-radius:20px;">Subscription</span>
+          </div>
+          <input
+            id="cost-manus"
+            type="text"
+            placeholder="$0.00"
+            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
+            oninput="saveCost(this)"
+          />
+          <div style="font-size:10px;color:var(--muted);margin-top:6px;">manus.im/account</div>
+        </div>
+
+        <!-- OpenClaw -->
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:12px;font-weight:700;color:var(--text);">OpenClaw</span>
+            <span style="font-size:10px;padding:2px 8px;background:rgba(245,158,11,.15);color:var(--amber);border-radius:20px;">Subscription</span>
+          </div>
+          <input
+            id="cost-openclaw"
+            type="text"
+            placeholder="$0.00"
+            style="width:100%;background:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:14px;font-weight:700;"
+            oninput="saveCost(this)"
+          />
+          <div style="font-size:10px;color:var(--muted);margin-top:6px;">openclaw.ai/billing</div>
+        </div>
+
+      </div>
+
+      <!-- Total -->
+      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--subtle);border:1px solid var(--border-glow);border-radius:10px;padding:16px 20px;">
+        <span style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Total Monthly AI Spend</span>
+        <span id="cost-total" style="font-size:24px;font-weight:700;color:#10b981;">$0.00</span>
+      </div>
+
+      <div style="font-size:10px;color:var(--muted);margin-top:10px;text-align:right;">
+        Values saved locally in your browser · Update at the start of each month
+      </div>
+
+    </div>
+  </div>
+
 </main>
 
 <!-- ─── Toast ─────────────────────────────────────────────────────────────── -->
@@ -1064,6 +1239,43 @@ function saveKpi(el) {
 /* ═══════════════════════════════════════════════════════════
    FIELD SAVE (text inputs / textareas)
 ═══════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   API COST TRACKER
+═══════════════════════════════════════════════════════════ */
+const COST_IDS = [
+  'cost-anthropic','cost-openai','cost-elevenlabs','cost-gemini',
+  'cost-magichour','cost-heygen','cost-higgsfield','cost-manus','cost-openclaw'
+];
+
+function saveCost(el) {
+  const data = loadData();
+  data[el.id] = el.value;
+  saveData(data);
+  updateCostTotal();
+}
+
+function updateCostTotal() {
+  let total = 0;
+  COST_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const raw = el.value.replace(/[^0-9.]/g, '');
+    const num = parseFloat(raw);
+    if (!isNaN(num)) total += num;
+  });
+  const totalEl = document.getElementById('cost-total');
+  if (totalEl) totalEl.textContent = '$' + total.toLocaleString('en-AU', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+}
+
+function loadCosts() {
+  const data = loadData();
+  COST_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && data[id] !== undefined) el.value = data[id];
+  });
+  updateCostTotal();
+}
+
 function saveField(el) {
   const key = el.dataset.key;
   const card = el.dataset.card;
@@ -1095,6 +1307,7 @@ function focusKpi(kpiEl) {
    INIT — LOAD FROM LOCALSTORAGE
 ═══════════════════════════════════════════════════════════ */
 function init() {
+  loadCosts();
   const data = loadData();
 
   // KPI fields (contenteditable)
