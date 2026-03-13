@@ -439,13 +439,15 @@
 
 <script>
 const LS_KEY   = 'mc_v5';
-const API_BASE = 'http://100.105.163.93:8080';
+// Public tunnel — works without Tailscale. Falls back to Tailscale IP if needed.
+const API_BASE = 'https://condos-rebel-invention-spending.trycloudflare.com';
+const API_FALLBACK = 'http://100.105.163.93:8080';
 const REFRESH  = 30000; // 30 seconds
 
 /* ── Agent link map ─────────────────────────────────────────── */
 const AGENT_LINKS = {
-  'Trading Bot':          { url: 'http://100.105.163.93:8080',        label: '↗ Open Dashboard' },
-  'ONEST AI (Ryan Clone)':{ url: 'http://100.105.163.93:8090/health', label: '↗ Health Check' },
+  'Trading Bot':          { url: 'https://condos-rebel-invention-spending.trycloudflare.com', label: '↗ Open Dashboard' },
+  'ONEST AI (Ryan Clone)':{ url: 'http://100.105.163.93:8090/health',                        label: '↗ Health Check' },
 };
 
 /* ── ClickUp space URLs ──────────────────────────────────────── */
@@ -592,16 +594,42 @@ function renderProjects(projects) {
 }
 
 /* ── Main fetch ──────────────────────────────────────────────── */
+const OFFLINE_AGENTS = [
+  {icon:'🤖', name:'Trading Bot',           status:'unknown', task:'Connect to load live session data', last_active:null},
+  {icon:'💬', name:'ONEST AI (Ryan Clone)',  status:'unknown', task:'Connect to load status',            last_active:null},
+  {icon:'🔍', name:'Intelligence Engine',   status:'scheduled',task:'Scheduled — runs 6 AM AEST daily', last_active:null},
+  {icon:'⚡', name:'Elara (Chief of Staff)', status:'running', task:'Always on',                         last_active:new Date().toISOString()},
+];
+const OFFLINE_PROJECTS = [
+  {name:'Trading Bot',    icon:'⚡', color:'#22c55e', tasks:['Bot auto-executes NY + Asia sessions'], clickup_tasks:[]},
+  {name:'ONEST Health',   icon:'💊', color:'#2563eb', tasks:[],                                       clickup_tasks:[]},
+  {name:'Personal Brand', icon:'🎥', color:'#8b5cf6', tasks:['Content pipeline active'],             clickup_tasks:[]},
+  {name:'BEPRIME',        icon:'🧬', color:'#c4714a', tasks:[],                                       clickup_tasks:[]},
+  {name:'NewU',           icon:'🟣', color:'#7c3aed', tasks:[],                                       clickup_tasks:[]},
+  {name:'Ad Creatives',   icon:'🎨', color:'#f59e0b', tasks:[],                                       clickup_tasks:[]},
+];
+
 async function fetchMissionControl() {
-  try {
-    const res = await fetch(`${API_BASE}/api/mission-control`, {signal:AbortSignal.timeout(12000)});
-    if (!res.ok) throw new Error(res.status);
-    const d = await res.json();
+  let d = null;
+  // Try public tunnel first, then Tailscale fallback
+  for (const base of [API_BASE, API_FALLBACK]) {
+    try {
+      const res = await fetch(`${base}/api/mission-control`, {signal:AbortSignal.timeout(10000)});
+      if (res.ok) { d = await res.json(); break; }
+    } catch {}
+  }
+  if (d) {
     renderLiveData(d);
     document.getElementById('liveIndicator').style.cssText='background:var(--green);box-shadow:0 0 6px var(--green);width:7px;height:7px;border-radius:50%;animation:pulse 2s infinite';
     setText('footerTs', `Updated ${new Date().toLocaleTimeString('en-AU',{timeZone:'Australia/Brisbane',hour:'2-digit',minute:'2-digit'})} AEST`);
-  } catch(e) {
+  } else {
+    // Offline fallback — render static skeleton so page isn't empty
     document.getElementById('liveIndicator').style.cssText='background:var(--amber);box-shadow:0 0 6px var(--amber);width:7px;height:7px;border-radius:50%';
+    renderAgents(OFFLINE_AGENTS);
+    renderProjects(OFFLINE_PROJECTS);
+    setText('agentCountBadge', 'offline');
+    setText('footerTs', 'Offline — live data unavailable');
+    setHtml('svcList', '<div class="svc-row"><span class="svc-name" style="color:var(--amber)">⚠️ Cannot reach iMac — check Tailscale or cloudflare tunnel</span></div>');
   }
 }
 
