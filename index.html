@@ -8,14 +8,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #080808;
-      --surface:   #111111;
-      --surface2:  #181818;
-      --border:    #1e1e1e;
-      --border-hi: #2e2e2e;
-      --text:      #efefef;
-      --muted:     #555;
-      --subtle:    #222;
+      --bg:        #070708;
+      --surface:   #0f0f11;
+      --surface2:  #161618;
+      --surface3:  #1c1c1f;
+      --border:    #1e1e22;
+      --border-hi: #2e2e34;
+      --text:      #f0f0f2;
+      --muted:     #52525b;
+      --subtle:    #1a1a1e;
 
       --green:     #22c55e;
       --amber:     #f59e0b;
@@ -23,14 +24,13 @@
       --blue:      #3b82f6;
       --purple:    #8b5cf6;
 
-      --green-bg:  rgba(34,197,94,.08);
-      --amber-bg:  rgba(245,158,11,.08);
-      --red-bg:    rgba(239,68,68,.08);
-      --blue-bg:   rgba(59,130,246,.08);
+      --green-bg:  rgba(34,197,94,.09);
+      --amber-bg:  rgba(245,158,11,.09);
+      --red-bg:    rgba(239,68,68,.09);
+      --blue-bg:   rgba(59,130,246,.09);
 
-      /* Brand accents */
       --onest:   #2563eb;
-      --bb:      #e01e37;
+      --bb:      #dc1e37;
       --beprime: #c4714a;
       --newu:    #7c3aed;
       --perform: #d97706;
@@ -38,8 +38,8 @@
       --brand:   #8b5cf6;
 
       --r: 12px;
-      --pad: 24px;
-      --gap: 20px;
+      --pad: 22px;
+      --gap: 16px;
     }
 
     html { scroll-behavior: smooth; }
@@ -51,83 +51,113 @@
       line-height: 1.5;
     }
 
-    /* ── Header ──────────────────────────────────────────────────── */
+    /* ── Header ─────────────────────────────────────────────── */
     header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(8,8,8,.92);
-      backdrop-filter: blur(24px);
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(7,7,8,.94);
+      backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
-      padding: 0 32px;
+      padding: 0 28px;
       display: flex; align-items: center; justify-content: space-between;
-      height: 60px;
+      height: 56px;
     }
-    .hdr-left { display: flex; align-items: center; gap: 12px; }
+    .hdr-left { display: flex; align-items: center; gap: 10px; }
     .hdr-mark {
-      width: 30px; height: 30px;
-      background: linear-gradient(135deg, #fff 0%, #999 100%);
-      border-radius: 7px;
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+      border-radius: 6px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 900; color: #000;
+      font-size: 11px; font-weight: 900; color: #000; letter-spacing: -.3px;
     }
-    .hdr-title { font-size: 15px; font-weight: 600; letter-spacing: -.2px; }
-    .hdr-title span { color: var(--muted); font-weight: 400; font-size: 13px; margin-left: 6px; }
-    .hdr-right { display: flex; align-items: center; gap: 16px; }
-    .clock { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: .5px; }
+    .hdr-title { font-size: 14px; font-weight: 700; letter-spacing: -.3px; }
+    .hdr-title span { color: var(--muted); font-weight: 400; font-size: 12px; margin-left: 6px; }
+    .hdr-center { display: flex; align-items: center; gap: 10px; }
+    .hdr-pnl {
+      font-size: 13px; font-weight: 700; padding: 3px 10px;
+      border-radius: 20px; border: 1px solid var(--border);
+      background: var(--surface2); letter-spacing: -.2px;
+      display: none;
+    }
+    .hdr-session {
+      font-size: 10px; font-weight: 700; padding: 3px 9px;
+      border-radius: 20px; letter-spacing: .5px; text-transform: uppercase;
+      display: none;
+    }
+    .hdr-right { display: flex; align-items: center; gap: 14px; }
+    .clock { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: .3px; }
     .refresh-btn {
       font-size: 11px; color: var(--muted);
       background: none; border: 1px solid var(--border);
-      padding: 4px 10px; border-radius: 5px; cursor: pointer;
-      transition: .15s;
+      padding: 4px 10px; border-radius: 5px; cursor: pointer; transition: .15s;
     }
     .refresh-btn:hover { border-color: var(--blue); color: var(--blue); }
     .live-dot {
       width: 7px; height: 7px; border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 6px var(--green);
+      background: var(--green); box-shadow: 0 0 6px var(--green);
       animation: pulse 2s infinite;
     }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
-    /* ── Layout ───────────────────────────────────────────────────── */
-    main {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 32px 24px 80px;
+    /* ── Alert Banner ───────────────────────────────────────── */
+    #alertBanner {
+      display: none;
+      background: rgba(239,68,68,.1); border-bottom: 1px solid rgba(239,68,68,.25);
+      padding: 8px 28px; font-size: 12px; color: var(--red);
+      text-align: center; letter-spacing: .2px;
     }
 
-    /* ── Hero Stats Row ───────────────────────────────────────────── */
-    .hero-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--gap);
+    /* ── Layout ─────────────────────────────────────────────── */
+    main { max-width: 1440px; margin: 0 auto; padding: 24px 20px 80px; }
+
+    /* ── Live Session Strip ─────────────────────────────────── */
+    #sessionStrip {
+      display: none;
+      border-radius: var(--r); padding: 12px 20px;
       margin-bottom: var(--gap);
+      align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      border: 1px solid rgba(34,197,94,.2);
+      background: rgba(34,197,94,.04);
     }
+    #sessionStrip.long-bias { border-color: rgba(34,197,94,.25); background: rgba(34,197,94,.05); }
+    #sessionStrip.short-bias { border-color: rgba(239,68,68,.25); background: rgba(239,68,68,.04); }
+    .strip-left { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .strip-badge {
+      font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 20px;
+    }
+    .strip-badge.live { background: rgba(34,197,94,.15); color: var(--green); }
+    .strip-price { font-size: 22px; font-weight: 800; letter-spacing: -.5px; }
+    .strip-info { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .strip-item { font-size: 11px; color: var(--muted); }
+    .strip-item strong { color: var(--text); font-weight: 600; }
+    .strip-bias {
+      font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 20px; text-transform: uppercase; letter-spacing: .5px;
+    }
+    .bias-long  { background: var(--green-bg); color: var(--green); }
+    .bias-short { background: var(--red-bg);   color: var(--red); }
+    .bias-neutral { background: var(--subtle);  color: var(--muted); }
+    .strip-right { font-size: 11px; color: var(--muted); }
+
+    /* ── Hero Stats Row ─────────────────────────────────────── */
+    .hero-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); margin-bottom: var(--gap); }
     .hero-stat {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 20px 22px;
-      position: relative;
-      overflow: hidden;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 18px 20px; position: relative; overflow: hidden;
     }
     .hero-stat::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
       background: var(--accent, var(--blue));
     }
-    .hero-stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
-    .hero-stat-value { font-size: 28px; font-weight: 700; letter-spacing: -.5px; color: var(--text); line-height: 1; }
-    .hero-stat-sub   { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .hero-stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
+    .hero-stat-value { font-size: 26px; font-weight: 800; letter-spacing: -.5px; color: var(--text); line-height: 1; }
+    .hero-stat-sub   { font-size: 11px; color: var(--muted); margin-top: 5px; }
     .hero-stat-value.green { color: var(--green); }
     .hero-stat-value.red   { color: var(--red); }
     .hero-stat-value.amber { color: var(--amber); }
 
-    /* ── Grid ─────────────────────────────────────────────────────── */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--gap);
-    }
+    /* ── Grid ───────────────────────────────────────────────── */
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
     .grid-2col { grid-template-columns: repeat(2, 1fr); }
     .span2 { grid-column: span 2; }
     .span3 { grid-column: span 3; }
@@ -135,193 +165,190 @@
     /* Section label */
     .section-label {
       font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
-      color: var(--muted); margin: 28px 0 12px;
+      color: var(--muted); margin: 24px 0 12px;
       display: flex; align-items: center; gap: 10px;
     }
-    .section-label::after {
-      content: ''; flex: 1; height: 1px; background: var(--border);
-    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .section-label-icon { font-size: 14px; }
 
-    /* ── Card ─────────────────────────────────────────────────────── */
+    /* ── Card ───────────────────────────────────────────────── */
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      overflow: hidden;
-      position: relative;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); overflow: hidden; position: relative;
     }
     .card::before {
-      content: '';
-      display: block; height: 2px; width: 100%;
-      background: var(--accent, linear-gradient(90deg, #333, #555));
+      content: ''; display: block; height: 2px; width: 100%;
+      background: var(--accent, linear-gradient(90deg, #222, #333));
     }
     .card-head {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 18px var(--pad) 0;
+      padding: 16px var(--pad) 0;
     }
-    .card-title {
-      font-size: 13px; font-weight: 600; letter-spacing: -.1px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .card-badge {
-      font-size: 10px; padding: 2px 7px; border-radius: 100px;
-      font-weight: 500; letter-spacing: .3px;
-    }
+    .card-title { font-size: 13px; font-weight: 700; letter-spacing: -.1px; display: flex; align-items: center; gap: 8px; }
+    .card-badge { font-size: 10px; padding: 2px 8px; border-radius: 100px; font-weight: 600; letter-spacing: .3px; }
     .badge-green { background: var(--green-bg); color: var(--green); }
     .badge-red   { background: var(--red-bg);   color: var(--red);   }
     .badge-amber { background: var(--amber-bg); color: var(--amber); }
     .badge-blue  { background: var(--blue-bg);  color: var(--blue);  }
-    .badge-muted { background: var(--subtle); color: var(--muted); }
+    .badge-muted { background: var(--subtle);   color: var(--muted); }
     .card-body   { padding: var(--pad); }
-    .card-body-sm{ padding: 16px var(--pad); }
+    .card-body-sm{ padding: 14px var(--pad); }
 
-    /* ── KPI Grid inside card ─────────────────────────────────────── */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 16px;
-    }
+    /* ── KPI Grid ───────────────────────────────────────────── */
+    .kpi-grid   { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 14px; }
     .kpi-grid-3 { grid-template-columns: repeat(3, 1fr); }
     .kpi {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 14px;
-      cursor: pointer;
-      transition: border-color .15s;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 11px 13px; cursor: pointer; transition: border-color .15s;
     }
     .kpi:hover { border-color: var(--border-hi); }
     .kpi.s-green { border-color: rgba(34,197,94,.3); background: rgba(34,197,94,.04); }
     .kpi.s-amber { border-color: rgba(245,158,11,.3); background: rgba(245,158,11,.04); }
     .kpi.s-red   { border-color: rgba(239,68,68,.3);  background: rgba(239,68,68,.04); }
-    .kpi-label   { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 4px; }
-    .kpi-val-row { display: flex; align-items: baseline; gap: 4px; }
-    .kpi-value {
-      font-size: 22px; font-weight: 700; letter-spacing: -.3px;
-      outline: none; min-width: 20px;
-    }
+    .kpi-label   { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 3px; }
+    .kpi-val-row { display: flex; align-items: baseline; gap: 3px; }
+    .kpi-value   { font-size: 21px; font-weight: 800; letter-spacing: -.3px; outline: none; min-width: 20px; }
     .kpi-value:focus { color: var(--blue); }
-    .kpi-unit { font-size: 14px; color: var(--muted); }
-    .kpi-target { font-size: 10px; color: var(--muted); margin-top: 2px; }
+    .kpi-unit    { font-size: 13px; color: var(--muted); }
+    .kpi-target  { font-size: 10px; color: var(--muted); margin-top: 2px; }
+    .prog-wrap   { height: 2px; background: var(--subtle); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+    .prog-fill   { height: 100%; border-radius: 2px; transition: width .4s; }
+    .prog-fill.green   { background: var(--green); }
+    .prog-fill.amber   { background: var(--amber); }
+    .prog-fill.red     { background: var(--red); }
+    .prog-fill.blue    { background: var(--blue); }
+    .prog-fill.neutral { background: var(--muted); }
 
-    /* Progress bar */
-    .prog-wrap { height: 3px; background: var(--subtle); border-radius: 2px; margin-top: 6px; overflow: hidden; }
-    .prog-fill  { height: 100%; border-radius: 2px; transition: width .4s; }
-    .prog-fill.green  { background: var(--green); }
-    .prog-fill.amber  { background: var(--amber); }
-    .prog-fill.red    { background: var(--red); }
-    .prog-fill.blue   { background: var(--blue); }
-    .prog-fill.neutral{ background: var(--muted); }
-
-    /* Status dot */
-    .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
-    .dot.green  { background: var(--green); }
-    .dot.amber  { background: var(--amber); }
-    .dot.red    { background: var(--red); }
-    .dot.neutral{ background: var(--muted); }
-
-    /* ── Combine Progress Bar ─────────────────────────────────────── */
-    .combine-bar-wrap {
-      background: var(--subtle);
-      border-radius: 8px; height: 12px;
-      overflow: hidden; margin-top: 12px;
-    }
+    /* ── Combine Progress ───────────────────────────────────── */
+    .combine-bar-wrap { background: var(--subtle); border-radius: 8px; height: 10px; overflow: hidden; margin-top: 10px; }
     .combine-bar-fill {
       height: 100%; border-radius: 8px;
-      background: linear-gradient(90deg, var(--trading), #86efac);
+      background: linear-gradient(90deg, #15803d, var(--trading), #86efac);
       transition: width .6s cubic-bezier(.4,0,.2,1);
     }
-    .combine-labels {
-      display: flex; justify-content: space-between;
-      font-size: 10px; color: var(--muted); margin-top: 4px;
-    }
+    .combine-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); margin-top: 4px; }
 
-    /* ── Service list ─────────────────────────────────────────────── */
-    .svc-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+    /* ── Trading session panel ──────────────────────────────── */
+    .session-panel {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px 14px; margin-top: 14px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    }
+    .sp-item .sp-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .7px; margin-bottom: 2px; }
+    .sp-item .sp-val   { font-size: 14px; font-weight: 700; }
+    .sp-ib-row {
+      display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;
+    }
+    .sp-level {
+      background: var(--surface3); border: 1px solid var(--border);
+      border-radius: 5px; padding: 4px 10px; font-size: 11px;
+    }
+    .sp-level-name { color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: .5px; }
+    .sp-level-val  { color: var(--text); font-weight: 600; }
+
+    /* ── Service list ───────────────────────────────────────── */
+    .svc-list { display: flex; flex-direction: column; gap: 7px; margin-top: 12px; }
     .svc-row  {
       display: flex; align-items: center; justify-content: space-between;
       background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 7px; padding: 9px 14px;
+      border-radius: 7px; padding: 8px 13px;
     }
-    .svc-name { font-size: 13px; }
-    .svc-status {
-      font-size: 11px; font-weight: 600; letter-spacing: .3px;
-      display: flex; align-items: center; gap: 5px;
-    }
+    .svc-name   { font-size: 13px; }
+    .svc-status { font-size: 11px; font-weight: 700; letter-spacing: .3px; display: flex; align-items: center; gap: 5px; }
 
-    /* ── Pipeline steps ───────────────────────────────────────────── */
+    /* ── Pipeline ───────────────────────────────────────────── */
     .pipeline {
-      display: flex; gap: 0; margin-top: 14px;
-      border-radius: 8px; overflow: hidden;
-      border: 1px solid var(--border);
+      display: flex; gap: 0; margin-top: 12px;
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border);
     }
     .pipe-step {
-      flex: 1; text-align: center; padding: 12px 8px;
+      flex: 1; text-align: center; padding: 14px 6px;
       background: var(--surface2);
       border-right: 1px solid var(--border);
       position: relative;
     }
     .pipe-step:last-child { border-right: none; }
-    .pipe-step-num  { font-size: 20px; font-weight: 700; color: var(--text); }
-    .pipe-step-label{ font-size: 9px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin-top: 2px; }
-    .pipe-step.has-items .pipe-step-num { color: var(--blue); }
+    .pipe-step::after {
+      content: '›';
+      position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
+      color: var(--border-hi); font-size: 16px; z-index: 1;
+      pointer-events: none;
+    }
+    .pipe-step:last-child::after { display: none; }
+    .pipe-step-num   { font-size: 22px; font-weight: 800; color: var(--muted); }
+    .pipe-step-label { font-size: 9px; text-transform: uppercase; letter-spacing: .7px; color: var(--muted); margin-top: 2px; }
+    .pipe-step.has-items .pipe-step-num   { color: var(--blue); }
+    .pipe-step.has-items .pipe-step-label { color: var(--text); }
+    .pipe-step.active-stage { background: rgba(59,130,246,.06); }
 
-    /* ── Ideas list ───────────────────────────────────────────────── */
-    .idea-list { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+    /* ── Ideas ──────────────────────────────────────────────── */
+    .idea-list { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
     .idea-item {
       display: flex; align-items: flex-start; gap: 10px;
       background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 7px; padding: 10px 14px; font-size: 12px;
+      border-radius: 7px; padding: 9px 12px; font-size: 12px;
     }
-    .idea-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .idea-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
 
-    /* ── Log tail ─────────────────────────────────────────────────── */
-    .log-tail {
-      font-family: 'SF Mono', 'Menlo', monospace;
-      font-size: 11px; color: var(--muted);
-      background: var(--subtle); border-radius: 6px;
-      padding: 10px 12px; margin-top: 12px;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    /* ── Dot ────────────────────────────────────────────────── */
+    .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .dot.green   { background: var(--green); }
+    .dot.amber   { background: var(--amber); }
+    .dot.red     { background: var(--red); }
+    .dot.neutral { background: var(--muted); }
+
+    /* ── Priority stack ─────────────────────────────────────── */
+    .priority-item {
+      display: flex; gap: 10px; align-items: center;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 7px; padding: 10px 13px;
     }
+    .priority-num { font-size: 11px; font-weight: 800; color: var(--amber); min-width: 16px; }
+    .priority-text { font-size: 13px; }
 
-    /* ── Timestamp ────────────────────────────────────────────────── */
-    .ts { font-size: 10px; color: var(--muted); }
-
-    /* ── Textarea / Input in card ─────────────────────────────────── */
+    /* ── Textarea / Input ───────────────────────────────────── */
     .card-textarea, .card-input {
       width: 100%; background: var(--surface2);
       border: 1px solid var(--border); border-radius: 7px;
       color: var(--text); font-size: 13px;
-      padding: 10px 12px; resize: vertical; outline: none;
-      font-family: inherit; margin-top: 8px; line-height: 1.5;
-      transition: border-color .15s;
+      padding: 9px 12px; resize: vertical; outline: none;
+      font-family: inherit; margin-top: 8px; line-height: 1.5; transition: border-color .15s;
     }
     .card-textarea:focus, .card-input:focus { border-color: var(--blue); }
+    .card-input { resize: none; }
 
-    /* ── Divider ──────────────────────────────────────────────────── */
-    .divider { height: 1px; background: var(--border); margin: 16px 0; }
+    /* ── Divider ────────────────────────────────────────────── */
+    .divider { height: 1px; background: var(--border); margin: 14px 0; }
 
-    /* ── Last updated ─────────────────────────────────────────────── */
-    .data-freshness {
-      font-size: 10px; color: var(--muted);
-      text-align: right; margin-top: 6px;
-    }
+    /* ── Data freshness ─────────────────────────────────────── */
+    .data-freshness { font-size: 10px; color: var(--muted); text-align: right; margin-top: 6px; }
 
-    /* ── Responsive ───────────────────────────────────────────────── */
+    /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 1100px) { .grid { grid-template-columns: repeat(2, 1fr); } .span3 { grid-column: span 2; } }
-    @media (max-width: 700px)  { .grid, .hero-row, .grid-2col { grid-template-columns: 1fr; } .span2, .span3 { grid-column: 1; } }
+    @media (max-width: 700px)  {
+      .grid, .hero-row, .grid-2col { grid-template-columns: 1fr; }
+      .span2, .span3 { grid-column: 1; }
+      .session-panel { grid-template-columns: repeat(2, 1fr); }
+      header { padding: 0 16px; }
+      main { padding: 16px 14px 60px; }
+      .hdr-session { display: none !important; }
+    }
   </style>
 </head>
 <body>
 
-<!-- ════════════════════════════════════════════════════
-     HEADER
-════════════════════════════════════════════════════ -->
+<!-- Alert Banner -->
+<div id="alertBanner"></div>
+
+<!-- Header -->
 <header>
   <div class="hdr-left">
     <div class="hdr-mark">RS</div>
     <div class="hdr-title">Mission Control <span>Ryan Spiteri</span></div>
+  </div>
+  <div class="hdr-center">
+    <div class="hdr-pnl" id="hdrPnl">P&L $0</div>
+    <div class="hdr-session" id="hdrSession"></div>
   </div>
   <div class="hdr-right">
     <div class="live-dot" id="liveIndicator" title="Data status"></div>
@@ -330,12 +357,26 @@
   </div>
 </header>
 
-<!-- ════════════════════════════════════════════════════
-     MAIN
-════════════════════════════════════════════════════ -->
 <main>
 
-  <!-- ── Hero Stats Row ─────────────────────────────── -->
+  <!-- Live Session Strip (shows when session active) -->
+  <div id="sessionStrip">
+    <div class="strip-left">
+      <span class="strip-badge live">● LIVE</span>
+      <span class="strip-price" id="stripPrice">—</span>
+      <div class="strip-info">
+        <div class="strip-item">Session: <strong id="stripSession">—</strong></div>
+        <div class="strip-bias" id="stripBias">—</div>
+        <div class="strip-item">IB: <strong id="stripIB">—</strong></div>
+        <div class="strip-item">VAH: <strong id="stripVAH">—</strong></div>
+        <div class="strip-item">VAL: <strong id="stripVAL">—</strong></div>
+        <div class="strip-item">POC: <strong id="stripPOC">—</strong></div>
+      </div>
+    </div>
+    <div class="strip-right" id="stripUpdated">—</div>
+  </div>
+
+  <!-- Hero Stats Row -->
   <div class="hero-row">
     <div class="hero-stat" style="--accent:var(--trading)">
       <div class="hero-stat-label">Combine Balance</div>
@@ -343,36 +384,36 @@
       <div class="hero-stat-sub" id="h-balance-sub">Loading…</div>
     </div>
     <div class="hero-stat" style="--accent:var(--trading)">
-      <div class="hero-stat-label">Combine Progress</div>
-      <div class="hero-stat-value" id="h-combine-pct">—%</div>
-      <div class="hero-stat-sub" id="h-combine-sub">$49,988 → $53,000 target</div>
+      <div class="hero-stat-label">To Pass Combine</div>
+      <div class="hero-stat-value amber" id="h-needed">$—</div>
+      <div class="hero-stat-sub">Target $53,000</div>
+    </div>
+    <div class="hero-stat" style="--accent:var(--blue)">
+      <div class="hero-stat-label">Today's P&L</div>
+      <div class="hero-stat-value" id="h-pnl">$0</div>
+      <div class="hero-stat-sub" id="h-trades">0 trades</div>
     </div>
     <div class="hero-stat" style="--accent:var(--brand)">
       <div class="hero-stat-label">Content Pipeline</div>
       <div class="hero-stat-value" id="h-content">—</div>
       <div class="hero-stat-sub">ideas + scripts queued</div>
     </div>
-    <div class="hero-stat" style="--accent:var(--onest)">
-      <div class="hero-stat-label">Boss Bodies Target</div>
-      <div class="hero-stat-value">$100K</div>
-      <div class="hero-stat-sub">Monthly revenue goal</div>
-    </div>
   </div>
 
-  <!-- ════════ TRADING ════════ -->
-  <div class="section-label">⚡ Trading Bot — 50K Combine</div>
+  <!-- ═══ TRADING ═══ -->
+  <div class="section-label"><span class="section-label-icon">⚡</span> Trading — 50K Combine</div>
   <div class="grid grid-2col">
 
     <!-- Combine Progress -->
-    <div class="card" style="--accent:linear-gradient(90deg,#166534,var(--trading),#86efac)">
+    <div class="card" style="--accent:linear-gradient(90deg,#14532d,var(--trading),#86efac)">
       <div class="card-head">
-        <div class="card-title">50K Combine Progress</div>
+        <div class="card-title">50K Combine</div>
         <span class="card-badge" id="botBadge">Loading…</span>
       </div>
       <div class="card-body">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
-          <span style="font-size:32px;font-weight:700;letter-spacing:-.5px" id="combineBalance">$—</span>
-          <span style="font-size:13px;color:var(--muted)">Target: <strong style="color:var(--green)">$53,000</strong></span>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+          <span style="font-size:30px;font-weight:800;letter-spacing:-.5px" id="combineBalance">$—</span>
+          <span style="font-size:12px;color:var(--muted)">Target: <strong style="color:var(--green)">$53,000</strong></span>
         </div>
         <div class="combine-bar-wrap">
           <div class="combine-bar-fill" id="combineBarFill" style="width:0%"></div>
@@ -385,90 +426,113 @@
         <div class="divider"></div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
           <div>
-            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Today P&L</div>
-            <div style="font-size:18px;font-weight:700" id="todayPnl">$0</div>
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px">Today P&L</div>
+            <div style="font-size:17px;font-weight:800" id="todayPnl">$0</div>
           </div>
           <div>
-            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Trades Today</div>
-            <div style="font-size:18px;font-weight:700" id="tradesToday">0/3</div>
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px">Trades</div>
+            <div style="font-size:17px;font-weight:800" id="tradesToday">0/3</div>
           </div>
           <div>
-            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">Needed</div>
-            <div style="font-size:18px;font-weight:700;color:var(--amber)" id="neededAmount">$—</div>
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px">Needed</div>
+            <div style="font-size:17px;font-weight:800;color:var(--amber)" id="neededAmount">$—</div>
           </div>
         </div>
-        <div class="log-tail" id="botLogTail">Waiting for bot data…</div>
+        <!-- Live session panel (replaces log tail) -->
+        <div class="session-panel" id="sessionPanel" style="display:none">
+          <div class="sp-item">
+            <div class="sp-label">Session</div>
+            <div class="sp-val" id="spSession">—</div>
+          </div>
+          <div class="sp-item">
+            <div class="sp-label">Price</div>
+            <div class="sp-val" id="spPrice">—</div>
+          </div>
+          <div class="sp-item">
+            <div class="sp-label">Bias</div>
+            <div class="sp-val" id="spBias">—</div>
+          </div>
+          <div class="sp-item">
+            <div class="sp-label">IB High / Low</div>
+            <div class="sp-val" id="spIB">—</div>
+          </div>
+          <div class="sp-item">
+            <div class="sp-label">VWAP</div>
+            <div class="sp-val" id="spVWAP">—</div>
+          </div>
+          <div class="sp-item">
+            <div class="sp-label">Halted</div>
+            <div class="sp-val" id="spHalted">No</div>
+          </div>
+        </div>
         <div class="data-freshness" id="tradingFreshness"></div>
       </div>
     </div>
 
     <!-- System Health -->
-    <div class="card" style="--accent:linear-gradient(90deg,#1e3a5f,var(--blue))">
+    <div class="card" style="--accent:linear-gradient(90deg,#0f1e38,var(--blue))">
       <div class="card-head">
         <div class="card-title">System Health</div>
         <span class="card-badge badge-muted" id="sysHealthBadge">—</span>
       </div>
       <div class="card-body">
         <div class="svc-list" id="svcList">
-          <div class="svc-row">
-            <span class="svc-name">Loading services…</span>
-          </div>
+          <div class="svc-row"><span class="svc-name">Loading services…</span></div>
         </div>
         <div class="divider"></div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.7">
-          <div>iMac Tailscale: <strong style="color:var(--text)">100.105.163.93</strong></div>
-          <div>Dashboard: <a href="http://100.105.163.93:8080" target="_blank" style="color:var(--blue)">:8080</a></div>
-          <div>Ryan Clone: <a href="http://100.105.163.93:8090" target="_blank" style="color:var(--blue)">:8090</a></div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;font-size:11px;color:var(--muted)">
+          <div>iMac Tailscale<br><strong style="color:var(--text);font-size:12px">100.105.163.93</strong></div>
+          <div>Dashboard<br><a href="http://100.105.163.93:8080" target="_blank" style="color:var(--blue);font-size:12px;font-weight:600">:8080</a></div>
+          <div>Ryan Clone<br><a href="http://100.105.163.93:8090" target="_blank" style="color:var(--blue);font-size:12px;font-weight:600">:8090</a></div>
+          <div>ngrok<br><span style="color:var(--text);font-size:12px" id="ngrokUrl">—</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ════════ PERSONAL BRAND ════════ -->
-  <div class="section-label">🎥 Personal Brand Content Pipeline</div>
+  <!-- ═══ PERSONAL BRAND ═══ -->
+  <div class="section-label"><span class="section-label-icon">🎥</span> Personal Brand Content Pipeline</div>
   <div class="grid">
 
-    <!-- Content Pipeline -->
-    <div class="card span2" style="--accent:linear-gradient(90deg,#4c1d95,var(--brand),#a78bfa)">
+    <div class="card span2" style="--accent:linear-gradient(90deg,#3b0764,var(--brand),#a78bfa)">
       <div class="card-head">
         <div class="card-title">Content Pipeline</div>
         <span class="card-badge badge-blue">Live ClickUp</span>
       </div>
       <div class="card-body">
         <div class="pipeline" id="contentPipeline">
-          <div class="pipe-step">
+          <div class="pipe-step" id="pp-ideas-step">
             <div class="pipe-step-num" id="pp-ideas">—</div>
             <div class="pipe-step-label">💡 Ideas</div>
           </div>
-          <div class="pipe-step">
+          <div class="pipe-step" id="pp-approved-step">
             <div class="pipe-step-num" id="pp-approved">—</div>
             <div class="pipe-step-label">✅ Approved</div>
           </div>
-          <div class="pipe-step">
+          <div class="pipe-step" id="pp-scripts-step">
             <div class="pipe-step-num" id="pp-scripts">—</div>
             <div class="pipe-step-label">✍️ Scripts</div>
           </div>
-          <div class="pipe-step">
+          <div class="pipe-step" id="pp-production-step">
             <div class="pipe-step-num" id="pp-production">—</div>
             <div class="pipe-step-label">🎬 Production</div>
           </div>
-          <div class="pipe-step">
+          <div class="pipe-step" id="pp-ready-step">
             <div class="pipe-step-num" id="pp-ready">—</div>
             <div class="pipe-step-label">🚀 Ready</div>
           </div>
-          <div class="pipe-step">
+          <div class="pipe-step" id="pp-scheduled-step">
             <div class="pipe-step-num" id="pp-scheduled">—</div>
             <div class="pipe-step-label">📅 Scheduled</div>
           </div>
         </div>
-        <div style="margin-top:14px;font-size:12px;color:var(--muted)">
-          Platforms: TikTok + Instagram (1.8M followers) · Daily brief at 8AM AEST via Telegram
+        <div style="margin-top:12px;font-size:11px;color:var(--muted)">
+          TikTok + Instagram · 1.8M followers · Daily brief 7AM AEST via Telegram
         </div>
       </div>
     </div>
 
-    <!-- Ideas Backlog -->
-    <div class="card" style="--accent:linear-gradient(90deg,#3b1f6e,var(--purple))">
+    <div class="card" style="--accent:linear-gradient(90deg,#2e1065,var(--purple))">
       <div class="card-head">
         <div class="card-title">Ideas Backlog</div>
         <span class="card-badge badge-muted" id="ideasCount">0</span>
@@ -482,20 +546,17 @@
 
   </div>
 
-  <!-- ════════ BUSINESSES ════════ -->
-  <div class="section-label">🏢 Business Portfolio</div>
+  <!-- ═══ BUSINESSES ═══ -->
+  <div class="section-label"><span class="section-label-icon">🏢</span> Business Portfolio</div>
   <div class="grid">
 
-    <!-- ONEST Health -->
+    <!-- ONEST Health — Flagship -->
     <div class="card span2" style="--accent:linear-gradient(90deg,#1e3a8a,var(--onest),#60a5fa)">
       <div class="card-head">
         <div class="card-title">⚡ ONEST Health</div>
-        <span class="card-badge badge-blue">Flagship · AU + US</span>
+        <span class="card-badge badge-blue">Flagship · AU + US · $50M target</span>
       </div>
       <div class="card-body">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:12px">
-          Premium Australian supplements · 350+ AU retailers · "Made of Greatness" · Target: $50M revenue
-        </div>
         <div class="kpi-grid kpi-grid-3">
           <div class="kpi" id="kpi-on-revenue" onclick="focusKpi(this)">
             <div class="kpi-label">Monthly Revenue</div>
@@ -506,7 +567,7 @@
                 onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
               <span class="kpi-unit">K</span>
             </div>
-            <div class="kpi-target">Target: $417K/mo ($5M/yr run rate)</div>
+            <div class="kpi-target">Target: $417K/mo</div>
             <div class="prog-wrap"><div class="prog-fill neutral" id="bar-on-revenue" style="width:0%"></div></div>
           </div>
           <div class="kpi" id="kpi-on-us" onclick="focusKpi(this)">
@@ -525,16 +586,15 @@
             <div class="kpi-label">AU Retailers</div>
             <div class="kpi-val-row">
               <div class="kpi-value" contenteditable="true" id="val-on-retailers"
-                data-key="on-retailers" data-type="number" data-target="350" data-dir="gte"
+                data-key="on-retailers" data-type="number" data-target="500" data-dir="gte"
                 onblur="saveKpi(this)" oninput="updateKpiStatus(this)">350</div>
             </div>
             <div class="kpi-target">Target: 500+</div>
             <div class="prog-wrap"><div class="prog-fill neutral" id="bar-on-retailers" style="width:0%"></div></div>
           </div>
         </div>
-        <div style="margin-top:14px">
-          <div style="font-size:11px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px">Notes / Active Campaigns</div>
-          <textarea class="card-textarea" rows="2" data-key="on-notes" data-card="onest"
+        <div style="margin-top:12px">
+          <textarea class="card-textarea" rows="2" data-key="on-notes"
             onblur="saveField(this)" placeholder="Campaign updates, priorities, notes…"></textarea>
         </div>
       </div>
@@ -555,6 +615,7 @@
               <div class="kpi-value" contenteditable="true" id="val-bb-revenue"
                 data-key="bb-revenue" data-type="currency" data-target="100000" data-dir="gte"
                 onblur="saveKpi(this)" oninput="updateKpiStatus(this)">0</div>
+              <span class="kpi-unit">K</span>
             </div>
             <div class="kpi-target">Target: $100K/mo</div>
             <div class="prog-wrap"><div class="prog-fill neutral" id="bar-bb-revenue" style="width:0%"></div></div>
@@ -596,16 +657,14 @@
       </div>
     </div>
 
-    <!-- BEPRIME + NewU side by side -->
+    <!-- BEPRIME -->
     <div class="card" style="--accent:linear-gradient(90deg,#5c2d1e,var(--beprime))">
       <div class="card-head">
         <div class="card-title">🧬 BEPRIME</div>
         <span class="card-badge badge-amber">Active build</span>
       </div>
       <div class="card-body-sm">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:10px">
-          Telehealth · Peptides + hormones · 50% Ryan / 50% Chris<br>Portal: Terracotta/sage/cream · HIMSS UX
-        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Telehealth · Peptides + hormones · 50/50 Ryan / Chris</div>
         <div class="kpi-grid">
           <div class="kpi" id="kpi-bp-clients" onclick="focusKpi(this)">
             <div class="kpi-label">Active Clients</div>
@@ -629,20 +688,19 @@
             <div class="prog-wrap"><div class="prog-fill neutral" id="bar-bp-revenue" style="width:0%"></div></div>
           </div>
         </div>
-        <textarea class="card-textarea" rows="2" data-key="bp-notes" data-card="beprime"
+        <textarea class="card-textarea" rows="2" data-key="bp-notes"
           onblur="saveField(this)" placeholder="Portal progress, blockers…"></textarea>
       </div>
     </div>
 
+    <!-- NewU -->
     <div class="card" style="--accent:linear-gradient(90deg,#2e1065,var(--newu))">
       <div class="card-head">
         <div class="card-title">🟣 NewU</div>
         <span class="card-badge badge-muted">Active build</span>
       </div>
       <div class="card-body-sm">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:10px">
-          Coaching platform / app · Ryan owns code · Boss Bodies migration target
-        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Coaching platform · Ryan owns code · Boss Bodies migration target</div>
         <div class="kpi-grid">
           <div class="kpi" id="kpi-nu-users" onclick="focusKpi(this)">
             <div class="kpi-label">Active Users</div>
@@ -666,7 +724,7 @@
             <div class="prog-wrap"><div class="prog-fill neutral" id="bar-nu-mrr" style="width:0%"></div></div>
           </div>
         </div>
-        <textarea class="card-textarea" rows="2" data-key="nu-notes" data-card="newu"
+        <textarea class="card-textarea" rows="2" data-key="nu-notes"
           onblur="saveField(this)" placeholder="App build progress, milestones…"></textarea>
       </div>
     </div>
@@ -678,9 +736,7 @@
         <span class="card-badge badge-amber">SaaS Potential</span>
       </div>
       <div class="card-body-sm">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:10px">
-          AI-powered ad creative platform · Built via Manus AI · Domains: HookLab.io / WinningCreatives.io / AdFire.io
-        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px">AI ad creative platform · HookLab.io / WinningCreatives.io / AdFire.io</div>
         <div class="kpi-grid">
           <div class="kpi" id="kpi-pf-mrr" onclick="focusKpi(this)">
             <div class="kpi-label">MRR</div>
@@ -694,7 +750,7 @@
             <div class="prog-wrap"><div class="prog-fill neutral" id="bar-pf-mrr" style="width:0%"></div></div>
           </div>
           <div class="kpi" id="kpi-pf-users" onclick="focusKpi(this)">
-            <div class="kpi-label">Users</div>
+            <div class="kpi-label">Beta Users</div>
             <div class="kpi-val-row">
               <div class="kpi-value" contenteditable="true" id="val-pf-users"
                 data-key="pf-users" data-type="number" data-target="100" data-dir="gte"
@@ -704,153 +760,99 @@
             <div class="prog-wrap"><div class="prog-fill neutral" id="bar-pf-users" style="width:0%"></div></div>
           </div>
         </div>
-        <textarea class="card-textarea" rows="2" data-key="pf-notes" data-card="perform"
+        <textarea class="card-textarea" rows="2" data-key="pf-notes"
           onblur="saveField(this)" placeholder="Build status, domain decision…"></textarea>
       </div>
     </div>
 
-  </div><!-- /grid -->
+  </div>
 
-  <!-- ════════ FOUNDER INTELLIGENCE ════════ -->
-  <div class="section-label">🧠 Founder Intelligence</div>
+  <!-- ═══ FOUNDER INTELLIGENCE ═══ -->
+  <div class="section-label"><span class="section-label-icon">🧠</span> Founder Intelligence</div>
   <div class="grid grid-2col">
 
-    <!-- Priority + Focus -->
-    <div class="card" style="--accent:linear-gradient(90deg,#1a1a2e,#3b82f6)">
+    <div class="card" style="--accent:linear-gradient(90deg,#0f172a,var(--blue))">
       <div class="card-head">
-        <div class="card-title">Current Focus & Priorities</div>
+        <div class="card-title">Priority Stack</div>
       </div>
       <div class="card-body">
-        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">This Week's Priority Stack</div>
-        <div style="display:flex;flex-direction:column;gap:6px" id="priorityStack">
-          <div style="display:flex;gap:10px;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:10px 14px">
-            <span style="font-size:11px;font-weight:700;color:var(--amber);min-width:18px">1</span>
-            <span style="font-size:13px">ONEST Health — US expansion + marketing</span>
-          </div>
-          <div style="display:flex;gap:10px;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:10px 14px">
-            <span style="font-size:11px;font-weight:700;color:var(--amber);min-width:18px">2</span>
-            <span style="font-size:13px">Perform Creative — platform build</span>
-          </div>
-          <div style="display:flex;gap:10px;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:10px 14px">
-            <span style="font-size:11px;font-weight:700;color:var(--amber);min-width:18px">3</span>
-            <span style="font-size:13px">NewU — coaching app launch</span>
-          </div>
-          <div style="display:flex;gap:10px;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:10px 14px">
-            <span style="font-size:11px;font-weight:700;color:var(--amber);min-width:18px">4</span>
-            <span style="font-size:13px">Personal Brand — content machine activation</span>
-          </div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px">
+          <div class="priority-item"><span class="priority-num">1</span><span class="priority-text">ONEST Health — US expansion + marketing</span></div>
+          <div class="priority-item"><span class="priority-num">2</span><span class="priority-text">Perform Creative — platform build</span></div>
+          <div class="priority-item"><span class="priority-num">3</span><span class="priority-text">NewU — coaching app launch</span></div>
+          <div class="priority-item"><span class="priority-num">4</span><span class="priority-text">Personal Brand — content machine activation</span></div>
+          <div class="priority-item"><span class="priority-num">5</span><span class="priority-text">BEPRIME — portal build</span></div>
         </div>
-        <div style="margin-top:14px">
-          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Ryan's Focus Today</div>
-          <textarea class="card-textarea" rows="3" data-key="today-focus"
-            onblur="saveField(this)" placeholder="What's the #1 thing today? Key decisions, blocks, notes…"></textarea>
-        </div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Today's Focus</div>
+        <textarea class="card-textarea" rows="3" data-key="today-focus"
+          onblur="saveField(this)" placeholder="What's the #1 thing today? Key decisions, blocks, wins…"></textarea>
       </div>
     </div>
 
-    <!-- API Cost Tracker -->
     <div class="card" style="--accent:linear-gradient(90deg,#0f172a,#334155)">
       <div class="card-head">
         <div class="card-title">AI / API Cost Tracker</div>
-        <span style="font-size:18px;font-weight:700;color:var(--text)" id="cost-total">$0.00</span>
+        <span style="font-size:18px;font-weight:800;color:var(--text)" id="cost-total">$0.00</span>
       </div>
       <div class="card-body">
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
-          <div>
-            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">Anthropic</div>
-            <input class="card-input" style="margin-top:0" id="cost-anthropic" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
-          </div>
-          <div>
-            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">OpenAI</div>
-            <input class="card-input" style="margin-top:0" id="cost-openai" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
-          </div>
-          <div>
-            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">ElevenLabs</div>
-            <input class="card-input" style="margin-top:0" id="cost-elevenlabs" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
-          </div>
-          <div>
-            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">Gemini</div>
-            <input class="card-input" style="margin-top:0" id="cost-gemini" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
-          </div>
-          <div>
-            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">HeyGen</div>
-            <input class="card-input" style="margin-top:0" id="cost-heygen" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
-          </div>
-          <div>
-            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">Manus AI</div>
-            <input class="card-input" style="margin-top:0" id="cost-manus" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
-          </div>
-          <div>
-            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">Magic Hour</div>
-            <input class="card-input" style="margin-top:0" id="cost-magichour" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
-          </div>
-          <div>
-            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">Higgsfield</div>
-            <input class="card-input" style="margin-top:0" id="cost-higgsfield" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
-          </div>
-          <div>
-            <div style="font-size:10px;color:var(--muted);margin-bottom:4px">OpenClaw</div>
-            <input class="card-input" style="margin-top:0" id="cost-openclaw" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()">
-          </div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px">Anthropic</div>
+            <input class="card-input" style="margin-top:0" id="cost-anthropic" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()"></div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px">OpenAI</div>
+            <input class="card-input" style="margin-top:0" id="cost-openai" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()"></div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px">ElevenLabs</div>
+            <input class="card-input" style="margin-top:0" id="cost-elevenlabs" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()"></div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px">Gemini</div>
+            <input class="card-input" style="margin-top:0" id="cost-gemini" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()"></div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px">HeyGen</div>
+            <input class="card-input" style="margin-top:0" id="cost-heygen" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()"></div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px">Manus AI</div>
+            <input class="card-input" style="margin-top:0" id="cost-manus" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()"></div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px">Magic Hour</div>
+            <input class="card-input" style="margin-top:0" id="cost-magichour" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()"></div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px">Higgsfield</div>
+            <input class="card-input" style="margin-top:0" id="cost-higgsfield" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()"></div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px">OpenClaw</div>
+            <input class="card-input" style="margin-top:0" id="cost-openclaw" type="text" placeholder="$0" oninput="saveCost(this);updateCostTotal()"></div>
         </div>
-        <div style="margin-top:14px">
-          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Notes</div>
-          <textarea class="card-textarea" rows="2" data-key="cost-notes"
-            onblur="saveField(this)" placeholder="Budget notes, billing dates…"></textarea>
-        </div>
+        <textarea class="card-textarea" rows="2" data-key="cost-notes"
+          onblur="saveField(this)" placeholder="Budget notes, billing dates…" style="margin-top:10px"></textarea>
       </div>
     </div>
 
-  </div><!-- /grid -->
+  </div>
 
-  <div style="text-align:center;padding-top:32px;font-size:11px;color:var(--muted)">
-    Mission Control — Ryan Spiteri · Powered by Elara ⚡ · <span id="footerTs">—</span>
+  <div style="text-align:center;padding-top:28px;font-size:11px;color:var(--muted)">
+    Mission Control · Ryan Spiteri · Powered by Elara ⚡ · <span id="footerTs">—</span>
   </div>
 
 </main>
 
-<!-- ════════════════════════════════════════════════════
-     JAVASCRIPT
-════════════════════════════════════════════════════ -->
 <script>
-/* ─── Config ────────────────────────────────────────── */
-const LS_KEY      = 'mc_v3';
-const API_BASE    = 'http://100.105.163.93:8080';  // iMac Tailscale
-const REFRESH_MS  = 90000;  // 90s auto-refresh
+const LS_KEY     = 'mc_v4';
+const API_BASE   = 'http://100.105.163.93:8080';
+const REFRESH_MS = 60000;
 
 /* ─── Clock ─────────────────────────────────────────── */
 function tickClock() {
-  const now = new Date();
+  const now  = new Date();
   const opts = { timeZone: 'Australia/Brisbane', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
   const time = now.toLocaleTimeString('en-AU', opts);
   const date = now.toLocaleDateString('en-AU', { timeZone: 'Australia/Brisbane', weekday: 'short', day: 'numeric', month: 'short' });
   document.getElementById('clock').textContent = `${date}  ${time} AEST`;
 }
-setInterval(tickClock, 1000);
-tickClock();
+setInterval(tickClock, 1000); tickClock();
 
 /* ─── LocalStorage ───────────────────────────────────── */
-function loadData() {
-  try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch { return {}; }
-}
-function saveData(d) {
-  try { localStorage.setItem(LS_KEY, JSON.stringify(d)); } catch {}
-}
+function loadData() { try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch { return {}; } }
+function saveData(d) { try { localStorage.setItem(LS_KEY, JSON.stringify(d)); } catch {} }
 
-/* ─── KPI logic ─────────────────────────────────────── */
+/* ─── KPI ────────────────────────────────────────────── */
 function getStatus(val, target, dir) {
   const v = parseFloat(val), t = parseFloat(target);
   if (isNaN(v) || !t) return 'neutral';
-  if (dir === 'gte') {
-    if (v >= t)        return 'green';
-    if (v >= t * 0.75) return 'amber';
-    return 'red';
-  }
-  if (dir === 'lte') {
-    if (v <= t)        return 'green';
-    if (v <= t * 1.5)  return 'amber';
-    return 'red';
-  }
+  if (dir === 'gte') { if (v >= t) return 'green'; if (v >= t * 0.75) return 'amber'; return 'red'; }
+  if (dir === 'lte') { if (v <= t) return 'green'; if (v <= t * 1.5)  return 'amber'; return 'red'; }
   return 'neutral';
 }
 function getProgressPct(val, target, dir) {
@@ -862,41 +864,29 @@ function getProgressPct(val, target, dir) {
 }
 function updateKpiStatus(el) {
   const key = el.dataset.key, val = el.textContent.trim();
-  const target = el.dataset.target, dir = el.dataset.dir;
-  const status = getStatus(val, target, dir);
-  const pct    = getProgressPct(val, target, dir);
-  const dot    = document.getElementById(`dot-${key}`);
+  const status = getStatus(val, el.dataset.target, el.dataset.dir);
+  const pct    = getProgressPct(val, el.dataset.target, el.dataset.dir);
   const bar    = document.getElementById(`bar-${key}`);
   const kpiEl  = document.getElementById(`kpi-${key}`);
-  if (dot)   dot.className   = `dot ${status}`;
   if (kpiEl) kpiEl.className = `kpi s-${status}`;
-  if (bar) { bar.style.width = pct + '%'; bar.className = `prog-fill ${status}`; }
+  if (bar)   { bar.style.width = pct + '%'; bar.className = `prog-fill ${status}`; }
 }
 function saveKpi(el) {
-  const key = el.dataset.key, val = el.textContent.trim();
-  const d = loadData(); d[key] = val; saveData(d);
-  updateKpiStatus(el);
-  showToast('Saved');
+  const d = loadData(); d[el.dataset.key] = el.textContent.trim(); saveData(d);
+  updateKpiStatus(el); showToast('Saved');
 }
 function focusKpi(kpiEl) {
   const ed = kpiEl.querySelector('[contenteditable]');
-  if (!ed) return;
-  ed.focus();
+  if (!ed) return; ed.focus();
   const r = document.createRange(); r.selectNodeContents(ed); r.collapse(false);
   const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
 }
-
-/* ─── Fields ─────────────────────────────────────────── */
-function saveField(el) {
-  const d = loadData(); d[el.dataset.key] = el.value; saveData(d);
-}
+function saveField(el) { const d = loadData(); d[el.dataset.key] = el.value; saveData(d); }
 
 /* ─── Cost tracker ───────────────────────────────────── */
 const COST_IDS = ['cost-anthropic','cost-openai','cost-elevenlabs','cost-gemini',
                   'cost-magichour','cost-heygen','cost-higgsfield','cost-manus','cost-openclaw'];
-function saveCost(el) {
-  const d = loadData(); d[el.id] = el.value; saveData(d);
-}
+function saveCost(el) { const d = loadData(); d[el.id] = el.value; saveData(d); }
 function updateCostTotal() {
   let t = 0;
   COST_IDS.forEach(id => {
@@ -914,70 +904,121 @@ let _toastTimer;
 function showToast(msg) {
   let t = document.getElementById('_toast');
   if (!t) {
-    t = document.createElement('div');
-    t.id = '_toast';
+    t = document.createElement('div'); t.id = '_toast';
     Object.assign(t.style, {
       position:'fixed', bottom:'24px', right:'24px',
-      background:'#222', border:'1px solid #333', borderRadius:'8px',
-      padding:'10px 16px', fontSize:'12px', color:'#eee',
-      zIndex:'9999', opacity:'0', transition:'opacity .2s',
-      pointerEvents:'none'
+      background:'#1c1c1f', border:'1px solid #2e2e34', borderRadius:'8px',
+      padding:'10px 16px', fontSize:'12px', color:'#eee', zIndex:'9999',
+      opacity:'0', transition:'opacity .2s', pointerEvents:'none'
     });
     document.body.appendChild(t);
   }
-  t.textContent = msg;
-  t.style.opacity = '1';
+  t.textContent = msg; t.style.opacity = '1';
   clearTimeout(_toastTimer);
   _toastTimer = setTimeout(() => { t.style.opacity = '0'; }, 2000);
 }
 
-/* ─── Live Data fetch ───────────────────────────────── */
+/* ─── fmt helpers ────────────────────────────────────── */
+function fmtPrice(p) { return p ? p.toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2}) : '—'; }
+function fmtPnl(p)   { if (p === undefined || p === null) return '$0'; return (p >= 0 ? '+$' : '-$') + Math.abs(p).toLocaleString('en-AU', {minimumFractionDigits:2}); }
+
+/* ─── Live Data ──────────────────────────────────────── */
 async function fetchMissionControl() {
   try {
     const res = await fetch(`${API_BASE}/api/mission-control`, { signal: AbortSignal.timeout(10000) });
     if (!res.ok) throw new Error(res.status);
     const d = await res.json();
     renderLiveData(d);
-    document.getElementById('liveIndicator').style.background = 'var(--green)';
-    document.getElementById('liveIndicator').style.boxShadow  = '0 0 6px var(--green)';
-    document.getElementById('footerTs').textContent = `Data updated ${new Date().toLocaleTimeString('en-AU', {timeZone:'Australia/Brisbane', hour:'2-digit', minute:'2-digit'})} AEST`;
+    document.getElementById('liveIndicator').style.cssText = 'background:var(--green);box-shadow:0 0 6px var(--green);width:7px;height:7px;border-radius:50%';
+    document.getElementById('footerTs').textContent = `Updated ${new Date().toLocaleTimeString('en-AU', {timeZone:'Australia/Brisbane', hour:'2-digit', minute:'2-digit'})} AEST`;
   } catch(e) {
-    document.getElementById('liveIndicator').style.background = 'var(--amber)';
-    document.getElementById('liveIndicator').style.boxShadow  = '0 0 6px var(--amber)';
-    // graceful: keep whatever was in localStorage
+    document.getElementById('liveIndicator').style.cssText = 'background:var(--amber);box-shadow:0 0 6px var(--amber);width:7px;height:7px;border-radius:50%';
   }
 }
 
 function renderLiveData(d) {
-  /* ── Trading ── */
+  /* ── Trading / Balance ── */
   const t = d.trading || {};
   if (t.balance) {
-    const bal = t.balance;
+    const bal    = t.balance;
     const needed = Math.max(0, 53000 - bal);
     const pct    = Math.min(100, Math.max(0, (bal - 50000) / 3000 * 100));
-    document.getElementById('h-balance').textContent      = '$' + bal.toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2});
-    document.getElementById('h-balance-sub').textContent  = t.can_trade ? '✅ Can trade' : '⛔ Cannot trade';
-    document.getElementById('combineBalance').textContent = '$' + bal.toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2});
-    document.getElementById('combineBarFill').style.width = pct + '%';
-    document.getElementById('combinePct').textContent     = pct.toFixed(1) + '%';
-    document.getElementById('h-combine-pct').textContent  = pct.toFixed(1) + '%';
-    document.getElementById('neededAmount').textContent   = '$' + needed.toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2});
+    const balFmt = '$' + bal.toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2});
+    setText('h-balance', balFmt);
+    setText('h-balance-sub', t.can_trade ? '✅ Can trade' : '⛔ Cannot trade');
+    setText('combineBalance', balFmt);
+    setWidth('combineBarFill', pct + '%');
+    setText('combinePct', pct.toFixed(1) + '%');
+    setText('h-needed', '$' + needed.toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2}));
+    setText('neededAmount', '$' + needed.toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2}));
   }
 
   /* ── Bot ── */
   const b = d.bot || {};
   const running = b.running;
-  document.getElementById('botBadge').textContent  = running ? '● LIVE' : '○ OFFLINE';
-  document.getElementById('botBadge').className    = 'card-badge ' + (running ? 'badge-green' : 'badge-red');
-  if (b.log_tail)   document.getElementById('botLogTail').textContent = b.log_tail;
-  if (b.daily_pnl !== undefined) {
-    const pnl = b.daily_pnl || 0;
-    const pnlEl = document.getElementById('todayPnl');
-    pnlEl.textContent = (pnl >= 0 ? '+$' : '-$') + Math.abs(pnl).toLocaleString('en-AU', {minimumFractionDigits:2});
-    pnlEl.style.color = pnl > 0 ? 'var(--green)' : pnl < 0 ? 'var(--red)' : 'var(--text)';
-  }
-  if (b.trades_today !== undefined) {
-    document.getElementById('tradesToday').textContent = b.trades_today + '/3';
+  const badge = document.getElementById('botBadge');
+  badge.textContent = running ? '● LIVE' : '○ OFFLINE';
+  badge.className   = 'card-badge ' + (running ? 'badge-green' : 'badge-red');
+
+  const pnl = b.daily_pnl || 0;
+  const pnlFmt = fmtPnl(pnl);
+  const pnlColor = pnl > 0 ? 'var(--green)' : pnl < 0 ? 'var(--red)' : 'var(--text)';
+  setHtml('h-pnl', `<span style="color:${pnlColor}">${pnlFmt}</span>`);
+  setHtml('todayPnl', `<span style="color:${pnlColor}">${pnlFmt}</span>`);
+  setText('h-trades', (b.trades_today || 0) + ' trade' + ((b.trades_today || 0) !== 1 ? 's' : '') + ' today');
+  setText('tradesToday', (b.trades_today || 0) + '/3');
+
+  // Header P&L pill
+  const hdrPnl = document.getElementById('hdrPnl');
+  hdrPnl.style.display = 'block';
+  hdrPnl.style.color = pnlColor;
+  hdrPnl.textContent = 'P&L ' + pnlFmt;
+
+  /* ── Session strip & panel ── */
+  const session  = b.session;
+  const price    = b.price;
+  const bias     = b.bias;
+  const strip    = document.getElementById('sessionStrip');
+  const panel    = document.getElementById('sessionPanel');
+
+  if (running && session && price) {
+    strip.style.display = 'flex';
+    panel.style.display = 'grid';
+
+    // Bias colour
+    const biasClass = bias === 'LONG' ? 'bias-long' : bias === 'SHORT' ? 'bias-short' : 'bias-neutral';
+    strip.className = bias === 'LONG' ? 'long-bias' : bias === 'SHORT' ? 'short-bias' : '';
+
+    setText('stripPrice', fmtPrice(price));
+    setText('stripSession', session);
+    setHtml('stripBias', `<span class="strip-bias ${biasClass}">${bias || '—'}</span>`);
+    setText('stripIB', b.ib_high ? `${fmtPrice(b.ib_high)} / ${fmtPrice(b.ib_low)}` : '—');
+    setText('stripVAH', fmtPrice(b.vah));
+    setText('stripVAL', fmtPrice(b.val));
+    setText('stripPOC', fmtPrice(b.poc));
+    if (b.state_ts) {
+      const ts = new Date(b.state_ts);
+      setText('stripUpdated', ts.toLocaleTimeString('en-AU', {timeZone:'Australia/Brisbane', hour:'2-digit', minute:'2-digit'}) + ' AEST');
+    }
+
+    // Header session badge
+    const hdrSes = document.getElementById('hdrSession');
+    hdrSes.style.display = 'block';
+    hdrSes.style.background = bias === 'LONG' ? 'var(--green-bg)' : bias === 'SHORT' ? 'var(--red-bg)' : 'var(--subtle)';
+    hdrSes.style.color = bias === 'LONG' ? 'var(--green)' : bias === 'SHORT' ? 'var(--red)' : 'var(--muted)';
+    hdrSes.textContent = `${session} · ${bias}`;
+
+    // Panel
+    setText('spSession', session);
+    setText('spPrice', fmtPrice(price));
+    setHtml('spBias', `<span style="color:${bias === 'LONG' ? 'var(--green)' : bias === 'SHORT' ? 'var(--red)' : 'var(--muted)'};font-weight:800">${bias || '—'}</span>`);
+    setText('spIB', b.ib_high ? `${fmtPrice(b.ib_high)} / ${fmtPrice(b.ib_low)}` : 'Forming');
+    setText('spVWAP', fmtPrice(b.vwap));
+    setText('spHalted', b.trading_halted ? '⛔ Yes' : '✅ No');
+  } else {
+    strip.style.display = 'none';
+    panel.style.display = 'none';
+    document.getElementById('hdrSession').style.display = 'none';
   }
 
   /* ── Services ── */
@@ -998,30 +1039,54 @@ function renderLiveData(d) {
         ${svcs[s.key] ? 'RUNNING' : 'OFFLINE'}
       </span>
     </div>`).join('');
-  const badge = document.getElementById('sysHealthBadge');
-  badge.textContent = `${healthyCount}/${svcDefs.length} services`;
-  badge.className   = 'card-badge ' + (healthyCount === svcDefs.length ? 'badge-green' : healthyCount >= 2 ? 'badge-amber' : 'badge-red');
+  const shb = document.getElementById('sysHealthBadge');
+  shb.textContent = `${healthyCount}/${svcDefs.length} running`;
+  shb.className   = 'card-badge ' + (healthyCount === svcDefs.length ? 'badge-green' : healthyCount >= 2 ? 'badge-amber' : 'badge-red');
 
-  /* ── Personal Brand ── */
+  // Alert banner
+  const alertEl = document.getElementById('alertBanner');
+  const downSvcs = svcDefs.filter(s => !svcs[s.key]).map(s => s.name.replace(/[^ ]+ /,''));
+  if (downSvcs.length > 0) {
+    alertEl.style.display = 'block';
+    alertEl.textContent = `⚠️ Service${downSvcs.length > 1 ? 's' : ''} offline: ${downSvcs.join(', ')}`;
+  } else {
+    alertEl.style.display = 'none';
+  }
+
+  /* ── Personal Brand pipeline ── */
   const pb = d.personal_brand || {};
   if (pb.ideas_total !== undefined) {
-    document.getElementById('pp-ideas').textContent      = pb.ideas_total || 0;
-    document.getElementById('pp-approved').textContent   = pb.ideas_approved || 0;
-    document.getElementById('pp-scripts').textContent    = pb.scripts_total || 0;
-    document.getElementById('pp-production').textContent = pb.production_total || 0;
-    document.getElementById('pp-ready').textContent      = pb.ready_to_post || 0;
-    document.getElementById('pp-scheduled').textContent  = pb.scheduled_total || 0;
-    document.getElementById('h-content').textContent     = ((pb.ideas_total || 0) + (pb.scripts_total || 0));
+    const steps = [
+      { id: 'pp-ideas',      val: pb.ideas_total || 0,     step: 'pp-ideas-step'      },
+      { id: 'pp-approved',   val: pb.ideas_approved || 0,  step: 'pp-approved-step'   },
+      { id: 'pp-scripts',    val: pb.scripts_total || 0,   step: 'pp-scripts-step'    },
+      { id: 'pp-production', val: pb.production_total || 0,step: 'pp-production-step' },
+      { id: 'pp-ready',      val: pb.ready_to_post || 0,   step: 'pp-ready-step'      },
+      { id: 'pp-scheduled',  val: pb.scheduled_total || 0, step: 'pp-scheduled-step'  },
+    ];
+    steps.forEach(s => {
+      setText(s.id, s.val);
+      const el = document.getElementById(s.step);
+      if (el) el.className = 'pipe-step' + (s.val > 0 ? ' has-items' : '');
+    });
+    setText('h-content', (pb.ideas_total || 0) + (pb.scripts_total || 0));
   }
 
   /* ── Ideas backlog ── */
   const ideas = d.ideas || [];
+  setText('ideasCount', ideas.length);
   const il = document.getElementById('ideaList');
-  document.getElementById('ideasCount').textContent = ideas.length;
   il.innerHTML = ideas.length
     ? ideas.map(i => `<div class="idea-item"><span class="idea-icon">💡</span><span style="font-size:12px">${i}</span></div>`).join('')
-    : '<div class="idea-item" style="color:var(--muted)">No ideas yet — say "idea: ..." to Elara</div>';
+    : '<div class="idea-item" style="color:var(--muted)">No ideas banked yet — say "idea: ..." to Elara</div>';
+
+  setText('tradingFreshness', `Refreshed ${new Date().toLocaleTimeString('en-AU', {timeZone:'Australia/Brisbane',hour:'2-digit',minute:'2-digit'})} AEST`);
 }
+
+/* ─── DOM helpers ────────────────────────────────────── */
+function setText(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+function setHtml(id, val) { const el = document.getElementById(id); if (el) el.innerHTML = val; }
+function setWidth(id, val){ const el = document.getElementById(id); if (el) el.style.width = val; }
 
 async function forceRefresh() {
   try { await fetch(`${API_BASE}/api/mission-control/refresh`, { method:'POST' }); } catch {}
@@ -1030,32 +1095,18 @@ async function forceRefresh() {
 
 /* ─── Init ───────────────────────────────────────────── */
 function init() {
-  // Load costs
   const d = loadData();
-  COST_IDS.forEach(id => {
-    const el = document.getElementById(id);
-    if (el && d[id]) el.value = d[id];
-  });
+  COST_IDS.forEach(id => { const el = document.getElementById(id); if (el && d[id]) el.value = d[id]; });
   updateCostTotal();
-
-  // Load KPI fields
   document.querySelectorAll('[data-key][contenteditable]').forEach(el => {
-    const v = d[el.dataset.key];
-    if (v !== undefined) el.textContent = v;
-    updateKpiStatus(el);
+    const v = d[el.dataset.key]; if (v !== undefined) el.textContent = v; updateKpiStatus(el);
   });
-
-  // Load text fields
   document.querySelectorAll('input[data-key], textarea[data-key]').forEach(el => {
-    const v = d[el.dataset.key];
-    if (v !== undefined) el.value = v;
+    const v = d[el.dataset.key]; if (v !== undefined) el.value = v;
   });
-
-  // Fetch live data
   fetchMissionControl();
   setInterval(fetchMissionControl, REFRESH_MS);
 }
-
 window.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
