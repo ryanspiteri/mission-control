@@ -323,6 +323,29 @@
     /* ── Data freshness ─────────────────────────────────────── */
     .data-freshness { font-size: 10px; color: var(--muted); text-align: right; margin-top: 6px; }
 
+    /* ── Agent cards ────────────────────────────────────────── */
+    .agent-row {
+      display: grid;
+      grid-template-columns: 36px 1fr auto;
+      align-items: center; gap: 14px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 9px; padding: 12px 16px;
+      transition: border-color .15s;
+    }
+    .agent-row:hover { border-color: var(--border-hi); }
+    .agent-icon { font-size: 20px; text-align: center; }
+    .agent-info .agent-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+    .agent-info .agent-task { font-size: 11px; color: var(--muted); line-height: 1.4; }
+    .agent-meta { text-align: right; flex-shrink: 0; }
+    .agent-status {
+      font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 20px; margin-bottom: 4px; display: inline-block;
+    }
+    .agent-status.running   { background: var(--green-bg); color: var(--green); }
+    .agent-status.offline   { background: var(--red-bg);   color: var(--red); }
+    .agent-status.scheduled { background: var(--blue-bg);  color: var(--blue); }
+    .agent-last { font-size: 10px; color: var(--muted); }
+
     /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 1100px) { .grid { grid-template-columns: repeat(2, 1fr); } .span3 { grid-column: span 2; } }
     @media (max-width: 700px)  {
@@ -767,6 +790,22 @@
 
   </div>
 
+  <!-- ═══ AI WORKFORCE ═══ -->
+  <div class="section-label"><span class="section-label-icon">🤖</span> AI Workforce</div>
+  <div class="grid" id="agentGrid">
+    <div class="card span3" style="--accent:linear-gradient(90deg,#0a0a14,#1e1e3f,#3b3b6e)">
+      <div class="card-head">
+        <div class="card-title">Active Agents</div>
+        <span class="card-badge badge-muted" id="agentCountBadge">Loading…</span>
+      </div>
+      <div class="card-body">
+        <div id="agentList" style="display:flex;flex-direction:column;gap:8px">
+          <div style="color:var(--muted);font-size:12px">Loading agent status…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══ FOUNDER INTELLIGENCE ═══ -->
   <div class="section-label"><span class="section-label-icon">🧠</span> Founder Intelligence</div>
   <div class="grid grid-2col">
@@ -1081,6 +1120,33 @@ function renderLiveData(d) {
     : '<div class="idea-item" style="color:var(--muted)">No ideas banked yet — say "idea: ..." to Elara</div>';
 
   setText('tradingFreshness', `Refreshed ${new Date().toLocaleTimeString('en-AU', {timeZone:'Australia/Brisbane',hour:'2-digit',minute:'2-digit'})} AEST`);
+
+  /* ── AI Workforce ── */
+  const agents = d.agents || [];
+  const agentList = document.getElementById('agentList');
+  const agentBadge = document.getElementById('agentCountBadge');
+  const runningCount = agents.filter(a => a.status === 'running').length;
+  if (agentBadge) agentBadge.textContent = `${runningCount}/${agents.length} running`;
+  if (agentList && agents.length > 0) {
+    agentList.innerHTML = agents.map(a => {
+      const lastStr = a.last_active ? (() => {
+        const d = new Date(a.last_active);
+        return d.toLocaleTimeString('en-AU', {timeZone:'Australia/Brisbane', hour:'2-digit', minute:'2-digit'}) + ' AEST';
+      })() : '—';
+      return `
+        <div class="agent-row">
+          <div class="agent-icon">${a.icon}</div>
+          <div class="agent-info">
+            <div class="agent-name">${a.name}</div>
+            <div class="agent-task">${a.task}</div>
+          </div>
+          <div class="agent-meta">
+            <div class="agent-status ${a.status}">${a.status === 'running' ? '● Running' : a.status === 'scheduled' ? '◷ Scheduled' : '○ Offline'}</div>
+            <div class="agent-last">Last active: ${lastStr}</div>
+          </div>
+        </div>`;
+    }).join('');
+  }
 }
 
 /* ─── DOM helpers ────────────────────────────────────── */
