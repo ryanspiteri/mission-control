@@ -125,18 +125,29 @@
     .pipe-step.has-items .pipe-step-label { color:var(--text); }
 
     /* Project cards */
-    .project-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden;
+      transition: border-color .15s, transform .12s;
+    }
+    .project-card:hover { border-color: var(--border-hi); transform: translateY(-1px); }
     .project-card::before { content:''; display:block; height:2px; background:var(--project-color, var(--blue)); }
-    .project-head { display:flex; align-items:center; gap:8px; padding:13px 16px 10px; }
+    .project-head {
+      display: flex; align-items: center; gap: 8px; padding: 13px 16px 10px;
+      text-decoration: none; color: inherit;
+    }
+    .project-head:hover .project-name { color: var(--blue); }
     .project-icon { font-size:16px; }
-    .project-name { font-size:13px; font-weight:700; }
+    .project-name { font-size:13px; font-weight:700; transition: color .15s; }
     .project-badge { margin-left:auto; font-size:9px; font-weight:700; padding:2px 7px; border-radius:20px; background:var(--subtle); color:var(--muted); }
+    .project-link-icon { font-size: 10px; color: var(--muted); margin-left: 2px; }
     .task-list { padding:0 16px 14px; display:flex; flex-direction:column; gap:5px; }
     .task-item {
-      display:flex; align-items:flex-start; gap:8px;
-      background:var(--surface2); border:1px solid var(--border);
-      border-radius:6px; padding:7px 10px; font-size:11px; line-height:1.4;
+      display: flex; align-items: flex-start; gap: 8px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 6px; padding: 7px 10px; font-size: 11px; line-height: 1.4;
+      text-decoration: none; color: inherit; transition: border-color .12s;
     }
+    a.task-item:hover { border-color: var(--blue); }
     .task-check { color:var(--muted); font-size:10px; margin-top:1px; flex-shrink:0; }
     .task-text  { color:var(--text); flex:1; }
     .task-status {
@@ -149,23 +160,62 @@
     .task-status.open     { background:var(--blue-bg);  color:var(--blue); }
     .no-tasks { padding:8px 16px 14px; font-size:11px; color:var(--muted); font-style:italic; }
 
-    /* Agent rows */
-    .agent-row {
-      display:grid; grid-template-columns:32px 1fr auto;
-      align-items:center; gap:12px;
-      background:var(--surface2); border:1px solid var(--border);
-      border-radius:8px; padding:11px 14px; transition:border-color .15s;
+    /* Agent cards — v5 clickable + expandable */
+    .agent-card {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+      transition: border-color .15s;
     }
-    .agent-row:hover { border-color:var(--border-hi); }
-    .agent-icon { font-size:18px; text-align:center; }
-    .agent-name { font-size:12px; font-weight:700; margin-bottom:2px; }
-    .agent-task { font-size:10px; color:var(--muted); line-height:1.4; }
-    .agent-meta { text-align:right; flex-shrink:0; }
-    .agent-status { font-size:9px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; padding:2px 8px; border-radius:20px; display:inline-block; margin-bottom:3px; }
-    .agent-status.running   { background:var(--green-bg); color:var(--green); }
-    .agent-status.offline   { background:var(--red-bg);   color:var(--red); }
-    .agent-status.scheduled { background:var(--blue-bg);  color:var(--blue); }
-    .agent-last { font-size:10px; color:var(--muted); }
+    .agent-card:hover { border-color: var(--border-hi); }
+    .agent-card.has-link { cursor: pointer; }
+    .agent-card-main {
+      display: grid; grid-template-columns: 36px 1fr auto;
+      align-items: start; gap: 12px; padding: 13px 14px;
+    }
+    .agent-icon { font-size: 20px; text-align: center; padding-top: 2px; }
+    .agent-info { min-width: 0; }
+    .agent-name { font-size: 12px; font-weight: 700; margin-bottom: 2px; display: flex; align-items: center; gap: 6px; }
+    .agent-name-link { color: var(--blue); font-size: 9px; text-decoration: none; opacity: 0; transition: opacity .15s; }
+    .agent-card:hover .agent-name-link { opacity: 1; }
+    .agent-task { font-size: 11px; color: var(--muted); line-height: 1.45; word-break: break-word; }
+    .agent-task strong { color: var(--text); font-weight: 600; }
+    .agent-meta { text-align: right; flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+    .agent-status-badge {
+      font-size: 9px; font-weight: 700; letter-spacing: .5px;
+      padding: 3px 8px; border-radius: 20px; white-space: nowrap;
+    }
+    .agent-status-badge.running   { background: var(--green-bg); color: var(--green); }
+    .agent-status-badge.offline   { background: var(--red-bg);   color: var(--red); }
+    .agent-status-badge.scheduled { background: var(--blue-bg);  color: var(--blue); }
+    .agent-last { font-size: 10px; color: var(--muted); }
+    .agent-expand-toggle {
+      font-size: 9px; color: var(--muted); background: none; border: none;
+      cursor: pointer; padding: 0; text-align: right; text-decoration: underline;
+      transition: color .12s;
+    }
+    .agent-expand-toggle:hover { color: var(--text); }
+
+    /* Agent detail panel */
+    .agent-detail {
+      display: none; border-top: 1px solid var(--border);
+      padding: 12px 14px 12px 62px; background: var(--subtle);
+    }
+    .agent-detail.open { display: block; }
+    .agent-detail-label { font-size: 9px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin-bottom: 6px; }
+    .agent-detail-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 11px; color: var(--muted); padding: 4px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .agent-detail-item:last-child { border-bottom: none; }
+    .agent-detail-item .dot { flex-shrink: 0; margin-top: 5px; }
+    .agent-detail-link {
+      display: inline-flex; align-items: center; gap: 5px; margin-top: 10px;
+      font-size: 11px; color: var(--blue); text-decoration: none;
+      background: var(--blue-bg); padding: 5px 10px; border-radius: 6px;
+      border: 1px solid rgba(59,130,246,.2); transition: background .12s;
+    }
+    .agent-detail-link:hover { background: rgba(59,130,246,.15); }
 
     /* Trading panel */
     .session-panel { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:12px 14px; margin-top:12px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
@@ -200,7 +250,7 @@
 
     /* Responsive */
     @media (max-width:1100px) { .grid { grid-template-columns:repeat(2,1fr); } .span3,.span4 { grid-column:span 2; } .grid-4 { grid-template-columns:repeat(2,1fr); } }
-    @media (max-width:700px)  { .grid,.hero-row,.grid-2,.grid-4 { grid-template-columns:1fr; } .span2,.span3,.span4 { grid-column:1; } header { padding:0 14px; } main { padding:14px 12px 60px; } }
+    @media (max-width:700px)  { .grid,.hero-row,.grid-2,.grid-4 { grid-template-columns:1fr; } .span2,.span3,.span4 { grid-column:1; } header { padding:0 14px; } main { padding:14px 12px 60px; } .agent-detail { padding-left: 14px; } }
   </style>
 </head>
 <body>
@@ -388,17 +438,48 @@
 </main>
 
 <script>
-const LS_KEY    = 'mc_v5';
-const API_BASE  = 'http://100.105.163.93:8080';
-const REFRESH   = 60000;
+const LS_KEY   = 'mc_v5';
+const API_BASE = 'http://100.105.163.93:8080';
+const REFRESH  = 30000; // 30 seconds
 
+/* ── Agent link map ─────────────────────────────────────────── */
+const AGENT_LINKS = {
+  'Trading Bot':          { url: 'http://100.105.163.93:8080',        label: '↗ Open Dashboard' },
+  'ONEST AI (Ryan Clone)':{ url: 'http://100.105.163.93:8090/health', label: '↗ Health Check' },
+};
+
+/* ── ClickUp space URLs ──────────────────────────────────────── */
+const CLICKUP_SPACES = {
+  'ONEST Health':    'https://app.clickup.com/6929411/v/s/6970178',
+  'Trading Bot':     'https://app.clickup.com/6929411/v/s/901605225338',
+  'Personal Brand':  'https://app.clickup.com/6929411/v/s/90166556838',
+  'BEPRIME':         'https://app.clickup.com/6929411/v/s/90166384973',
+  'NewU':            'https://app.clickup.com/6929411/v/s/90163253544',
+  'Ad Creatives':    'https://ryanspiteri.github.io/mission-control/ad-creatives.html',
+};
+
+/* ── Utilities ──────────────────────────────────────────────── */
 function tickClock() {
   const now = new Date();
-  const t = now.toLocaleTimeString('en-AU', {timeZone:'Australia/Brisbane', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false});
-  const d = now.toLocaleDateString('en-AU', {timeZone:'Australia/Brisbane', weekday:'short', day:'numeric', month:'short'});
+  const t = now.toLocaleTimeString('en-AU',{timeZone:'Australia/Brisbane',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+  const d = now.toLocaleDateString('en-AU',{timeZone:'Australia/Brisbane',weekday:'short',day:'numeric',month:'short'});
   document.getElementById('clock').textContent = `${d}  ${t} AEST`;
 }
 setInterval(tickClock, 1000); tickClock();
+
+function timeAgo(ts) {
+  if (!ts || ts === '...') return '—';
+  try {
+    const d = new Date(ts);
+    if (isNaN(d)) return '—';
+    const secs = Math.floor((Date.now() - d) / 1000);
+    if (secs < 5)   return 'just now';
+    if (secs < 60)  return `${secs}s ago`;
+    if (secs < 3600) return `${Math.floor(secs/60)}m ago`;
+    if (secs < 86400) return `${Math.floor(secs/3600)}h ago`;
+    return `${Math.floor(secs/86400)}d ago`;
+  } catch { return '—'; }
+}
 
 function loadData() { try { return JSON.parse(localStorage.getItem(LS_KEY)||'{}'); } catch { return {}; } }
 function saveData(d) { try { localStorage.setItem(LS_KEY, JSON.stringify(d)); } catch {} }
@@ -413,7 +494,104 @@ function fmtTime(ts) {
   try { return new Date(ts).toLocaleTimeString('en-AU',{timeZone:'Australia/Brisbane',hour:'2-digit',minute:'2-digit'})+' AEST'; }
   catch { return '—'; }
 }
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
+/* ── Agent expand toggle ─────────────────────────────────────── */
+function toggleAgent(id) {
+  const panel = document.getElementById('agent-detail-'+id);
+  const btn   = document.getElementById('agent-toggle-'+id);
+  if (!panel) return;
+  const open = panel.classList.toggle('open');
+  if (btn) btn.textContent = open ? '▲ less' : '▼ details';
+}
+
+/* ── Render agent cards ──────────────────────────────────────── */
+function renderAgents(agents) {
+  const runningCount = agents.filter(a=>a.status==='running').length;
+  setText('agentCountBadge', `${runningCount}/${agents.length} running`);
+
+  document.getElementById('agentList').innerHTML = agents.map((a, i) => {
+    const link = AGENT_LINKS[a.name];
+    const statusLabel = a.status === 'running' ? '● RUNNING' : a.status === 'scheduled' ? '◷ SCHEDULED' : '○ OFFLINE';
+    const taskDisplay = esc(a.task || '—');
+    const lastSeen   = timeAgo(a.last_active);
+
+    // Build detail items from task string (split on | )
+    const taskParts = (a.task||'').split('|').map(s=>s.trim()).filter(Boolean);
+    const detailItems = taskParts.length > 1
+      ? taskParts.map(p=>`<div class="agent-detail-item"><span class="dot green"></span><span>${esc(p)}</span></div>`).join('')
+      : `<div class="agent-detail-item"><span class="dot ${a.status==='running'?'green':a.status==='scheduled'?'':'red'}"></span><span>${taskDisplay}</span></div>`;
+
+    const linkHtml = link
+      ? `<a href="${link.url}" target="_blank" class="agent-detail-link">${link.label}</a>`
+      : '';
+
+    return `
+      <div class="agent-card${link?' has-link':''}">
+        <div class="agent-card-main" onclick="toggleAgent(${i})" style="cursor:pointer">
+          <div class="agent-icon">${esc(a.icon||'🤖')}</div>
+          <div class="agent-info">
+            <div class="agent-name">
+              ${esc(a.name)}
+              ${link ? `<a href="${link.url}" target="_blank" class="agent-name-link" onclick="event.stopPropagation()">↗</a>` : ''}
+            </div>
+            <div class="agent-task">${taskDisplay}</div>
+          </div>
+          <div class="agent-meta">
+            <span class="agent-status-badge ${esc(a.status)}">${statusLabel}</span>
+            <span class="agent-last">${lastSeen}</span>
+            <button class="agent-expand-toggle" id="agent-toggle-${i}" onclick="event.stopPropagation();toggleAgent(${i})">▼ details</button>
+          </div>
+        </div>
+        <div class="agent-detail" id="agent-detail-${i}">
+          <div class="agent-detail-label">Current activity</div>
+          ${detailItems}
+          ${linkHtml}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+/* ── Render project cards ────────────────────────────────────── */
+function renderProjects(projects) {
+  const grid = document.getElementById('projectsGrid');
+  if (!projects.length) { grid.innerHTML='<div style="color:var(--muted);font-size:12px;grid-column:span 4">No projects loaded</div>'; return; }
+
+  grid.innerHTML = projects.map(p => {
+    const spaceUrl = CLICKUP_SPACES[p.name] || '#';
+    const allTasks = [
+      ...(p.tasks||[]).map(t=>({name:t, status:'open', src:'elara', id:null})),
+      ...(p.clickup_tasks||[]).map(t=>({name:t.name, status:t.status, src:'clickup', id:t.id||null}))
+    ];
+
+    const taskHtml = allTasks.length
+      ? allTasks.slice(0,5).map(t => {
+          const taskUrl = t.id ? `https://app.clickup.com/t/${t.id}` : null;
+          const tag = taskUrl ? 'a' : 'div';
+          const href = taskUrl ? ` href="${taskUrl}" target="_blank"` : '';
+          const statusClass = t.status==='approved'?'approved':t.status==='backlog'?'backlog':'open';
+          return `<${tag} class="task-item"${href}>
+            <span class="task-check">${t.src==='elara'?'◻':'▸'}</span>
+            <span class="task-text">${esc(t.name.slice(0,70))}</span>
+            <span class="task-status ${statusClass}">${esc(t.status||'open')}</span>
+          </${tag}>`;
+        }).join('')
+      : '<div class="no-tasks">No open tasks</div>';
+
+    return `
+      <div class="project-card" style="--project-color:${esc(p.color||'var(--blue)')}">
+        <a class="project-head" href="${spaceUrl}" target="_blank">
+          <span class="project-icon">${esc(p.icon||'📁')}</span>
+          <span class="project-name">${esc(p.name)}</span>
+          <span class="project-link-icon">↗</span>
+          <span class="project-badge">${allTasks.length} task${allTasks.length!==1?'s':''}</span>
+        </a>
+        <div class="task-list">${taskHtml}</div>
+      </div>`;
+  }).join('');
+}
+
+/* ── Main fetch ──────────────────────────────────────────────── */
 async function fetchMissionControl() {
   try {
     const res = await fetch(`${API_BASE}/api/mission-control`, {signal:AbortSignal.timeout(12000)});
@@ -502,49 +680,11 @@ function renderLiveData(d) {
   if (down.length) { alertEl.style.display='block'; alertEl.textContent=`⚠️ Offline: ${down.join(', ')}`; }
   else alertEl.style.display='none';
 
-  /* AI Agents */
-  const agents = d.agents || [];
-  const runningCount = agents.filter(a=>a.status==='running').length;
-  setText('agentCountBadge', `${runningCount}/${agents.length} running`);
-  document.getElementById('agentList').innerHTML = agents.map(a=>`
-    <div class="agent-row">
-      <div class="agent-icon">${a.icon}</div>
-      <div>
-        <div class="agent-name">${a.name}</div>
-        <div class="agent-task">${a.task}</div>
-      </div>
-      <div class="agent-meta">
-        <div class="agent-status ${a.status}">${a.status==='running'?'● Running':a.status==='scheduled'?'◷ Scheduled':'○ Offline'}</div>
-        <div class="agent-last">${fmtTime(a.last_active)}</div>
-      </div>
-    </div>`).join('');
+  /* AI Agents — v5 */
+  renderAgents(d.agents || []);
 
-  /* Projects */
-  const projects = d.projects || [];
-  const grid = document.getElementById('projectsGrid');
-  if (projects.length) {
-    grid.innerHTML = projects.map(p => {
-      const allTasks = [...(p.tasks||[]).map(t=>({name:t,status:'open',src:'elara'})),
-                       ...(p.clickup_tasks||[]).map(t=>({name:t.name,status:t.status,src:'clickup'}))];
-      const taskHtml = allTasks.length
-        ? allTasks.slice(0,5).map(t=>`
-            <div class="task-item">
-              <span class="task-check">${t.src==='elara'?'◻':'▸'}</span>
-              <span class="task-text">${t.name.slice(0,70)}</span>
-              <span class="task-status ${t.status==='approved'?'approved':t.status==='backlog'?'backlog':'open'}">${t.status}</span>
-            </div>`).join('')
-        : '<div class="no-tasks">No open tasks</div>';
-      return `
-        <div class="project-card" style="--project-color:${p.color}">
-          <div class="project-head">
-            <span class="project-icon">${p.icon}</span>
-            <span class="project-name">${p.name}</span>
-            <span class="project-badge">${allTasks.length} task${allTasks.length!==1?'s':''}</span>
-          </div>
-          <div class="task-list">${taskHtml}</div>
-        </div>`;
-    }).join('');
-  }
+  /* Projects — v5 */
+  renderProjects(d.projects || []);
 
   /* Content pipeline */
   const pb = d.personal_brand || {};
@@ -567,7 +707,7 @@ function renderLiveData(d) {
   const ideas = d.ideas || [];
   setText('ideasCount', ideas.length);
   document.getElementById('ideaList').innerHTML = ideas.length
-    ? ideas.map(i=>`<div class="idea-item"><span>💡</span><span style="font-size:11px">${i}</span></div>`).join('')
+    ? ideas.map(i=>`<div class="idea-item"><span>💡</span><span style="font-size:11px">${esc(i)}</span></div>`).join('')
     : '<div class="idea-item" style="color:var(--muted)">No ideas yet — say "idea: ..." to Elara</div>';
 
   /* Approved content ideas */
@@ -575,7 +715,7 @@ function renderLiveData(d) {
   const approvedTasks = (d.projects||[]).find(p=>p.name==='Personal Brand');
   const cuIdeas = approvedTasks?.clickup_tasks?.filter(t=>t.status==='approved') || [];
   approvedEl.innerHTML = cuIdeas.length
-    ? cuIdeas.map(t=>`<div class="idea-item"><span>✅</span><span style="font-size:11px">${t.name}</span></div>`).join('')
+    ? cuIdeas.map(t=>`<div class="idea-item"><span>✅</span><span style="font-size:11px">${esc(t.name)}</span></div>`).join('')
     : '<div style="font-size:11px;color:var(--muted)">No approved ideas yet</div>';
 
   setText('tradingFreshness', `Refreshed ${new Date().toLocaleTimeString('en-AU',{timeZone:'Australia/Brisbane',hour:'2-digit',minute:'2-digit'})} AEST`);
