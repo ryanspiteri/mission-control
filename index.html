@@ -169,17 +169,16 @@
     .agent-card:hover { border-color: var(--border-hi); }
     .agent-card.has-link { cursor: pointer; }
     .agent-card-main {
-      display: grid; grid-template-columns: 36px 1fr auto;
-      align-items: start; gap: 12px; padding: 13px 14px;
+      display: flex; align-items: flex-start; gap: 10px; padding: 13px 14px;
     }
-    .agent-icon { font-size: 20px; text-align: center; padding-top: 2px; }
-    .agent-info { min-width: 0; }
-    .agent-name { font-size: 12px; font-weight: 700; margin-bottom: 2px; display: flex; align-items: center; gap: 6px; }
+    .agent-icon { font-size: 20px; flex-shrink: 0; padding-top: 2px; }
+    .agent-info { flex: 1; min-width: 0; overflow: hidden; }
+    .agent-name { font-size: 12px; font-weight: 700; margin-bottom: 2px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .agent-name-link { color: var(--blue); font-size: 9px; text-decoration: none; opacity: 0; transition: opacity .15s; }
     .agent-card:hover .agent-name-link { opacity: 1; }
-    .agent-task { font-size: 11px; color: var(--muted); line-height: 1.45; word-break: break-word; }
+    .agent-task { font-size: 11px; color: var(--muted); line-height: 1.45; overflow-wrap: break-word; word-break: break-word; white-space: normal; }
     .agent-task strong { color: var(--text); font-weight: 600; }
-    .agent-meta { text-align: right; flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+    .agent-meta { flex-shrink: 0; text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; max-width: 90px; }
     .agent-status-badge {
       font-size: 9px; font-weight: 700; letter-spacing: .5px;
       padding: 3px 8px; border-radius: 20px; white-space: nowrap;
