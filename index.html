@@ -283,6 +283,18 @@ header{
 .cron-schedule{font-size:10px;color:var(--text3);margin-top:2px;font-variant-numeric:tabular-nums}
 .cron-desc{font-size:10px;color:var(--text2);margin-top:2px;line-height:1.35}
 .cron-next{font-size:10px;color:var(--amber);font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cron-row{cursor:pointer;transition:background .15s}
+.cron-row:hover td{background:rgba(255,255,255,.03)!important}
+.cron-row.expanded td{background:rgba(255,255,255,.02)}
+.cron-detail{display:none;background:var(--s2);border-top:1px solid var(--border)}
+.cron-detail.open{display:table-row}
+.cron-detail-inner{padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.cron-detail-row{display:flex;align-items:flex-start;gap:8px;font-size:11px}
+.cron-detail-label{color:var(--text3);min-width:90px;flex-shrink:0;font-size:10px;text-transform:uppercase;letter-spacing:.4px;padding-top:1px}
+.cron-detail-val{color:var(--text);font-family:monospace;font-size:11px;word-break:break-all}
+.cron-chevron{font-size:9px;color:var(--text3);transition:transform .2s;display:inline-block;margin-left:4px}
+.cron-row.expanded .cron-chevron{transform:rotate(90deg)}
+.cron-id{font-size:10px;color:var(--text3);margin-top:2px;font-family:monospace}
 .svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .svc-card{
   background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:12px 13px;
@@ -620,12 +632,62 @@ const BUSINESSES = [
 
 // ─── Static cron config ────────────────────────────────────────────────────
 const CRONS = [
-  { name:'Daily 7AM Brief',    schedule:'7:00 AM daily',         desc:'Metals + morning brief + calendar', cron:'0 7 * * *',   days:'daily' },
-  { name:'Daily 7PM Brief',    schedule:'7:00 PM daily',         desc:'TODOs + Day-X script + proactive ideas', cron:'0 19 * * *', days:'daily' },
-  { name:'Pre-Session Asia',   schedule:'9:00 AM Mon–Fri',       desc:'Bot health check before Asia open', cron:'0 9 * * 1-5', days:'weekdays' },
-  { name:'Pre-Session NY',     schedule:'10:30 PM Mon–Fri',      desc:'Bot health check before NY open',  cron:'30 22 * * 1-5',days:'weekdays' },
-  { name:'Property Watch',     schedule:'Fri 5:00 PM',           desc:'Off-the-plan GC + Brisbane digest', cron:'0 17 * * 5',  days:'friday' },
-  { name:'Security Check',     schedule:'Every 6 hours',         desc:'iMac security audit',               cron:'0 */6 * * *', days:'every6h' },
+  {
+    name:'Daily 7AM Brief', schedule:'7:00 AM daily', desc:'Metals + morning brief + calendar',
+    cron:'0 7 * * *', days:'daily', id:'6256922c-bed7-4647-92bb-4b8034b7633b',
+    script:'/Users/jarvis/Documents/personal-brand/brief.py',
+    triggers:'Morning metals watchlist + Google Calendar events + trading bot status + content cards',
+    output:'Telegram message to Ryan', lastRun:'7:00 AM today'
+  },
+  {
+    name:'Daily 7PM Brief', schedule:'7:00 PM daily', desc:'TODOs + Day-X script + proactive ideas',
+    cron:'0 19 * * *', days:'daily', id:'dfc926f0-1b64-4138-a8c8-50aaa3a7833e',
+    script:'/Users/jarvis/Documents/personal-brand/pipeline.py',
+    triggers:'Incomplete TODOs + Day-X personal brand script generation + ClickUp task update',
+    output:'Telegram message to Ryan + ClickUp task created'
+  },
+  {
+    name:'Pre-Session Asia', schedule:'9:00 AM Mon–Fri', desc:'Bot health check before Asia open',
+    cron:'0 9 * * 1-5', days:'weekdays', id:'08294f96-248a-46b4-82fe-f3d5c2128216',
+    script:'/Users/jarvis/Documents/Trading/pre_session_check.py',
+    triggers:'Asia session opens 10:00 AM AEST — runs 1hr before',
+    output:'Telegram alert: bot status, account balance, key levels set'
+  },
+  {
+    name:'Pre-Session NY', schedule:'10:30 PM Mon–Fri', desc:'Bot health check before NY open',
+    cron:'30 22 * * 1-5', days:'weekdays', id:'7e11fa95-502c-4b4d-b479-8fcb55766a73',
+    script:'/Users/jarvis/Documents/Trading/pre_session_check.py',
+    triggers:'NY session opens 11:30 PM AEST — runs 1hr before',
+    output:'Telegram alert: bot status, account balance, key levels set'
+  },
+  {
+    name:'Property Watch', schedule:'Fri 5:00 PM', desc:'Off-the-plan GC + Brisbane digest',
+    cron:'0 17 * * 5', days:'friday', id:'398decd1-0e46-459c-8625-6969a0855759',
+    script:'/Users/jarvis/Documents/market-monitor/property_watch.py',
+    triggers:'Weekly property market scan — off-the-plan, $800K–$2.5M, Gold Coast + Brisbane',
+    output:'Telegram digest with new listings and market updates'
+  },
+  {
+    name:'Security Check', schedule:'Every 6 hours', desc:'iMac security audit',
+    cron:'0 */6 * * *', days:'every6h', id:'9c92dcf3-a6d4-4f4e-b83a-a4733df9a741',
+    script:'OpenClaw healthcheck skill',
+    triggers:'Runs at 12AM, 6AM, 12PM, 6PM daily',
+    output:'Telegram alert if any security issues found'
+  },
+  {
+    name:'Gateway Watchdog', schedule:'Every 5 minutes', desc:'Checks Elara gateway is alive',
+    cron:'*/5 * * * *', days:'every5m', id:'8af438a3-9419-465d-854a-409842ffd789',
+    script:'/Users/jarvis/Documents/system/gateway_watchdog.py',
+    triggers:'Pings gateway every 5 min, auto-recovers if down',
+    output:'Telegram 🚨 alert if gateway goes down and auto-recovery fails'
+  },
+  {
+    name:'Aaron Supplements', schedule:'16 Mar 7:00 AM (once)', desc:'One-time supplement reminder',
+    cron:'0 7 16 3 *', days:'once', id:'901fcb7b-3634-4b18-9bed-8b7f8b93d5b8',
+    script:'Reminder message',
+    triggers:'Single run — 16 March 2026 7:00 AM AEST',
+    output:'Telegram reminder to Ryan about Aaron supplements'
+  },
 ];
 
 // ─── Static services config ────────────────────────────────────────────────
@@ -891,15 +953,54 @@ function renderProjects(projects){
 }
 
 // ─── Render: Crons ────────────────────────────────────────────────────────
+function toggleCron(idx){
+  const detailRow = document.getElementById('cron-detail-'+idx);
+  const mainRow   = document.getElementById('cron-row-'+idx);
+  if(!detailRow||!mainRow) return;
+  const isOpen = detailRow.classList.contains('open');
+  detailRow.classList.toggle('open',!isOpen);
+  mainRow.classList.toggle('expanded',!isOpen);
+}
+
 function renderCrons(){
-  document.getElementById('cron-tbody').innerHTML = CRONS.map(c=>`
-    <tr>
+  document.getElementById('cron-tbody').innerHTML = CRONS.map((c,i)=>`
+    <tr class="cron-row" id="cron-row-${i}" onclick="toggleCron(${i})">
       <td>
-        <div class="cron-name"><div class="cron-name-dot"></div>${esc(c.name)}</div>
+        <div class="cron-name">
+          <div class="cron-name-dot"></div>
+          ${esc(c.name)}
+          <span class="cron-chevron">▶</span>
+        </div>
         <div class="cron-desc">${esc(c.desc)}</div>
       </td>
       <td><div class="cron-schedule">${esc(c.schedule)}</div></td>
       <td class="cron-next">${nextCronRun(c)}</td>
+    </tr>
+    <tr class="cron-detail" id="cron-detail-${i}">
+      <td colspan="3">
+        <div class="cron-detail-inner">
+          <div class="cron-detail-row">
+            <span class="cron-detail-label">Cron ID</span>
+            <span class="cron-detail-val">${esc(c.id||'—')}</span>
+          </div>
+          <div class="cron-detail-row">
+            <span class="cron-detail-label">Schedule</span>
+            <span class="cron-detail-val">${esc(c.cron||'—')}</span>
+          </div>
+          <div class="cron-detail-row">
+            <span class="cron-detail-label">Script</span>
+            <span class="cron-detail-val">${esc(c.script||'—')}</span>
+          </div>
+          <div class="cron-detail-row">
+            <span class="cron-detail-label">What it does</span>
+            <span class="cron-detail-val">${esc(c.triggers||c.desc||'—')}</span>
+          </div>
+          <div class="cron-detail-row">
+            <span class="cron-detail-label">Output</span>
+            <span class="cron-detail-val">${esc(c.output||'—')}</span>
+          </div>
+        </div>
+      </td>
     </tr>
   `).join('');
 }
