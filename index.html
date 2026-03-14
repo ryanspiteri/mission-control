@@ -340,6 +340,28 @@ footer{
       </div>
     </div>
 
+    <!-- API Usage -->
+    <div style="margin-bottom:16px">
+      <div class="sec-hdr">
+        <span class="sec-title">API Usage</span>
+        <span style="font-size:11px;color:var(--text2)">Auto-refreshes every 60s</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+        <div class="stat-card">
+          <div class="stat-label">Today</div>
+          <div class="stat-val" id="usage-today">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">This Month</div>
+          <div class="stat-val" id="usage-month">—</div>
+        </div>
+      </div>
+      <div class="card" style="padding:10px">
+        <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px">By Service</div>
+        <div id="usage-breakdown"><div class="empty-state">Loading…</div></div>
+      </div>
+    </div>
+
     <!-- Project Pipeline -->
     <div>
       <div class="sec-hdr">
@@ -431,7 +453,7 @@ footer{
 
 <script>
 // ─── Config ────────────────────────────────────────────────────────────────
-const CF    = 'https://coming-totally-indicated-buildings.trycloudflare.com';
+const CF    = 'https://authority-visits-duke-ties.trycloudflare.com';
 const API   = CF + '/api/mission-control';
 const SAPI  = CF + '/api/sub-agents';
 const AEST  = 'Australia/Brisbane';
@@ -838,3 +860,41 @@ setInterval(renderCrons, 60000);
 </script>
 </body>
 </html>
+<!-- SCRIPT INJECTED BY ELARA -->
+<script>
+// Patch fetchAll to also fetch /api/usage
+const _origFetchAll = fetchAll;
+const USAGE_API = CF + '/api/usage';
+
+async function fetchUsage() {
+  try {
+    const r = await fetch(USAGE_API, {cache:'no-store', signal: AbortSignal.timeout(5000)});
+    const d = await r.json();
+    renderUsage(d);
+  } catch(e) {
+    document.getElementById('usage-today') && (document.getElementById('usage-today').textContent = 'Unavailable');
+  }
+}
+
+function renderUsage(d) {
+  const today = d.today || {};
+  const month = d.this_month || {};
+  const el = document.getElementById('usage-today');
+  const mel = document.getElementById('usage-month');
+  if (el) el.textContent = '$' + (today.total_cost_usd || 0).toFixed(2);
+  if (mel) mel.textContent = '$' + (month.total_cost_usd || 0).toFixed(2);
+  
+  const breakdown = document.getElementById('usage-breakdown');
+  if (breakdown && today.by_service) {
+    breakdown.innerHTML = Object.entries(today.by_service).map(([svc, data]) =>
+      `<div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid var(--border)">
+        <span style="color:var(--text2)">${svc}</span>
+        <span style="color:var(--accent);font-weight:600">$${(data.cost_usd||0).toFixed(3)}</span>
+       </div>`
+    ).join('');
+  }
+}
+
+fetchUsage();
+setInterval(fetchUsage, 60000);
+</script>
