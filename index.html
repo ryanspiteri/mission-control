@@ -190,30 +190,52 @@ header{
 .agent-foot{display:flex;align-items:center;justify-content:space-between;margin-top:9px;padding-top:9px;border-top:1px solid var(--border)}
 .agent-time{font-size:10px;color:var(--text3);font-variant-numeric:tabular-nums}
 
-/* Sub-agents section */
-.subagent-list{display:flex;flex-direction:column;gap:7px;margin-top:10px}
+/* Sub-agents section — redesigned */
+.subagent-list{display:flex;flex-direction:column;gap:6px;margin-top:4px}
 .subagent-card{
-  display:flex;align-items:flex-start;gap:10px;
-  background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:11px 13px;
-  border-left:2px solid transparent;transition:border-color .15s,background .15s;
+  background:var(--s2);border:1px solid var(--border);border-radius:9px;
+  border-left:3px solid transparent;overflow:hidden;
+  transition:transform .15s ease,box-shadow .15s ease,border-color .15s;
+  cursor:default;
 }
-.subagent-card:hover{background:var(--s3)}
+.subagent-card:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-hover);
+  border-color:var(--border-hi);
+}
 .subagent-card.running{border-left-color:var(--green)}
 .subagent-card.completed{border-left-color:var(--blue)}
 .subagent-card.failed{border-left-color:var(--red)}
-.subagent-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px}
-.subagent-card.running .subagent-dot{background:var(--green);box-shadow:0 0 5px var(--green);animation:blink 2s infinite}
-.subagent-card.completed .subagent-dot{background:var(--blue)}
-.subagent-card.failed .subagent-dot{background:var(--red)}
-.subagent-body{flex:1;min-width:0}
-.subagent-name{font-size:12px;font-weight:600;color:var(--text);letter-spacing:-.2px}
-.subagent-task{font-size:11px;color:var(--text2);margin-top:2px;line-height:1.4}
-.subagent-meta{display:flex;align-items:center;gap:8px;margin-top:5px;flex-wrap:wrap}
-.subagent-status{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:1px 6px;border-radius:4px}
-.running .subagent-status{color:var(--green);background:var(--green-dim)}
-.completed .subagent-status{color:var(--blue);background:var(--blue-dim)}
-.failed .subagent-status{color:var(--red);background:var(--red-dim)}
-.subagent-time{font-size:10px;color:var(--text3);font-variant-numeric:tabular-nums}
+.subagent-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 13px 11px 12px;gap:12px;
+}
+.subagent-info{flex:1;min-width:0}
+.subagent-name{font-size:14px;font-weight:700;color:var(--text);letter-spacing:-.3px;line-height:1.2}
+.subagent-task{
+  font-size:11px;color:var(--text3);margin-top:3px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4;
+}
+.subagent-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0}
+.subagent-badge{
+  font-size:10px;font-weight:700;letter-spacing:.3px;
+  padding:3px 9px;border-radius:20px;border:1px solid transparent;white-space:nowrap;
+}
+.subagent-card.running .subagent-badge{color:var(--green);background:var(--green-dim);border-color:var(--green-border)}
+.subagent-card.completed .subagent-badge{color:var(--blue);background:var(--blue-dim);border-color:rgba(59,130,246,.22)}
+.subagent-card.failed .subagent-badge{color:var(--red);background:var(--red-dim);border-color:rgba(239,68,68,.22)}
+.subagent-elapsed{font-size:10px;color:var(--text3);font-variant-numeric:tabular-nums;white-space:nowrap}
+/* Sub-agents empty state */
+.subagent-empty{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:28px 16px;gap:10px;text-align:center;
+}
+.subagent-empty-icon{
+  width:38px;height:38px;border-radius:11px;
+  background:var(--s3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:17px;opacity:.65;
+}
+.subagent-empty-label{font-size:12px;font-weight:500;color:var(--text3)}
 
 /* ── Empty State ── */
 .empty-state{
@@ -887,10 +909,9 @@ function renderSubAgents(data){
   document.getElementById('subagent-count').textContent = agents.length;
   const el = document.getElementById('subagent-list');
   if(!agents.length){
-    el.innerHTML=`<div class="empty-state">
-      <div class="empty-state-icon">💤</div>
-      <div class="empty-state-text">No sub-agents spawned today</div>
-      <div class="empty-state-sub">Sub-agents will appear here when active</div>
+    el.innerHTML=`<div class="subagent-empty">
+      <div class="subagent-empty-icon">🤖</div>
+      <div class="subagent-empty-label">No agents spawned today</div>
     </div>`;
     return;
   }
@@ -901,18 +922,18 @@ function renderSubAgents(data){
   });
   el.innerHTML = sorted.map(a=>{
     const st=(a.status||'running').toLowerCase();
-    const dur = a.completed_at
-      ? Math.round((new Date(a.completed_at)-new Date(a.started_at))/60000)+'m'
-      : (a.started_at ? 'Running '+relTime(a.started_at).replace(' ago','') : '—');
+    const badgeLabel = st==='running'?'Running':st==='completed'?'Done':'Failed';
+    const elapsed = a.started_at ? relTime(a.started_at) : '—';
     return `
     <div class="subagent-card ${st}">
-      <div class="subagent-dot"></div>
-      <div class="subagent-body">
-        <div class="subagent-name">${esc(a.name)}</div>
-        <div class="subagent-task">${esc(a.task||'—')}</div>
-        <div class="subagent-meta">
-          <span class="subagent-status">${st}</span>
-          <span class="subagent-time">Started ${relTime(a.started_at)} · ${dur}</span>
+      <div class="subagent-inner">
+        <div class="subagent-info">
+          <div class="subagent-name">${esc(a.name)}</div>
+          <div class="subagent-task">${esc(a.task||'—')}</div>
+        </div>
+        <div class="subagent-right">
+          <span class="subagent-badge">${badgeLabel}</span>
+          <span class="subagent-elapsed">${elapsed}</span>
         </div>
       </div>
     </div>`;
