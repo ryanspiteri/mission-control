@@ -1171,7 +1171,7 @@ function renderTradingBot(bot){
   if(sigEl&&bot.recent_signals&&bot.recent_signals.length){
     sigEl.innerHTML = bot.recent_signals.slice(0,5).map(s=>`
       <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">
-        <div style="font-size:11px;color:var(--text2);flex:1">${esc(s.pair||s.symbol||'—')} <span style="color:${s.direction==='buy'?'var(--green)':'var(--red)';font-weight:600">${esc((s.direction||'').toUpperCase())}</span></div>
+        <div style="font-size:11px;color:var(--text2);flex:1">${esc(s.pair||s.symbol||'—')} <span style="color:${s.direction==='buy'?'var(--green)':'var(--red)'};font-weight:600">${esc((s.direction||'').toUpperCase())}</span></div>
         <div style="font-size:10px;color:var(--text3)">${fmtTime(s.time||s.ts)}</div>
       </div>`).join('');
   }
