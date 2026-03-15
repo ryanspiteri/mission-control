@@ -1103,7 +1103,7 @@ function renderTradingBot(bot){
   if(pageBadge){ pageBadge.textContent=st; pageBadge.className=stClass; }
 
   const pnlDay = bot.pnl_today??bot.daily_pnl??null;
-  const pnlColor = pnlDay===null?'':'pnlDay>=0 ?' pos':' neg'';
+  const pnlColor = pnlDay===null?'':(pnlDay>=0?' pos':' neg');
   if(pnlLarge){
     pnlLarge.textContent = pnlDay===null ? '—' : (pnlDay>=0?'+$':'-$')+Math.abs(pnlDay).toFixed(2);
     pnlLarge.className = 'bot-pnl-value'+(pnlDay===null?'':pnlDay>=0?' pos':' neg');
