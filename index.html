@@ -292,8 +292,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
 .skills-label{font-size:13px;color:var(--text2);margin-bottom:8px}
 .skills-badge{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);color:var(--accent);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.4px;margin-bottom:8px}
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
-.skill-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:13px 15px;transition:border-color .15s;display:flex;flex-direction:column;gap:5px}
-.skill-card:hover{border-color:#333}
+.skill-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:13px 15px;transition:border-color .15s,box-shadow .15s;display:flex;flex-direction:column;gap:5px;cursor:pointer}
+.skill-card:hover{border-color:var(--accent);box-shadow:0 0 0 1px rgba(59,130,246,.2)}
 .skill-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .skill-name{font-size:12px;font-weight:700;color:var(--text)}
 .skill-badge{font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:2px 7px;border-radius:10px;flex-shrink:0}
@@ -305,6 +305,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
 .skill-badge.productivity{background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.2)}
 .skill-badge.utility{background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
 .skill-desc{font-size:11px;color:var(--text2);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* ── Skill Detail Panel ── */
+.skill-panel-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:400;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.skill-panel-overlay.open{opacity:1;pointer-events:all}
+.skill-panel{
+  position:fixed;top:0;right:0;height:100vh;width:min(540px,100vw);
+  background:var(--bg2);border-left:1px solid var(--border);z-index:401;
+  display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  box-shadow:-8px 0 40px rgba(0,0,0,.5);
+}
+.skill-panel.open{transform:translateX(0)}
+.skill-panel-header{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+  padding:20px 20px 16px;border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.skill-panel-title-block{flex:1;min-width:0}
+.skill-panel-name{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.5px;margin-bottom:6px}
+.skill-panel-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.skill-panel-close{
+  width:30px;height:30px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);
+  color:var(--text2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:.15s;line-height:1;
+}
+.skill-panel-close:hover{border-color:#444;color:var(--text)}
+.skill-panel-body{flex:1;overflow-y:auto;padding:16px 20px}
+.skill-panel-content-label{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text2);margin-bottom:10px}
+.skill-panel-pre{
+  background:var(--bg);border:1px solid var(--border);border-radius:8px;
+  padding:16px;font-family:'SF Mono',Monaco,'Cascadia Code',monospace;
+  font-size:11px;line-height:1.65;color:#d4d4d4;white-space:pre-wrap;word-break:break-word;
+  overflow-x:auto;
+}
 
 /* ── Loading shimmer ── */
 .shimmer{background:linear-gradient(90deg,var(--bg3) 25%,#1a1a1a 50%,var(--bg3) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px}
@@ -642,6 +678,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
 
 </div><!-- /main-inner -->
 </div><!-- /main -->
+
+<!-- Skill Detail Panel -->
+<div class="skill-panel-overlay" id="skill-panel-overlay" onclick="closeSkillPanel()"></div>
+<div class="skill-panel" id="skill-panel">
+  <div class="skill-panel-header">
+    <div class="skill-panel-title-block">
+      <div class="skill-panel-name" id="skill-panel-name">—</div>
+      <div class="skill-panel-desc" id="skill-panel-desc"></div>
+    </div>
+    <button class="skill-panel-close" onclick="closeSkillPanel()" title="Close (Esc)">✕</button>
+  </div>
+  <div class="skill-panel-body">
+    <div class="skill-panel-content-label">SKILL.md</div>
+    <pre class="skill-panel-pre" id="skill-panel-pre"></pre>
+  </div>
+</div>
 
 <!-- Offline Toast -->
 <div id="offline-toast">
@@ -1091,8 +1143,33 @@ function inferCategory(name){
   return 'utility';
 }
 
+let _skillsData = [];
+
+function openSkillPanel(idx){
+  const s = _skillsData[idx];
+  if(!s) return;
+  const displayName = s.name.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+  document.getElementById('skill-panel-name').textContent = displayName;
+  document.getElementById('skill-panel-desc').textContent = s.description||'';
+  document.getElementById('skill-panel-pre').textContent = s.content||'(No SKILL.md content available)';
+  document.getElementById('skill-panel').classList.add('open');
+  document.getElementById('skill-panel-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSkillPanel(){
+  document.getElementById('skill-panel').classList.remove('open');
+  document.getElementById('skill-panel-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') closeSkillPanel();
+});
+
 function renderSkillsPage(data){
   const skills = data.skills||[];
+  _skillsData = skills;
   const total = data.total||skills.length;
   const totalEl = document.getElementById('skills-total');
   const badgeEl = document.getElementById('skills-lib-badge');
@@ -1101,10 +1178,10 @@ function renderSkillsPage(data){
   const grid = document.getElementById('skills-grid');
   if(!grid) return;
   if(!skills.length){ grid.innerHTML='<div class="empty-state" style="grid-column:1/-1">No skills found</div>'; return; }
-  grid.innerHTML = skills.map(s=>{
+  grid.innerHTML = skills.map((s, idx)=>{
     const cat = inferCategory(s.name);
     const displayName = s.name.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-    return `<div class="skill-card">
+    return `<div class="skill-card" onclick="openSkillPanel(${idx})">
       <div class="skill-card-top">
         <div class="skill-name">${esc(displayName)}</div>
         <div class="skill-badge ${cat}">${cat}</div>
