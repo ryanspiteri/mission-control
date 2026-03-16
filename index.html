@@ -7,520 +7,641 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#070708;
-  --s1:#0f0f11;
-  --s2:#161618;
-  --s3:#1c1c1f;
-  --s4:#222226;
-  --border:#1e1e24;
-  --border-hi:#2d2d35;
-  --text:#eeeef0;
-  --text2:#a1a1aa;
-  --text3:#71717a;
-  --accent:#FF3838;
-  --accent-dim:rgba(255,56,56,.12);
-  --accent-glow:rgba(255,56,56,.25);
+  --bg:#0d0d0d;
+  --bg2:#111111;
+  --bg3:#161616;
+  --border:#222222;
+  --text:#f0f0f0;
+  --text2:#888888;
+  --accent:#3b82f6;
   --green:#22c55e;
-  --green-bg:rgba(34,197,94,.1);
-  --amber:#f59e0b;
-  --amber-bg:rgba(245,158,11,.1);
   --red:#ef4444;
-  --red-bg:rgba(239,68,68,.1);
-  --blue:#3b82f6;
-  --blue-bg:rgba(59,130,246,.1);
+  --amber:#f59e0b;
   --purple:#8b5cf6;
   --cyan:#06b6d4;
   --r:10px;
   --gap:14px;
+  --sidebar:240px;
 }
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:13px;line-height:1.5}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:13px;line-height:1.5;display:flex}
 
-/* ── Header ── */
-header{
-  position:sticky;top:0;z-index:300;
-  background:rgba(7,7,8,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--border);
-  padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:52px;gap:12px;
+/* ── Sidebar ── */
+.sidebar{
+  width:var(--sidebar);flex-shrink:0;
+  background:var(--bg2);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:fixed;top:0;left:0;height:100vh;z-index:200;
+  overflow-y:auto;
+  transition:transform .25s ease;
 }
-.hdr-left{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.hdr-logo{
-  width:28px;height:28px;border-radius:7px;
-  background:linear-gradient(135deg,var(--accent) 0%,#c0392b 100%);
+.sidebar-logo{padding:20px 16px 16px;border-bottom:1px solid var(--border)}
+.logo-mark{display:flex;align-items:center;gap:9px}
+.logo-icon{
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,var(--accent) 0%,#1d4ed8 100%);
   display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:900;color:#fff;letter-spacing:-1px;
-  box-shadow:0 0 12px var(--accent-glow);
+  font-size:16px;flex-shrink:0;
+  box-shadow:0 0 16px rgba(59,130,246,.3);
 }
-.hdr-title{font-size:14px;font-weight:700;letter-spacing:-.4px;color:var(--text)}
-.hdr-sub{font-size:11px;color:var(--text3);margin-left:2px}
-.hdr-center{display:flex;align-items:center;gap:8px}
-.live-badge{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--green);background:var(--green-bg);border:1px solid rgba(34,197,94,.2);padding:3px 10px;border-radius:20px}
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
-.hdr-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.clock{font-size:12px;color:var(--text3);font-variant-numeric:tabular-nums;font-feature-settings:"tnum";letter-spacing:.3px}
-.btn-refresh{font-size:11px;color:var(--text3);background:none;border:1px solid var(--border-hi);padding:4px 11px;border-radius:6px;cursor:pointer;transition:.15s;letter-spacing:.3px}
+.logo-title{font-size:14px;font-weight:800;color:var(--text);letter-spacing:-.4px}
+.logo-sub{font-size:11px;color:var(--text2);margin-top:1px}
+.nav-section{padding:16px 8px 4px}
+.nav-section-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text2);padding:0 8px;margin-bottom:4px}
+.nav-item{
+  display:flex;align-items:center;gap:9px;
+  padding:8px 10px;border-radius:7px;cursor:pointer;
+  font-size:12px;font-weight:500;color:var(--text2);
+  transition:.15s;margin-bottom:1px;border:none;background:none;width:100%;text-align:left;
+}
+.nav-item:hover{background:var(--bg3);color:var(--text)}
+.nav-item.active{background:rgba(59,130,246,.12);color:var(--accent);font-weight:600}
+.nav-item-icon{font-size:14px;width:18px;text-align:center;flex-shrink:0}
+.sidebar-footer{
+  margin-top:auto;padding:14px 16px;border-top:1px solid var(--border);
+}
+.status-line{display:flex;align-items:center;gap:7px;margin-bottom:10px}
+.status-dot-live{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:blink 2s infinite;flex-shrink:0}
+.status-text{font-size:11px;color:var(--text2)}
+.btn-refresh{
+  width:100%;font-size:11px;color:var(--text2);background:var(--bg3);
+  border:1px solid var(--border);padding:7px 12px;border-radius:7px;
+  cursor:pointer;transition:.15s;letter-spacing:.2px;display:flex;align-items:center;justify-content:center;gap:6px;
+}
 .btn-refresh:hover{border-color:var(--accent);color:var(--accent)}
 .btn-refresh.spinning svg{animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
 
-/* ── Alert Banner ── */
-#alert-banner{
-  display:none;background:linear-gradient(90deg,rgba(245,158,11,.08),rgba(245,158,11,.04));
-  border-bottom:1px solid rgba(245,158,11,.2);
-  padding:10px 20px;display:none;align-items:flex-start;gap:12px;
+/* ── Hamburger ── */
+.hamburger{
+  display:none;position:fixed;top:12px;left:12px;z-index:300;
+  width:36px;height:36px;border-radius:8px;background:var(--bg2);
+  border:1px solid var(--border);cursor:pointer;
+  flex-direction:column;align-items:center;justify-content:center;gap:4px;
 }
-.alert-icon{font-size:15px;flex-shrink:0;margin-top:1px}
-.alert-body{flex:1;min-width:0}
-.alert-title{font-size:12px;font-weight:700;color:var(--amber);margin-bottom:4px}
-.alert-items{display:flex;flex-wrap:wrap;gap:6px}
-.alert-item{font-size:11px;color:var(--text2);background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.15);padding:3px 9px;border-radius:4px}
-.alert-dismiss{font-size:18px;color:var(--text3);cursor:pointer;flex-shrink:0;line-height:1;background:none;border:none;padding:0 4px;transition:.15s}
-.alert-dismiss:hover{color:var(--text)}
+.hamburger span{display:block;width:16px;height:2px;background:var(--text2);border-radius:1px;transition:.2s}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190}
 
-/* ── Layout ── */
-.layout{display:grid;grid-template-columns:1fr 320px;gap:var(--gap);padding:var(--gap) 20px;max-width:1440px;margin:0 auto}
-.col-main{display:flex;flex-direction:column;gap:var(--gap);min-width:0}
-.col-side{display:flex;flex-direction:column;gap:var(--gap)}
+/* ── Main ── */
+.main{margin-left:var(--sidebar);flex:1;min-width:0;display:flex;flex-direction:column;min-height:100vh}
+.main-inner{flex:1;padding:20px;max-width:1300px;width:100%}
 
-/* ── Section Header ── */
-.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.sec-title{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3)}
-.sec-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;background:var(--s3);color:var(--text3);border:1px solid var(--border)}
-.sec-link{font-size:11px;color:var(--text3);text-decoration:none;transition:.15s}
-.sec-link:hover{color:var(--accent)}
+/* ── Page title ── */
+.page-header{margin-bottom:18px}
+.page-title{font-size:18px;font-weight:800;color:var(--text);letter-spacing:-.5px}
+.page-sub{font-size:12px;color:var(--text2);margin-top:2px}
 
-/* ── Card ── */
-.card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+/* ── Cards ── */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
 .card-pad{padding:14px 16px}
 
-/* ── Agent Grid ── */
-.agent-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.agent-card{
-  background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;
-  cursor:pointer;transition:border-color .15s,background .15s;position:relative;overflow:hidden;
-}
-.agent-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:.15s}
-.agent-card.status-running::before{background:var(--green)}
-.agent-card.status-offline::before{background:var(--text3)}
-.agent-card.status-scheduled::before{background:var(--amber)}
-.agent-card:hover{border-color:var(--border-hi);background:var(--s3)}
-.agent-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:7px}
-.agent-icon{font-size:18px;line-height:1}
-.agent-status-badge{
-  font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
-  padding:2px 7px;border-radius:10px;border:1px solid transparent;display:flex;align-items:center;gap:4px;
-}
-.agent-status-badge.running{color:var(--green);background:var(--green-bg);border-color:rgba(34,197,94,.2)}
-.agent-status-badge.offline{color:var(--text3);background:var(--s3);border-color:var(--border)}
-.agent-status-badge.scheduled{color:var(--amber);background:var(--amber-bg);border-color:rgba(245,158,11,.2)}
-.status-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
-.running .status-dot{background:var(--green);animation:blink 2s infinite}
-.offline .status-dot{background:var(--text3)}
-.scheduled .status-dot{background:var(--amber);animation:blink 3s infinite}
-.agent-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:-.2px}
-.agent-task{font-size:11px;color:var(--text2);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.agent-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
-.agent-time{font-size:10px;color:var(--text3);font-variant-numeric:tabular-nums}
+/* ── Section header ── */
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sec-title{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text2)}
+.sec-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
+.sec-link{font-size:11px;color:var(--text2);text-decoration:none;transition:.15s}
+.sec-link:hover{color:var(--accent)}
 
-/* Sub-agents section */
-.subagent-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+/* ── Grid utilities ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+
+/* ── Metric cards ── */
+.metric-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);
+  padding:16px;display:flex;flex-direction:column;gap:4px;
+}
+.metric-label{font-size:11px;color:var(--text2);letter-spacing:.4px;text-transform:uppercase;font-weight:600}
+.metric-value{font-size:28px;font-weight:800;color:var(--text);letter-spacing:-1px;font-variant-numeric:tabular-nums;line-height:1.1}
+.metric-sub{font-size:11px;color:var(--text2);margin-top:3px}
+.metric-value.green{color:var(--green)}
+.metric-value.red{color:var(--red)}
+.metric-value.blue{color:var(--accent)}
+
+/* ── Status chips ── */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{
+  display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;
+  padding:5px 11px;border-radius:20px;border:1px solid transparent;
+}
+.chip.green{color:var(--green);background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.2)}
+.chip.red{color:var(--red);background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2)}
+.chip.amber{color:var(--amber);background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2)}
+.chip.blue{color:var(--accent);background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.2)}
+.chip-dot{width:6px;height:6px;border-radius:50%}
+.chip.green .chip-dot{background:var(--green);animation:blink 2s infinite}
+.chip.red .chip-dot{background:var(--red)}
+.chip.amber .chip-dot{background:var(--amber);animation:blink 3s infinite}
+.chip.blue .chip-dot{background:var(--accent)}
+
+/* ── Dashboard layout ── */
+.dash-layout{display:grid;grid-template-columns:1fr 340px;gap:var(--gap)}
+.dash-main{display:flex;flex-direction:column;gap:var(--gap)}
+.dash-side{display:flex;flex-direction:column;gap:var(--gap)}
+
+/* ── Recent activity / sub-agents ── */
+.subagent-list{display:flex;flex-direction:column;gap:7px}
 .subagent-card{
   display:flex;align-items:flex-start;gap:10px;
-  background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;
-  border-left:2px solid var(--border);transition:.15s;
+  background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;
+  border-left:2px solid var(--border);
 }
 .subagent-card.running{border-left-color:var(--green)}
-.subagent-card.completed{border-left-color:var(--blue)}
+.subagent-card.completed{border-left-color:var(--accent)}
 .subagent-card.failed{border-left-color:var(--red)}
 .subagent-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px}
 .subagent-card.running .subagent-dot{background:var(--green);animation:blink 2s infinite}
-.subagent-card.completed .subagent-dot{background:var(--blue)}
+.subagent-card.completed .subagent-dot{background:var(--accent)}
 .subagent-card.failed .subagent-dot{background:var(--red)}
 .subagent-body{flex:1;min-width:0}
-.subagent-name{font-size:12px;font-weight:600;color:var(--text);letter-spacing:-.2px}
-.subagent-task{font-size:11px;color:var(--text2);margin-top:2px;line-height:1.4}
+.subagent-name{font-size:12px;font-weight:600;color:var(--text)}
+.subagent-task{font-size:11px;color:var(--text2);margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .subagent-meta{display:flex;align-items:center;gap:8px;margin-top:5px}
 .subagent-status{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
 .running .subagent-status{color:var(--green)}
-.completed .subagent-status{color:var(--blue)}
+.completed .subagent-status{color:var(--accent)}
 .failed .subagent-status{color:var(--red)}
-.subagent-time{font-size:10px;color:var(--text3);font-variant-numeric:tabular-nums}
-.empty-state{text-align:center;padding:18px;color:var(--text3);font-size:11px}
+.subagent-time{font-size:10px;color:var(--text2);font-variant-numeric:tabular-nums}
+.empty-state{text-align:center;padding:18px;color:var(--text2);font-size:12px}
 
-/* ── Project Pipeline ── */
-.biz-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-.biz-card{
-  background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:12px 13px;
-  transition:border-color .15s;
+/* ── Cron mini list (dashboard) ── */
+.cron-mini{display:flex;flex-direction:column;gap:0}
+.cron-mini-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:9px 0;border-bottom:1px solid var(--border);
 }
-.biz-card:hover{border-color:var(--border-hi)}
-.biz-head{display:flex;align-items:center;gap:7px;margin-bottom:10px}
-.biz-icon{font-size:16px;line-height:1}
-.biz-name{font-size:11px;font-weight:700;color:var(--text);letter-spacing:-.2px;line-height:1.2}
-.biz-stats{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
-.stat-row{display:flex;align-items:center;justify-content:space-between;gap:6px}
-.stat-label{font-size:10px;color:var(--text3);letter-spacing:.2px}
-.stat-val{font-size:11px;font-weight:700;font-variant-numeric:tabular-nums}
-.stat-bar{height:3px;background:var(--border);border-radius:2px;margin-top:3px;overflow:hidden}
-.stat-fill{height:100%;border-radius:2px;transition:width .4s}
-.biz-tasks{border-top:1px solid var(--border);padding-top:9px;margin-top:4px}
-.biz-task-item{
-  font-size:10px;color:var(--text2);padding:3px 0;
-  display:flex;align-items:flex-start;gap:5px;line-height:1.35;
-}
-.biz-task-item::before{content:'·';color:var(--text3);flex-shrink:0;margin-top:1px}
-.biz-task-item.blocked::before{content:'⚠';color:var(--amber)}
-.biz-link{display:block;font-size:10px;color:var(--text3);text-decoration:none;margin-top:7px;transition:.15s}
+.cron-mini-item:last-child{border-bottom:none}
+.cron-mini-name{font-size:12px;font-weight:600;color:var(--text)}
+.cron-mini-sched{font-size:10px;color:var(--text2);margin-top:1px}
+.cron-mini-next{font-size:11px;color:var(--amber);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* ── Business grid ── */
+.biz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.biz-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px;transition:border-color .15s}
+.biz-card:hover{border-color:#333}
+.biz-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.biz-icon{font-size:20px;line-height:1}
+.biz-name{font-size:13px;font-weight:700;color:var(--text);letter-spacing:-.2px}
+.biz-stats{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.stat-row{display:flex;align-items:center;justify-content:space-between}
+.stat-label{font-size:10px;color:var(--text2)}
+.stat-val{font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.biz-tasks{border-top:1px solid var(--border);padding-top:10px}
+.biz-task-item{font-size:11px;color:var(--text2);padding:3px 0;display:flex;align-items:flex-start;gap:5px;line-height:1.35}
+.biz-task-item::before{content:'·';color:var(--text2);flex-shrink:0;margin-top:1px}
+.no-tasks{font-size:11px;color:var(--text2);padding:4px 0;font-style:italic}
+.biz-link{display:block;font-size:11px;color:var(--text2);text-decoration:none;margin-top:10px;transition:.15s}
 .biz-link:hover{color:var(--accent)}
-.no-tasks{font-size:10px;color:var(--text3);padding:4px 0;font-style:italic}
 
-/* ── Automations ── */
-.auto-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
-.cron-table{width:100%;border-collapse:collapse}
-.cron-table th{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);text-align:left;padding:5px 10px;border-bottom:1px solid var(--border);background:var(--s2)}
-.cron-table td{padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:top}
-.cron-table tr:last-child td{border-bottom:none}
-.cron-table tr:hover td{background:var(--s2)}
-.cron-name{font-size:12px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:6px}
-.cron-name-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0}
-.cron-schedule{font-size:10px;color:var(--text3);margin-top:2px;font-variant-numeric:tabular-nums}
-.cron-desc{font-size:10px;color:var(--text2);margin-top:2px;line-height:1.35}
-.cron-next{font-size:10px;color:var(--amber);font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
-.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.svc-card{
-  background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:11px 13px;
-  display:flex;align-items:center;gap:10px;
+/* ── Trading page ── */
+.trading-hero{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);
+  padding:28px;margin-bottom:var(--gap);text-align:center;
 }
-.svc-led{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.svc-led.on{background:var(--green);box-shadow:0 0 5px var(--green);animation:blink 3s infinite}
+.trading-hero-label{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text2);margin-bottom:8px}
+.trading-hero-value{font-size:64px;font-weight:900;letter-spacing:-3px;line-height:1;font-variant-numeric:tabular-nums}
+.trading-hero-value.pos{color:var(--green)}
+.trading-hero-value.neg{color:var(--red)}
+.trading-hero-value.zero{color:var(--text)}
+.trading-hero-sub{font-size:13px;color:var(--text2);margin-top:8px}
+.trading-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);margin-bottom:var(--gap)}
+.trading-stat{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.trading-stat-label{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);margin-bottom:6px}
+.trading-stat-val{font-size:22px;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums}
+.session-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+
+/* ── Agents page ── */
+.filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.filter-btn{
+  font-size:11px;font-weight:600;padding:5px 13px;border-radius:6px;cursor:pointer;
+  border:1px solid var(--border);background:none;color:var(--text2);transition:.15s;
+}
+.filter-btn:hover{border-color:#333;color:var(--text)}
+.filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.agent-list{display:flex;flex-direction:column;gap:8px}
+.agent-row{
+  display:flex;align-items:flex-start;gap:12px;
+  background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;
+  border-left:3px solid var(--border);transition:.15s;
+}
+.agent-row.running{border-left-color:var(--green)}
+.agent-row.completed{border-left-color:var(--accent)}
+.agent-row.failed{border-left-color:var(--red)}
+.agent-row-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.agent-row.running .agent-row-dot{background:var(--green);animation:blink 2s infinite}
+.agent-row.completed .agent-row-dot{background:var(--accent)}
+.agent-row.failed .agent-row-dot{background:var(--red)}
+.agent-row-body{flex:1;min-width:0}
+.agent-row-name{font-size:13px;font-weight:700;color:var(--text)}
+.agent-row-task{font-size:12px;color:var(--text2);margin-top:3px;line-height:1.4}
+.agent-row-meta{display:flex;align-items:center;gap:10px;margin-top:6px}
+.agent-row-status{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.running .agent-row-status{color:var(--green)}
+.completed .agent-row-status{color:var(--accent)}
+.failed .agent-row-status{color:var(--red)}
+.agent-row-time{font-size:11px;color:var(--text2)}
+
+/* ── Crons page ── */
+.cron-table{width:100%;border-collapse:collapse}
+.cron-table th{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);text-align:left;padding:8px 12px;border-bottom:1px solid var(--border);background:var(--bg3)}
+.cron-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.cron-table tr:last-child td{border-bottom:none}
+.cron-table tr:hover td{background:var(--bg3)}
+.cron-name{font-size:12px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:7px}
+.cron-name-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0}
+.cron-schedule{font-size:11px;color:var(--text2);margin-top:2px}
+.cron-desc{font-size:11px;color:var(--text2);margin-top:3px;line-height:1.4}
+.cron-next{font-size:11px;color:var(--amber);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cron-expr{font-size:10px;color:var(--text2);font-family:monospace;margin-top:2px}
+
+/* ── Services page ── */
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap)}
+.svc-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.svc-led{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.svc-led.on{background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 3s infinite}
 .svc-led.off{background:var(--red)}
 .svc-body{flex:1;min-width:0}
-.svc-name{font-size:12px;font-weight:600;color:var(--text)}
-.svc-meta{font-size:10px;color:var(--text3);margin-top:1px}
-.svc-status{font-size:10px;font-weight:700;letter-spacing:.3px}
+.svc-name{font-size:13px;font-weight:600;color:var(--text)}
+.svc-meta{font-size:11px;color:var(--text2);margin-top:2px}
+.svc-status{font-size:11px;font-weight:700;letter-spacing:.3px;flex-shrink:0}
 .svc-status.on{color:var(--green)}
 .svc-status.off{color:var(--red)}
 
-/* ── Activity Log ── */
-.activity-feed{display:flex;flex-direction:column;gap:0}
-.activity-item{
-  display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);
-  transition:background .1s;
-}
-.activity-item:last-child{border-bottom:none}
-.activity-time{font-size:10px;color:var(--text3);font-variant-numeric:tabular-nums;flex-shrink:0;width:38px;padding-top:1px;letter-spacing:.2px}
-.activity-dot{width:5px;height:5px;border-radius:50%;background:var(--s4);border:1px solid var(--border-hi);flex-shrink:0;margin-top:5px}
-.activity-dot.green{background:var(--green)}
-.activity-dot.amber{background:var(--amber)}
-.activity-dot.red{background:var(--red)}
-.activity-dot.blue{background:var(--blue)}
-.activity-dot.purple{background:var(--purple)}
-.activity-text{font-size:11px;color:var(--text2);line-height:1.45;flex:1;min-width:0}
-.activity-text strong{color:var(--text);font-weight:600}
+/* ── Usage page ── */
+.usage-layout{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.usage-metric{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.usage-metric-label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);margin-bottom:8px}
+.usage-metric-value{font-size:36px;font-weight:900;color:var(--text);letter-spacing:-1.5px;font-variant-numeric:tabular-nums}
+.usage-metric-sub{font-size:11px;color:var(--text2);margin-top:4px}
+.bar-chart{display:flex;flex-direction:column;gap:10px;padding:16px}
+.bar-item{}
+.bar-label-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.bar-label{font-size:12px;color:var(--text2)}
+.bar-val{font-size:12px;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
+.bar-track{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;background:var(--accent);transition:width .5s}
 
-/* ── Divider ── */
-.sub-sec-hdr{
-  display:flex;align-items:center;gap:8px;margin:12px 0 8px;
-}
-.sub-sec-title{font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3)}
-.sub-sec-line{flex:1;height:1px;background:var(--border)}
-
-/* ── Progress Bar ── */
-.progress-bar{height:4px;background:var(--s3);border-radius:2px;overflow:hidden;margin-top:6px}
-.progress-fill{height:100%;border-radius:2px;background:var(--accent);transition:width .5s}
-
-/* ── Footer ── */
-footer{
-  text-align:center;padding:14px 20px;border-top:1px solid var(--border);
-  font-size:10px;color:var(--text3);margin-top:4px;display:flex;align-items:center;justify-content:center;gap:14px;
-}
-.footer-dot{width:3px;height:3px;border-radius:50%;background:var(--border-hi)}
-
-/* ── Page Nav ── */
-.page-nav{
-  background:var(--s1);border-bottom:1px solid var(--border);
-  padding:0 20px;display:flex;align-items:center;gap:2px;
-}
-.page-tab{
-  font-size:12px;font-weight:600;color:var(--text3);
-  padding:10px 14px;border-bottom:2px solid transparent;cursor:pointer;
-  transition:.15s;letter-spacing:-.2px;white-space:nowrap;
-  background:none;border-top:none;border-left:none;border-right:none;
-}
-.page-tab:hover{color:var(--text)}
-.page-tab.active{color:var(--text);border-bottom-color:var(--accent)}
-
-/* ── Skills Page ── */
-#page-skills{display:none}
-#page-main{display:block}
-.skills-hero{
-  display:flex;align-items:center;gap:16px;
-  padding:20px 20px 4px;max-width:1440px;margin:0 auto;
-}
-.skills-hero-count{
-  font-size:56px;font-weight:900;color:var(--text);letter-spacing:-3px;
-  line-height:1;
-}
-.skills-hero-label{font-size:13px;color:var(--text3);margin-top:4px}
-.skills-hero-badge{
-  background:var(--accent-dim);border:1px solid rgba(255,56,56,.25);
-  color:var(--accent);font-size:11px;font-weight:700;
-  padding:4px 12px;border-radius:20px;letter-spacing:.4px;
-}
-.skills-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:10px;
-  padding:14px 20px 20px;
-  max-width:1440px;margin:0 auto;
-}
-.skill-card{
-  background:var(--s1);border:1px solid var(--border);border-radius:8px;
-  padding:12px 14px;transition:border-color .15s,background .15s;
-  display:flex;flex-direction:column;gap:5px;
-}
-.skill-card:hover{border-color:var(--border-hi);background:var(--s2)}
+/* ── Skills page ── */
+.skills-hero{display:flex;align-items:flex-end;gap:12px;margin-bottom:var(--gap)}
+.skills-count{font-size:56px;font-weight:900;color:var(--text);letter-spacing:-3px;line-height:1}
+.skills-label{font-size:13px;color:var(--text2);margin-bottom:8px}
+.skills-badge{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);color:var(--accent);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.4px;margin-bottom:8px}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.skill-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:13px 15px;transition:border-color .15s;display:flex;flex-direction:column;gap:5px}
+.skill-card:hover{border-color:#333}
 .skill-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.skill-name{font-size:12px;font-weight:700;color:var(--text);letter-spacing:-.2px}
-.skill-badge{
-  font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
-  padding:2px 7px;border-radius:10px;flex-shrink:0;
-}
+.skill-name{font-size:12px;font-weight:700;color:var(--text)}
+.skill-badge{font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:2px 7px;border-radius:10px;flex-shrink:0}
 .skill-badge.trading{background:rgba(245,158,11,.12);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
-.skill-badge.infrastructure{background:rgba(59,130,246,.12);color:var(--blue);border:1px solid rgba(59,130,246,.2)}
+.skill-badge.infrastructure{background:rgba(59,130,246,.12);color:var(--accent);border:1px solid rgba(59,130,246,.2)}
 .skill-badge.communication{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.2)}
 .skill-badge.media{background:rgba(139,92,246,.12);color:var(--purple);border:1px solid rgba(139,92,246,.2)}
 .skill-badge.ai{background:rgba(6,182,212,.12);color:var(--cyan);border:1px solid rgba(6,182,212,.2)}
-.skill-badge.productivity{background:rgba(255,56,56,.12);color:var(--accent);border:1px solid rgba(255,56,56,.2)}
-.skill-badge.utility{background:var(--s3);color:var(--text3);border:1px solid var(--border)}
-.skill-desc{font-size:11px;color:var(--text2);line-height:1.45;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-
-/* ── Offline Toast ── */
-#offline-toast{
-  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
-  background:#1a1a1e;border:1px solid rgba(239,68,68,.3);border-radius:8px;
-  padding:10px 18px;font-size:12px;color:var(--red);z-index:999;
-  display:none;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,.5);
-}
+.skill-badge.productivity{background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+.skill-badge.utility{background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
+.skill-desc{font-size:11px;color:var(--text2);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
 /* ── Loading shimmer ── */
-.shimmer{
-  background:linear-gradient(90deg,var(--s2) 25%,var(--s3) 50%,var(--s2) 75%);
-  background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px;
-}
+.shimmer{background:linear-gradient(90deg,var(--bg3) 25%,#1a1a1a 50%,var(--bg3) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
+/* ── Offline toast ── */
+#offline-toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1a1a1a;border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:10px 18px;font-size:12px;color:var(--red);z-index:999;display:none;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+
+/* ── Divider ── */
+.divider{height:1px;background:var(--border);margin:16px 0}
+
 /* ── Responsive ── */
-@media(max-width:1100px){
-  .biz-grid{grid-template-columns:repeat(3,1fr)}
-  .auto-grid{grid-template-columns:1fr}
-}
 @media(max-width:900px){
-  .layout{grid-template-columns:1fr}
-  .col-side{order:-1}
-  .agent-grid{grid-template-columns:1fr}
-  .biz-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:540px){
-  header{padding:0 14px}
-  .layout{padding:10px 14px}
-  .biz-grid{grid-template-columns:1fr}
+  .dash-layout{grid-template-columns:1fr}
+  .trading-stats{grid-template-columns:1fr 1fr}
+  .biz-grid{grid-template-columns:1fr 1fr}
   .svc-grid{grid-template-columns:1fr}
-  .hdr-sub{display:none}
+}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-overlay{display:none}
+  .sidebar-overlay.visible{display:block}
+  .hamburger{display:flex}
+  .main{margin-left:0}
+  .main-inner{padding:14px;padding-top:56px}
+  .grid-4{grid-template-columns:1fr 1fr}
+  .usage-layout{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .biz-grid{grid-template-columns:1fr}
+  .session-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .grid-4{grid-template-columns:1fr 1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .trading-stats{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- ── Header ── -->
-<header>
-  <div class="hdr-left">
-    <div class="hdr-logo">MC</div>
-    <div>
-      <div class="hdr-title">Mission Control <span style="color:var(--text3);font-weight:400;font-size:12px">— Ryan Spiteri</span></div>
+<!-- ── Hamburger ── -->
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">
+  <span></span><span></span><span></span>
+</button>
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+<!-- ── Sidebar ── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <div class="logo-icon">⚡</div>
+      <div>
+        <div class="logo-title">Ryan OS</div>
+        <div class="logo-sub">Ryan Spiteri</div>
+      </div>
     </div>
   </div>
-  <div class="hdr-center">
-    <div class="live-badge"><div class="live-dot"></div>LIVE</div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Overview</div>
+    <button class="nav-item active" data-page="dashboard" onclick="navigate('dashboard',this)">
+      <span class="nav-item-icon">🏠</span> Dashboard
+    </button>
+    <button class="nav-item" data-page="businesses" onclick="navigate('businesses',this)">
+      <span class="nav-item-icon">💼</span> Businesses
+    </button>
+    <button class="nav-item" data-page="trading" onclick="navigate('trading',this)">
+      <span class="nav-item-icon">📈</span> Trading Bot
+    </button>
   </div>
-  <div class="hdr-right">
-    <div class="clock" id="clock">—</div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Operations</div>
+    <button class="nav-item" data-page="agents" onclick="navigate('agents',this)">
+      <span class="nav-item-icon">🤖</span> Sub-Agents
+    </button>
+    <button class="nav-item" data-page="crons" onclick="navigate('crons',this)">
+      <span class="nav-item-icon">⏱</span> Cron Jobs
+    </button>
+    <button class="nav-item" data-page="services" onclick="navigate('services',this)">
+      <span class="nav-item-icon">⚙️</span> Services
+    </button>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Analytics</div>
+    <button class="nav-item" data-page="usage" onclick="navigate('usage',this)">
+      <span class="nav-item-icon">💰</span> API Usage
+    </button>
+    <button class="nav-item" data-page="skills" onclick="navigate('skills',this)">
+      <span class="nav-item-icon">🧠</span> Skills
+    </button>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="status-line">
+      <div class="status-dot-live"></div>
+      <div class="status-text">Last updated <span id="last-updated-sidebar">—</span></div>
+    </div>
     <button class="btn-refresh" id="btn-refresh" onclick="fetchAll(true)">
-      <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><path d="M1 4s1.5-3 7-3a7 7 0 1 1-6.36 4"/><polyline points="1 1 1 4 4 4"/></svg>
+      <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4s1.5-3 7-3a7 7 0 1 1-6.36 4"/><polyline points="1 1 1 4 4 4"/></svg>
       Refresh
     </button>
   </div>
-</header>
+</aside>
 
-<!-- ── Page Nav ── -->
-<nav class="page-nav">
-  <button class="page-tab active" onclick="showPage('main',this)">Overview</button>
-  <button class="page-tab" onclick="showPage('skills',this)">Skills</button>
-</nav>
+<!-- ── Main content ── -->
+<div class="main">
+<div class="main-inner">
 
-<!-- ── Alert Banner ── -->
-<div id="alert-banner" style="display:none">
-  <div class="alert-icon">⚠️</div>
-  <div class="alert-body">
-    <div class="alert-title" id="alert-title">Attention Required</div>
-    <div class="alert-items" id="alert-items"></div>
-  </div>
-  <button class="alert-dismiss" onclick="document.getElementById('alert-banner').style.display='none'">×</button>
-</div>
-
-<!-- ── Skills Page ── -->
-<div id="page-skills" style="display:none">
-  <div class="skills-hero">
-    <div>
-      <div class="skills-hero-count" id="skills-total">—</div>
-      <div class="skills-hero-label">installed skills</div>
+  <!-- ── Dashboard Page ── -->
+  <div id="page-dashboard" class="page">
+    <div class="page-header">
+      <div class="page-title" id="greeting">Good morning, Ryan 👋</div>
+      <div class="page-sub" id="clock">—</div>
     </div>
-    <div class="skills-hero-badge" id="skills-lib-badge">Skills Library</div>
-  </div>
-  <div class="skills-grid" id="skills-grid">
-    <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
-    <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
-    <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
-    <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
-    <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
-    <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
-  </div>
-</div>
 
-<!-- ── Main Layout ── -->
-<div id="page-main">
-<div class="layout">
-
-  <!-- ── Left Column ── -->
-  <div class="col-main">
-
-    <!-- Agent Activity Feed -->
-    <div>
-      <div class="sec-hdr">
-        <span class="sec-title">Agent Activity</span>
-        <span class="sec-badge" id="agent-count">—</span>
+    <!-- Metric cards -->
+    <div class="grid-4" style="margin-bottom:var(--gap)">
+      <div class="metric-card">
+        <div class="metric-label">Bot P&L</div>
+        <div class="metric-value" id="dash-pnl">—</div>
+        <div class="metric-sub" id="dash-pnl-sub">Today</div>
       </div>
-      <div class="card card-pad">
-        <!-- System Agents -->
-        <div class="sub-sec-hdr" style="margin-top:0">
-          <span class="sub-sec-title">System Agents</span>
-          <div class="sub-sec-line"></div>
-        </div>
-        <div class="agent-grid" id="agent-grid">
-          <!-- filled by JS -->
-          <div class="agent-card"><div class="shimmer" style="height:70px;width:100%"></div></div>
-          <div class="agent-card"><div class="shimmer" style="height:70px;width:100%"></div></div>
-          <div class="agent-card"><div class="shimmer" style="height:70px;width:100%"></div></div>
-        </div>
-        <!-- Sub-Agents -->
-        <div class="sub-sec-hdr">
-          <span class="sub-sec-title">Sub-Agents</span>
-          <div class="sub-sec-line"></div>
-          <span class="sec-badge" id="subagent-count">—</span>
-        </div>
-        <div class="subagent-list" id="subagent-list">
-          <div class="empty-state">Loading sub-agents…</div>
-        </div>
+      <div class="metric-card">
+        <div class="metric-label">Account Balance</div>
+        <div class="metric-value blue" id="dash-balance">—</div>
+        <div class="metric-sub">Futures account</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">API Spend Today</div>
+        <div class="metric-value" id="dash-api-spend">—</div>
+        <div class="metric-sub" id="dash-api-monthly">— this month</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Active Agents</div>
+        <div class="metric-value blue" id="dash-active-agents">—</div>
+        <div class="metric-sub">Sub-agents running</div>
       </div>
     </div>
 
-    <!-- Project Pipeline -->
-    <div>
-      <div class="sec-hdr">
-        <span class="sec-title">Project Pipeline</span>
-        <a class="sec-link" href="https://app.clickup.com" target="_blank">Open ClickUp ↗</a>
-      </div>
-      <div class="biz-grid" id="biz-grid">
-        <!-- filled by JS -->
-        <div class="biz-card"><div class="shimmer" style="height:100px"></div></div>
-        <div class="biz-card"><div class="shimmer" style="height:100px"></div></div>
-        <div class="biz-card"><div class="shimmer" style="height:100px"></div></div>
-        <div class="biz-card"><div class="shimmer" style="height:100px"></div></div>
-        <div class="biz-card"><div class="shimmer" style="height:100px"></div></div>
-      </div>
+    <!-- System status chips -->
+    <div class="chips" id="dash-chips">
+      <div class="chip green"><div class="chip-dot"></div>System Online</div>
     </div>
 
-    <!-- Automations & Schedules -->
-    <div>
-      <div class="sec-hdr">
-        <span class="sec-title">Automations &amp; Schedules</span>
-      </div>
-      <div class="auto-grid">
-        <!-- Crons -->
-        <div class="card">
-          <div style="padding:12px 14px 8px;border-bottom:1px solid var(--border)">
-            <div class="sec-title" style="margin-bottom:0">Scheduled Crons</div>
+    <div class="dash-layout">
+      <div class="dash-main">
+        <!-- Recent sub-agents -->
+        <div>
+          <div class="sec-hdr">
+            <span class="sec-title">Recent Activity</span>
+            <span class="sec-badge" id="dash-agent-count">—</span>
           </div>
-          <table class="cron-table">
-            <thead><tr><th>Name</th><th>Schedule</th><th>Next Run</th></tr></thead>
-            <tbody id="cron-tbody"><!-- filled by JS --></tbody>
-          </table>
-        </div>
-        <!-- Services -->
-        <div class="card card-pad">
-          <div class="sub-sec-hdr" style="margin-top:0;margin-bottom:10px">
-            <span class="sub-sec-title">Background Services</span>
-            <div class="sub-sec-line"></div>
+          <div class="card card-pad">
+            <div class="subagent-list" id="dash-subagent-list">
+              <div class="shimmer" style="height:60px"></div>
+            </div>
           </div>
-          <div class="svc-grid" id="svc-grid"><!-- filled by JS --></div>
+        </div>
+      </div>
+
+      <div class="dash-side">
+        <!-- Upcoming crons -->
+        <div>
+          <div class="sec-hdr">
+            <span class="sec-title">Upcoming Crons</span>
+          </div>
+          <div class="card card-pad">
+            <div class="cron-mini" id="dash-cron-mini"></div>
+          </div>
+        </div>
+
+        <!-- Services quick view -->
+        <div>
+          <div class="sec-hdr">
+            <span class="sec-title">Services</span>
+          </div>
+          <div class="card card-pad" id="dash-services-mini">
+            <div class="shimmer" style="height:60px"></div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
-  </div><!-- /col-main -->
+  <!-- ── Businesses Page ── -->
+  <div id="page-businesses" class="page" style="display:none">
+    <div class="page-header">
+      <div class="page-title">Businesses</div>
+      <div class="page-sub">Project pipeline across all ventures</div>
+    </div>
+    <div class="biz-grid" id="biz-grid">
+      <div class="biz-card"><div class="shimmer" style="height:120px"></div></div>
+      <div class="biz-card"><div class="shimmer" style="height:120px"></div></div>
+      <div class="biz-card"><div class="shimmer" style="height:120px"></div></div>
+      <div class="biz-card"><div class="shimmer" style="height:120px"></div></div>
+      <div class="biz-card"><div class="shimmer" style="height:120px"></div></div>
+      <div class="biz-card"><div class="shimmer" style="height:120px"></div></div>
+    </div>
+  </div>
 
-  <!-- ── Right Column ── -->
-  <div class="col-side">
-    <!-- Today's Activity Log -->
-    <div>
-      <div class="sec-hdr">
-        <span class="sec-title">Today</span>
-        <span class="sec-badge" id="activity-count">—</span>
+  <!-- ── Trading Page ── -->
+  <div id="page-trading" class="page" style="display:none">
+    <div class="page-header">
+      <div class="page-title">Trading Bot</div>
+      <div class="page-sub">NQ / MNQ automated strategy</div>
+    </div>
+    <div class="trading-hero">
+      <div class="trading-hero-label">Today's P&L</div>
+      <div class="trading-hero-value zero" id="trading-pnl">—</div>
+      <div class="trading-hero-sub" id="trading-pnl-sub">Loading...</div>
+    </div>
+    <div class="trading-stats" id="trading-stats">
+      <div class="trading-stat"><div class="trading-stat-label">Win Rate</div><div class="trading-stat-val shimmer" style="height:28px"></div></div>
+      <div class="trading-stat"><div class="trading-stat-label">Trades Today</div><div class="trading-stat-val shimmer" style="height:28px"></div></div>
+      <div class="trading-stat"><div class="trading-stat-label">Avg Win</div><div class="trading-stat-val shimmer" style="height:28px"></div></div>
+      <div class="trading-stat"><div class="trading-stat-label">Avg Loss</div><div class="trading-stat-val shimmer" style="height:28px"></div></div>
+    </div>
+    <div class="session-grid">
+      <div>
+        <div class="sec-hdr"><span class="sec-title">Session Status</span></div>
+        <div class="card card-pad" id="trading-session">
+          <div class="shimmer" style="height:80px"></div>
+        </div>
       </div>
-      <div class="card card-pad">
-        <div class="activity-feed" id="activity-feed">
-          <div class="empty-state" style="padding:20px 0">Loading activity…</div>
+      <div>
+        <div class="sec-hdr"><span class="sec-title">Recent Trades</span></div>
+        <div class="card card-pad" id="trading-trades">
+          <div class="shimmer" style="height:80px"></div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Personal Brand Snapshot -->
-    <div>
-      <div class="sec-hdr">
-        <span class="sec-title">Personal Brand</span>
-        <a class="sec-link" href="https://app.clickup.com/6929411/v/s/90166556838" target="_blank">Open ↗</a>
+  <!-- ── Sub-Agents Page ── -->
+  <div id="page-agents" class="page" style="display:none">
+    <div class="page-header">
+      <div class="page-title">Sub-Agents</div>
+      <div class="page-sub" id="agents-sub">All spawned agents</div>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterAgents('all',this)">All</button>
+      <button class="filter-btn" onclick="filterAgents('running',this)">Running</button>
+      <button class="filter-btn" onclick="filterAgents('completed',this)">Completed</button>
+      <button class="filter-btn" onclick="filterAgents('failed',this)">Failed</button>
+    </div>
+    <div class="agent-list" id="agent-list">
+      <div class="card card-pad"><div class="shimmer" style="height:60px"></div></div>
+    </div>
+  </div>
+
+  <!-- ── Crons Page ── -->
+  <div id="page-crons" class="page" style="display:none">
+    <div class="page-header">
+      <div class="page-title">Cron Jobs</div>
+      <div class="page-sub">Scheduled automations and recurring tasks</div>
+    </div>
+    <div class="card">
+      <table class="cron-table">
+        <thead>
+          <tr>
+            <th>Name &amp; Description</th>
+            <th>Schedule</th>
+            <th>Expression</th>
+            <th>Next Run</th>
+          </tr>
+        </thead>
+        <tbody id="cron-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Services Page ── -->
+  <div id="page-services" class="page" style="display:none">
+    <div class="page-header">
+      <div class="page-title">Services</div>
+      <div class="page-sub">Background processes and infrastructure</div>
+    </div>
+    <div class="svc-grid" id="svc-grid">
+      <div class="svc-card"><div class="shimmer" style="height:40px;flex:1"></div></div>
+      <div class="svc-card"><div class="shimmer" style="height:40px;flex:1"></div></div>
+      <div class="svc-card"><div class="shimmer" style="height:40px;flex:1"></div></div>
+      <div class="svc-card"><div class="shimmer" style="height:40px;flex:1"></div></div>
+    </div>
+  </div>
+
+  <!-- ── Usage Page ── -->
+  <div id="page-usage" class="page" style="display:none">
+    <div class="page-header">
+      <div class="page-title">API Usage</div>
+      <div class="page-sub">OpenClaw token and cost tracking</div>
+    </div>
+    <div class="usage-layout" style="margin-bottom:var(--gap)">
+      <div class="usage-metric">
+        <div class="usage-metric-label">Spend Today</div>
+        <div class="usage-metric-value" id="usage-today">—</div>
+        <div class="usage-metric-sub" id="usage-today-tokens">— tokens</div>
       </div>
-      <div class="card card-pad" id="pb-card">
-        <div class="shimmer" style="height:80px"></div>
+      <div class="usage-metric">
+        <div class="usage-metric-label">Spend This Month</div>
+        <div class="usage-metric-value" id="usage-month">—</div>
+        <div class="usage-metric-sub" id="usage-month-tokens">— tokens</div>
       </div>
     </div>
-
-    <!-- Skills Health -->
-    <div>
-      <div class="sec-hdr">
-        <span class="sec-title">Skills Health</span>
-        <span class="sec-badge" id="skills-badge">—</span>
-      </div>
-      <div class="card card-pad" id="skills-card">
+    <div class="sec-hdr"><span class="sec-title">By Service</span></div>
+    <div class="card">
+      <div class="bar-chart" id="usage-bar-chart">
         <div class="shimmer" style="height:120px"></div>
       </div>
     </div>
   </div>
 
-</div><!-- /layout -->
+  <!-- ── Skills Page ── -->
+  <div id="page-skills" class="page" style="display:none">
+    <div class="page-header" style="margin-bottom:12px">
+      <div class="page-title">Skills Library</div>
+      <div class="page-sub">Installed capabilities and integrations</div>
+    </div>
+    <div class="skills-hero">
+      <div class="skills-count" id="skills-total">—</div>
+      <div>
+        <div class="skills-label">installed skills</div>
+        <div class="skills-badge" id="skills-lib-badge">Skills Library</div>
+      </div>
+    </div>
+    <div class="skills-grid" id="skills-grid">
+      <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
+      <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
+      <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
+      <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
+    </div>
+  </div>
 
-</div><!-- /page-main -->
-
-<!-- Footer -->
-<footer>
-  <span>Mission Control v6</span>
-  <div class="footer-dot"></div>
-  <span>Auto-refresh every 30s</span>
-  <div class="footer-dot"></div>
-  <span>Last updated: <span id="last-updated">—</span></span>
-</footer>
+</div><!-- /main-inner -->
+</div><!-- /main -->
 
 <!-- Offline Toast -->
 <div id="offline-toast">
@@ -533,48 +654,55 @@ footer{
 const CF    = 'https://dashboard.elaravoss.net';
 const API   = CF + '/api/mission-control';
 const SAPI  = CF + '/api/sub-agents';
+const UAPI  = CF + '/api/usage';
 const AEST  = 'Australia/Brisbane';
 const REFRESH_MS = 30000;
 
-// ─── Business config (display order) ──────────────────────────────────────
+// ─── Business config ───────────────────────────────────────────────────────
 const BUSINESSES = [
-  { key:'ONEST Health',     icon:'💊', color:'#3b82f6', cu_space:'6929411/v/s/6970821',  name:'ONEST Health' },
-  { key:'Perform Creative', icon:'🎬', color:'#f59e0b', cu_space:null,                   name:'Perform Creative' },
+  { key:'ONEST Health',     icon:'💊', color:'#3b82f6', cu_space:'6929411/v/s/6970821',     name:'ONEST Health' },
+  { key:'Perform Creative', icon:'🎬', color:'#f59e0b', cu_space:null,                      name:'Perform Creative' },
   { key:'NewU',             icon:'🟣', color:'#8b5cf6', cu_space:'6929411/v/s/90163253544', name:'NewU' },
   { key:'BEPRIME',          icon:'🧬', color:'#ef4444', cu_space:'6929411/v/s/90166384973', name:'BEPRIME' },
-  { key:'Personal Brand',   icon:'⚡', color:'#FF3838', cu_space:'6929411/v/s/90166556838', name:'Personal Brand' },
+  { key:'Personal Brand',   icon:'⚡', color:'#3b82f6', cu_space:'6929411/v/s/90166556838', name:'Personal Brand' },
+  { key:'Boss Bodies',      icon:'💪', color:'#22c55e', cu_space:'6929411/v/s/7054798',     name:'Boss Bodies' },
 ];
 
 // ─── Static cron config ────────────────────────────────────────────────────
 const CRONS = [
-  { name:'Daily 7AM Brief',    schedule:'7:00 AM daily',         desc:'Metals + morning brief + calendar', cron:'0 7 * * *',   days:'daily' },
-  { name:'Daily 7PM Brief',    schedule:'7:00 PM daily',         desc:'TODOs + Day-X script + proactive ideas', cron:'0 19 * * *', days:'daily' },
-  { name:'Pre-Session Asia',   schedule:'9:00 AM Mon–Fri',       desc:'Bot health check before Asia open', cron:'0 9 * * 1-5', days:'weekdays' },
-  { name:'Pre-Session NY',     schedule:'10:30 PM Mon–Fri',      desc:'Bot health check before NY open',  cron:'30 22 * * 1-5',days:'weekdays' },
-  { name:'Property Watch',     schedule:'Fri 5:00 PM',           desc:'Off-the-plan GC + Brisbane digest', cron:'0 17 * * 5',  days:'friday' },
-  { name:'Security Check',     schedule:'Every 6 hours',         desc:'iMac security audit',               cron:'0 */6 * * *', days:'every6h' },
+  { name:'Daily 7AM Brief',   schedule:'7:00 AM daily',    desc:'Metals + morning brief + calendar', cron:'0 7 * * *',   days:'daily' },
+  { name:'Daily 7PM Brief',   schedule:'7:00 PM daily',    desc:'TODOs + Day-X script + proactive ideas', cron:'0 19 * * *', days:'daily' },
+  { name:'Pre-Session Asia',  schedule:'9:00 AM Mon–Fri',  desc:'Bot health check before Asia open', cron:'0 9 * * 1-5', days:'weekdays' },
+  { name:'Pre-Session NY',    schedule:'10:30 PM Mon–Fri', desc:'Bot health check before NY open',  cron:'30 22 * * 1-5',days:'weekdays' },
+  { name:'Property Watch',    schedule:'Fri 5:00 PM',      desc:'Off-the-plan GC + Brisbane digest', cron:'0 17 * * 5',  days:'friday' },
+  { name:'Security Check',    schedule:'Every 6 hours',    desc:'iMac security audit',               cron:'0 */6 * * *', days:'every6h' },
 ];
 
 // ─── Static services config ────────────────────────────────────────────────
 const SERVICES_CFG = [
-  { id:'dashboard',   name:'Trading Dashboard', meta:'Port 8080',           key:'dashboard' },
-  { id:'ryan_clone',  name:'Ryan Clone AI',     meta:'Port 8090',           key:'ryan_clone' },
-  { id:'cloudflare',  name:'Cloudflare Tunnel', meta:'→ localhost:8080',    key:'cloudflare', forceOn:true },
-  { id:'ngrok',       name:'ngrok',             meta:'→ localhost:8090',    key:'ngrok' },
+  { id:'dashboard',  name:'Trading Dashboard', meta:'Port 8080',        key:'dashboard' },
+  { id:'ryan_clone', name:'Ryan Clone AI',     meta:'Port 8090',        key:'ryan_clone' },
+  { id:'cloudflare', name:'Cloudflare Tunnel', meta:'→ localhost:8080', key:'cloudflare', forceOn:true },
+  { id:'ngrok',      name:'ngrok',             meta:'→ localhost:8090', key:'ngrok' },
 ];
 
 // ─── State ─────────────────────────────────────────────────────────────────
-let _data     = null;
-let _subdata  = null;
-let _timer    = null;
-let _offline  = false;
+let _data    = null;
+let _subdata = null;
+let _usdata  = null;
+let _timer   = null;
+let _agentFilter = 'all';
 
-// ─── Clock ─────────────────────────────────────────────────────────────────
+// ─── Clock & Greeting ──────────────────────────────────────────────────────
 function updateClock(){
   const now = new Date();
   const s = now.toLocaleTimeString('en-AU',{timeZone:AEST,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
-  const d = now.toLocaleDateString('en-AU',{timeZone:AEST,weekday:'short',day:'numeric',month:'short'});
-  document.getElementById('clock').textContent = `${d} ${s} AEST`;
+  const d = now.toLocaleDateString('en-AU',{timeZone:AEST,weekday:'long',day:'numeric',month:'long'});
+  document.getElementById('clock').textContent = `${d} · ${s} AEST`;
+  // Greeting
+  const h = parseInt(now.toLocaleTimeString('en-AU',{timeZone:AEST,hour:'2-digit',hour12:false}));
+  const g = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+  document.getElementById('greeting').textContent = `${g}, Ryan 👋`;
 }
 setInterval(updateClock,1000); updateClock();
 
@@ -584,12 +712,11 @@ function relTime(iso){
   const d = new Date(iso);
   if(isNaN(d)) return '—';
   const diff = Math.floor((Date.now()-d)/1000);
-  if(diff<60)  return diff+'s ago';
+  if(diff<60) return diff+'s ago';
   if(diff<3600) return Math.floor(diff/60)+'m ago';
   if(diff<86400) return Math.floor(diff/3600)+'h ago';
   return Math.floor(diff/86400)+'d ago';
 }
-
 function fmtTime(iso){
   if(!iso) return '—';
   const d = new Date(iso);
@@ -600,136 +727,213 @@ function fmtTime(iso){
 // ─── Next cron run ─────────────────────────────────────────────────────────
 function nextCronRun(cronDef){
   const now = new Date();
-  const aestOffset = 10 * 60; // AEST = UTC+10
+  const aestOffset = 10 * 60;
   const nowAEST = new Date(now.getTime() + (aestOffset - now.getTimezoneOffset()) * 60000);
-  const h = nowAEST.getHours(), m = nowAEST.getMinutes(), dow = nowAEST.getDay();
-
   function nextHHMM(targetH, targetM, allowedDays){
-    // allowedDays: 'daily', 'weekdays', 'friday'
     let candidate = new Date(nowAEST);
     candidate.setSeconds(0,0);
     for(let d=0;d<8;d++){
-      const cDow = (candidate.getDay());
+      const cDow = candidate.getDay();
       let allowed = false;
       if(allowedDays==='daily') allowed=true;
       else if(allowedDays==='weekdays') allowed=(cDow>=1&&cDow<=5);
       else if(allowedDays==='friday') allowed=(cDow===5);
-      if(allowed){
-        const at = new Date(candidate);
-        at.setHours(targetH,targetM,0,0);
-        if(at>nowAEST) return at;
-      }
-      candidate.setDate(candidate.getDate()+1);
-      candidate.setHours(0,0,0,0);
+      if(allowed){ const at=new Date(candidate); at.setHours(targetH,targetM,0,0); if(at>nowAEST) return at; }
+      candidate.setDate(candidate.getDate()+1); candidate.setHours(0,0,0,0);
     }
     return null;
   }
-
   function nextEvery6(){
-    const slots=[0,6,12,18];
-    let best=null;
-    for(const sh of slots){
-      const c=new Date(nowAEST);c.setHours(sh,0,0,0);
-      if(c>nowAEST){best=c;break;}
-    }
-    if(!best){best=new Date(nowAEST);best.setDate(best.getDate()+1);best.setHours(0,0,0,0);}
+    const slots=[0,6,12,18]; let best=null;
+    for(const sh of slots){ const c=new Date(nowAEST); c.setHours(sh,0,0,0); if(c>nowAEST){best=c;break;} }
+    if(!best){ best=new Date(nowAEST); best.setDate(best.getDate()+1); best.setHours(0,0,0,0); }
     return best;
   }
-
   let next=null;
-  const {days,cron} = cronDef;
+  const {days,cron}=cronDef;
   if(days==='every6h') next=nextEvery6();
-  else{
-    const parts=cron.split(' ');
-    const cm=parseInt(parts[0]),ch=parseInt(parts[1]);
-    next=nextHHMM(ch,cm,days);
-  }
+  else{ const parts=cron.split(' '); next=nextHHMM(parseInt(parts[1]),parseInt(parts[0]),days); }
   if(!next) return '—';
   const diffM=Math.round((next-nowAEST)/60000);
   if(diffM<60) return `in ${diffM}m`;
   if(diffM<1440) return `in ${Math.floor(diffM/60)}h ${diffM%60}m`;
-  const ds=next.toLocaleDateString('en-AU',{weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false});
-  return ds;
+  return next.toLocaleDateString('en-AU',{timeZone:AEST,weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false});
 }
 
-// ─── Escape HTML ───────────────────────────────────────────────────────────
+// ─── Escape ────────────────────────────────────────────────────────────────
 function esc(s){ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-// ─── Render: Agents ────────────────────────────────────────────────────────
-function renderAgents(agents){
-  // Filter out Trading Bot from agent feed per design brief
-  const display = (agents||[]).filter(a=>a.name!=='Trading Bot');
-  document.getElementById('agent-count').textContent = display.length + ' active';
-  const grid = document.getElementById('agent-grid');
-  if(!display.length){ grid.innerHTML='<div class="empty-state">No agents found</div>'; return; }
-  grid.innerHTML = display.map(a=>{
-    const st = (a.status||'offline').toLowerCase();
-    return `
-    <div class="agent-card status-${st}">
-      <div class="agent-top">
-        <div class="agent-icon">${esc(a.icon||'🤖')}</div>
-        <div class="agent-status-badge ${st}"><div class="status-dot"></div>${st}</div>
-      </div>
-      <div class="agent-name">${esc(a.name)}</div>
-      <div class="agent-task">${esc(a.task||'—')}</div>
-      <div class="agent-foot">
-        <span class="agent-time">Last active: ${relTime(a.last_active)}</span>
-        <span style="font-size:10px;color:var(--text3)">${fmtTime(a.last_active)}</span>
-      </div>
+// ─── Render: Trading Bot ───────────────────────────────────────────────────
+function renderTradingBot(data){
+  const bot = (data&&data.trading_bot)||{};
+  const pnl = bot.pnl_today;
+  const el = document.getElementById('trading-pnl');
+  const sub = document.getElementById('trading-pnl-sub');
+  // Dashboard metric
+  const dashPnl = document.getElementById('dash-pnl');
+
+  if(pnl !== undefined && pnl !== null){
+    const pos = pnl > 0;
+    const neg = pnl < 0;
+    const formatted = (pos?'+':'') + '$' + Math.abs(pnl).toLocaleString('en-AU',{minimumFractionDigits:2,maximumFractionDigits:2});
+    el.textContent = formatted;
+    el.className = 'trading-hero-value ' + (pos?'pos':neg?'neg':'zero');
+    if(dashPnl){ dashPnl.textContent = formatted; dashPnl.className = 'metric-value ' + (pos?'green':neg?'red':''); }
+    if(sub) sub.textContent = (bot.trades_today||0) + ' trades today';
+  } else {
+    el.textContent = 'No Data';
+    el.className = 'trading-hero-value zero';
+    if(dashPnl){ dashPnl.textContent = '—'; dashPnl.className = 'metric-value'; }
+  }
+
+  // Balance
+  const balance = bot.account_balance;
+  const dashBal = document.getElementById('dash-balance');
+  if(dashBal && balance !== undefined && balance !== null){
+    dashBal.textContent = '$' + Number(balance).toLocaleString('en-AU',{minimumFractionDigits:0,maximumFractionDigits:0});
+  }
+
+  // Stats grid
+  const statsEl = document.getElementById('trading-stats');
+  const winRate = bot.win_rate !== undefined ? (bot.win_rate*100).toFixed(1)+'%' : '—';
+  const tradesT = bot.trades_today !== undefined ? bot.trades_today : '—';
+  const avgWin  = bot.avg_win !== undefined ? '+$'+bot.avg_win.toFixed(2) : '—';
+  const avgLoss = bot.avg_loss !== undefined ? '-$'+Math.abs(bot.avg_loss).toFixed(2) : '—';
+  const stats = [{label:'Win Rate',val:winRate},{label:'Trades Today',val:tradesT},{label:'Avg Win',val:avgWin},{label:'Avg Loss',val:avgLoss}];
+  statsEl.innerHTML = stats.map(s=>`
+    <div class="trading-stat">
+      <div class="trading-stat-label">${s.label}</div>
+      <div class="trading-stat-val">${s.val}</div>
+    </div>`).join('');
+
+  // Session
+  const session = bot.session||{};
+  const sessEl = document.getElementById('trading-session');
+  if(sessEl) sessEl.innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:8px">
+      ${[
+        {label:'Status', val: bot.status||'Unknown', accent: bot.status==='running'?'var(--green)':bot.status==='stopped'?'var(--red)':'var(--text2)'},
+        {label:'Strategy', val: bot.strategy||'—'},
+        {label:'Symbol', val: bot.symbol||'NQ'},
+        {label:'Last Trade', val: bot.last_trade ? relTime(bot.last_trade) : '—'},
+      ].map(r=>`
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)">
+          <span style="font-size:11px;color:var(--text2)">${r.label}</span>
+          <span style="font-size:12px;font-weight:600;color:${r.accent||'var(--text)'}">  ${esc(String(r.val))}</span>
+        </div>
+      `).join('')}
     </div>`;
-  }).join('');
+
+  // Recent trades
+  const trades = bot.recent_trades||[];
+  const tradesEl = document.getElementById('trading-trades');
+  if(tradesEl){
+    if(!trades.length){ tradesEl.innerHTML='<div class="empty-state">No trades yet today</div>'; }
+    else tradesEl.innerHTML = trades.slice(0,5).map(t=>{
+      const pnlV = t.pnl||0;
+      const pos = pnlV>0;
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)">
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--text)">${esc(t.direction||t.side||'—')} ${esc(t.symbol||'')}</div>
+          <div style="font-size:10px;color:var(--text2)">${fmtTime(t.time||t.timestamp)}</div>
+        </div>
+        <div style="font-size:13px;font-weight:700;color:${pos?'var(--green)':'var(--red)'}">${pos?'+':''}$${Math.abs(pnlV).toFixed(2)}</div>
+      </div>`;
+    }).join('');
+  }
 }
 
-// ─── Render: Sub-Agents ────────────────────────────────────────────────────
+// ─── Render: Sub-Agents (agents page + dashboard) ──────────────────────────
 function renderSubAgents(data){
   const agents = (data&&data.agents)||[];
-  document.getElementById('subagent-count').textContent = agents.length;
-  const el = document.getElementById('subagent-list');
-  if(!agents.length){
-    el.innerHTML='<div class="empty-state">No sub-agents spawned today</div>';
-    return;
-  }
-  // Sort: running first, then by started_at desc
+  const activeCount = agents.filter(a=>a.status==='running').length;
+
+  // Dashboard active agents count
+  const dashActive = document.getElementById('dash-active-agents');
+  if(dashActive) dashActive.textContent = activeCount;
+
+  // Agents page sub text
+  const agentsSub = document.getElementById('agents-sub');
+  if(agentsSub) agentsSub.textContent = `${agents.length} total · ${activeCount} running`;
+
+  // Dashboard: last 5
+  const dashList = document.getElementById('dash-subagent-list');
+  const dashCount = document.getElementById('dash-agent-count');
   const sorted = [...agents].sort((a,b)=>{
     if(a.status==='running'&&b.status!=='running') return -1;
     if(b.status==='running'&&a.status!=='running') return 1;
     return new Date(b.started_at)-new Date(a.started_at);
   });
-  el.innerHTML = sorted.map(a=>{
+  if(dashCount) dashCount.textContent = agents.length;
+  if(dashList){
+    if(!sorted.length){ dashList.innerHTML='<div class="empty-state">No sub-agents spawned yet</div>'; }
+    else dashList.innerHTML = sorted.slice(0,5).map(a=>{
+      const st=(a.status||'running').toLowerCase();
+      const dur = a.completed_at
+        ? Math.round((new Date(a.completed_at)-new Date(a.started_at))/60000)+'m'
+        : (a.started_at ? 'Running '+relTime(a.started_at).replace(' ago','') : '—');
+      return `<div class="subagent-card ${st}">
+        <div class="subagent-dot"></div>
+        <div class="subagent-body">
+          <div class="subagent-name">${esc(a.name)}</div>
+          <div class="subagent-task">${esc(a.task||'—')}</div>
+          <div class="subagent-meta">
+            <span class="subagent-status">${st}</span>
+            <span class="subagent-time">Started ${relTime(a.started_at)} · ${dur}</span>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // Full agents page
+  renderAgentList(agents);
+}
+
+let _allAgents = [];
+function renderAgentList(agents){
+  _allAgents = agents;
+  const filter = _agentFilter;
+  const filtered = filter==='all' ? agents : agents.filter(a=>(a.status||'').toLowerCase()===filter);
+  const el = document.getElementById('agent-list');
+  if(!el) return;
+  if(!filtered.length){ el.innerHTML='<div class="card card-pad"><div class="empty-state">No agents match this filter</div></div>'; return; }
+  el.innerHTML = filtered.map(a=>{
     const st=(a.status||'running').toLowerCase();
     const dur = a.completed_at
       ? Math.round((new Date(a.completed_at)-new Date(a.started_at))/60000)+'m'
       : (a.started_at ? 'Running '+relTime(a.started_at).replace(' ago','') : '—');
-    return `
-    <div class="subagent-card ${st}">
-      <div class="subagent-dot"></div>
-      <div class="subagent-body">
-        <div class="subagent-name">${esc(a.name)}</div>
-        <div class="subagent-task">${esc(a.task||'—')}</div>
-        <div class="subagent-meta">
-          <span class="subagent-status">${st}</span>
-          <span class="subagent-time">Started ${relTime(a.started_at)} · ${dur}</span>
+    return `<div class="agent-row ${st}">
+      <div class="agent-row-dot"></div>
+      <div class="agent-row-body">
+        <div class="agent-row-name">${esc(a.name)}</div>
+        <div class="agent-row-task">${esc(a.task||'—')}</div>
+        <div class="agent-row-meta">
+          <span class="agent-row-status">${st}</span>
+          <span class="agent-row-time">Started ${relTime(a.started_at)} · ${dur}</span>
         </div>
       </div>
     </div>`;
   }).join('');
 }
 
-// ─── Render: Project Pipeline ──────────────────────────────────────────────
-function renderProjects(projects){
+function filterAgents(f, btn){
+  _agentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderAgentList(_allAgents);
+}
+
+// ─── Render: Businesses ────────────────────────────────────────────────────
+function renderBizGrid(projects){
   const grid = document.getElementById('biz-grid');
-  // Build lookup from API
   const lookup = {};
   (projects||[]).forEach(p=>{ lookup[p.name]=p; });
-
   grid.innerHTML = BUSINESSES.map(biz=>{
     const p = lookup[biz.key]||{name:biz.key,tasks:[],clickup_tasks:[]};
     const tasks = [...(p.tasks||[]),...(p.clickup_tasks||[]).map(t=>typeof t==='string'?t:(t.name||''))].filter(Boolean);
     const cuLink = biz.cu_space ? `https://app.clickup.com/${biz.cu_space}` : null;
-    const taskCount = tasks.length;
-
-    return `
-    <div class="biz-card">
+    return `<div class="biz-card">
       <div class="biz-head">
         <div class="biz-icon">${biz.icon}</div>
         <div class="biz-name" style="color:${biz.color}">${biz.name}</div>
@@ -737,12 +941,12 @@ function renderProjects(projects){
       <div class="biz-stats">
         <div class="stat-row">
           <span class="stat-label">Open Tasks</span>
-          <span class="stat-val" style="color:${biz.color}">${taskCount}</span>
+          <span class="stat-val" style="color:${biz.color}">${tasks.length}</span>
         </div>
       </div>
       <div class="biz-tasks">
-        ${taskCount ? tasks.slice(0,4).map(t=>`<div class="biz-task-item">${esc(t)}</div>`).join('') : '<div class="no-tasks">No open tasks</div>'}
-        ${taskCount>4?`<div style="font-size:10px;color:var(--text3);padding:3px 0">+${taskCount-4} more</div>`:''}
+        ${tasks.length ? tasks.slice(0,4).map(t=>`<div class="biz-task-item">${esc(t)}</div>`).join('') : '<div class="no-tasks">No open tasks</div>'}
+        ${tasks.length>4?`<div style="font-size:10px;color:var(--text2);padding:3px 0">+${tasks.length-4} more</div>`:''}
       </div>
       ${cuLink?`<a class="biz-link" href="${cuLink}" target="_blank">Open in ClickUp ↗</a>`:''}
     </div>`;
@@ -751,29 +955,39 @@ function renderProjects(projects){
 
 // ─── Render: Crons ────────────────────────────────────────────────────────
 function renderCrons(){
-  document.getElementById('cron-tbody').innerHTML = CRONS.map(c=>`
-    <tr>
-      <td>
-        <div class="cron-name"><div class="cron-name-dot"></div>${esc(c.name)}</div>
-        <div class="cron-desc">${esc(c.desc)}</div>
-      </td>
-      <td><div class="cron-schedule">${esc(c.schedule)}</div></td>
-      <td class="cron-next">${nextCronRun(c)}</td>
-    </tr>
-  `).join('');
+  const tb = document.getElementById('cron-tbody');
+  if(!tb) return;
+  tb.innerHTML = CRONS.map(c=>`<tr>
+    <td>
+      <div class="cron-name"><div class="cron-name-dot"></div>${esc(c.name)}</div>
+      <div class="cron-desc">${esc(c.desc)}</div>
+    </td>
+    <td><div class="cron-schedule">${esc(c.schedule)}</div></td>
+    <td><div class="cron-expr">${esc(c.cron)}</div></td>
+    <td class="cron-next">${nextCronRun(c)}</td>
+  </tr>`).join('');
+
+  // Dashboard mini crons (next 3)
+  const mini = document.getElementById('dash-cron-mini');
+  if(mini){
+    // Sort by next run time
+    const withNext = CRONS.map(c=>({...c, _next: nextCronRun(c)}));
+    mini.innerHTML = withNext.slice(0,3).map(c=>`
+      <div class="cron-mini-item">
+        <div>
+          <div class="cron-mini-name">${esc(c.name)}</div>
+          <div class="cron-mini-sched">${esc(c.schedule)}</div>
+        </div>
+        <div class="cron-mini-next">${c._next}</div>
+      </div>`).join('');
+  }
 }
 
 // ─── Render: Services ─────────────────────────────────────────────────────
 function renderServices(svcData){
-  const el = document.getElementById('svc-grid');
-  // Try to ping each service via API data; fallback to "Running" for cloudflare
-  el.innerHTML = SERVICES_CFG.map(s=>{
-    let on = false;
-    if(s.forceOn) on=true;
-    else if(svcData&&s.key in svcData) on=!!svcData[s.key];
-    else on=true; // default show Running if no data
-    return `
-    <div class="svc-card">
+  const html = SERVICES_CFG.map(s=>{
+    let on = s.forceOn ? true : (svcData && s.key in svcData ? !!svcData[s.key] : true);
+    return `<div class="svc-card">
       <div class="svc-led ${on?'on':'off'}"></div>
       <div class="svc-body">
         <div class="svc-name">${esc(s.name)}</div>
@@ -782,238 +996,90 @@ function renderServices(svcData){
       <div class="svc-status ${on?'on':'off'}">${on?'Running':'Offline'}</div>
     </div>`;
   }).join('');
-}
 
-// ─── Render: Activity Log ─────────────────────────────────────────────────
-function renderActivity(agents, subAgents){
-  const items=[];
-  const today = new Date().toLocaleDateString('en-AU',{timeZone:AEST});
+  const svcGrid = document.getElementById('svc-grid');
+  if(svcGrid) svcGrid.innerHTML = html;
 
-  // From system agents
-  (agents||[]).forEach(a=>{
-    if(!a.last_active) return;
-    const d=new Date(a.last_active);
-    const ad=d.toLocaleDateString('en-AU',{timeZone:AEST});
-    if(ad!==today) return;
-    const st=(a.status||'offline').toLowerCase();
-    const color=st==='running'?'green':st==='scheduled'?'amber':'red';
-    items.push({ ts:d, color, text:`<strong>${a.name}</strong> — ${a.task||'active'}` });
-  });
-
-  // From sub-agents
-  ((subAgents&&subAgents.agents)||[]).forEach(a=>{
-    if(a.started_at){
-      const d=new Date(a.started_at);
-      const ad=d.toLocaleDateString('en-AU',{timeZone:AEST});
-      if(ad===today) items.push({ ts:d, color:'purple', text:`<strong>Sub-agent spawned:</strong> ${a.name}` });
-    }
-    if(a.completed_at){
-      const d=new Date(a.completed_at);
-      const ad=d.toLocaleDateString('en-AU',{timeZone:AEST});
-      if(ad===today) items.push({ ts:d, color:'blue', text:`<strong>Sub-agent completed:</strong> ${a.name}` });
-    }
-  });
-
-  // Sort desc
-  items.sort((a,b)=>b.ts-a.ts);
-  document.getElementById('activity-count').textContent = items.length;
-
-  const feed = document.getElementById('activity-feed');
-  if(!items.length){
-    feed.innerHTML='<div class="empty-state" style="padding:16px 0">No activity recorded today</div>';
-    return;
-  }
-  feed.innerHTML = items.map(it=>`
-    <div class="activity-item">
-      <div class="activity-time">${fmtTime(it.ts.toISOString())}</div>
-      <div class="activity-dot ${it.color}"></div>
-      <div class="activity-text">${it.text}</div>
-    </div>
-  `).join('');
-}
-
-// ─── Render: Personal Brand ────────────────────────────────────────────────
-function renderPersonalBrand(pb){
-  const el = document.getElementById('pb-card');
-  if(!pb){el.innerHTML='<div class="empty-state">No data</div>';return;}
-  const stats=[
-    {label:'Ideas',     val:pb.ideas_total||0,   accent:'#f59e0b'},
-    {label:'Approved',  val:pb.ideas_approved||0, accent:'#22c55e'},
-    {label:'Scripts',   val:pb.scripts_total||0,  accent:'#3b82f6'},
-    {label:'Production',val:pb.production_total||0,accent:'#8b5cf6'},
-    {label:'Scheduled', val:pb.scheduled_total||0, accent:'#06b6d4'},
-    {label:'Ready',     val:pb.ready_to_post||0,   accent:'#FF3838'},
-  ];
-  el.innerHTML=`
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
-      ${stats.map(s=>`
-        <div style="background:var(--s2);border:1px solid var(--border);border-radius:7px;padding:10px 11px;text-align:center">
-          <div style="font-size:18px;font-weight:800;color:${s.accent};font-variant-numeric:tabular-nums">${s.val}</div>
-          <div style="font-size:10px;color:var(--text3);margin-top:2px;letter-spacing:.3px">${s.label}</div>
-        </div>
-      `).join('')}
-    </div>
-    <div style="margin-top:10px;padding:8px 10px;background:var(--s2);border:1px solid var(--border);border-radius:7px">
-      <div style="font-size:10px;color:var(--text3);margin-bottom:5px;letter-spacing:.4px;text-transform:uppercase;font-weight:700">Content Pipeline</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:${pb.ideas_total>0?Math.min(100,Math.round((pb.ideas_approved||0)/pb.ideas_total*100)):0}%"></div></div>
-      <div style="font-size:10px;color:var(--text3);margin-top:4px">${pb.ideas_approved||0} / ${pb.ideas_total||0} ideas approved</div>
-    </div>
-  `;
-}
-
-// ─── Render: Skills Health ─────────────────────────────────────────────────
-function renderSkills(){
-  const el = document.getElementById('skills-card');
-  const badge = document.getElementById('skills-badge');
-  if(!el) return;
-
-  // Try to load skill health data from the API (injected by Mission Control server)
-  // Fallback: show static skill count with last audit info
-  const SKILLS = [
-    'spencer-sniper-trading','beprime-compliance','brand-voice-enforcement','clickup-workflow',
-    'digital-ocean-deployment','elara-email-voice','property-investment','klaviyo-flow-design',
-    'ad-creative-briefing','code-review-standard','onest-margin-analysis','paid-media-strategy',
-    'data-security','coding-agent','gh-issues','github','gog','sag','xurl','crawly',
-    'summarize','video-transcriber','weather','openai-image-gen','openai-whisper-api',
-    'skill-creator','agent-browser','healthcheck','mcporter','service-management',
-  ];
-
-  // Load skill health from memory if available (injected by API)
-  const skillData = (window._skillHealth)||null;
-  if(skillData && skillData.skills){
-    const solid = skillData.skills.filter(s=>s.status==='Solid').length;
-    const needsUpdate = skillData.skills.filter(s=>s.status==='Needs Update').length;
-    const outdated = skillData.skills.filter(s=>s.status==='Outdated').length;
-    badge.textContent = skillData.skills.length + ' skills';
-    const lastAudit = skillData.lastAudit ? new Date(skillData.lastAudit).toLocaleDateString('en-AU',{timeZone:'Australia/Brisbane',day:'numeric',month:'short'}) : 'Never';
-    el.innerHTML = `
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">
-        <div style="background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center">
-          <div style="font-size:16px;font-weight:800;color:var(--green)">${solid}</div>
-          <div style="font-size:9px;color:var(--text3);margin-top:1px;letter-spacing:.3px">SOLID</div>
-        </div>
-        <div style="background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center">
-          <div style="font-size:16px;font-weight:800;color:var(--amber)">${needsUpdate}</div>
-          <div style="font-size:9px;color:var(--text3);margin-top:1px;letter-spacing:.3px">NEEDS UPDATE</div>
-        </div>
-        <div style="background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center">
-          <div style="font-size:16px;font-weight:800;color:var(--red)">${outdated}</div>
-          <div style="font-size:9px;color:var(--text3);margin-top:1px;letter-spacing:.3px">OUTDATED</div>
-        </div>
+  // Dashboard services mini
+  const mini = document.getElementById('dash-services-mini');
+  if(mini){
+    const online = SERVICES_CFG.filter(s=>s.forceOn||(svcData&&!!svcData[s.key])||(!svcData)).length;
+    mini.innerHTML = `
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--green);animation:blink 2s infinite"></div>
+        <span style="font-size:12px;font-weight:600;color:var(--text)">${online}/${SERVICES_CFG.length} Running</span>
       </div>
-      ${skillData.skills.filter(s=>s.status!=='Solid').slice(0,4).map(s=>`
-        <div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--border)">
-          <div style="width:6px;height:6px;border-radius:50%;background:${s.status==='Needs Update'?'var(--amber)':'var(--red)'};flex-shrink:0"></div>
-          <span style="font-size:11px;color:var(--text2);flex:1">${esc(s.name)}</span>
-          <span style="font-size:10px;color:var(--text3)">${esc(s.status)}</span>
-        </div>
-      `).join('')}
-      <div style="font-size:10px;color:var(--text3);margin-top:8px">Last audit: ${lastAudit} · Next: Sunday 9AM</div>
-    `;
-  } else {
-    // Static fallback
-    badge.textContent = SKILLS.length + ' skills';
-    el.innerHTML = `
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">
-        <div style="background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center">
-          <div style="font-size:16px;font-weight:800;color:var(--green)">${SKILLS.length}</div>
-          <div style="font-size:9px;color:var(--text3);margin-top:1px;letter-spacing:.3px">TOTAL</div>
-        </div>
-        <div style="background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center">
-          <div style="font-size:16px;font-weight:800;color:var(--amber)">—</div>
-          <div style="font-size:9px;color:var(--text3);margin-top:1px;letter-spacing:.3px">NEEDS UPDATE</div>
-        </div>
-        <div style="background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center">
-          <div style="font-size:16px;font-weight:800;color:var(--text3)">—</div>
-          <div style="font-size:9px;color:var(--text3);margin-top:1px;letter-spacing:.3px">OUTDATED</div>
-        </div>
-      </div>
-      <div style="font-size:10px;color:var(--text3)">Next audit: Sunday 9AM AEST · Health check runs weekly</div>
+      ${SERVICES_CFG.map(s=>{
+        const on = s.forceOn?true:(svcData&&s.key in svcData?!!svcData[s.key]:true);
+        return `<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border)">
+          <span style="font-size:11px;color:var(--text2)">${esc(s.name)}</span>
+          <span style="font-size:10px;font-weight:700;color:${on?'var(--green)':'var(--red)'}">${on?'ON':'OFF'}</span>
+        </div>`;
+      }).join('')}
     `;
   }
 }
 
-// ─── Render: Alerts ────────────────────────────────────────────────────────
-function renderAlerts(alerts){
-  const banner=document.getElementById('alert-banner');
-  if(!alerts||!alerts.length){banner.style.display='none';return;}
-  document.getElementById('alert-title').textContent=`${alerts.length} item${alerts.length>1?'s':''} need your attention`;
-  document.getElementById('alert-items').innerHTML=alerts.map(a=>`<span class="alert-item">${esc(a)}</span>`).join('');
-  banner.style.display='flex';
+// ─── Render: Usage ─────────────────────────────────────────────────────────
+function renderUsage(data){
+  if(!data) return;
+  const todayEl = document.getElementById('usage-today');
+  const monthEl = document.getElementById('usage-month');
+  const todayTok = document.getElementById('usage-today-tokens');
+  const monthTok = document.getElementById('usage-month-tokens');
+  const dashApi = document.getElementById('dash-api-spend');
+  const dashMon = document.getElementById('dash-api-monthly');
+
+  const today = data.today||{};
+  const month = data.month||{};
+
+  const todayCost = today.cost !== undefined ? '$'+Number(today.cost).toFixed(2) : '$0.00';
+  const monthCost = month.cost !== undefined ? '$'+Number(month.cost).toFixed(2) : '$0.00';
+
+  if(todayEl) todayEl.textContent = todayCost;
+  if(monthEl) monthEl.textContent = monthCost;
+  if(todayTok) todayTok.textContent = (today.tokens||0).toLocaleString() + ' tokens';
+  if(monthTok) monthTok.textContent = (month.tokens||0).toLocaleString() + ' tokens';
+  if(dashApi) dashApi.textContent = todayCost;
+  if(dashMon) dashMon.textContent = monthCost + ' this month';
+
+  // Bar chart by service
+  const byService = data.by_service||data.services||[];
+  const chartEl = document.getElementById('usage-bar-chart');
+  if(chartEl && byService.length){
+    const maxCost = Math.max(...byService.map(s=>s.cost||0), 0.01);
+    chartEl.innerHTML = byService.map(s=>{
+      const pct = Math.round((s.cost||0)/maxCost*100);
+      return `<div class="bar-item">
+        <div class="bar-label-row">
+          <span class="bar-label">${esc(s.name||s.model||s.service||'—')}</span>
+          <span class="bar-val">$${Number(s.cost||0).toFixed(3)}</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+      </div>`;
+    }).join('');
+  } else if(chartEl){
+    chartEl.innerHTML = '<div class="empty-state">No usage data available</div>';
+  }
 }
 
-// ─── Fetch all ────────────────────────────────────────────────────────────
-async function fetchAll(force=false){
-  const btn = document.getElementById('btn-refresh');
-  btn.classList.add('spinning');
-
-  const results = await Promise.allSettled([
-    fetch(API,{cache:'no-store',signal:AbortSignal.timeout(8000)}).then(r=>r.json()),
-    fetch(SAPI,{cache:'no-store',signal:AbortSignal.timeout(6000)}).then(r=>r.json()),
-  ]);
-
-  const mainRes = results[0];
-  const subRes  = results[1];
-
-  let offline = false;
-  if(mainRes.status==='fulfilled'){
-    _data = mainRes.value;
-    offline = false;
-  } else {
-    offline = true;
-  }
-
-  if(subRes.status==='fulfilled'){
-    _subdata = subRes.value;
-  }
-
-  // Update offline toast
-  const toast=document.getElementById('offline-toast');
-  if(offline && !_data){
-    toast.style.display='flex';
-  } else {
-    toast.style.display='none';
-  }
-
-  if(_data){
-    renderAgents(_data.agents);
-    renderProjects(_data.projects);
-    renderServices(_data.services);
-    renderPersonalBrand(_data.personal_brand);
-    renderAlerts(_data.alerts);
-    // Inject skill health if API provides it
-    if(_data.skill_health) window._skillHealth = _data.skill_health;
-    renderSkills();
-    document.getElementById('last-updated').textContent =
-      new Date().toLocaleTimeString('en-AU',{timeZone:AEST,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})+' AEST';
-  }
-
-  if(_subdata){
-    renderSubAgents(_subdata);
-  } else if(_data){
-    // Fallback: empty state
-    renderSubAgents({agents:[]});
-  }
-
-  // Activity log uses both
-  renderActivity(_data&&_data.agents, _subdata);
-
-  // Crons are static
-  renderCrons();
-
-  btn.classList.remove('spinning');
+// ─── Render: Dashboard chips ───────────────────────────────────────────────
+function renderDashChips(data, subdata){
+  const chips = document.getElementById('dash-chips');
+  if(!chips) return;
+  const activeAgents = ((subdata&&subdata.agents)||[]).filter(a=>a.status==='running').length;
+  const bot = (data&&data.trading_bot)||{};
+  const items = [
+    { label: 'System Online', cls: 'green' },
+  ];
+  if(activeAgents > 0) items.push({ label: activeAgents+' Agent'+(activeAgents>1?'s':'')+' Running', cls: 'green' });
+  if(bot.status === 'running') items.push({ label: 'Bot Active', cls: 'green' });
+  else if(bot.status === 'stopped') items.push({ label: 'Bot Stopped', cls: 'red' });
+  if(data && data.alerts && data.alerts.length) items.push({ label: data.alerts.length+' Alert'+(data.alerts.length>1?'s':''), cls: 'amber' });
+  chips.innerHTML = items.map(c=>`<div class="chip ${c.cls}"><div class="chip-dot"></div>${esc(c.label)}</div>`).join('');
 }
 
-// ─── Page Nav ─────────────────────────────────────────────────────────────
-function showPage(page, btn){
-  document.getElementById('page-main').style.display = page==='main' ? 'block' : 'none';
-  document.getElementById('page-skills').style.display = page==='skills' ? 'block' : 'none';
-  document.querySelectorAll('.page-tab').forEach(t=>t.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  if(page==='skills' && !window._skillsLoaded) fetchSkills();
-}
-
-// ─── Skill category inference ──────────────────────────────────────────────
+// ─── Render: Skills ────────────────────────────────────────────────────────
 function inferCategory(name){
   const n = name.toLowerCase();
   if(/trading|price|nq|mnq|sniper|bot/.test(n)) return 'trading';
@@ -1025,27 +1091,25 @@ function inferCategory(name){
   return 'utility';
 }
 
-// ─── Render: Skills page ────────────────────────────────────────────────────
 function renderSkillsPage(data){
-  const skills = data.skills || [];
-  const total = data.total || skills.length;
-  document.getElementById('skills-total').textContent = total;
-  document.getElementById('skills-lib-badge').textContent = total + ' Skills Installed';
+  const skills = data.skills||[];
+  const total = data.total||skills.length;
+  const totalEl = document.getElementById('skills-total');
+  const badgeEl = document.getElementById('skills-lib-badge');
+  if(totalEl) totalEl.textContent = total;
+  if(badgeEl) badgeEl.textContent = total + ' Skills Installed';
   const grid = document.getElementById('skills-grid');
-  if(!skills.length){
-    grid.innerHTML='<div class="empty-state" style="grid-column:1/-1;padding:30px">No skills found</div>';
-    return;
-  }
+  if(!grid) return;
+  if(!skills.length){ grid.innerHTML='<div class="empty-state" style="grid-column:1/-1">No skills found</div>'; return; }
   grid.innerHTML = skills.map(s=>{
     const cat = inferCategory(s.name);
     const displayName = s.name.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-    return `
-    <div class="skill-card">
+    return `<div class="skill-card">
       <div class="skill-card-top">
         <div class="skill-name">${esc(displayName)}</div>
         <div class="skill-badge ${cat}">${cat}</div>
       </div>
-      ${s.description ? `<div class="skill-desc">${esc(s.description)}</div>` : ''}
+      ${s.description?`<div class="skill-desc">${esc(s.description)}</div>`:''}
     </div>`;
   }).join('');
   window._skillsLoaded = true;
@@ -1053,23 +1117,107 @@ function renderSkillsPage(data){
 
 async function fetchSkills(){
   try{
-    const CF_BASE = CF;
-    const r = await fetch(CF_BASE+'/api/skills',{cache:'no-store',signal:AbortSignal.timeout(8000)});
+    const r = await fetch(CF+'/api/skills',{cache:'no-store',signal:AbortSignal.timeout(8000)});
     const data = await r.json();
     renderSkillsPage(data);
   } catch(e){
-    document.getElementById('skills-grid').innerHTML =
-      '<div class="empty-state" style="grid-column:1/-1;padding:30px;color:var(--red)">Failed to load skills — API unreachable</div>';
+    const grid = document.getElementById('skills-grid');
+    if(grid) grid.innerHTML='<div class="empty-state" style="grid-column:1/-1;color:var(--red)">Failed to load skills</div>';
   }
 }
 
+// ─── Fetch all ─────────────────────────────────────────────────────────────
+async function fetchAll(force=false){
+  const btn = document.getElementById('btn-refresh');
+  if(btn) btn.classList.add('spinning');
+
+  const results = await Promise.allSettled([
+    fetch(API,{cache:'no-store',signal:AbortSignal.timeout(8000)}).then(r=>r.json()),
+    fetch(SAPI,{cache:'no-store',signal:AbortSignal.timeout(6000)}).then(r=>r.json()),
+    fetch(UAPI,{cache:'no-store',signal:AbortSignal.timeout(6000)}).then(r=>r.json()),
+  ]);
+
+  let offline = false;
+  if(results[0].status==='fulfilled') { _data = results[0].value; }
+  else { offline = true; }
+  if(results[1].status==='fulfilled') { _subdata = results[1].value; }
+  if(results[2].status==='fulfilled') { _usdata = results[2].value; }
+
+  const toast = document.getElementById('offline-toast');
+  if(toast) toast.style.display = (offline && !_data) ? 'flex' : 'none';
+
+  if(_data){
+    renderTradingBot(_data);
+    renderBizGrid(_data.projects);
+    renderServices(_data.services);
+  }
+  if(_subdata){ renderSubAgents(_subdata); }
+  else { renderSubAgents({agents:[]}); }
+  if(_usdata){ renderUsage(_usdata); }
+
+  renderDashChips(_data, _subdata);
+  renderCrons();
+
+  const now = new Date().toLocaleTimeString('en-AU',{timeZone:AEST,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+  const luEl = document.getElementById('last-updated-sidebar');
+  if(luEl) luEl.textContent = relTime(new Date().toISOString());
+
+  if(btn) btn.classList.remove('spinning');
+}
+
+// ─── Hash routing ──────────────────────────────────────────────────────────
+const PAGES = ['dashboard','businesses','trading','agents','crons','services','usage','skills'];
+
+function navigate(page, btn){
+  // Hide all pages
+  PAGES.forEach(p=>{
+    const el = document.getElementById('page-'+p);
+    if(el) el.style.display = 'none';
+  });
+  // Show target
+  const target = document.getElementById('page-'+page);
+  if(target) target.style.display = 'block';
+  // Update nav
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  else {
+    const b = document.querySelector(`.nav-item[data-page="${page}"]`);
+    if(b) b.classList.add('active');
+  }
+  // Update hash
+  location.hash = page;
+  // Lazy load skills
+  if(page==='skills' && !window._skillsLoaded) fetchSkills();
+  // Close sidebar on mobile
+  closeSidebar();
+}
+
+function initRoute(){
+  const hash = location.hash.replace('#','');
+  const page = PAGES.includes(hash) ? hash : 'dashboard';
+  navigate(page);
+}
+
+window.addEventListener('hashchange', ()=>{
+  const hash = location.hash.replace('#','');
+  if(PAGES.includes(hash)) navigate(hash);
+});
+
+// ─── Sidebar toggle ────────────────────────────────────────────────────────
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebar-overlay').classList.toggle('visible');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('visible');
+}
+
 // ─── Init ──────────────────────────────────────────────────────────────────
+initRoute();
 fetchAll();
 _timer = setInterval(()=>fetchAll(), REFRESH_MS);
-// Refresh cron next-run times every minute
 setInterval(renderCrons, 60000);
-// Initial skills render (static fallback until API data loads)
-renderSkills();
 </script>
 </body>
 </html>
