@@ -237,6 +237,66 @@ footer{
 }
 .footer-dot{width:3px;height:3px;border-radius:50%;background:var(--border-hi)}
 
+/* ── Page Nav ── */
+.page-nav{
+  background:var(--s1);border-bottom:1px solid var(--border);
+  padding:0 20px;display:flex;align-items:center;gap:2px;
+}
+.page-tab{
+  font-size:12px;font-weight:600;color:var(--text3);
+  padding:10px 14px;border-bottom:2px solid transparent;cursor:pointer;
+  transition:.15s;letter-spacing:-.2px;white-space:nowrap;
+  background:none;border-top:none;border-left:none;border-right:none;
+}
+.page-tab:hover{color:var(--text)}
+.page-tab.active{color:var(--text);border-bottom-color:var(--accent)}
+
+/* ── Skills Page ── */
+#page-skills{display:none}
+#page-main{display:block}
+.skills-hero{
+  display:flex;align-items:center;gap:16px;
+  padding:20px 20px 4px;max-width:1440px;margin:0 auto;
+}
+.skills-hero-count{
+  font-size:56px;font-weight:900;color:var(--text);letter-spacing:-3px;
+  line-height:1;
+}
+.skills-hero-label{font-size:13px;color:var(--text3);margin-top:4px}
+.skills-hero-badge{
+  background:var(--accent-dim);border:1px solid rgba(255,56,56,.25);
+  color:var(--accent);font-size:11px;font-weight:700;
+  padding:4px 12px;border-radius:20px;letter-spacing:.4px;
+}
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:10px;
+  padding:14px 20px 20px;
+  max-width:1440px;margin:0 auto;
+}
+.skill-card{
+  background:var(--s1);border:1px solid var(--border);border-radius:8px;
+  padding:12px 14px;transition:border-color .15s,background .15s;
+  display:flex;flex-direction:column;gap:5px;
+}
+.skill-card:hover{border-color:var(--border-hi);background:var(--s2)}
+.skill-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.skill-name{font-size:12px;font-weight:700;color:var(--text);letter-spacing:-.2px}
+.skill-badge{
+  font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+  padding:2px 7px;border-radius:10px;flex-shrink:0;
+}
+.skill-badge.trading{background:rgba(245,158,11,.12);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
+.skill-badge.infrastructure{background:rgba(59,130,246,.12);color:var(--blue);border:1px solid rgba(59,130,246,.2)}
+.skill-badge.communication{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.2)}
+.skill-badge.media{background:rgba(139,92,246,.12);color:var(--purple);border:1px solid rgba(139,92,246,.2)}
+.skill-badge.ai{background:rgba(6,182,212,.12);color:var(--cyan);border:1px solid rgba(6,182,212,.2)}
+.skill-badge.productivity{background:rgba(255,56,56,.12);color:var(--accent);border:1px solid rgba(255,56,56,.2)}
+.skill-badge.utility{background:var(--s3);color:var(--text3);border:1px solid var(--border)}
+.skill-desc{font-size:11px;color:var(--text2);line-height:1.45;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
 /* ── Offline Toast ── */
 #offline-toast{
   position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
@@ -294,6 +354,12 @@ footer{
   </div>
 </header>
 
+<!-- ── Page Nav ── -->
+<nav class="page-nav">
+  <button class="page-tab active" onclick="showPage('main',this)">Overview</button>
+  <button class="page-tab" onclick="showPage('skills',this)">Skills</button>
+</nav>
+
 <!-- ── Alert Banner ── -->
 <div id="alert-banner" style="display:none">
   <div class="alert-icon">⚠️</div>
@@ -304,7 +370,27 @@ footer{
   <button class="alert-dismiss" onclick="document.getElementById('alert-banner').style.display='none'">×</button>
 </div>
 
+<!-- ── Skills Page ── -->
+<div id="page-skills" style="display:none">
+  <div class="skills-hero">
+    <div>
+      <div class="skills-hero-count" id="skills-total">—</div>
+      <div class="skills-hero-label">installed skills</div>
+    </div>
+    <div class="skills-hero-badge" id="skills-lib-badge">Skills Library</div>
+  </div>
+  <div class="skills-grid" id="skills-grid">
+    <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
+    <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
+    <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
+    <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
+    <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
+    <div class="skill-card"><div class="shimmer" style="height:54px"></div></div>
+  </div>
+</div>
+
 <!-- ── Main Layout ── -->
+<div id="page-main">
 <div class="layout">
 
   <!-- ── Left Column ── -->
@@ -424,6 +510,8 @@ footer{
   </div>
 
 </div><!-- /layout -->
+
+</div><!-- /page-main -->
 
 <!-- Footer -->
 <footer>
@@ -914,6 +1002,65 @@ async function fetchAll(force=false){
   renderCrons();
 
   btn.classList.remove('spinning');
+}
+
+// ─── Page Nav ─────────────────────────────────────────────────────────────
+function showPage(page, btn){
+  document.getElementById('page-main').style.display = page==='main' ? 'block' : 'none';
+  document.getElementById('page-skills').style.display = page==='skills' ? 'block' : 'none';
+  document.querySelectorAll('.page-tab').forEach(t=>t.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  if(page==='skills' && !window._skillsLoaded) fetchSkills();
+}
+
+// ─── Skill category inference ──────────────────────────────────────────────
+function inferCategory(name){
+  const n = name.toLowerCase();
+  if(/trading|price|nq|mnq|sniper|bot/.test(n)) return 'trading';
+  if(/infra|provision|deploy|health|service|node/.test(n)) return 'infrastructure';
+  if(/email|calendar|gog|xurl|slack|whatsapp|discord|sag|tts/.test(n)) return 'communication';
+  if(/video|image|whisper|transcrib|summarize|frame|crawl/.test(n)) return 'media';
+  if(/coding|agent|gemini|openai|claude|browser/.test(n)) return 'ai';
+  if(/clickup|github|gh-|1pass|mcport/.test(n)) return 'productivity';
+  return 'utility';
+}
+
+// ─── Render: Skills page ────────────────────────────────────────────────────
+function renderSkillsPage(data){
+  const skills = data.skills || [];
+  const total = data.total || skills.length;
+  document.getElementById('skills-total').textContent = total;
+  document.getElementById('skills-lib-badge').textContent = total + ' Skills Installed';
+  const grid = document.getElementById('skills-grid');
+  if(!skills.length){
+    grid.innerHTML='<div class="empty-state" style="grid-column:1/-1;padding:30px">No skills found</div>';
+    return;
+  }
+  grid.innerHTML = skills.map(s=>{
+    const cat = inferCategory(s.name);
+    const displayName = s.name.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+    return `
+    <div class="skill-card">
+      <div class="skill-card-top">
+        <div class="skill-name">${esc(displayName)}</div>
+        <div class="skill-badge ${cat}">${cat}</div>
+      </div>
+      ${s.description ? `<div class="skill-desc">${esc(s.description)}</div>` : ''}
+    </div>`;
+  }).join('');
+  window._skillsLoaded = true;
+}
+
+async function fetchSkills(){
+  try{
+    const CF_BASE = CF;
+    const r = await fetch(CF_BASE+'/api/skills',{cache:'no-store',signal:AbortSignal.timeout(8000)});
+    const data = await r.json();
+    renderSkillsPage(data);
+  } catch(e){
+    document.getElementById('skills-grid').innerHTML =
+      '<div class="empty-state" style="grid-column:1/-1;padding:30px;color:var(--red)">Failed to load skills — API unreachable</div>';
+  }
 }
 
 // ─── Init ──────────────────────────────────────────────────────────────────
