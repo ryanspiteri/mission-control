@@ -73,6 +73,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
 
+/* ── Team members ── */
+.team-member{
+  display:flex;align-items:center;gap:9px;
+  padding:7px 10px;border-radius:7px;cursor:default;
+  margin-bottom:1px;transition:.15s;
+}
+.team-member:hover{background:var(--bg3)}
+.team-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.team-info{flex:1;min-width:0}
+.team-name{font-size:12px;font-weight:600;color:var(--text)}
+.team-role{font-size:10px;color:var(--text2);margin-top:1px}
+
 /* ── Hamburger ── */
 .hamburger{
   display:none;position:fixed;top:12px;left:12px;z-index:300;
@@ -491,6 +503,38 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
     <button class="nav-item" data-page="trading" onclick="navigate('trading',this)">
       <span class="nav-item-icon">📈</span> Trading Bot
     </button>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Team</div>
+    <div class="team-member" title="Market research, competitor monitoring, trend analysis">
+      <div class="team-dot" style="background:#8b5cf6;box-shadow:0 0 5px #8b5cf6"></div>
+      <div class="team-info">
+        <div class="team-name">Atlas</div>
+        <div class="team-role">Research &amp; Intelligence</div>
+      </div>
+    </div>
+    <div class="team-member" title="Content pipeline, scripts, social media, brand voice">
+      <div class="team-dot" style="background:#f59e0b;box-shadow:0 0 5px #f59e0b"></div>
+      <div class="team-info">
+        <div class="team-name">Nova</div>
+        <div class="team-role">Content &amp; Brand</div>
+      </div>
+    </div>
+    <div class="team-member" title="Code review, deployments, technical architecture">
+      <div class="team-dot" style="background:#22c55e;box-shadow:0 0 5px #22c55e"></div>
+      <div class="team-info">
+        <div class="team-name">Rex</div>
+        <div class="team-role">Code &amp; Deploy</div>
+      </div>
+    </div>
+    <div class="team-member" title="P&L analysis, trading bot, financial insights">
+      <div class="team-dot" style="background:#3b82f6;box-shadow:0 0 5px #3b82f6"></div>
+      <div class="team-info">
+        <div class="team-name">Finn</div>
+        <div class="team-role">Finance &amp; Data</div>
+      </div>
+    </div>
   </div>
 
   <div class="nav-section">

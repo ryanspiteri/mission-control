@@ -1,0 +1,130 @@
+{
+  "team": [
+    {
+      "id": "atlas",
+      "name": "Atlas",
+      "role": "Research & Intelligence",
+      "emoji": "🔭",
+      "color": "#8b5cf6",
+      "workspace": "/Users/jarvis/.openclaw/agents/atlas/workspace/",
+      "status": "ready",
+      "speciality": "Market research, competitor monitoring, trend analysis, industry intelligence"
+    },
+    {
+      "id": "nova",
+      "name": "Nova",
+      "role": "Content & Brand",
+      "emoji": "✨",
+      "color": "#f59e0b",
+      "workspace": "/Users/jarvis/.openclaw/agents/nova/workspace/",
+      "status": "ready",
+      "speciality": "Content pipeline, scripts, social media strategy, copywriting, brand voice"
+    },
+    {
+      "id": "rex",
+      "name": "Rex",
+      "role": "Code & Deploy",
+      "emoji": "⚡",
+      "color": "#22c55e",
+      "workspace": "/Users/jarvis/.openclaw/agents/rex/workspace/",
+      "status": "ready",
+      "speciality": "Code review, build monitoring, deployment management, technical architecture"
+    },
+    {
+      "id": "finn",
+      "name": "Finn",
+      "role": "Finance & Data",
+      "emoji": "📊",
+      "color": "#3b82f6",
+      "workspace": "/Users/jarvis/.openclaw/agents/finn/workspace/",
+      "status": "ready",
+      "speciality": "P&L analysis, trading bot performance, financial insights, business metrics"
+    }
+  ],
+  "agents": [
+    {
+      "name": "BEPRIME Critical Fixes",
+      "task": "Fix Calendly webhook + blood test upload",
+      "status": "completed",
+      "started_at": "2026-03-15T06:06:00+10:00",
+      "completed_at": "2026-03-15T06:07:00+10:00"
+    },
+    {
+      "name": "NewU Full Scope",
+      "task": "149 tasks audited, 15 new ClickUp tasks created",
+      "status": "completed",
+      "started_at": "2026-03-15T06:06:00+10:00",
+      "completed_at": "2026-03-15T06:14:00+10:00"
+    },
+    {
+      "name": "13 Skill Files",
+      "task": "Built and installed 13 skill files",
+      "status": "completed",
+      "started_at": "2026-03-15T06:06:00+10:00",
+      "completed_at": "2026-03-15T06:16:00+10:00"
+    },
+    {
+      "name": "$500K Strategic Brief",
+      "task": "Revenue gap analysis + 12-month roadmap",
+      "status": "completed",
+      "started_at": "2026-03-15T06:06:00+10:00",
+      "completed_at": "2026-03-15T06:09:00+10:00"
+    },
+    {
+      "name": "Perform Creative Deploy",
+      "task": "Deployed to Digital Ocean Sydney",
+      "status": "completed",
+      "started_at": "2026-03-15T06:06:00+10:00",
+      "completed_at": "2026-03-15T06:12:00+10:00"
+    },
+    {
+      "name": "ONEST App Stack Audit",
+      "task": "26 apps audited, $193K/year savings identified",
+      "status": "completed",
+      "started_at": "2026-03-15T07:53:00+10:00",
+      "completed_at": "2026-03-15T07:59:00+10:00"
+    },
+    {
+      "name": "ONEST WMS Brief",
+      "task": "Full warehouse management system technical brief",
+      "status": "completed",
+      "started_at": "2026-03-15T08:04:00+10:00",
+      "completed_at": "2026-03-15T08:09:00+10:00"
+    },
+    {
+      "name": "InfluPilot Tech Spec",
+      "task": "Full influencer platform spec + GitHub repo scaffold",
+      "status": "completed",
+      "started_at": "2026-03-15T08:32:00+10:00",
+      "completed_at": "2026-03-15T09:00:00+10:00"
+    },
+    {
+      "name": "ONEST OS Master Spec",
+      "task": "15-module ERP spec, 3,134 lines, Cursor prompts",
+      "status": "completed",
+      "started_at": "2026-03-15T09:22:00+10:00",
+      "completed_at": "2026-03-15T09:36:00+10:00"
+    },
+    {
+      "name": "ONEST OS Deploy",
+      "task": "Deployed to Digital Ocean + DB migrations",
+      "status": "completed",
+      "started_at": "2026-03-15T16:44:00+10:00",
+      "completed_at": "2026-03-15T17:30:00+10:00"
+    },
+    {
+      "name": "NewU ClickUp Gap Fill",
+      "task": "16 missing tasks created across all modules",
+      "status": "completed",
+      "started_at": "2026-03-15T07:34:00+10:00",
+      "completed_at": "2026-03-15T07:38:00+10:00"
+    },
+    {
+      "name": "Agent Team Setup",
+      "task": "Atlas, Nova, Rex, Finn — 4 specialist agents created with workspaces",
+      "status": "completed",
+      "started_at": "2026-03-20T22:09:00+10:00",
+      "completed_at": "2026-03-20T22:15:00+10:00"
+    }
+  ]
+}
