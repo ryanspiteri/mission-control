@@ -83,24 +83,38 @@ function setup() {
   analyser.connect(audioCtx.destination);
 }
 
+let countdown = null;
+
 function togglePlay() {
   setup();
   if (audioCtx.state === 'suspended') audioCtx.resume();
-  if (audio.paused) {
-    audio.play();
-    playing = true;
-    lbl.textContent = 'Speaking...';
-    lbl.className = 'label speaking';
-    cancelAnimationFrame(raf);
-    drawLive();
-  } else {
+  if (!audio.paused) {
     audio.pause();
     playing = false;
     lbl.textContent = 'Paused';
     lbl.className = 'label';
     cancelAnimationFrame(raf);
+    if (countdown) { clearTimeout(countdown); countdown = null; }
     drawIdle();
+    return;
   }
+  // 3 second countdown
+  let n = 3;
+  lbl.textContent = n + '...';
+  lbl.className = 'label speaking';
+  const tick = setInterval(() => {
+    n--;
+    if (n <= 0) {
+      clearInterval(tick);
+      audio.play();
+      playing = true;
+      lbl.textContent = 'Speaking...';
+      cancelAnimationFrame(raf);
+      drawLive();
+    } else {
+      lbl.textContent = n + '...';
+    }
+  }, 1000);
 }
 
 audio.addEventListener('ended', () => {
