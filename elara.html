@@ -23,9 +23,7 @@
     gap: 32px;
   }
 
-  canvas {
-    cursor: pointer;
-  }
+  canvas { cursor: pointer; }
 
   .label {
     font-size: 13px;
@@ -83,8 +81,6 @@ function setup() {
   analyser.connect(audioCtx.destination);
 }
 
-let countdown = null;
-
 function togglePlay() {
   setup();
   if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -94,27 +90,15 @@ function togglePlay() {
     lbl.textContent = 'Paused';
     lbl.className = 'label';
     cancelAnimationFrame(raf);
-    if (countdown) { clearTimeout(countdown); countdown = null; }
     drawIdle();
     return;
   }
-  // 3 second countdown
-  let n = 3;
-  lbl.textContent = n + '...';
+  audio.play();
+  playing = true;
+  lbl.textContent = 'Speaking...';
   lbl.className = 'label speaking';
-  const tick = setInterval(() => {
-    n--;
-    if (n <= 0) {
-      clearInterval(tick);
-      audio.play();
-      playing = true;
-      lbl.textContent = 'Speaking...';
-      cancelAnimationFrame(raf);
-      drawLive();
-    } else {
-      lbl.textContent = n + '...';
-    }
-  }, 1000);
+  cancelAnimationFrame(raf);
+  drawLive();
 }
 
 audio.addEventListener('ended', () => {
@@ -125,12 +109,10 @@ audio.addEventListener('ended', () => {
   drawIdle();
 });
 
-// ── Draw helpers ────────────────────────────────────────────────
-
 function drawBase() {
   ctx.clearRect(0, 0, W, H);
 
-  // Outer glow ring
+  // Outer glow
   const glow = ctx.createRadialGradient(CX, CY, AVATAR_R, CX, CY, RADIUS + 60);
   glow.addColorStop(0, 'rgba(139,92,246,0.08)');
   glow.addColorStop(1, 'rgba(0,0,0,0)');
@@ -139,7 +121,7 @@ function drawBase() {
   ctx.arc(CX, CY, RADIUS + 60, 0, Math.PI * 2);
   ctx.fill();
 
-  // Avatar background
+  // Avatar
   const grad = ctx.createRadialGradient(CX - 10, CY - 10, 10, CX, CY, AVATAR_R);
   grad.addColorStop(0, '#a78bfa');
   grad.addColorStop(1, '#5b21b6');
@@ -148,7 +130,6 @@ function drawBase() {
   ctx.fillStyle = grad;
   ctx.fill();
 
-  // Avatar glow
   ctx.shadowColor = '#8b5cf6';
   ctx.shadowBlur = playing ? 40 : 20;
   ctx.beginPath();
@@ -158,11 +139,12 @@ function drawBase() {
   ctx.stroke();
   ctx.shadowBlur = 0;
 
-  // ⚡ emoji
-  ctx.font = '44px serif';
+  // "E" letter
+  ctx.font = 'bold 48px -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('⚡', CX, CY + 2);
+  ctx.fillStyle = '#fff';
+  ctx.fillText('E', CX, CY + 2);
 }
 
 function drawIdleBars(angle) {
@@ -171,14 +153,10 @@ function drawIdleBars(angle) {
     const theta = (i / bars) * Math.PI * 2 + angle;
     const noise = 0.5 + 0.5 * Math.sin(i * 0.4 + angle * 3);
     const h = 6 + noise * 10;
-    const inner = RADIUS;
-    const outer = RADIUS + h;
-
-    const x1 = CX + Math.cos(theta) * inner;
-    const y1 = CY + Math.sin(theta) * inner;
-    const x2 = CX + Math.cos(theta) * outer;
-    const y2 = CY + Math.sin(theta) * outer;
-
+    const x1 = CX + Math.cos(theta) * RADIUS;
+    const y1 = CY + Math.sin(theta) * RADIUS;
+    const x2 = CX + Math.cos(theta) * (RADIUS + h);
+    const y2 = CY + Math.sin(theta) * (RADIUS + h);
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
@@ -195,14 +173,10 @@ function drawLiveBars(data) {
     const theta = (i / bars) * Math.PI * 2 - Math.PI / 2;
     const val = data[i] / 255;
     const h = Math.max(6, val * 80);
-    const inner = RADIUS;
-    const outer = RADIUS + h;
-
-    const x1 = CX + Math.cos(theta) * inner;
-    const y1 = CY + Math.sin(theta) * inner;
-    const x2 = CX + Math.cos(theta) * outer;
-    const y2 = CY + Math.sin(theta) * outer;
-
+    const x1 = CX + Math.cos(theta) * RADIUS;
+    const y1 = CY + Math.sin(theta) * RADIUS;
+    const x2 = CX + Math.cos(theta) * (RADIUS + h);
+    const y2 = CY + Math.sin(theta) * (RADIUS + h);
     const alpha = 0.3 + val * 0.7;
     ctx.beginPath();
     ctx.moveTo(x1, y1);
