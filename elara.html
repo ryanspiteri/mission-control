@@ -93,12 +93,15 @@ function togglePlay() {
     drawIdle();
     return;
   }
-  audio.play();
-  playing = true;
-  lbl.textContent = 'Speaking...';
-  lbl.className = 'label speaking';
-  cancelAnimationFrame(raf);
-  drawLive();
+  // 3 second silent delay, no visible countdown
+  setTimeout(() => {
+    audio.play();
+    playing = true;
+    lbl.textContent = 'Speaking...';
+    lbl.className = 'label speaking';
+    cancelAnimationFrame(raf);
+    drawLive();
+  }, 3000);
 }
 
 audio.addEventListener('ended', () => {
