@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Elara — Voice</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    overflow: hidden;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  canvas {
+    cursor: pointer;
+  }
+
+  .label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .label.speaking {
+    color: #8b5cf6;
+    animation: fade 1.2s ease-in-out infinite;
+  }
+
+  @keyframes fade {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <canvas id="c" width="420" height="420" onclick="togglePlay()"></canvas>
+  <div class="label" id="lbl">Tap to play</div>
+</div>
+
+<audio id="audio" src="elara-reply.mp3" preload="auto"></audio>
+
+<script>
+const audio = document.getElementById('audio');
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const lbl = document.getElementById('lbl');
+
+const W = canvas.width;
+const H = canvas.height;
+const CX = W / 2;
+const CY = H / 2;
+const RADIUS = 130;
+const AVATAR_R = 72;
+
+let audioCtx, analyser, source, raf;
+let ready = false;
+let playing = false;
+let idleAngle = 0;
+
+function setup() {
+  if (ready) return;
+  ready = true;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 256;
+  source = audioCtx.createMediaElementSource(audio);
+  source.connect(analyser);
+  analyser.connect(audioCtx.destination);
+}
+
+function togglePlay() {
+  setup();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  if (audio.paused) {
+    audio.play();
+    playing = true;
+    lbl.textContent = 'Speaking...';
+    lbl.className = 'label speaking';
+    cancelAnimationFrame(raf);
+    drawLive();
+  } else {
+    audio.pause();
+    playing = false;
+    lbl.textContent = 'Paused';
+    lbl.className = 'label';
+    cancelAnimationFrame(raf);
+    drawIdle();
+  }
+}
+
+audio.addEventListener('ended', () => {
+  playing = false;
+  lbl.textContent = 'Tap to play';
+  lbl.className = 'label';
+  cancelAnimationFrame(raf);
+  drawIdle();
+});
+
+// ── Draw helpers ────────────────────────────────────────────────
+
+function drawBase() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Outer glow ring
+  const glow = ctx.createRadialGradient(CX, CY, AVATAR_R, CX, CY, RADIUS + 60);
+  glow.addColorStop(0, 'rgba(139,92,246,0.08)');
+  glow.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = glow;
+  ctx.beginPath();
+  ctx.arc(CX, CY, RADIUS + 60, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Avatar background
+  const grad = ctx.createRadialGradient(CX - 10, CY - 10, 10, CX, CY, AVATAR_R);
+  grad.addColorStop(0, '#a78bfa');
+  grad.addColorStop(1, '#5b21b6');
+  ctx.beginPath();
+  ctx.arc(CX, CY, AVATAR_R, 0, Math.PI * 2);
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Avatar glow
+  ctx.shadowColor = '#8b5cf6';
+  ctx.shadowBlur = playing ? 40 : 20;
+  ctx.beginPath();
+  ctx.arc(CX, CY, AVATAR_R, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(167,139,250,0.6)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // ⚡ emoji
+  ctx.font = '44px serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('⚡', CX, CY + 2);
+}
+
+function drawIdleBars(angle) {
+  const bars = 80;
+  for (let i = 0; i < bars; i++) {
+    const theta = (i / bars) * Math.PI * 2 + angle;
+    const noise = 0.5 + 0.5 * Math.sin(i * 0.4 + angle * 3);
+    const h = 6 + noise * 10;
+    const inner = RADIUS;
+    const outer = RADIUS + h;
+
+    const x1 = CX + Math.cos(theta) * inner;
+    const y1 = CY + Math.sin(theta) * inner;
+    const x2 = CX + Math.cos(theta) * outer;
+    const y2 = CY + Math.sin(theta) * outer;
+
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.strokeStyle = 'rgba(139,92,246,0.3)';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+  }
+}
+
+function drawLiveBars(data) {
+  const bars = Math.min(80, data.length);
+  for (let i = 0; i < bars; i++) {
+    const theta = (i / bars) * Math.PI * 2 - Math.PI / 2;
+    const val = data[i] / 255;
+    const h = Math.max(6, val * 80);
+    const inner = RADIUS;
+    const outer = RADIUS + h;
+
+    const x1 = CX + Math.cos(theta) * inner;
+    const y1 = CY + Math.sin(theta) * inner;
+    const x2 = CX + Math.cos(theta) * outer;
+    const y2 = CY + Math.sin(theta) * outer;
+
+    const alpha = 0.3 + val * 0.7;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.strokeStyle = `rgba(167,139,250,${alpha})`;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+  }
+}
+
+function drawIdle() {
+  idleAngle += 0.008;
+  drawBase();
+  drawIdleBars(idleAngle);
+  raf = requestAnimationFrame(drawIdle);
+}
+
+function drawLive() {
+  const data = new Uint8Array(analyser.frequencyBinCount);
+  analyser.getByteFrequencyData(data);
+  drawBase();
+  drawLiveBars(data);
+  raf = requestAnimationFrame(drawLive);
+}
+
+drawIdle();
+</script>
+</body>
+</html>
