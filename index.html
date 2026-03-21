@@ -582,70 +582,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
 
   <div class="nav-section">
     <div class="nav-section-label">Team</div>
-    <div class="team-member" onclick="openAgentPanel('elara')" data-agent="elara">
-      <div class="team-avatar" style="background:#8b5cf6;box-shadow:0 0 8px rgba(139,92,246,.4)">E<div class="team-status-dot"></div></div>
-      <div class="team-info">
-        <div class="team-name">Elara</div>
-        <div class="team-role">Chief of Staff</div>
-        <div class="team-updated">Always active</div>
-      </div>
-    </div>
-    <div class="team-member" onclick="openAgentPanel('atlas')" data-agent="atlas">
-      <div class="team-avatar" style="background:#3b82f6;box-shadow:0 0 8px rgba(59,130,246,.4)">A<div class="team-status-dot"></div></div>
-      <div class="team-info">
-        <div class="team-name">Atlas</div>
-        <div class="team-role">Research &amp; Intelligence</div>
-        <div class="team-updated" id="team-updated-atlas">—</div>
-      </div>
-    </div>
-    <div class="team-member" onclick="openAgentPanel('nova')" data-agent="nova">
-      <div class="team-avatar" style="background:#ec4899;box-shadow:0 0 8px rgba(236,72,153,.4)">N<div class="team-status-dot idle"></div></div>
-      <div class="team-info">
-        <div class="team-name">Nova</div>
-        <div class="team-role">Content &amp; Brand</div>
-        <div class="team-updated" id="team-updated-nova">—</div>
-      </div>
-    </div>
-    <div class="team-member" onclick="openAgentPanel('rex')" data-agent="rex">
-      <div class="team-avatar" style="background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.4)">R<div class="team-status-dot idle"></div></div>
-      <div class="team-info">
-        <div class="team-name">Rex</div>
-        <div class="team-role">Code &amp; Deploy</div>
-        <div class="team-updated" id="team-updated-rex">—</div>
-      </div>
-    </div>
-    <div class="team-member" onclick="openAgentPanel('finn')" data-agent="finn">
-      <div class="team-avatar" style="background:#f59e0b;box-shadow:0 0 8px rgba(245,158,11,.4)">F<div class="team-status-dot idle"></div></div>
-      <div class="team-info">
-        <div class="team-name">Finn</div>
-        <div class="team-role">Finance &amp; Data</div>
-        <div class="team-updated" id="team-updated-finn">—</div>
-      </div>
-    </div>
-    <div class="team-member" onclick="openAgentPanel('sage')" data-agent="sage">
-      <div class="team-avatar" style="background:#14b8a6;box-shadow:0 0 8px rgba(20,184,166,.4)">S<div class="team-status-dot idle"></div></div>
-      <div class="team-info">
-        <div class="team-name">Sage</div>
-        <div class="team-role">ONEST Health Ops</div>
-        <div class="team-updated" id="team-updated-sage">—</div>
-      </div>
-    </div>
-    <div class="team-member" onclick="openAgentPanel('prime')" data-agent="prime">
-      <div class="team-avatar" style="background:#6366f1;box-shadow:0 0 8px rgba(99,102,241,.4)">P<div class="team-status-dot idle"></div></div>
-      <div class="team-info">
-        <div class="team-name">Prime</div>
-        <div class="team-role">BEPRIME &amp; NewU</div>
-        <div class="team-updated" id="team-updated-prime">—</div>
-      </div>
-    </div>
-    <div class="team-member" onclick="openAgentPanel('hunter')" data-agent="hunter">
-      <div class="team-avatar" style="background:#ef4444;box-shadow:0 0 8px rgba(239,68,68,.4)">H<div class="team-status-dot idle"></div></div>
-      <div class="team-info">
-        <div class="team-name">Hunter</div>
-        <div class="team-role">Sales &amp; Lead Gen</div>
-        <div class="team-updated" id="team-updated-hunter">—</div>
-      </div>
-    </div>
+    <button class="nav-item" data-page="team" onclick="navigate('team',this)">
+      <span class="nav-item-icon">👥</span> Team
+    </button>
   </div>
 
   <!-- Agent Detail Panel -->
@@ -844,6 +783,153 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
           <div class="shimmer" style="height:80px"></div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- ── Team Page ── -->
+  <div id="page-team" class="page" style="display:none">
+    <div class="page-header">
+      <div class="page-title">Team</div>
+      <div class="page-sub">Your AI chief of staff and specialist agents</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--gap);padding-top:4px">
+
+      <!-- Elara -->
+      <div class="card card-pad" style="cursor:pointer;transition:border-color .2s,transform .15s" onclick="openAgentPanel('elara')"
+           onmouseover="this.style.borderColor='#8b5cf6';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.borderColor='';this.style.transform=''">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:48px;height:48px;border-radius:14px;background:#8b5cf6;box-shadow:0 0 16px rgba(139,92,246,.4);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;position:relative">
+            E<div class="team-status-dot" style="width:10px;height:10px;bottom:0;right:0;position:absolute;border:2px solid var(--bg2);border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green)"></div>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--text)">Elara</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px">Chief of Staff</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6">Central intelligence layer. Orchestrates all agents, manages priorities, runs heartbeat checks.</div>
+        <div style="margin-top:12px;font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px">● Always active</div>
+      </div>
+
+      <!-- Atlas -->
+      <div class="card card-pad" style="cursor:pointer;transition:border-color .2s,transform .15s" onclick="openAgentPanel('atlas')"
+           onmouseover="this.style.borderColor='#3b82f6';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.borderColor='';this.style.transform=''">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:48px;height:48px;border-radius:14px;background:#3b82f6;box-shadow:0 0 16px rgba(59,130,246,.4);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;position:relative">
+            A<div style="width:10px;height:10px;bottom:0;right:0;position:absolute;border:2px solid var(--bg2);border-radius:50%;background:#555"></div>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--text)">Atlas</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px">Research &amp; Intelligence</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6">Market research, competitor monitoring, and trend analysis across all businesses.</div>
+        <div style="margin-top:12px;font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px" id="team-updated-atlas">— idle</div>
+      </div>
+
+      <!-- Nova -->
+      <div class="card card-pad" style="cursor:pointer;transition:border-color .2s,transform .15s" onclick="openAgentPanel('nova')"
+           onmouseover="this.style.borderColor='#ec4899';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.borderColor='';this.style.transform=''">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:48px;height:48px;border-radius:14px;background:#ec4899;box-shadow:0 0 16px rgba(236,72,153,.4);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;position:relative">
+            N<div style="width:10px;height:10px;bottom:0;right:0;position:absolute;border:2px solid var(--bg2);border-radius:50%;background:#555"></div>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--text)">Nova</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px">Content &amp; Brand</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6">Content pipeline for personal brand and business channels. Scripts, scheduling, brand voice.</div>
+        <div style="margin-top:12px;font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px" id="team-updated-nova">— idle</div>
+      </div>
+
+      <!-- Rex -->
+      <div class="card card-pad" style="cursor:pointer;transition:border-color .2s,transform .15s" onclick="openAgentPanel('rex')"
+           onmouseover="this.style.borderColor='#22c55e';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.borderColor='';this.style.transform=''">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:48px;height:48px;border-radius:14px;background:#22c55e;box-shadow:0 0 16px rgba(34,197,94,.4);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;position:relative">
+            R<div style="width:10px;height:10px;bottom:0;right:0;position:absolute;border:2px solid var(--bg2);border-radius:50%;background:#555"></div>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--text)">Rex</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px">Code &amp; Deploy</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6">Builds, deploys, and maintains technical infrastructure across all projects.</div>
+        <div style="margin-top:12px;font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px" id="team-updated-rex">— idle</div>
+      </div>
+
+      <!-- Finn -->
+      <div class="card card-pad" style="cursor:pointer;transition:border-color .2s,transform .15s" onclick="openAgentPanel('finn')"
+           onmouseover="this.style.borderColor='#f59e0b';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.borderColor='';this.style.transform=''">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:48px;height:48px;border-radius:14px;background:#f59e0b;box-shadow:0 0 16px rgba(245,158,11,.4);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;position:relative">
+            F<div style="width:10px;height:10px;bottom:0;right:0;position:absolute;border:2px solid var(--bg2);border-radius:50%;background:#555"></div>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--text)">Finn</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px">Finance &amp; Data</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6">Financial tracking, P&L monitoring, and data analysis across the portfolio.</div>
+        <div style="margin-top:12px;font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px" id="team-updated-finn">— idle</div>
+      </div>
+
+      <!-- Sage -->
+      <div class="card card-pad" style="cursor:pointer;transition:border-color .2s,transform .15s" onclick="openAgentPanel('sage')"
+           onmouseover="this.style.borderColor='#14b8a6';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.borderColor='';this.style.transform=''">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:48px;height:48px;border-radius:14px;background:#14b8a6;box-shadow:0 0 16px rgba(20,184,166,.4);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;position:relative">
+            S<div style="width:10px;height:10px;bottom:0;right:0;position:absolute;border:2px solid var(--bg2);border-radius:50%;background:#555"></div>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--text)">Sage</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px">ONEST Health Ops</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6">ONEST Health operations, inventory, retail relationships, and fulfilment oversight.</div>
+        <div style="margin-top:12px;font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px" id="team-updated-sage">— idle</div>
+      </div>
+
+      <!-- Prime -->
+      <div class="card card-pad" style="cursor:pointer;transition:border-color .2s,transform .15s" onclick="openAgentPanel('prime')"
+           onmouseover="this.style.borderColor='#6366f1';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.borderColor='';this.style.transform=''">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:48px;height:48px;border-radius:14px;background:#6366f1;box-shadow:0 0 16px rgba(99,102,241,.4);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;position:relative">
+            P<div style="width:10px;height:10px;bottom:0;right:0;position:absolute;border:2px solid var(--bg2);border-radius:50%;background:#555"></div>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--text)">Prime</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px">BEPRIME &amp; NewU</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6">BEPRIME telehealth and NewU coaching platform operations and patient journey.</div>
+        <div style="margin-top:12px;font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px" id="team-updated-prime">— idle</div>
+      </div>
+
+      <!-- Hunter -->
+      <div class="card card-pad" style="cursor:pointer;transition:border-color .2s,transform .15s" onclick="openAgentPanel('hunter')"
+           onmouseover="this.style.borderColor='#ef4444';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.borderColor='';this.style.transform=''">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:48px;height:48px;border-radius:14px;background:#ef4444;box-shadow:0 0 16px rgba(239,68,68,.4);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;position:relative">
+            H<div style="width:10px;height:10px;bottom:0;right:0;position:absolute;border:2px solid var(--bg2);border-radius:50%;background:#555"></div>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--text)">Hunter</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px">Sales &amp; Lead Gen</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6">Boss Bodies lead generation, DM conversion, and sales pipeline management.</div>
+        <div style="margin-top:12px;font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px" id="team-updated-hunter">— idle</div>
+      </div>
+
     </div>
   </div>
 
@@ -1578,7 +1664,7 @@ async function fetchAll(force=false){
 }
 
 // ─── Hash routing ──────────────────────────────────────────────────────────
-const PAGES = ['dashboard','businesses','trading','agents','crons','services','usage','skills'];
+const PAGES = ['dashboard','businesses','trading','team','agents','crons','services','usage','skills'];
 
 function navigate(page, btn){
   // Hide all pages
