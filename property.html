@@ -1,19 +1,1183 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Property Agent</title>
-<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,sans-serif;background:#f5f5f5}
-.hdr{background:#111;color:#fff;padding:20px 28px}.hdr h1{font-size:22px;font-weight:700;color:#ff8c00}
-.hdr p{color:#888;font-size:12px;margin-top:3px}.stats{display:flex;gap:12px;padding:20px 28px;background:#fff;border-bottom:1px solid #eee}
-.s{background:#f8f8f8;border-radius:8px;padding:14px 20px}.sv{font-size:26px;font-weight:800}.sl{font-size:11px;color:#888;margin-top:2px}
-.hot .sv{color:#e53e3e}.warm .sv{color:#d97706}.tbl{padding:20px 28px}
-table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.1)}
-th{background:#111;color:#ff8c00;padding:10px 14px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
-td{padding:10px 14px;border-bottom:1px solid #f0f0f0;font-size:12px}tr:last-child td{border-bottom:none}
-tr:hover td{background:#fafafa}a{color:#2563eb;text-decoration:none}</style></head>
-<body><div class="hdr"><h1>Property Deal Finder</h1><p>Gold Coast + Brisbane | $600K-$1.5M | 37 listings found</p></div>
-<div class="stats">
-<div class="s"><div class="sv">37</div><div class="sl">Total</div></div>
-<div class="s hot"><div class="sv">0</div><div class="sl">Hot (60+ days)</div></div>
-<div class="s warm"><div class="sv">0</div><div class="sl">Warm (30-60d)</div></div>
-<div class="s"><div class="sv">5</div><div class="sl">Emails Ready</div></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Deal Finder — Ryan Spiteri</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f0f0; color: #1a1a1a; }
+.header { background: #111; padding: 24px 32px; border-bottom: 3px solid #ff8c00; }
+.header h1 { font-size: 22px; font-weight: 800; color: #ff8c00; letter-spacing: -0.5px; }
+.header p { color: #888; font-size: 12px; margin-top: 4px; }
+.stats { display: flex; gap: 16px; padding: 24px 32px; background: #fff; border-bottom: 1px solid #e5e5e5; flex-wrap: wrap; }
+.stat { background: #f8f8f8; border-radius: 10px; padding: 16px 24px; min-width: 120px; border: 1px solid #e5e5e5; }
+.stat-val { font-size: 28px; font-weight: 800; color: #111; }
+.stat-label { font-size: 11px; color: #888; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+.stat.hot .stat-val { color: #e53e3e; }
+.stat.warm .stat-val { color: #d97706; }
+.stat.green .stat-val { color: #16a34a; }
+.content { padding: 24px 32px; }
+.table-wrap { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e5e5e5; }
+table { width: 100%; border-collapse: collapse; }
+thead th { background: #111; color: #ff8c00; padding: 12px 16px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+tbody td { padding: 11px 16px; border-bottom: 1px solid #f0f0f0; font-size: 12px; vertical-align: middle; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: #fafafa; }
+.footer { padding: 16px 32px; color: #aaa; font-size: 11px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Property Deal Finder</h1>
+  <p>Gold Coast | $600K-$1.5M | 140 listings | Updated: March 2026</p>
 </div>
-<div class="tbl"><table><thead><tr><th>Address</th><th>Type</th><th>Beds</th><th>Price</th><th>Days</th><th>Offer (75%)</th><th>Email</th></tr></thead>
-<tbody><tr><td><a href='https://www.domain.com.au/project/4150/esperance-hope-island-qld/' target='_blank'>1 PENDRAAT PARADE, HOPE ISLAND, QLD 4212</a></td><td>Property</td><td>?bd</td><td></td><td style=''>0d</td><td>$0</td><td><a href="offer-emails/4150.txt">View</a></td></tr><tr><td><a href='https://www.domain.com.au/project/6277/cypress-palms-surfers-paradise-qld/' target='_blank'>3 CYPRESS AVENUE, SURFERS PARADISE, QLD 4217</a></td><td>Property</td><td>?bd</td><td></td><td style=''>0d</td><td>$0</td><td><a href="offer-emails/6277.txt">View</a></td></tr><tr><td><a href='https://www.domain.com.au/project/6669/the-landmark-mermaid-beach-qld/' target='_blank'>1 SEAVIEW AVENUE, MERMAID BEACH, QLD 4218</a></td><td>Property</td><td>?bd</td><td></td><td style=''>0d</td><td>$0</td><td><a href="offer-emails/6669.txt">View</a></td></tr><tr><td><a href='https://www.domain.com.au/project/6749/bilinga-house-bilinga-qld/' target='_blank'>107 - 109 GOLDEN FOUR DRIVE, BILINGA, QLD 4225</a></td><td>Property</td><td>?bd</td><td></td><td style=''>0d</td><td>$0</td><td><a href="offer-emails/6749.txt">View</a></td></tr><tr><td><a href='https://www.domain.com.au/project/6869/chevron-one-surfers-paradise-qld/' target='_blank'>42 STANHILL DRIVE, SURFERS PARADISE, QLD 4217</a></td><td>Property</td><td>?bd</td><td></td><td style=''>0d</td><td>$0</td><td><a href="offer-emails/6869.txt">View</a></td></tr><tr><td><a href='https://www.domain.com.au/project/6874/harmony-on-broadbeach-broadbeach-qld/' target='_blank'>2797-2799 GOLD COAST HIGHWAY, BROADBEACH, QLD 4218</a></td><td>Property</td><td>?bd</td><td></td><td style=''>0d</td><td>$0</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/project/6959/li-rre-palm-beach-qld/' target='_blank'>66 JEFFERSON LANE, PALM BEACH, QLD 4221</a></td><td>Property</td><td>?bd</td><td></td><td style=''>0d</td><td>$0</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/kurrawa-1-pendraat-parade-hope-island-qld-4212-2018399280' target='_blank'>Kurrawa/1 Pendraat Parade, Hope Island</a></td><td>Property</td><td>?bd</td><td>$949,000</td><td style=''>0d</td><td>$711,750</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/tugun-1-pendraat-parade-hope-island-qld-4212-2018399356' target='_blank'>Tugun/1 Pendraat Parade, Hope Island</a></td><td>Property</td><td>?bd</td><td>$1,090,000</td><td style=''>0d</td><td>$817,500</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/3-cypress-avenue-surfers-paradise-qld-4217-2019226466' target='_blank'>3 Cypress Avenue, Surfers Paradise</a></td><td>Property</td><td>?bd</td><td>From $803,000</td><td style=''>0d</td><td>$602,250</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/3-cypress-avenue-surfers-paradise-qld-4217-2019226493' target='_blank'>3 Cypress Avenue, Surfers Paradise</a></td><td>Property</td><td>?bd</td><td>From $1,188,000</td><td style=''>0d</td><td>$891,000</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/3-cypress-avenue-surfers-paradise-qld-4217-2019226496' target='_blank'>3 Cypress Avenue, Surfers Paradise</a></td><td>Property</td><td>?bd</td><td>From $1,380,000</td><td style=''>0d</td><td>$1,035,000</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/pelican-1-pendraat-parade-hope-island-qld-4212-2019328017' target='_blank'>Pelican//1 Pendraat Parade, Hope Island</a></td><td>Property</td><td>?bd</td><td>$975,000</td><td style=''>0d</td><td>$731,250</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/moreton-1-pendraat-parade-hope-island-qld-4212-2019954840' target='_blank'>Moreton/1 Pendraat Parade, Hope Island</a></td><td>Property</td><td>?bd</td><td>$915,000</td><td style=''>0d</td><td>$686,250</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/205-107-109-golden-four-drive-bilinga-qld-4225-2020188775' target='_blank'>205/107 - 109 Golden Four Drive, Bilinga</a></td><td>Property</td><td>?bd</td><td>$1,270,500</td><td style=''>0d</td><td>$952,875</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/1-seaview-avenue-mermaid-beach-qld-4218-2020335708' target='_blank'>1 Seaview Avenue, Mermaid Beach</a></td><td>Property</td><td>?bd</td><td>from $1,495,000</td><td style=''>0d</td><td>$1,121,250</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/42-stanhill-drive-surfers-paradise-qld-4217-2020425071' target='_blank'>42 Stanhill Drive, Surfers Paradise</a></td><td>Property</td><td>?bd</td><td>$1,259,000</td><td style=''>0d</td><td>$944,250</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/2203-2797-2799-gold-coast-highway-broadbeach-qld-4218-2020514882' target='_blank'>2203/2797-2799 Gold Coast Highway, Broadbeach</a></td><td>Property</td><td>?bd</td><td>$1,415,000</td><td style=''>0d</td><td>$1,061,250</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/ge-510-marine-parade-biggera-waters-qld-4216-2020543923' target='_blank'>{'street': 'GE/510 Marine Parade', 'suburb': 'BIGGERA WATERS', 'state': 'QLD', 'postcode': '4216', 'lat': -27.929388, 'lng': 153.40504}</a></td><td>Property</td><td>?bd</td><td>$848,000</td><td style=''>0d</td><td>$636,000</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/3-2-burleigh-glen-court-burleigh-heads-qld-4220-2020638311' target='_blank'>{'street': '3/2 Burleigh Glen Court', 'suburb': 'BURLEIGH HEADS', 'state': 'QLD', 'postcode': '4220', 'lat': -28.109066, 'lng': 153.44023}</a></td><td>Property</td><td>?bd</td><td>$1,095,000</td><td style=''>0d</td><td>$821,250</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/1-6-hill-avenue-burleigh-heads-qld-4220-2020650726' target='_blank'>{'street': '1/6 Hill Avenue', 'suburb': 'BURLEIGH HEADS', 'state': 'QLD', 'postcode': '4220', 'lat': -28.092632, 'lng': 153.45078}</a></td><td>Property</td><td>?bd</td><td>Auction</td><td style=''>0d</td><td>$0</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/1003-2797-2799-gold-coast-highway-broadbeach-qld-4218-2020665323' target='_blank'>1003/2797-2799 Gold Coast Highway, Broadbeach</a></td><td>Property</td><td>?bd</td><td>$1,165,000</td><td style=''>0d</td><td>$873,750</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/53-4-park-avenue-burleigh-heads-qld-4220-2020698060' target='_blank'>{'street': '53/4 Park Avenue', 'suburb': 'BURLEIGH HEADS', 'state': 'QLD', 'postcode': '4220', 'lat': -28.090727, 'lng': 153.45093}</a></td><td>Property</td><td>?bd</td><td>Offers over $1,395,000</td><td style=''>0d</td><td>$1,046,250</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/164-tierney-drive-currumbin-waters-qld-4223-2020707695' target='_blank'>{'street': '164 Tierney Drive', 'suburb': 'CURRUMBIN WATERS', 'state': 'QLD', 'postcode': '4223', 'lat': -28.16187, 'lng': 153.4506}</a></td><td>Property</td><td>?bd</td><td>Auction</td><td style=''>0d</td><td>$0</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/2-21-artists-avenue-oxenford-qld-4210-2020707718' target='_blank'>{'street': '2/21 Artists Avenue', 'suburb': 'OXENFORD', 'state': 'QLD', 'postcode': '4210', 'lat': -27.92308, 'lng': 153.3165}</a></td><td>Property</td><td>?bd</td><td>Expression of Interest</td><td style=''>0d</td><td>$0</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/27-delta-circuit-hope-island-qld-4212-2020707889' target='_blank'>{'street': '27 Delta Circuit', 'suburb': 'HOPE ISLAND', 'state': 'QLD', 'postcode': '4212', 'lat': -27.876553, 'lng': 153.366}</a></td><td>Property</td><td>?bd</td><td>Offers Over $1,500,000</td><td style=''>0d</td><td>$1,125,000</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/66-jefferson-lane-palm-beach-qld-4221-2020708063' target='_blank'>66 Jefferson Lane, Palm Beach</a></td><td>Property</td><td>?bd</td><td>$1,413,000</td><td style=''>0d</td><td>$1,059,750</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/66-jefferson-lane-palm-beach-qld-4221-2020708128' target='_blank'>66 Jefferson Lane, Palm Beach</a></td><td>Property</td><td>?bd</td><td>$1,495,000</td><td style=''>0d</td><td>$1,121,250</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/21-papara-street-pacific-pines-qld-4211-2020708164' target='_blank'>{'street': '21 Papara Street', 'suburb': 'PACIFIC PINES', 'state': 'QLD', 'postcode': '4211', 'lat': -27.934465, 'lng': 153.32518}</a></td><td>Property</td><td>?bd</td><td>Just Listed</td><td style=''>0d</td><td>$0</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/2-12-goldwyn-way-oxenford-qld-4210-2020709483' target='_blank'>{'street': '2/12 Goldwyn Way', 'suburb': 'OXENFORD', 'state': 'QLD', 'postcode': '4210', 'lat': -27.923018, 'lng': 153.32153}</a></td><td>Property</td><td>?bd</td><td>Offers Over $875,000</td><td style=''>0d</td><td>$656,250</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/2-5-orvieto-avenue-mermaid-waters-qld-4218-2020709678' target='_blank'>{'street': '2/5 Orvieto Avenue', 'suburb': 'MERMAID WATERS', 'state': 'QLD', 'postcode': '4218', 'lat': -28.040258, 'lng': 153.43057}</a></td><td>Property</td><td>?bd</td><td>Auction</td><td style=''>0d</td><td>$0</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/19-191-197-marina-quays-boulevard-hope-island-qld-4212-2020709872' target='_blank'>{'street': '19/191-197 Marina Quays Boulevard', 'suburb': 'HOPE ISLAND', 'state': 'QLD', 'postcode': '4212', 'lat': -27.876543, 'lng': 153.37428}</a></td><td>Property</td><td>?bd</td><td>JUST LISTED! LOW MAINTENANCE COMPLEX LIVING!</td><td style=''>0d</td><td>$0</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/2-6-russell-court-miami-qld-4220-2020709997' target='_blank'>{'street': '2/6 Russell Court', 'suburb': 'MIAMI', 'state': 'QLD', 'postcode': '4220', 'lat': -28.073042, 'lng': 153.43475}</a></td><td>Property</td><td>?bd</td><td>Auction</td><td style=''>0d</td><td>$0</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/13-41-dixon-street-coolangatta-qld-4225-2020710098' target='_blank'>{'street': '13/41 Dixon Street', 'suburb': 'COOLANGATTA', 'state': 'QLD', 'postcode': '4225', 'lat': -28.173098, 'lng': 153.5378}</a></td><td>Property</td><td>?bd</td><td>Expressions of Interest</td><td style=''>0d</td><td>$0</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/64-29-39-woodroffe-avenue-main-beach-qld-4217-2020710334' target='_blank'>{'street': '64/29-39 Woodroffe Avenue', 'suburb': 'MAIN BEACH', 'state': 'QLD', 'postcode': '4217', 'lat': -27.979315, 'lng': 153.42567}</a></td><td>Property</td><td>?bd</td><td>Just Listed!</td><td style=''>0d</td><td>$0</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/2-copper-parade-pimpama-qld-4209-2020710336' target='_blank'>{'street': '2 Copper Parade', 'suburb': 'PIMPAMA', 'state': 'QLD', 'postcode': '4209', 'lat': -27.82875, 'lng': 153.30763}</a></td><td>Property</td><td>?bd</td><td>Submit All Offers</td><td style=''>0d</td><td>$0</td><td>N/A</td></tr><tr><td><a href='https://www.domain.com.au/4104-31-bourton-road-merrimac-qld-4226-2020710738' target='_blank'>{'street': '4104/31 Bourton Road', 'suburb': 'MERRIMAC', 'state': 'QLD', 'postcode': '4226', 'lat': -28.054276, 'lng': 153.36407}</a></td><td>Property</td><td>?bd</td><td>Offers Over $799,000</td><td style=''>0d</td><td>$599,250</td><td>N/A</td></tr></tbody></table></div></body></html>
+<div class="stats">
+  <div class="stat"><div class="stat-val">140</div><div class="stat-label">Total Listings</div></div>
+  <div class="stat hot"><div class="stat-val">0</div><div class="stat-label">Hot (60+ days)</div></div>
+  <div class="stat warm"><div class="stat-val">0</div><div class="stat-label">Warm (30-60 days)</div></div>
+  <div class="stat green"><div class="stat-val">9</div><div class="stat-label">Offer Drafts Ready</div></div>
+</div>
+<div class="content">
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th>Address</th>
+  <th>Suburb</th>
+  <th>Size</th>
+  <th>Listed Price</th>
+  <th>Days</th>
+  <th>Our Offer (75%)</th>
+  <th>Draft</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+        <td><a href="https://www.domain.com.au/project/6277/cypress-palms-surfers-paradise-qld/" target="_blank" style="color:#1a1a1a;text-decoration:none">3 Cypress Avenue, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">?</td>
+        <td style="font-weight:600">POA</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><a href="offer-emails/6277.txt" style="color:#2563eb">View Draft</a></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/901-2-mawarra-street-palm-beach-qld-4221-2020651828" target="_blank" style="color:#1a1a1a;text-decoration:none">901/2 Mawarra Street, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/164-tierney-drive-currumbin-waters-qld-4223-2020707695" target="_blank" style="color:#1a1a1a;text-decoration:none">164 Tierney Drive, CURRUMBIN WATERS QLD 4223</a></td>
+        <td style="color:#666;font-size:11px">Currumbin Waters</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2-21-artists-avenue-oxenford-qld-4210-2020707718" target="_blank" style="color:#1a1a1a;text-decoration:none">2/21 Artists Avenue, OXENFORD QLD 4210</a></td>
+        <td style="color:#666;font-size:11px">Oxenford</td>
+        <td style="text-align:center">2bd 1ba</td>
+        <td style="font-weight:600">Expression of Interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/21-papara-street-pacific-pines-qld-4211-2020708164" target="_blank" style="color:#1a1a1a;text-decoration:none">21 Papara Street, PACIFIC PINES QLD 4211</a></td>
+        <td style="color:#666;font-size:11px">Pacific Pines</td>
+        <td style="text-align:center">4bd 2ba</td>
+        <td style="font-weight:600">Just Listed</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2-5-orvieto-avenue-mermaid-waters-qld-4218-2020709678" target="_blank" style="color:#1a1a1a;text-decoration:none">2/5 Orvieto Avenue, MERMAID WATERS QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Mermaid Waters</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/19-191-197-marina-quays-boulevard-hope-island-qld-4212-2020709872" target="_blank" style="color:#1a1a1a;text-decoration:none">19/191-197 Marina Quays Boulevard, HOPE ISLAND QLD 4212</a></td>
+        <td style="color:#666;font-size:11px">Hope Island</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">JUST LISTED! LOW MAINTENANCE COMPLEX LIVING!</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2-6-russell-court-miami-qld-4220-2020709997" target="_blank" style="color:#1a1a1a;text-decoration:none">2/6 Russell Court, MIAMI QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Miami</td>
+        <td style="text-align:center">3bd 1ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/13-41-dixon-street-coolangatta-qld-4225-2020710098" target="_blank" style="color:#1a1a1a;text-decoration:none">13/41 Dixon Street, COOLANGATTA QLD 4225</a></td>
+        <td style="color:#666;font-size:11px">Coolangatta</td>
+        <td style="text-align:center">3bd 3ba</td>
+        <td style="font-weight:600">Expressions of Interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/64-29-39-woodroffe-avenue-main-beach-qld-4217-2020710334" target="_blank" style="color:#1a1a1a;text-decoration:none">64/29-39 Woodroffe Avenue, MAIN BEACH QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Main Beach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Just Listed!</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2-copper-parade-pimpama-qld-4209-2020710336" target="_blank" style="color:#1a1a1a;text-decoration:none">2 Copper Parade, PIMPAMA QLD 4209</a></td>
+        <td style="color:#666;font-size:11px">Pimpama</td>
+        <td style="text-align:center">4bd 2ba</td>
+        <td style="font-weight:600">Submit All Offers</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/25d-30-laycock-street-surfers-paradise-qld-4217-2020573843" target="_blank" style="color:#1a1a1a;text-decoration:none">25D/30 Laycock Street, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Contact Agents</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2601-5-enderley-avenue-surfers-paradise-qld-4217-2020640065" target="_blank" style="color:#1a1a1a;text-decoration:none">2601/5 Enderley Avenue, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Contact Agent</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/901-256-stanhill-drive-surfers-paradise-qld-4217-2020683640" target="_blank" style="color:#1a1a1a;text-decoration:none">901/256 Stanhill Drive, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Contact Agent</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1903-3-northcliffe-terrace-surfers-paradise-qld-4217-2020686104" target="_blank" style="color:#1a1a1a;text-decoration:none">1903/3 Northcliffe Terrace, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3205-3422-surfers-paradise-boulevard-surfers-paradise-qld-4217-2020703520" target="_blank" style="color:#1a1a1a;text-decoration:none">3205/3422 Surfers Paradise Boulevard, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Contact Agent</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1-19-fern-street-surfers-paradise-qld-4217-2020706016" target="_blank" style="color:#1a1a1a;text-decoration:none">1/19 Fern Street, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/154-ocean-parade-burleigh-heads-qld-4220-2019875891" target="_blank" style="color:#1a1a1a;text-decoration:none">154 Ocean Parade, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">?</td>
+        <td style="font-weight:600">CONTACT AGENT</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/129-1969-gold-coast-highway-burleigh-heads-qld-4220-2020502711" target="_blank" style="color:#1a1a1a;text-decoration:none">129/1969 Gold Coast Highway, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Contact Agent</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1-6-hill-avenue-burleigh-heads-qld-4220-2020650726" target="_blank" style="color:#1a1a1a;text-decoration:none">1/6 Hill Avenue, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">2bd 1ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1105-1328-gold-coast-highway-palm-beach-qld-4221-2020627189" target="_blank" style="color:#1a1a1a;text-decoration:none">1105/1328 Gold Coast Highway, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">VIEW BY APPOINTMENT ONLY - CONTACT AGENT</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/13-1111-gold-coast-highway-palm-beach-qld-4221-2020635743" target="_blank" style="color:#1a1a1a;text-decoration:none">13/1111 Gold Coast Highway, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Price on Request</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/64-manus-avenue-palm-beach-qld-4221-2020655141" target="_blank" style="color:#1a1a1a;text-decoration:none">64 Manus Avenue, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">3bd 1ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3-7-nalla-court-palm-beach-qld-4221-2020669331" target="_blank" style="color:#1a1a1a;text-decoration:none">3/7 Nalla Court, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 1ba</td>
+        <td style="font-weight:600">Expressions of Interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2-1031-gold-coast-highway-palm-beach-qld-4221-2020691320" target="_blank" style="color:#1a1a1a;text-decoration:none">2/1031 Gold Coast Highway, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 1ba</td>
+        <td style="font-weight:600">Contact agent</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2-9-molucca-avenue-palm-beach-qld-4221-2020691506" target="_blank" style="color:#1a1a1a;text-decoration:none">2/9 Molucca Avenue, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 1ba</td>
+        <td style="font-weight:600">Price on Request</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3-3-lind-avenue-palm-beach-qld-4221-2020704170" target="_blank" style="color:#1a1a1a;text-decoration:none">3/3 Lind Avenue, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 1ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/5-1260-gold-coast-highway-palm-beach-qld-4221-2020704882" target="_blank" style="color:#1a1a1a;text-decoration:none">5/1260 Gold Coast Highway, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Expressions of Interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3205-2663-gold-coast-highway-broadbeach-qld-4218-2018902529" target="_blank" style="color:#1a1a1a;text-decoration:none">3205/2663 Gold Coast Highway, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Contact the Agent</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/23007-16-casino-drive-broadbeach-qld-4218-2019335723" target="_blank" style="color:#1a1a1a;text-decoration:none">23007/16 Casino Drive, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Expression of Interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/12510-5-the-darling-avenue-broadbeach-qld-4218-2020421201" target="_blank" style="color:#1a1a1a;text-decoration:none">12510/5 The Darling Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 1ba</td>
+        <td style="font-weight:600">EXPRESSIONS OF INTEREST</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/level-16-1605-28-30-second-avenue-broadbeach-qld-4218-2020590554" target="_blank" style="color:#1a1a1a;text-decoration:none">Level 16, 1605/28-30 Second Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">1bd 1ba</td>
+        <td style="font-weight:600">CONTACT AGENT</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1706-12-philip-avenue-broadbeach-qld-4218-2020596545" target="_blank" style="color:#1a1a1a;text-decoration:none">1706/12 Philip Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">1bd 1ba</td>
+        <td style="font-weight:600">Contact Agent</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3-17-britannia-avenue-broadbeach-qld-4218-2020676767" target="_blank" style="color:#1a1a1a;text-decoration:none">3/17 Britannia Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 1ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/56-31-queensland-avenue-broadbeach-qld-4218-2020678947" target="_blank" style="color:#1a1a1a;text-decoration:none">56/31 Queensland Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Just Listed!</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/15e-1-albert-avenue-broadbeach-qld-4218-2020697361" target="_blank" style="color:#1a1a1a;text-decoration:none">15E/1 Albert Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/19-137-eugaree-street-southport-qld-4215-2020662347" target="_blank" style="color:#1a1a1a;text-decoration:none">19/137 Eugaree Street, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Expressions Of Interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/705-8-meron-street-southport-qld-4215-2020662422" target="_blank" style="color:#1a1a1a;text-decoration:none">705/8 Meron Street, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Expressions of Interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/405-8-meron-street-southport-qld-4215-2020680709" target="_blank" style="color:#1a1a1a;text-decoration:none">405/8 Meron Street, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Expressions of Interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/4-119-eugaree-street-southport-qld-4215-2020693202" target="_blank" style="color:#1a1a1a;text-decoration:none">4/119 Eugaree Street, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">4bd 2ba</td>
+        <td style="font-weight:600">New To Market</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/15f-10-marine-parade-southport-qld-4215-2020699303" target="_blank" style="color:#1a1a1a;text-decoration:none">15F/10 Marine Parade, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Expressions of Interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2-26-eugenia-circuit-robina-qld-4226-2020583304" target="_blank" style="color:#1a1a1a;text-decoration:none">2/26 Eugenia Circuit, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">Contact Agent</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2301-22-34-glenside-drive-robina-qld-4226-2020597969" target="_blank" style="color:#1a1a1a;text-decoration:none">2301/22-34 Glenside Drive, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">For Sale</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/801-glades-drive-robina-qld-4226-2020603810" target="_blank" style="color:#1a1a1a;text-decoration:none">801 Glades Drive, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">4bd 3ba</td>
+        <td style="font-weight:600">Contact Agent for Price Guide</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/407-1-waterfront-place-robina-qld-4226-2020641171" target="_blank" style="color:#1a1a1a;text-decoration:none">407/1 Waterfront Place, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Expression of interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/26-wattlepark-lane-robina-qld-4226-2020651677" target="_blank" style="color:#1a1a1a;text-decoration:none">26 Wattlepark Lane, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">Contact Agent</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/81-thorngate-drive-robina-qld-4226-2020654571" target="_blank" style="color:#1a1a1a;text-decoration:none">81 Thorngate Drive, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">4bd 2ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/238-2-bella-avenue-robina-qld-4226-2020675674" target="_blank" style="color:#1a1a1a;text-decoration:none">238/2 Bella Avenue, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">Expressions of interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2310-42-laver-drive-robina-qld-4226-2020690948" target="_blank" style="color:#1a1a1a;text-decoration:none">2310/42 Laver Drive, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">1bd 2ba</td>
+        <td style="font-weight:600">Expressions of Interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/21-indooroopilly-court-robina-qld-4226-2020695999" target="_blank" style="color:#1a1a1a;text-decoration:none">21 Indooroopilly Court, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">3bd 1ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3-binkar-boulevard-robina-qld-4226-2020698794" target="_blank" style="color:#1a1a1a;text-decoration:none">3 BINKAR BOULEVARD, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">Expressions Of Interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/35-easthill-drive-robina-qld-4226-2020704719" target="_blank" style="color:#1a1a1a;text-decoration:none">35 Easthill Drive, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">Expressions of Interest</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/173-ron-penhaligon-way-robina-qld-4226-2020706583" target="_blank" style="color:#1a1a1a;text-decoration:none">173 Ron Penhaligon Way, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">4bd 2ba</td>
+        <td style="font-weight:600">Auction</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">POA</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/24-18-remembrance-drive-surfers-paradise-qld-4217-2020697299" target="_blank" style="color:#1a1a1a;text-decoration:none">24/18 Remembrance Drive, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">1bd 1ba</td>
+        <td style="font-weight:600">Offers Over $699,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$524,250</td>
+        <td><a href="offer-emails/2020697299.txt" style="color:#2563eb">View Draft</a></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1268-56-scarborough-street-southport-qld-4215-2020654318" target="_blank" style="color:#1a1a1a;text-decoration:none">1268/56 Scarborough Street, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">1bd 1ba</td>
+        <td style="font-weight:600">$719,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$539,250</td>
+        <td><a href="offer-emails/2020654318.txt" style="color:#2563eb">View Draft</a></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/601-2-como-crescent-southport-qld-4215-2020584542" target="_blank" style="color:#1a1a1a;text-decoration:none">601/2 Como Crescent, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">1bd 1ba</td>
+        <td style="font-weight:600">$725,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$543,750</td>
+        <td><a href="offer-emails/2020584542.txt" style="color:#2563eb">View Draft</a></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3604-42-laver-drive-robina-qld-4226-2020700934" target="_blank" style="color:#1a1a1a;text-decoration:none">3604/42 Laver Drive, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">1bd 1ba</td>
+        <td style="font-weight:600">Offers Over $750,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$562,500</td>
+        <td><a href="offer-emails/2020700934.txt" style="color:#2563eb">View Draft</a></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/project/4150/esperance-hope-island-qld/" target="_blank" style="color:#1a1a1a;text-decoration:none">Kurrawa/1 Pendraat Parade, HOPE ISLAND QLD 4212</a></td>
+        <td style="color:#666;font-size:11px">Hope Island</td>
+        <td style="text-align:center">?</td>
+        <td style="font-weight:600">$795,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$596,250</td>
+        <td><a href="offer-emails/4150.txt" style="color:#2563eb">View Draft</a></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/4104-31-bourton-road-merrimac-qld-4226-2020710738" target="_blank" style="color:#1a1a1a;text-decoration:none">4104/31 Bourton Road, MERRIMAC QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Merrimac</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $799,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$599,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/14-66-queen-street-southport-qld-4215-2020610478" target="_blank" style="color:#1a1a1a;text-decoration:none">14/66 Queen Street, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$799,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$599,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/31006-42-laver-drive-robina-qld-4226-2020682397" target="_blank" style="color:#1a1a1a;text-decoration:none">31006/42 Laver Drive, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $800,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$600,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3-cypress-avenue-surfers-paradise-qld-4217-2019226466" target="_blank" style="color:#1a1a1a;text-decoration:none">3 Cypress Avenue, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">1bd 1ba</td>
+        <td style="font-weight:600">From $803,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$602,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3202-3400-surfers-paradise-boulevard-surfers-paradise-qld-4217-2020691038" target="_blank" style="color:#1a1a1a;text-decoration:none">3202/3400 Surfers Paradise Boulevard, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">1bd 1ba</td>
+        <td style="font-weight:600">$825,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$618,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1176-56-scarborough-street-southport-qld-4215-2020662355" target="_blank" style="color:#1a1a1a;text-decoration:none">1176/56 Scarborough Street, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers over $845,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$633,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/ge-510-marine-parade-biggera-waters-qld-4216-2020543923" target="_blank" style="color:#1a1a1a;text-decoration:none">GE/510 Marine Parade, BIGGERA WATERS QLD 4216</a></td>
+        <td style="color:#666;font-size:11px">Biggera Waters</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$848,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$636,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/5-13-15-illawong-street-surfers-paradise-qld-4217-2020670452" target="_blank" style="color:#1a1a1a;text-decoration:none">5/13-15 Illawong Street, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$849,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$636,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2-16-o-doherty-avenue-southport-qld-4215-2020599195" target="_blank" style="color:#1a1a1a;text-decoration:none">2/16 O'Doherty Avenue, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">3bd 1ba</td>
+        <td style="font-weight:600">$849,000+</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$636,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/154-musgrave-ave-southport-qld-4215-2020559330" target="_blank" style="color:#1a1a1a;text-decoration:none">154 Musgrave Ave, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$850,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$637,500</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2-12-goldwyn-way-oxenford-qld-4210-2020709483" target="_blank" style="color:#1a1a1a;text-decoration:none">2/12 Goldwyn Way, OXENFORD QLD 4210</a></td>
+        <td style="color:#666;font-size:11px">Oxenford</td>
+        <td style="text-align:center">3bd 1ba</td>
+        <td style="font-weight:600">Offers Over $875,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$656,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/705-3422-surfers-paradise-boulevard-surfers-paradise-qld-4217-2020691400" target="_blank" style="color:#1a1a1a;text-decoration:none">705/3422 Surfers Paradise Boulevard, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$875,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$656,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/4-137-scottsdale-drive-robina-qld-4226-2020704157" target="_blank" style="color:#1a1a1a;text-decoration:none">4/137 Scottsdale Drive, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Above $879,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$659,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/401-60-jefferson-lane-palm-beach-qld-4221-2020590202" target="_blank" style="color:#1a1a1a;text-decoration:none">401/60 Jefferson Lane, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">1bd 1ba</td>
+        <td style="font-weight:600">Offers over $880,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$660,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/18-154-musgrave-ave-southport-qld-4215-2020559815" target="_blank" style="color:#1a1a1a;text-decoration:none">18/154 Musgrave Ave, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$880,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$660,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/10-154-musgrave-ave-southport-qld-4215-2020562166" target="_blank" style="color:#1a1a1a;text-decoration:none">10/154 Musgrave Ave, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$880,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$660,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/lot-1143-7-quarter-lane-southport-qld-4215-2020518962" target="_blank" style="color:#1a1a1a;text-decoration:none">Lot 1143/7 Quarter lane, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">1bd 1ba</td>
+        <td style="font-weight:600">"OFFERS ABOVE $899,000!"</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$674,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/11-2890-gold-coast-highway-surfers-paradise-qld-4217-2020683941" target="_blank" style="color:#1a1a1a;text-decoration:none">11/2890 Gold Coast Highway, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $900,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$675,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/moreton-1-pendraat-parade-hope-island-qld-4212-2019954840" target="_blank" style="color:#1a1a1a;text-decoration:none">Moreton/1 Pendraat Parade, HOPE ISLAND QLD 4212</a></td>
+        <td style="color:#666;font-size:11px">Hope Island</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$915,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$686,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/301-29-hill-avenue-burleigh-heads-qld-4220-2020668731" target="_blank" style="color:#1a1a1a;text-decoration:none">301/29 Hill Avenue, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $925,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$693,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/5-8-twenty-second-avenue-palm-beach-qld-4221-2020705714" target="_blank" style="color:#1a1a1a;text-decoration:none">5/8 Twenty Second Avenue, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 1ba</td>
+        <td style="font-weight:600">Offers Over $935,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$701,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/8-150-marine-parade-southport-qld-4215-2020698705" target="_blank" style="color:#1a1a1a;text-decoration:none">8/150 Marine Parade, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">Offers Over $945,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$708,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/kurrawa-1-pendraat-parade-hope-island-qld-4212-2018399280" target="_blank" style="color:#1a1a1a;text-decoration:none">Kurrawa/1 Pendraat Parade, HOPE ISLAND QLD 4212</a></td>
+        <td style="color:#666;font-size:11px">Hope Island</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$949,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$711,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/33-18-tallebudgera-creek-road-burleigh-heads-qld-4220-2020665751" target="_blank" style="color:#1a1a1a;text-decoration:none">33/18 Tallebudgera Creek Road, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">New Price - $949,000 +</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$711,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3-24-first-avenue-broadbeach-qld-4218-2020649958" target="_blank" style="color:#1a1a1a;text-decoration:none">3/24 First Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers over $950,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$712,500</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/pelican-1-pendraat-parade-hope-island-qld-4212-2019328017" target="_blank" style="color:#1a1a1a;text-decoration:none">Pelican//1 Pendraat Parade, HOPE ISLAND QLD 4212</a></td>
+        <td style="color:#666;font-size:11px">Hope Island</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">$975,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$731,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2-48-railway-street-southport-qld-4215-2020503819" target="_blank" style="color:#1a1a1a;text-decoration:none">2/48 Railway Street, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">3bd 1ba</td>
+        <td style="font-weight:600">$988,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$741,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/18-4-fleay-court-burleigh-heads-qld-4220-2020701625" target="_blank" style="color:#1a1a1a;text-decoration:none">18/4 Fleay Court, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers over $1,049,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$786,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/806-28-30-second-avenue-broadbeach-qld-4218-2020537172" target="_blank" style="color:#1a1a1a;text-decoration:none">806/28-30 Second Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,065,000 - MUST BE SOLD</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$798,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/tugun-1-pendraat-parade-hope-island-qld-4212-2018399356" target="_blank" style="color:#1a1a1a;text-decoration:none">Tugun/1 Pendraat Parade, HOPE ISLAND QLD 4212</a></td>
+        <td style="color:#666;font-size:11px">Hope Island</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">$1,090,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$817,500</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1b-3-second-avenue-burleigh-heads-qld-4220-2019392401" target="_blank" style="color:#1a1a1a;text-decoration:none">1B/3 Second Avenue, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,095,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$821,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3-2-burleigh-glen-court-burleigh-heads-qld-4220-2020638311" target="_blank" style="color:#1a1a1a;text-decoration:none">3/2 Burleigh Glen Court, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">$1,095,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$821,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/243-2-bella-avenue-robina-qld-4226-2020704175" target="_blank" style="color:#1a1a1a;text-decoration:none">243/2 Bella Avenue, ROBINA QLD 4226</a></td>
+        <td style="color:#666;font-size:11px">Robina</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,099,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$824,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/153-cowell-drive-burleigh-heads-qld-4220-2020373352" target="_blank" style="color:#1a1a1a;text-decoration:none">153 Cowell Drive, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">?</td>
+        <td style="font-weight:600">$1,100,000+ OFFERS</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$825,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/20-72-the-esplanade-burleigh-heads-qld-4220-2020699030" target="_blank" style="color:#1a1a1a;text-decoration:none">20/72 The Esplanade, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">2bd 1ba</td>
+        <td style="font-weight:600">Guide over $1,100,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$825,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/503a-b-1483-1489-gold-coast-highway-palm-beach-qld-4221-2020569923" target="_blank" style="color:#1a1a1a;text-decoration:none">503A&B/1483 - 1489 Gold Coast Highway, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,100,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$825,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/22003-3113-surfers-paradise-boulevard-surfers-paradise-qld-4217-2020593899" target="_blank" style="color:#1a1a1a;text-decoration:none">22003/3113 Surfers Paradise Boulevard, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers over $1,149,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$861,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3103-5-palm-avenue-surfers-paradise-qld-4217-2020697532" target="_blank" style="color:#1a1a1a;text-decoration:none">3103/5 Palm Avenue, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers above $1,150,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$862,500</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/project/6874/harmony-on-broadbeach-broadbeach-qld/" target="_blank" style="color:#1a1a1a;text-decoration:none">1003/2797-2799 Gold Coast Highway, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">?</td>
+        <td style="font-weight:600">$1,165,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$873,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1003-2797-2799-gold-coast-highway-broadbeach-qld-4218-2020665323" target="_blank" style="color:#1a1a1a;text-decoration:none">1003/2797-2799 Gold Coast Highway, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$1,165,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$873,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/project/5807/jewel-private-residences-surfers-paradise-qld/" target="_blank" style="color:#1a1a1a;text-decoration:none">12806/36 Old Burleigh Road, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">?</td>
+        <td style="font-weight:600">$1,175,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$881,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3-cypress-avenue-surfers-paradise-qld-4217-2019226493" target="_blank" style="color:#1a1a1a;text-decoration:none">3 Cypress Avenue, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">From $1,188,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$891,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2141-2633-gold-coast-highway-broadbeach-qld-4218-2020596567" target="_blank" style="color:#1a1a1a;text-decoration:none">2141/2633 Gold Coast Highway, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$1,190,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$892,500</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/project/6157/crest-broadbeach-qld/" target="_blank" style="color:#1a1a1a;text-decoration:none">13/15 Armrick Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">?</td>
+        <td style="font-weight:600">$1,199,900</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$899,925</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/13-15-armrick-avenue-broadbeach-qld-4218-2019909363" target="_blank" style="color:#1a1a1a;text-decoration:none">13/15 Armrick Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$1,199,900</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$899,925</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/50-1969-gold-coast-highway-burleigh-heads-qld-4220-2020574465" target="_blank" style="color:#1a1a1a;text-decoration:none">50/1969 Gold Coast Highway, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,200,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$900,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/unit-103-15-victoria-avenue-broadbeach-qld-4218-2020647217" target="_blank" style="color:#1a1a1a;text-decoration:none">Unit 103/15 Victoria Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers over $1,200,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$900,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/project/6749/bilinga-house-bilinga-qld/" target="_blank" style="color:#1a1a1a;text-decoration:none">205/107 - 109 Golden Four Drive, BILINGA QLD 4225</a></td>
+        <td style="color:#666;font-size:11px">Bilinga</td>
+        <td style="text-align:center">?</td>
+        <td style="font-weight:600">$1,230,500</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$922,875</td>
+        <td><a href="offer-emails/6749.txt" style="color:#2563eb">View Draft</a></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/13-15-armrick-avenue-broadbeach-qld-4218-2019909347" target="_blank" style="color:#1a1a1a;text-decoration:none">13/15 Armrick Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$1,239,900</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$929,925</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/20-1969-gold-coast-highway-burleigh-heads-qld-4220-2020091703" target="_blank" style="color:#1a1a1a;text-decoration:none">20/1969 Gold Coast Highway, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,245,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$933,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1200-42-surf-parade-broadbeach-qld-4218-2020014718" target="_blank" style="color:#1a1a1a;text-decoration:none">1200/42 Surf Parade, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$1,250,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$937,500</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2133-2633-gold-coast-highway-broadbeach-qld-4218-2020605275" target="_blank" style="color:#1a1a1a;text-decoration:none">2133/2633 Gold Coast Highway, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$1,250,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$937,500</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/project/6869/chevron-one-surfers-paradise-qld/" target="_blank" style="color:#1a1a1a;text-decoration:none">42 Stanhill Drive, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">?</td>
+        <td style="font-weight:600">$1,259,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$944,250</td>
+        <td><a href="offer-emails/6869.txt" style="color:#2563eb">View Draft</a></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/42-stanhill-drive-surfers-paradise-qld-4217-2020425071" target="_blank" style="color:#1a1a1a;text-decoration:none">42 Stanhill Drive, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">1bd 1ba</td>
+        <td style="font-weight:600">$1,259,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$944,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/205-107-109-golden-four-drive-bilinga-qld-4225-2020188775" target="_blank" style="color:#1a1a1a;text-decoration:none">205/107 - 109 Golden Four Drive, BILINGA QLD 4225</a></td>
+        <td style="color:#666;font-size:11px">Bilinga</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$1,270,500</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$952,875</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/6-22-burleigh-street-burleigh-heads-qld-4220-2020668715" target="_blank" style="color:#1a1a1a;text-decoration:none">6/22 Burleigh Street, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,275,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$956,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/6-114-the-esplanade-surfers-paradise-qld-4217-2020679595" target="_blank" style="color:#1a1a1a;text-decoration:none">6/114 The Esplanade, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,299,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$974,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/606-34-scarborough-street-southport-qld-4215-2020481972" target="_blank" style="color:#1a1a1a;text-decoration:none">606/34 Scarborough Street, SOUTHPORT QLD 4215</a></td>
+        <td style="color:#666;font-size:11px">Southport</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">$1,299,000 + buyers</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$974,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2509-1328-gold-coast-highway-palm-beach-qld-4221-2020626836" target="_blank" style="color:#1a1a1a;text-decoration:none">2509/1328 Gold Coast Highway, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers $1,300,000+</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$975,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/12d-50-old-burleigh-road-surfers-paradise-qld-4217-2020699788" target="_blank" style="color:#1a1a1a;text-decoration:none">12D/50 Old Burleigh Road, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers over $1,300,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$975,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/205-88-jefferson-lane-palm-beach-qld-4221-2020627761" target="_blank" style="color:#1a1a1a;text-decoration:none">205/88 Jefferson Lane, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">OFFERS OVER $1,300,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$975,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/49-2981-surfers-paradise-boulevard-surfers-paradise-qld-4217-2020697543" target="_blank" style="color:#1a1a1a;text-decoration:none">49/2981 Surfers Paradise Boulevard, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">Interest over $1,350,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,012,500</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1202-28-30-second-ave-broadbeach-qld-4218-2020541904" target="_blank" style="color:#1a1a1a;text-decoration:none">1202/28-30 Second Ave, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,350M</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,012,500</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/29-26-the-esplanade-surfers-paradise-qld-4217-2020684925" target="_blank" style="color:#1a1a1a;text-decoration:none">29/26 The Esplanade, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,365,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,023,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/3-cypress-avenue-surfers-paradise-qld-4217-2019226496" target="_blank" style="color:#1a1a1a;text-decoration:none">3 Cypress Avenue, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">From $1,380,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,035,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/12806-36-old-burleigh-road-surfers-paradise-qld-4217-2020546116" target="_blank" style="color:#1a1a1a;text-decoration:none">12806/36 Old Burleigh Road, SURFERS PARADISE QLD 4217</a></td>
+        <td style="color:#666;font-size:11px">Surfers Paradise</td>
+        <td style="text-align:center">1bd 1ba</td>
+        <td style="font-weight:600">$1,385,228</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,038,921</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/project/6669/the-landmark-mermaid-beach-qld/" target="_blank" style="color:#1a1a1a;text-decoration:none">1 Seaview Avenue, MERMAID BEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Mermaid Beach</td>
+        <td style="text-align:center">?</td>
+        <td style="font-weight:600">$1,395,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,046,250</td>
+        <td><a href="offer-emails/6669.txt" style="color:#2563eb">View Draft</a></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/53-4-park-avenue-burleigh-heads-qld-4220-2020698060" target="_blank" style="color:#1a1a1a;text-decoration:none">53/4 Park Avenue, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers over $1,395,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,046,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/project/6412/elevaire-palm-beach-qld/" target="_blank" style="color:#1a1a1a;text-decoration:none">203/1409-1411, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">?</td>
+        <td style="font-weight:600">$1,395,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,046,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/203-1409-1411-palm-beach-qld-4221-2018780150" target="_blank" style="color:#1a1a1a;text-decoration:none">203/1409-1411, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$1,395,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,046,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1-246-jefferson-lane-palm-beach-qld-4221-2020697546" target="_blank" style="color:#1a1a1a;text-decoration:none">1/246 Jefferson Lane, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">3bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,400,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,050,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/71-14-elizabeth-avenue-broadbeach-qld-4218-2020668827" target="_blank" style="color:#1a1a1a;text-decoration:none">71/14 Elizabeth Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,400,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,050,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/project/6959/li-rre-palm-beach-qld/" target="_blank" style="color:#1a1a1a;text-decoration:none">66 Jefferson Lane, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">?</td>
+        <td style="font-weight:600">$1,413,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,059,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/66-jefferson-lane-palm-beach-qld-4221-2020708063" target="_blank" style="color:#1a1a1a;text-decoration:none">66 Jefferson Lane, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$1,413,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,059,750</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/2203-2797-2799-gold-coast-highway-broadbeach-qld-4218-2020514882" target="_blank" style="color:#1a1a1a;text-decoration:none">2203/2797-2799 Gold Coast Highway, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$1,415,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,061,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1-01-64-goodwin-terrace-burleigh-heads-qld-4220-2017251643" target="_blank" style="color:#1a1a1a;text-decoration:none">1.01/64 Goodwin Terrace, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$1,422,968</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,067,226</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1-seaview-avenue-mermaid-beach-qld-4218-2020335708" target="_blank" style="color:#1a1a1a;text-decoration:none">1 Seaview Avenue, MERMAID BEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Mermaid Beach</td>
+        <td style="text-align:center">2bd 1ba</td>
+        <td style="font-weight:600">from $1,495,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,121,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/66-jefferson-lane-palm-beach-qld-4221-2020708128" target="_blank" style="color:#1a1a1a;text-decoration:none">66 Jefferson Lane, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">$1,495,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,121,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/1303-10-12-first-avenue-broadbeach-qld-4218-2020671448" target="_blank" style="color:#1a1a1a;text-decoration:none">1303/10-12 First Avenue, BROADBEACH QLD 4218</a></td>
+        <td style="color:#666;font-size:11px">Broadbeach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,495,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,121,250</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/508-6-palm-beach-avenue-palm-beach-qld-4221-2020566808" target="_blank" style="color:#1a1a1a;text-decoration:none">508/6 Palm Beach Avenue, PALM BEACH QLD 4221</a></td>
+        <td style="color:#666;font-size:11px">Palm Beach</td>
+        <td style="text-align:center">2bd 2ba</td>
+        <td style="font-weight:600">Offers $1,500,000 +</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,125,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/27-delta-circuit-hope-island-qld-4212-2020707889" target="_blank" style="color:#1a1a1a;text-decoration:none">27 Delta Circuit, HOPE ISLAND QLD 4212</a></td>
+        <td style="color:#666;font-size:11px">Hope Island</td>
+        <td style="text-align:center">4bd 2ba</td>
+        <td style="font-weight:600">Offers Over $1,500,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,125,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr><tr>
+        <td><a href="https://www.domain.com.au/10-82-the-esplanade-burleigh-heads-qld-4220-2020653900" target="_blank" style="color:#1a1a1a;text-decoration:none">10/82 The Esplanade, BURLEIGH HEADS QLD 4220</a></td>
+        <td style="color:#666;font-size:11px">Burleigh Heads</td>
+        <td style="text-align:center">2bd 1ba</td>
+        <td style="font-weight:600">Offers Over $1,500,000</td>
+        <td style="text-align:center"><span style="color:#888;font-size:11px">0d</span></td>
+        <td style="font-weight:600;color:#16a34a">$1,125,000</td>
+        <td><span style="color:#ccc">N/A</span></td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="footer">Data sourced from Domain.com.au via Scrapling. For research purposes only.</div>
+</body>
+</html>
