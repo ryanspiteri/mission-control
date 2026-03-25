@@ -1098,7 +1098,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
   const PROP_EMAIL_IDS = ["2020709678", "2020573843", "2020651828", "2020640065", "2020709997", "2020654318", "2020599195", "2020707695", "2020543923", "2020683640", "2020662355", "6869", "2020710738", "2020691038", "2020700934", "6669", "6749", "2020697299", "2020710098", "4150", "2020708164", "2019226466", "2020686104", "2020710336", "2020710334", "2020707718", "2020682397", "2020709872", "2020670452", "2020610478", "2020559330", "6277", "2020584542"];
   let propSortCol = null, propSortDir = 1;
 
-  (function initProp() {
+  function initProp() {
     const suburbs = [...new Set(PROP_DEALS.map(d => d.suburb).filter(Boolean))].sort();
     const sel = document.getElementById('pf-suburb');
     suburbs.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o); });
@@ -1983,6 +1983,7 @@ function navigate(page, btn){
   location.hash = page;
   // Lazy load skills
   if(page==='skills' && !window._skillsLoaded) fetchSkills();
+  if(page==='property' && !window._propLoaded) { window._propLoaded=true; initProp(); }
   // Close sidebar on mobile
   closeSidebar();
 }
