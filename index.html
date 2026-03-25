@@ -623,6 +623,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
   </div>
 
   <div class="nav-section">
+    <div class="nav-section-label">Investments</div>
+    <button class="nav-item" data-page="property" onclick="navigate('property',this)">
+      <span class="nav-item-icon">🏠</span> Property Finder
+    </button>
+  </div>
+
+  <div class="nav-section">
     <div class="nav-section-label">Operations</div>
     <button class="nav-item" data-page="agents" onclick="navigate('agents',this)">
       <span class="nav-item-icon">🤖</span> Sub-Agents
@@ -971,6 +978,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
         </div>
 
       </div>
+    </div>
+  </div>
+
+  <!-- ── Property Finder Page ── -->
+  <div id="page-property" class="page" style="display:none">
+    <div class="page-header">
+      <div class="page-title">Property Finder</div>
+      <div class="page-sub">Gold Coast deals | $600K–$1.5M | Scraped live from Domain.com.au</div>
+    </div>
+    <div style="margin-top:8px;border-radius:12px;overflow:hidden;border:1px solid var(--border)">
+      <iframe src="property.html" style="width:100%;height:calc(100vh - 160px);border:none;display:block" title="Property Finder"></iframe>
     </div>
   </div>
 
@@ -1705,7 +1723,7 @@ async function fetchAll(force=false){
 }
 
 // ─── Hash routing ──────────────────────────────────────────────────────────
-const PAGES = ['dashboard','businesses','trading','team','agents','crons','services','usage','skills'];
+const PAGES = ['dashboard','businesses','trading','team','property','agents','crons','services','usage','skills'];
 
 function navigate(page, btn){
   // Hide all pages
