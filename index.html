@@ -1165,7 +1165,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
       const addr = d.url ? '<a href="' + d.url + '" target="_blank" style="color:var(--text);text-decoration:none;font-weight:500">' + d.address + '</a>'
                          : '<span style="font-weight:500">' + d.address + '</span>';
       const beds = d.bedrooms && d.bedrooms !== '?' ? d.bedrooms + 'bd' : '—';
-      const draftCell = hasDraft ? '<button class="prop-draft-btn" onclick='propOpenDraft("' + d.id + '","' + d.address.replace(/'/g,"\\'") + '","' + (d.price_display||'') + '")'>View Draft</button>'
+            const draftCell = hasDraft ? '<button class="prop-draft-btn" onclick="propOpenDraft(\'' + d.id + '\',\'' + d.address.replace(/'/g,"\\'") + '\',\'' + (d.price_display||'') + '\')">View Draft</button>'
                                  : '<span style="color:var(--text2);font-size:11px">—</span>';
       return '<tr><td>' + addr + '</td><td style="color:var(--text2);font-size:11px">' + (d.suburb||'—') + '</td><td style="text-align:center;font-size:11px">' + beds + '</td><td style="font-weight:600">' + (d.price_display||'POA') + '</td><td style="text-align:center">' + badge + '</td><td style="font-weight:700;color:var(--green)">' + offerStr + '</td><td>' + draftCell + '</td></tr>';
     }).join('');
