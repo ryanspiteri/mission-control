@@ -6,14 +6,10 @@ var propSortCol = null;
 var propSortDir = 1;
 
 // Load data
-Promise.all([
-  fetch('prop-data.json').then(function(r){ return r.json(); }),
-  fetch('prop-drafts.json').then(function(r){ return r.json(); })
-]).then(function(results) {
-  var data = results[0];
-  PROP_DRAFTS = results[1];
+fetch('prop-data.json').then(function(r){ return r.json(); }).then(function(data) {
   PROP_DEALS = data.deals || [];
   PROP_EMAIL_IDS = data.emailIds || [];
+  PROP_DRAFTS = data.drafts || {};
   initProp();
 }).catch(function(e) {
   console.warn('prop data load failed:', e);
