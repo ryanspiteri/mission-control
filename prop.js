@@ -261,3 +261,36 @@ function propReset() {
   propSortDir = 1;
   propApply();
 }
+
+// Column visibility
+var COL_MAP = {
+  'col-suburb': 1, 'col-rent': 6, 'col-cashflow': 7,
+  'col-growth': 8, 'col-median': 9, 'col-stamp': 10,
+  'col-repay': 11, 'col-rating': 12, 'col-offer': 13
+};
+
+function propToggleCol(id, show) {
+  var idx = COL_MAP[id];
+  if (!idx) return;
+  var table = document.querySelector('.prop-table');
+  if (!table) return;
+  var rows = table.querySelectorAll('tr');
+  for (var i = 0; i < rows.length; i++) {
+    var cells = rows[i].querySelectorAll('th, td');
+    if (cells[idx]) cells[idx].style.display = show ? '' : 'none';
+  }
+}
+
+function propToggleColMenu() {
+  var menu = document.getElementById('prop-col-menu');
+  if (menu) menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(e) {
+  var menu = document.getElementById('prop-col-menu');
+  var btn = e.target.closest ? e.target.closest('[onclick="propToggleColMenu()"]') : null;
+  if (menu && menu.style.display === 'block' && !menu.contains(e.target) && !btn) {
+    menu.style.display = 'none';
+  }
+});
