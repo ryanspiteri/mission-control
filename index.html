@@ -1232,37 +1232,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
             </tr>
           </thead>
           <tbody>
-            ${[
-              ['HGH','4 IU','Daily','Subq injection','GH Axis','GH axis stimulation — anabolism, lipolysis, recovery, connective tissue support','#8b5cf6'],
-              ['Testosterone Enanthate','125mg (250mg/wk)','2x weekly Mon/Thu','IM or subq','Androgenic / Anabolic','Androgenic and anabolic load — muscle mass, libido, mood, body composition','#f59e0b'],
-              ['HCG','500 IU','2x weekly Mon/Thu','Subq injection','HPG Axis','HPG axis maintenance — prevents testicular atrophy, maintains endogenous testosterone','#06b6d4'],
-              ['Retatrutide','250mcg*','Weekly','Subq injection','Metabolic','Triple incretin agonist — corrects HGH-driven insulin resistance, appetite modulation, fat oxidation','#22c55e'],
-              ['NAD+','50mg','3x weekly','Subq or IV','Mitochondrial','Mitochondrial cofactor — cellular energy, sirtuin activation, DNA repair','#3b82f6'],
-              ['GHK-Cu','3mg','5x weekly Mon–Fri','Subq injection','Tissue Repair','Collagen synthesis, gene expression, wound healing, anti-inflammatory','#ec4899'],
-              ['KPV','500mcg–1mg','Daily','Subq injection','Anti-inflammatory','Systemic anti-inflammatory — NF-κB inhibition, cytokine suppression','#14b8a6'],
-              ['Epithalon','5–10mg','10–20 day course 1–2x/yr','Subq injection','Longevity','Telomere protection — telomerase activation, pineal/melatonin restoration','#a78bfa'],
-              ['Selank','250–300mcg','Cycled 2 wks on / 1 off','Intranasal','Cognitive / Stress','Anxiety modulation, calm clarity, stress resilience under high workload','#34d399'],
-              ['Vyvanse','40mg','4x weekly Mon–Thu','Oral','CNS / Focus','CNS stimulant — focus, executive function, dopaminergic output','#f97316'],
-              ['Anastrozole','0.25–0.5mg','Bloods-guided only','Oral','Aromatase Inhibitor','Prevents excess estrogen from Testosterone + HCG aromatisation','#ef4444'],
-              ['Cialis','10mg','As needed','Oral','PDE5 / Vascular','Vasodilation, erectile function, cardiovascular load offset','#64748b'],
-              ['Finasteride','0.25mg','Daily','Oral','5-AR Inhibitor','Reduces DHT, mitigates androgenic hair loss from elevated Testosterone','#78716c'],
-              ['Minoxidil','Per label','Daily','Topical','Hair','Follicle vasodilation — gold standard combo with Finasteride','#78716c'],
-              ['Krill Oil','1500mg','Daily','Oral','Omega-3','Cardiovascular — HDL/LDL support, offsets Testosterone lipid impact','#0ea5e9'],
-            ].map(([name,dose,freq,route,cat,purpose,color])=>`
-            <tr style="border-bottom:1px solid var(--border);transition:background .15s" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
-              <td style="padding:10px 14px;font-weight:700;color:${color}">${name}</td>
-              <td style="padding:10px 14px;font-family:monospace;font-size:11px;color:var(--text)">${dose}</td>
-              <td style="padding:10px 14px;color:var(--text2);font-size:11px">${freq}</td>
-              <td style="padding:10px 14px;color:var(--text2);font-size:11px">${route}</td>
-              <td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:${color}20;color:${color};font-size:10px;font-weight:600">${cat}</span></td>
-              <td style="padding:10px 14px;color:var(--text2);font-size:11px;max-width:300px">${purpose}</td>
-            </tr>`).join('')}
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#8b5cf6">HGH</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">4 IU</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Daily</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Subq injection</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(139,92,246,.15);color:#8b5cf6;font-size:10px;font-weight:600">GH Axis</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">GH axis stimulation — anabolism, lipolysis, recovery, connective tissue support</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#f59e0b">Testosterone Enanthate</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">125mg (250mg/wk)</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">2x weekly Mon/Thu</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">IM or subq</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(245,158,11,.15);color:#f59e0b;font-size:10px;font-weight:600">Androgenic / Anabolic</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Androgenic and anabolic load — muscle mass, libido, mood, body composition</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#06b6d4">HCG</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">500 IU</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">2x weekly Mon/Thu</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Subq injection</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(6,182,212,.15);color:#06b6d4;font-size:10px;font-weight:600">HPG Axis</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">HPG axis maintenance — prevents testicular atrophy, maintains endogenous testosterone</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#22c55e">Retatrutide</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">250mcg*</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Weekly</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Subq injection</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(34,197,94,.15);color:#22c55e;font-size:10px;font-weight:600">Metabolic</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Triple incretin agonist — corrects HGH-driven insulin resistance, appetite modulation, fat oxidation</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#3b82f6">NAD+</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">50mg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">3x weekly</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Subq or IV</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(59,130,246,.15);color:#3b82f6;font-size:10px;font-weight:600">Mitochondrial</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Mitochondrial cofactor — cellular energy, sirtuin activation, DNA repair</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#ec4899">GHK-Cu</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">3mg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">5x weekly Mon–Fri</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Subq injection</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(236,72,153,.15);color:#ec4899;font-size:10px;font-weight:600">Tissue Repair</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Collagen synthesis, gene expression, wound healing, anti-inflammatory</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#14b8a6">KPV</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">500mcg–1mg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Daily</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Subq injection</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(20,184,166,.15);color:#14b8a6;font-size:10px;font-weight:600">Anti-inflammatory</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Systemic anti-inflammatory — NF-kB inhibition, cytokine suppression</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#a78bfa">Epithalon</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">5–10mg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">10–20 day course, 1–2x/yr</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Subq injection</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(167,139,250,.15);color:#a78bfa;font-size:10px;font-weight:600">Longevity</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Telomere protection — telomerase activation, pineal/melatonin restoration</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#34d399">Selank</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">250–300mcg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Cycled 2wks on / 1 off</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Intranasal</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(52,211,153,.15);color:#34d399;font-size:10px;font-weight:600">Cognitive / Stress</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Anxiety modulation, calm clarity, stress resilience under high workload</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#f97316">Vyvanse</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">40mg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">4x weekly Mon–Thu</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Oral</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(249,115,22,.15);color:#f97316;font-size:10px;font-weight:600">CNS / Focus</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">CNS stimulant — focus, executive function, dopaminergic output</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#ef4444">Anastrozole</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">0.25–0.5mg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Bloods-guided only</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Oral</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(239,68,68,.15);color:#ef4444;font-size:10px;font-weight:600">Aromatase Inhibitor</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Prevents excess estrogen from Testosterone + HCG aromatisation</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#64748b">Cialis</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">10mg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">As needed</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Oral</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(100,116,139,.15);color:#64748b;font-size:10px;font-weight:600">PDE5 / Vascular</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Vasodilation, erectile function, cardiovascular load offset</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#78716c">Finasteride</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">0.25mg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Daily</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Oral</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(120,113,108,.15);color:#78716c;font-size:10px;font-weight:600">5-AR Inhibitor</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Reduces DHT, mitigates androgenic hair loss from elevated Testosterone</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#78716c">Minoxidil</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">Per label</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Daily</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Topical</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(120,113,108,.15);color:#78716c;font-size:10px;font-weight:600">Hair</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Follicle vasodilation — gold standard combo with Finasteride</td></tr>
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:700;color:#0ea5e9">Krill Oil</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">1500mg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Daily</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Oral</td><td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:rgba(14,165,233,.15);color:#0ea5e9;font-size:10px;font-weight:600">Omega-3</span></td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Cardiovascular — HDL/LDL support, offsets Testosterone lipid impact</td></tr>
           </tbody>
         </table>
       </div>
       <p style="color:var(--text2);font-size:11px;margin-top:12px">* Retatrutide 250mcg is below minimum clinical trial dose (500mcg). Consider titrating up with medical guidance.</p>
 
-      <!-- Supplements -->
       <div style="margin-top:28px">
         <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px">Supplement Stack</div>
         <div style="overflow-x:auto">
@@ -1276,26 +1265,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
               </tr>
             </thead>
             <tbody>
-              ${[
-                ['Magnesium Glycinate','400mg','Night','Vyvanse depletion, sleep, recovery'],
-                ['Vitamin D3 + K2 (MK-7)','5000IU / 100mcg','Morning with food','Testosterone receptor, cardiovascular'],
-                ['Taurine','2–3g','Daily','Vyvanse depletion, cardioprotection'],
-                ['NAC','600mg','Daily','Glutathione precursor, liver support'],
-                ['CoQ10 (Ubiquinol)','200–300mg','Morning with food','Mitochondrial, synergistic with NAD+'],
-                ['Methylated B Complex','Per product','Morning','Vyvanse depletion, NAD+ support'],
-                ['Vitamin C','1–2g','Daily','Collagen synthesis, adrenal support'],
-                ['Berberine','500mg 2–3x','With meals','Insulin sensitiser, lipid support'],
-                ['Zinc','15–25mg','Away from GHK-Cu','Testosterone metabolism, immunity'],
-                ['Selenium','100–200mcg','Daily','T4→T3 conversion, antioxidant'],
-                ['L-Tyrosine','500mg–1g','Vyvanse off days only','Catecholamine replenishment'],
-                ['Probiotics','Per product','Daily','Microbiome, synergistic with KPV'],
-              ].map(([name,dose,timing,purpose])=>`
-              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
-                <td style="padding:10px 14px;font-weight:600;color:var(--text)">${name}</td>
-                <td style="padding:10px 14px;font-family:monospace;font-size:11px">${dose}</td>
-                <td style="padding:10px 14px;color:var(--text2);font-size:11px">${timing}</td>
-                <td style="padding:10px 14px;color:var(--text2);font-size:11px">${purpose}</td>
-              </tr>`).join('')}
+              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:600;color:var(--text)">Magnesium Glycinate</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">400mg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Night</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Vyvanse depletion, sleep, recovery</td></tr>
+              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:600;color:var(--text)">Vitamin D3 + K2 (MK-7)</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">5000IU / 100mcg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Morning with food</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Testosterone receptor, cardiovascular</td></tr>
+              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:600;color:var(--text)">Taurine</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">2–3g</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Daily</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Vyvanse depletion, cardioprotection</td></tr>
+              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:600;color:var(--text)">NAC</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">600mg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Daily</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Glutathione precursor, liver support</td></tr>
+              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:600;color:var(--text)">CoQ10 (Ubiquinol)</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">200–300mg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Morning with food</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Mitochondrial, synergistic with NAD+</td></tr>
+              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:600;color:var(--text)">Methylated B Complex</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">Per product</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Morning</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Vyvanse depletion, NAD+ support</td></tr>
+              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:600;color:var(--text)">Vitamin C</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">1–2g</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Daily</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Collagen synthesis, adrenal support</td></tr>
+              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:600;color:var(--text)">Berberine</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">500mg 2–3x</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">With meals</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Insulin sensitiser, lipid support</td></tr>
+              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:600;color:var(--text)">Zinc</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">15–25mg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Away from GHK-Cu</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Testosterone metabolism, immunity</td></tr>
+              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:600;color:var(--text)">Selenium</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">100–200mcg</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Daily</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">T4 to T3 conversion, antioxidant</td></tr>
+              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:600;color:var(--text)">L-Tyrosine</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">500mg–1g</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Vyvanse off days only</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Catecholamine replenishment</td></tr>
+              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:600;color:var(--text)">Probiotics</td><td style="padding:10px 14px;font-family:monospace;font-size:11px">Per product</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Daily</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Microbiome, synergistic with KPV</td></tr>
             </tbody>
           </table>
         </div>
@@ -1308,33 +1289,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
         <table style="width:100%;border-collapse:collapse;font-size:12px">
           <thead>
             <tr style="background:var(--bg3)">
-              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border);min-width:140px">Compound</th>
-              ${['MON','TUE','WED','THU','FRI','SAT','SUN'].map(d=>`<th style="padding:10px 14px;text-align:center;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">${d}</th>`).join('')}
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border);min-width:160px">Compound</th>
+              <th style="padding:10px 14px;text-align:center;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">MON</th>
+              <th style="padding:10px 14px;text-align:center;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">TUE</th>
+              <th style="padding:10px 14px;text-align:center;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">WED</th>
+              <th style="padding:10px 14px;text-align:center;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">THU</th>
+              <th style="padding:10px 14px;text-align:center;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">FRI</th>
+              <th style="padding:10px 14px;text-align:center;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">SAT</th>
+              <th style="padding:10px 14px;text-align:center;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">SUN</th>
             </tr>
           </thead>
-          <tbody>
-            ${[
-              ['HGH 4IU','#8b5cf6',[1,1,1,1,1,1,1]],
-              ['Testosterone 125mg','#f59e0b',[1,0,0,0,1,0,0]],
-              ['HCG 500IU','#06b6d4',[1,0,0,0,1,0,0]],
-              ['Retatrutide 250mcg','#22c55e',[1,0,0,0,0,0,0]],
-              ['NAD+ 50mg','#3b82f6',[1,0,1,0,1,0,0]],
-              ['GHK-Cu 3mg','#ec4899',[1,1,1,1,1,0,0]],
-              ['KPV (subq)','#14b8a6',[1,1,1,1,1,1,1]],
-              ['Vyvanse 40mg','#f97316',[1,1,1,1,0,0,0]],
-              ['Selank (intranasal)','#34d399',[1,1,0,1,1,0,0]],
-              ['Finasteride 0.25mg','#78716c',[1,1,1,1,1,1,1]],
-              ['Minoxidil (topical)','#78716c',[1,1,1,1,1,1,1]],
-            ].map(([name,color,days])=>`
-            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
-              <td style="padding:10px 14px;font-weight:600;color:${color}">${name}</td>
-              ${days.map(d=>`<td style="padding:10px 14px;text-align:center">${d?`<span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:${color};opacity:.85"></span>`:`<span style="color:var(--border)">—</span>`}</td>`).join('')}
-            </tr>`).join('')}
-          </tbody>
+          <tbody id="schedule-tbody"></tbody>
         </table>
       </div>
       <div style="margin-top:14px;padding:12px 14px;background:var(--bg3);border-radius:8px;border:1px solid var(--border)">
-        <p style="font-size:11px;color:var(--text2)">⚠ Daily compounds (supplements, Finasteride, Minoxidil) administered every day. Testosterone and HCG same days (Mon/Thu) for hormonal consistency. Selank: 2 weeks on, 1 week off cycling recommended.</p>
+        <p style="font-size:11px;color:var(--text2)">Testosterone and HCG same days (Mon/Thu). Selank: 2 weeks on, 1 week off. Daily compounds every day.</p>
       </div>
     </div>
 
@@ -1345,36 +1314,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
           <thead>
             <tr style="background:var(--bg3)">
               <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Marker</th>
-              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Target / Rationale</th>
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Target</th>
               <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Frequency</th>
               <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Last Result</th>
               <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Status</th>
             </tr>
           </thead>
           <tbody>
-            ${[
-              ['Fasting Glucose','85–95 mg/dL','Every 6–8 weeks'],
-              ['HbA1c','< 5.7%','Quarterly'],
-              ['Total + Free Testosterone','Therapeutic range','Quarterly'],
-              ['Estradiol (E2)','20–30 pg/mL','Every 6–8 weeks'],
-              ['DHT','Confirm Finasteride efficacy','Quarterly'],
-              ['IGF-1','Confirm HGH load appropriate','Quarterly'],
-              ['Hematocrit / Hemoglobin','< 52%','Quarterly'],
-              ['PSA','Double result (Finasteride suppresses ~50%)','Quarterly'],
-              ['LH / FSH','Confirm HCG maintaining HPG axis','Quarterly'],
-              ['Lipid Panel','HDL/LDL — Testosterone impact','Quarterly'],
-              ['Lipase / Amylase','Pancreatic markers — GLP-1 monitoring','Quarterly'],
-              ['Blood Pressure + HR','Vyvanse + Testosterone + HGH load','Monthly'],
-              ['Liver Enzymes (ALT/AST)','Compound load','Quarterly'],
-              ['Fasting Insulin','Insulin sensitivity tracking','Quarterly'],
-            ].map(([marker,target,freq])=>`
-            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
-              <td style="padding:10px 14px;font-weight:600;color:var(--text)">${marker}</td>
-              <td style="padding:10px 14px;color:var(--text2);font-size:11px">${target}</td>
-              <td style="padding:10px 14px;color:var(--text2);font-size:11px">${freq}</td>
-              <td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td>
-              <td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td>
-            </tr>`).join('')}
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">Fasting Glucose</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">85–95 mg/dL</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Every 6–8 weeks</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">HbA1c</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">&lt; 5.7%</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Quarterly</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">Total + Free Testosterone</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Therapeutic range</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Quarterly</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">Estradiol (E2)</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">20–30 pg/mL</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Every 6–8 weeks</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">DHT</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Confirm Finasteride efficacy</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Quarterly</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">IGF-1</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Confirm HGH load appropriate</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Quarterly</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">Hematocrit / Hemoglobin</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">&lt; 52%</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Quarterly</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">PSA</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Double result (Finasteride suppresses ~50%)</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Quarterly</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">LH / FSH</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Confirm HCG maintaining HPG axis</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Quarterly</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">Lipid Panel</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">HDL/LDL — Testosterone impact</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Quarterly</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">Lipase / Amylase</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Pancreatic markers — GLP-1 monitoring</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Quarterly</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">Blood Pressure + HR</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Vyvanse + Testosterone + HGH load</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Monthly</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">Liver Enzymes (ALT/AST)</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Compound load</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Quarterly</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 14px;font-weight:600">Fasting Insulin</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Insulin sensitivity tracking</td><td style="padding:10px 14px;color:var(--text2);font-size:11px">Quarterly</td><td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td><td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -1385,26 +1345,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
       <div style="max-width:600px">
         <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:20px">
           <div style="font-size:15px;font-weight:700;margin-bottom:6px">Upload Blood Test Results</div>
-          <div style="font-size:12px;color:var(--text2);margin-bottom:20px">Upload your blood test PDF or image and I'll extract the values and compare against your protocol targets.</div>
-          <div id="blood-drop-zone" style="border:2px dashed var(--border);border-radius:10px;padding:40px;text-align:center;cursor:pointer;transition:border-color .2s" 
-               onmouseover="this.style.borderColor='var(--accent)'" 
+          <div style="font-size:12px;color:var(--text2);margin-bottom:20px">Upload your blood test PDF or image — send to Elara via Telegram for full extraction and comparison against your protocol targets.</div>
+          <div id="blood-drop-zone" style="border:2px dashed var(--border);border-radius:10px;padding:40px;text-align:center;cursor:pointer;transition:border-color .2s"
+               onmouseover="this.style.borderColor='var(--accent)'"
                onmouseout="this.style.borderColor='var(--border)'"
                onclick="document.getElementById('blood-file-input').click()">
             <div style="font-size:28px;margin-bottom:10px">📋</div>
             <div style="font-size:13px;font-weight:600;margin-bottom:4px">Drop your blood test here</div>
-            <div style="font-size:11px;color:var(--text2)">PDF, JPG, or PNG — results extracted automatically</div>
+            <div style="font-size:11px;color:var(--text2)">PDF, JPG, or PNG — send to Elara via Telegram for analysis</div>
           </div>
           <input type="file" id="blood-file-input" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleBloodUpload(this)">
         </div>
-
         <div id="blood-results-area" style="display:none;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px">
-          <div style="font-size:14px;font-weight:700;margin-bottom:14px">Extracted Results</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:14px">Results</div>
           <div id="blood-results-content"></div>
         </div>
-
-        <!-- Previous uploads -->
         <div style="margin-top:20px">
-          <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;font-size:10px">Previous Uploads</div>
+          <div style="font-size:10px;font-weight:600;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px">Previous Uploads</div>
           <div id="blood-history" style="color:var(--text2);font-size:12px;font-style:italic">No blood tests uploaded yet.</div>
         </div>
       </div>
@@ -2066,6 +2023,35 @@ async function fetchAll(force=false){
 
 // ─── Hash routing ──────────────────────────────────────────────────────────
 const PAGES = ['dashboard','businesses','trading','team','property','agents','crons','services','usage','skills','health'];
+
+
+// Build weekly schedule table
+(function(){
+  var rows = [
+    ['HGH 4IU','#8b5cf6',[1,1,1,1,1,1,1]],
+    ['Testosterone 125mg','#f59e0b',[1,0,0,0,1,0,0]],
+    ['HCG 500IU','#06b6d4',[1,0,0,0,1,0,0]],
+    ['Retatrutide 250mcg','#22c55e',[1,0,0,0,0,0,0]],
+    ['NAD+ 50mg','#3b82f6',[1,0,1,0,1,0,0]],
+    ['GHK-Cu 3mg','#ec4899',[1,1,1,1,1,0,0]],
+    ['KPV (subq)','#14b8a6',[1,1,1,1,1,1,1]],
+    ['Vyvanse 40mg','#f97316',[1,1,1,1,0,0,0]],
+    ['Selank','#34d399',[1,1,0,1,1,0,0]],
+    ['Finasteride 0.25mg','#78716c',[1,1,1,1,1,1,1]],
+    ['Minoxidil','#78716c',[1,1,1,1,1,1,1]],
+  ];
+  var tbody = document.getElementById('schedule-tbody');
+  if(!tbody) return;
+  tbody.innerHTML = rows.map(function(r){
+    var name=r[0],color=r[1],days=r[2];
+    var cells = days.map(function(d){
+      return d
+        ? '<td style="padding:10px 14px;text-align:center"><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:'+color+';opacity:.85"></span></td>'
+        : '<td style="padding:10px 14px;text-align:center;color:var(--border)">—</td>';
+    }).join('');
+    return '<tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><td style="padding:10px 14px;font-weight:600;color:'+color+'">'+name+'</td>'+cells+'</tr>';
+  }).join('');
+})();
 
 function healthTab(tab) {
   ['stack','schedule','blood','bloods-upload'].forEach(t => {
