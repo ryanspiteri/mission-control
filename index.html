@@ -651,6 +651,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
     <button class="nav-item" data-page="skills" onclick="navigate('skills',this)">
       <span class="nav-item-icon">🧠</span> Skills
     </button>
+    <button class="nav-item" data-page="health" onclick="navigate('health',this)">
+      <span class="nav-item-icon">💉</span> Health Protocol
+    </button>
   </div>
 
   <div class="sidebar-footer">
@@ -1197,6 +1200,216 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
         <div class="shimmer" style="height:120px"></div>
       </div>
     </div>
+  </div>
+
+  <!-- ── Health Protocol Page ── -->
+  <div id="page-health" class="page" style="display:none">
+    <div class="page-header" style="margin-bottom:20px">
+      <div class="page-title">Health Protocol</div>
+      <div class="page-sub">Performance &amp; Longevity Stack · Dosing · Schedule · Blood Monitoring</div>
+    </div>
+
+    <!-- Tab nav -->
+    <div style="display:flex;gap:8px;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:0">
+      <button onclick="healthTab('stack')" id="htab-stack" style="padding:8px 16px;background:none;border:none;border-bottom:2px solid var(--accent);color:var(--accent);font-weight:700;font-size:13px;cursor:pointer">Full Stack</button>
+      <button onclick="healthTab('schedule')" id="htab-schedule" style="padding:8px 16px;background:none;border:none;border-bottom:2px solid transparent;color:var(--text2);font-size:13px;cursor:pointer">Weekly Schedule</button>
+      <button onclick="healthTab('blood')" id="htab-blood" style="padding:8px 16px;background:none;border:none;border-bottom:2px solid transparent;color:var(--text2);font-size:13px;cursor:pointer">Blood Panel</button>
+      <button onclick="healthTab('bloods-upload')" id="htab-bloods-upload" style="padding:8px 16px;background:none;border:none;border-bottom:2px solid transparent;color:var(--text2);font-size:13px;cursor:pointer">📋 Upload Blood Test</button>
+    </div>
+
+    <!-- Full Stack Tab -->
+    <div id="hpanel-stack">
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:12px">
+          <thead>
+            <tr style="background:var(--bg3)">
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Compound</th>
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Dose</th>
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Frequency</th>
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Route</th>
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Category</th>
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${[
+              ['HGH','4 IU','Daily','Subq injection','GH Axis','GH axis stimulation — anabolism, lipolysis, recovery, connective tissue support','#8b5cf6'],
+              ['Testosterone Enanthate','125mg (250mg/wk)','2x weekly Mon/Thu','IM or subq','Androgenic / Anabolic','Androgenic and anabolic load — muscle mass, libido, mood, body composition','#f59e0b'],
+              ['HCG','500 IU','2x weekly Mon/Thu','Subq injection','HPG Axis','HPG axis maintenance — prevents testicular atrophy, maintains endogenous testosterone','#06b6d4'],
+              ['Retatrutide','250mcg*','Weekly','Subq injection','Metabolic','Triple incretin agonist — corrects HGH-driven insulin resistance, appetite modulation, fat oxidation','#22c55e'],
+              ['NAD+','50mg','3x weekly','Subq or IV','Mitochondrial','Mitochondrial cofactor — cellular energy, sirtuin activation, DNA repair','#3b82f6'],
+              ['GHK-Cu','3mg','5x weekly Mon–Fri','Subq injection','Tissue Repair','Collagen synthesis, gene expression, wound healing, anti-inflammatory','#ec4899'],
+              ['KPV','500mcg–1mg','Daily','Subq injection','Anti-inflammatory','Systemic anti-inflammatory — NF-κB inhibition, cytokine suppression','#14b8a6'],
+              ['Epithalon','5–10mg','10–20 day course 1–2x/yr','Subq injection','Longevity','Telomere protection — telomerase activation, pineal/melatonin restoration','#a78bfa'],
+              ['Selank','250–300mcg','Cycled 2 wks on / 1 off','Intranasal','Cognitive / Stress','Anxiety modulation, calm clarity, stress resilience under high workload','#34d399'],
+              ['Vyvanse','40mg','4x weekly Mon–Thu','Oral','CNS / Focus','CNS stimulant — focus, executive function, dopaminergic output','#f97316'],
+              ['Anastrozole','0.25–0.5mg','Bloods-guided only','Oral','Aromatase Inhibitor','Prevents excess estrogen from Testosterone + HCG aromatisation','#ef4444'],
+              ['Cialis','10mg','As needed','Oral','PDE5 / Vascular','Vasodilation, erectile function, cardiovascular load offset','#64748b'],
+              ['Finasteride','0.25mg','Daily','Oral','5-AR Inhibitor','Reduces DHT, mitigates androgenic hair loss from elevated Testosterone','#78716c'],
+              ['Minoxidil','Per label','Daily','Topical','Hair','Follicle vasodilation — gold standard combo with Finasteride','#78716c'],
+              ['Krill Oil','1500mg','Daily','Oral','Omega-3','Cardiovascular — HDL/LDL support, offsets Testosterone lipid impact','#0ea5e9'],
+            ].map(([name,dose,freq,route,cat,purpose,color])=>`
+            <tr style="border-bottom:1px solid var(--border);transition:background .15s" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
+              <td style="padding:10px 14px;font-weight:700;color:${color}">${name}</td>
+              <td style="padding:10px 14px;font-family:monospace;font-size:11px;color:var(--text)">${dose}</td>
+              <td style="padding:10px 14px;color:var(--text2);font-size:11px">${freq}</td>
+              <td style="padding:10px 14px;color:var(--text2);font-size:11px">${route}</td>
+              <td style="padding:10px 14px"><span style="padding:2px 7px;border-radius:8px;background:${color}20;color:${color};font-size:10px;font-weight:600">${cat}</span></td>
+              <td style="padding:10px 14px;color:var(--text2);font-size:11px;max-width:300px">${purpose}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <p style="color:var(--text2);font-size:11px;margin-top:12px">* Retatrutide 250mcg is below minimum clinical trial dose (500mcg). Consider titrating up with medical guidance.</p>
+
+      <!-- Supplements -->
+      <div style="margin-top:28px">
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px">Supplement Stack</div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <thead>
+              <tr style="background:var(--bg3)">
+                <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Supplement</th>
+                <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Dose</th>
+                <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Timing</th>
+                <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${[
+                ['Magnesium Glycinate','400mg','Night','Vyvanse depletion, sleep, recovery'],
+                ['Vitamin D3 + K2 (MK-7)','5000IU / 100mcg','Morning with food','Testosterone receptor, cardiovascular'],
+                ['Taurine','2–3g','Daily','Vyvanse depletion, cardioprotection'],
+                ['NAC','600mg','Daily','Glutathione precursor, liver support'],
+                ['CoQ10 (Ubiquinol)','200–300mg','Morning with food','Mitochondrial, synergistic with NAD+'],
+                ['Methylated B Complex','Per product','Morning','Vyvanse depletion, NAD+ support'],
+                ['Vitamin C','1–2g','Daily','Collagen synthesis, adrenal support'],
+                ['Berberine','500mg 2–3x','With meals','Insulin sensitiser, lipid support'],
+                ['Zinc','15–25mg','Away from GHK-Cu','Testosterone metabolism, immunity'],
+                ['Selenium','100–200mcg','Daily','T4→T3 conversion, antioxidant'],
+                ['L-Tyrosine','500mg–1g','Vyvanse off days only','Catecholamine replenishment'],
+                ['Probiotics','Per product','Daily','Microbiome, synergistic with KPV'],
+              ].map(([name,dose,timing,purpose])=>`
+              <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
+                <td style="padding:10px 14px;font-weight:600;color:var(--text)">${name}</td>
+                <td style="padding:10px 14px;font-family:monospace;font-size:11px">${dose}</td>
+                <td style="padding:10px 14px;color:var(--text2);font-size:11px">${timing}</td>
+                <td style="padding:10px 14px;color:var(--text2);font-size:11px">${purpose}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weekly Schedule Tab -->
+    <div id="hpanel-schedule" style="display:none">
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:12px">
+          <thead>
+            <tr style="background:var(--bg3)">
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border);min-width:140px">Compound</th>
+              ${['MON','TUE','WED','THU','FRI','SAT','SUN'].map(d=>`<th style="padding:10px 14px;text-align:center;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">${d}</th>`).join('')}
+            </tr>
+          </thead>
+          <tbody>
+            ${[
+              ['HGH 4IU','#8b5cf6',[1,1,1,1,1,1,1]],
+              ['Testosterone 125mg','#f59e0b',[1,0,0,0,1,0,0]],
+              ['HCG 500IU','#06b6d4',[1,0,0,0,1,0,0]],
+              ['Retatrutide 250mcg','#22c55e',[1,0,0,0,0,0,0]],
+              ['NAD+ 50mg','#3b82f6',[1,0,1,0,1,0,0]],
+              ['GHK-Cu 3mg','#ec4899',[1,1,1,1,1,0,0]],
+              ['KPV (subq)','#14b8a6',[1,1,1,1,1,1,1]],
+              ['Vyvanse 40mg','#f97316',[1,1,1,1,0,0,0]],
+              ['Selank (intranasal)','#34d399',[1,1,0,1,1,0,0]],
+              ['Finasteride 0.25mg','#78716c',[1,1,1,1,1,1,1]],
+              ['Minoxidil (topical)','#78716c',[1,1,1,1,1,1,1]],
+            ].map(([name,color,days])=>`
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
+              <td style="padding:10px 14px;font-weight:600;color:${color}">${name}</td>
+              ${days.map(d=>`<td style="padding:10px 14px;text-align:center">${d?`<span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:${color};opacity:.85"></span>`:`<span style="color:var(--border)">—</span>`}</td>`).join('')}
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:14px;padding:12px 14px;background:var(--bg3);border-radius:8px;border:1px solid var(--border)">
+        <p style="font-size:11px;color:var(--text2)">⚠ Daily compounds (supplements, Finasteride, Minoxidil) administered every day. Testosterone and HCG same days (Mon/Thu) for hormonal consistency. Selank: 2 weeks on, 1 week off cycling recommended.</p>
+      </div>
+    </div>
+
+    <!-- Blood Panel Tab -->
+    <div id="hpanel-blood" style="display:none">
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:12px">
+          <thead>
+            <tr style="background:var(--bg3)">
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Marker</th>
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Target / Rationale</th>
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Frequency</th>
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Last Result</th>
+              <th style="padding:10px 14px;text-align:left;color:var(--text2);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.5px;border-bottom:1px solid var(--border)">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${[
+              ['Fasting Glucose','85–95 mg/dL','Every 6–8 weeks'],
+              ['HbA1c','< 5.7%','Quarterly'],
+              ['Total + Free Testosterone','Therapeutic range','Quarterly'],
+              ['Estradiol (E2)','20–30 pg/mL','Every 6–8 weeks'],
+              ['DHT','Confirm Finasteride efficacy','Quarterly'],
+              ['IGF-1','Confirm HGH load appropriate','Quarterly'],
+              ['Hematocrit / Hemoglobin','< 52%','Quarterly'],
+              ['PSA','Double result (Finasteride suppresses ~50%)','Quarterly'],
+              ['LH / FSH','Confirm HCG maintaining HPG axis','Quarterly'],
+              ['Lipid Panel','HDL/LDL — Testosterone impact','Quarterly'],
+              ['Lipase / Amylase','Pancreatic markers — GLP-1 monitoring','Quarterly'],
+              ['Blood Pressure + HR','Vyvanse + Testosterone + HGH load','Monthly'],
+              ['Liver Enzymes (ALT/AST)','Compound load','Quarterly'],
+              ['Fasting Insulin','Insulin sensitivity tracking','Quarterly'],
+            ].map(([marker,target,freq])=>`
+            <tr style="border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
+              <td style="padding:10px 14px;font-weight:600;color:var(--text)">${marker}</td>
+              <td style="padding:10px 14px;color:var(--text2);font-size:11px">${target}</td>
+              <td style="padding:10px 14px;color:var(--text2);font-size:11px">${freq}</td>
+              <td style="padding:10px 14px;color:var(--text2);font-style:italic;font-size:11px">—</td>
+              <td style="padding:10px 14px"><span style="padding:2px 8px;border-radius:8px;background:#374151;color:#9ca3af;font-size:10px;font-weight:600">PENDING</span></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Upload Blood Test Tab -->
+    <div id="hpanel-bloods-upload" style="display:none">
+      <div style="max-width:600px">
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:20px">
+          <div style="font-size:15px;font-weight:700;margin-bottom:6px">Upload Blood Test Results</div>
+          <div style="font-size:12px;color:var(--text2);margin-bottom:20px">Upload your blood test PDF or image and I'll extract the values and compare against your protocol targets.</div>
+          <div id="blood-drop-zone" style="border:2px dashed var(--border);border-radius:10px;padding:40px;text-align:center;cursor:pointer;transition:border-color .2s" 
+               onmouseover="this.style.borderColor='var(--accent)'" 
+               onmouseout="this.style.borderColor='var(--border)'"
+               onclick="document.getElementById('blood-file-input').click()">
+            <div style="font-size:28px;margin-bottom:10px">📋</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px">Drop your blood test here</div>
+            <div style="font-size:11px;color:var(--text2)">PDF, JPG, or PNG — results extracted automatically</div>
+          </div>
+          <input type="file" id="blood-file-input" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleBloodUpload(this)">
+        </div>
+
+        <div id="blood-results-area" style="display:none;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px">
+          <div style="font-size:14px;font-weight:700;margin-bottom:14px">Extracted Results</div>
+          <div id="blood-results-content"></div>
+        </div>
+
+        <!-- Previous uploads -->
+        <div style="margin-top:20px">
+          <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;font-size:10px">Previous Uploads</div>
+          <div id="blood-history" style="color:var(--text2);font-size:12px;font-style:italic">No blood tests uploaded yet.</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- ── Skills Page ── -->
@@ -1852,7 +2065,28 @@ async function fetchAll(force=false){
 }
 
 // ─── Hash routing ──────────────────────────────────────────────────────────
-const PAGES = ['dashboard','businesses','trading','team','property','agents','crons','services','usage','skills'];
+const PAGES = ['dashboard','businesses','trading','team','property','agents','crons','services','usage','skills','health'];
+
+function healthTab(tab) {
+  ['stack','schedule','blood','bloods-upload'].forEach(t => {
+    document.getElementById('hpanel-'+t).style.display = t===tab ? '' : 'none';
+    const btn = document.getElementById('htab-'+t);
+    if(btn) {
+      btn.style.borderBottomColor = t===tab ? 'var(--accent)' : 'transparent';
+      btn.style.color = t===tab ? 'var(--accent)' : 'var(--text2)';
+      btn.style.fontWeight = t===tab ? '700' : '400';
+    }
+  });
+}
+
+function handleBloodUpload(input) {
+  if(!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  const area = document.getElementById('blood-results-area');
+  const content = document.getElementById('blood-results-content');
+  area.style.display = '';
+  content.innerHTML = '<div style="color:var(--text2);font-size:12px;font-style:italic">Analysing ' + file.name + '... Send the file to Elara via Telegram for full extraction and comparison against your protocol targets.</div>';
+}
 
 function navigate(page, btn){
   // Hide all pages
