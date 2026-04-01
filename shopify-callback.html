@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Shopify Auth</title></head>
+<body>
+<script>
+// Capture the code from URL and display it
+const params = new URLSearchParams(window.location.search);
+const code = params.get('code');
+const shop = params.get('shop');
+if(code) {
+  document.body.innerHTML = '<h2>Auth Code:</h2><code style="font-size:18px;word-break:break-all">' + code + '</code><br><br><p>Copy this code and send it to Elara</p>';
+} else {
+  document.body.innerHTML = '<p>No code found. Params: ' + window.location.search + '</p>';
+}
+</script>
+</body>
+</html>
