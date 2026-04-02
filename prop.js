@@ -317,5 +317,18 @@ function propToggleColMenu() {
 }
 
 function propToggleCol(colId, show) {
-  // Column toggle - simplified
+  var colMap = {
+    'col-suburb': 1, 'col-rent': 6, 'col-cashflow': 7,
+    'col-growth': 8, 'col-median': 9, 'col-stamp': 10,
+    'col-repay': 11, 'col-rating': 12, 'col-offer': 13
+  };
+  var colIdx = colMap[colId];
+  if (!colIdx) return;
+  var table = document.querySelector('.prop-table');
+  if (!table) return;
+  var rows = table.querySelectorAll('tr');
+  rows.forEach(function(row) {
+    var cells = row.querySelectorAll('th, td');
+    if (cells[colIdx]) cells[colIdx].style.display = show ? '' : 'none';
+  });
 }
