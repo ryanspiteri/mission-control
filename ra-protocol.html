@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integrative Protocol — Rheumatoid Arthritis</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;background:#0d0d0d;color:#e2e8f0;line-height:1.7;font-size:15px}
+.container{max-width:860px;margin:0 auto;padding:40px 24px}
+h1{font-size:32px;font-weight:800;color:#fff;letter-spacing:-0.5px}
+h2{font-size:20px;font-weight:700;color:#c07d5a;margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid #222}
+h3{font-size:15px;font-weight:700;color:#fff;margin:20px 0 8px}
+p{color:#b0bec5;margin-bottom:12px}
+ul{color:#b0bec5;padding-left:20px;margin-bottom:12px}
+ul li{margin-bottom:6px}
+.header{text-align:center;padding:48px 0 32px;border-bottom:1px solid #1e1e1e;margin-bottom:40px}
+.subtitle{font-size:14px;color:#c07d5a;letter-spacing:2px;text-transform:uppercase;margin-top:8px}
+.date{font-size:13px;color:#555;margin-top:6px}
+.disclaimer{background:#1a1400;border:1px solid #f59e0b40;border-left:4px solid #f59e0b;border-radius:8px;padding:16px 20px;margin-bottom:36px}
+.disclaimer strong{color:#f59e0b;display:block;margin-bottom:4px;font-size:13px;text-transform:uppercase;letter-spacing:.5px}
+.disclaimer p{color:#d4a900;font-size:13px;margin:0}
+.section{margin-bottom:48px}
+.goal-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.goal-card{background:#111;border:1px solid #222;border-radius:10px;padding:16px 20px}
+.goal-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.goal-card:first-child .goal-label{color:#f59e0b}
+.goal-card:last-child .goal-label{color:#22c55e}
+.goal-card p{font-size:13px;color:#94a3b8;margin:0}
+.peptide-card{background:#111;border:1px solid #1e1e1e;border-radius:12px;padding:24px;margin-bottom:20px;border-left:3px solid #c07d5a}
+.peptide-name{font-size:17px;font-weight:800;color:#fff;margin-bottom:4px}
+.peptide-subtitle{font-size:12px;color:#c07d5a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+.peptide-body{font-size:13px;color:#94a3b8;margin-bottom:16px;line-height:1.6}
+.dose-table{width:100%;border-collapse:collapse;font-size:13px}
+.dose-table tr{border-bottom:1px solid #1e1e1e}
+.dose-table tr:last-child{border-bottom:none}
+.dose-table td{padding:8px 12px;vertical-align:top}
+.dose-table td:first-child{color:#64748b;width:40%;font-size:12px}
+.dose-table td:last-child{color:#e2e8f0;font-weight:500}
+.warning-row td{background:#1a0a0a!important}
+.warning-row td:last-child{color:#ef4444}
+table.styled{width:100%;border-collapse:collapse;font-size:13px;background:#111;border-radius:10px;overflow:hidden;border:1px solid #1e1e1e}
+table.styled thead th{background:#161616;color:#c07d5a;padding:10px 14px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+table.styled tbody td{padding:10px 14px;border-bottom:1px solid #1a1a1a;color:#b0bec5;vertical-align:top}
+table.styled tbody tr:last-child td{border-bottom:none}
+table.styled tbody tr:hover td{background:#161616}
+table.styled tbody td:first-child{color:#e2e8f0;font-weight:500}
+.phase-table tbody td:first-child{color:#c07d5a;font-weight:700}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.food-card{background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:20px}
+.food-card h3{color:#22c55e;font-size:13px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+.food-card.eliminate h3{color:#ef4444}
+.food-card ul li{font-size:13px;color:#94a3b8;margin-bottom:5px}
+.timeline{margin-top:16px}
+.timeline-item{display:flex;gap:16px;margin-bottom:16px;align-items:flex-start}
+.timeline-dot{width:10px;height:10px;border-radius:50%;background:#c07d5a;flex-shrink:0;margin-top:5px}
+.timeline-content{font-size:13px;color:#94a3b8}
+.timeline-content strong{color:#e2e8f0}
+.lifestyle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.lifestyle-card{background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:18px}
+.lifestyle-card h3{font-size:13px;color:#c07d5a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.lifestyle-card ul li{font-size:12px;color:#94a3b8;margin-bottom:5px}
+.footer{text-align:center;padding:32px 0;border-top:1px solid #1e1e1e;margin-top:48px;color:#374151;font-size:12px}
+@media(max-width:640px){.goal-row,.two-col,.lifestyle-grid{grid-template-columns:1fr}.container{padding:20px 16px}h1{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="subtitle">BEPRIME Health Protocol</div>
+    <h1>Integrative Protocol</h1>
+    <h1 style="color:#c07d5a;font-size:22px;font-weight:400;margin-top:4px">Rheumatoid Arthritis</h1>
+    <div style="font-size:13px;color:#c07d5a;margin-top:8px;letter-spacing:1px">Peptide Therapy &nbsp;•&nbsp; Lifestyle &nbsp;•&nbsp; Nutrition &nbsp;•&nbsp; Monitoring</div>
+    <div class="date">April 2026</div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>⚠ Important Disclaimer</strong>
+    <p>This document is for informational and research purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. All peptide use should be discussed with a qualified medical professional.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <h2>Protocol Overview</h2>
+    <p>This integrative protocol is designed for a person with Rheumatoid Arthritis (RA) currently managed with biologic DMARD therapy. The goal is a two-pronged approach:</p>
+    <div class="goal-row">
+      <div class="goal-card">
+        <div class="goal-label">Short-Term Goal</div>
+        <p>Rapidly reduce active inflammation, joint pain, and flare frequency</p>
+      </div>
+      <div class="goal-card">
+        <div class="goal-label">Long-Term Goal</div>
+        <p>Support immune recalibration, joint tissue repair, and reduce biologic dependency over time</p>
+      </div>
+    </div>
+    <p>The protocol layers peptide therapy on top of existing biologic medication, focusing on complementary — not competing — mechanisms of action. Safety and biologic compatibility have been factored into every compound selected.</p>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <h2>Phase 1 — Peptide Stack (Months 1–6)</h2>
+    <p>All peptides are administered subcutaneously (SQ). Rotate injection sites to avoid localised reactions.</p>
+
+    <div class="peptide-card">
+      <div class="peptide-name">1. KPV</div>
+      <div class="peptide-subtitle">Primary Anti-Inflammatory & Immune Modulator</div>
+      <div class="peptide-body">Derived from alpha-MSH. Inhibits NF-κB signalling, directly reducing TNF-α, IL-1β, and IL-6 — the exact same cytokines driving RA. Uniquely modulates immune response WITHOUT broadly suppressing immunity (critical while on biologics). Demonstrated reduction in pannus formation and osteoclast activity in arthritis models.</div>
+      <table class="dose-table">
+        <tr><td>Dose</td><td>500–1000 mcg SQ daily</td></tr>
+        <tr><td>Timing</td><td>Morning, fasted</td></tr>
+        <tr><td>Cycle</td><td>Daily — no cycling required</td></tr>
+        <tr><td>Biologic Compatibility</td><td>✓ Safe — different mechanism, no immunosuppression overlap</td></tr>
+      </table>
+    </div>
+
+    <div class="peptide-card">
+      <div class="peptide-name">2. BPC-157</div>
+      <div class="peptide-subtitle">Joint Tissue Repair & Anti-Inflammatory</div>
+      <div class="peptide-body">Promotes angiogenesis and new blood vessel formation to damaged joint tissue. Stimulates fibroblast activity and collagen synthesis in tendons and cartilage. Activates M2 macrophage polarisation (anti-inflammatory, pro-repair). Shown to reduce inflammation in autoimmune arthritis models. Protects against NSAID-induced gut damage.</div>
+      <table class="dose-table">
+        <tr><td>Dose</td><td>250–500 mcg SQ daily</td></tr>
+        <tr><td>Timing</td><td>Flexible — morning or evening</td></tr>
+        <tr><td>Injection Site</td><td>Inject near affected joints where possible for localised benefit</td></tr>
+        <tr><td>Biologic Compatibility</td><td>✓ Safe — tissue repair pathway, no immune suppression interaction</td></tr>
+      </table>
+    </div>
+
+    <div class="peptide-card">
+      <div class="peptide-name">3. Thymosin Alpha-1 (Tα1)</div>
+      <div class="peptide-subtitle">Immune Recalibration</div>
+      <div class="peptide-body">The long-game peptide for RA. Tα1 doesn't just suppress — it retrains the immune system toward balance. Enhances regulatory T cell (Treg) function — the cells responsible for preventing self-attack. Promotes Th1 immune balance and reduces pathological Th17 activity (Th17 excess drives RA). Reduces infection risk — critical when on immunosuppressive biologics.</div>
+      <table class="dose-table">
+        <tr><td>Dose</td><td>1.5 mg SQ twice weekly</td></tr>
+        <tr><td>Timing</td><td>Monday and Thursday (or any 2 days, 72hrs apart)</td></tr>
+        <tr><td>Cycle</td><td>3 months on, 1 month off</td></tr>
+        <tr class="warning-row"><td>Biologic Note</td><td>⚠ DISCUSS WITH DOCTOR — Tα1 is immunomodulatory; monitor for any infection signs</td></tr>
+      </table>
+    </div>
+
+    <div class="peptide-card">
+      <div class="peptide-name">4. GHK-Cu</div>
+      <div class="peptide-subtitle">Anti-Inflammatory & Joint Support</div>
+      <div class="peptide-body">Inhibits NF-κB (same pathway as KPV — additive effect). Stimulates collagen and glycosaminoglycan synthesis — key components of cartilage. Reduces oxidative stress and cellular senescence in joint tissue. Antifibrotic: reduces excessive scar tissue formation in synovial membranes.</div>
+      <table class="dose-table">
+        <tr><td>Dose</td><td>1–2 mg SQ daily</td></tr>
+        <tr><td>Timing</td><td>Flexible</td></tr>
+        <tr><td>Cycle</td><td>Can run continuously</td></tr>
+        <tr><td>Biologic Compatibility</td><td>✓ Safe — no known interactions</td></tr>
+      </table>
+    </div>
+
+    <div class="peptide-card">
+      <div class="peptide-name">5. NAD+</div>
+      <div class="peptide-subtitle">Cellular Energy & Immune Regulation</div>
+      <div class="peptide-body">NAD+ levels are specifically depleted in Rheumatoid Arthritis — restoring them is foundational. Regulates T cell differentiation, reducing autoimmune CD4+ T cell aggression. Activates sirtuins — anti-inflammatory and longevity-associated proteins. Supports mitochondrial function in immune cells, improving energy and reducing chronic fatigue.</div>
+      <table class="dose-table">
+        <tr><td>Dose (SQ)</td><td>100–250 mg SQ, 2–3x per week</td></tr>
+        <tr><td>Dose (IV)</td><td>500–1000 mg IV monthly</td></tr>
+        <tr><td>Alternative</td><td>NMN 500–1000 mg oral daily (lower bioavailability but consistent)</td></tr>
+        <tr><td>Biologic Compatibility</td><td>✓ Safe — natural coenzyme, no interaction risk</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <h2>Daily Protocol Schedule</h2>
+    <table class="styled">
+      <thead><tr><th>Time</th><th>Peptide / Intervention</th><th>Dose</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Morning (fasted)</td><td>KPV</td><td>500–1000 mcg SQ</td><td>Cytokine suppression</td></tr>
+        <tr><td>Morning (fasted)</td><td>NAD+ injection</td><td>100–250 mg SQ</td><td>Cellular energy (3x/wk)</td></tr>
+        <tr><td>Morning / Flexible</td><td>GHK-Cu</td><td>1–2 mg SQ</td><td>Collagen + anti-inflammatory</td></tr>
+        <tr><td>Anytime</td><td>BPC-157</td><td>250–500 mcg SQ</td><td>Joint repair</td></tr>
+        <tr><td>Mon + Thu</td><td>Thymosin Alpha-1</td><td>1.5 mg SQ</td><td>Immune recalibration</td></tr>
+        <tr><td>With biologic schedule</td><td>Humira / Enbrel</td><td>As prescribed</td><td>TNF-α inhibition (existing)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <h2>Nutrition Protocol</h2>
+    <p>Diet is not optional support — it's active therapy. A consistently anti-inflammatory diet is a force multiplier for everything else in this protocol.</p>
+    <div class="two-col">
+      <div class="food-card">
+        <h3>✓ Prioritise These Foods</h3>
+        <ul>
+          <li>Fatty fish (salmon, sardines, mackerel) — 3–4x per week</li>
+          <li>Extra virgin olive oil — daily</li>
+          <li>Colourful vegetables (broccoli, kale, spinach, capsicum)</li>
+          <li>Berries (blueberries, cherries) — anthocyanins reduce joint inflammation</li>
+          <li>Ginger and turmeric (with black pepper)</li>
+          <li>Bone broth — collagen precursors</li>
+          <li>Eggs and organ meats — NAD+ precursors (niacin) and cofactors</li>
+        </ul>
+      </div>
+      <div class="food-card eliminate">
+        <h3>✗ Eliminate These</h3>
+        <ul>
+          <li>Ultra-processed foods, seed oils (canola, soy, sunflower)</li>
+          <li>Refined sugar and high-fructose corn syrup</li>
+          <li>Gluten (trial elimination for 8 weeks)</li>
+          <li>Alcohol — depletes NAD+ and disrupts gut barrier</li>
+          <li>Fast food and trans fats</li>
+        </ul>
+      </div>
+    </div>
+    <h3 style="margin-top:24px">Key Supplements</h3>
+    <table class="styled" style="margin-top:12px">
+      <thead><tr><th>Supplement</th><th>Dose</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr><td>Omega-3 Fish Oil</td><td>3–4 g EPA+DHA daily</td><td>Reduces inflammatory cytokines</td></tr>
+        <tr><td>Vitamin D3 + K2</td><td>5000–10,000 IU D3 daily</td><td>Immune regulation, bone protection</td></tr>
+        <tr><td>Magnesium Glycinate</td><td>400–600 mg nightly</td><td>NF-κB inhibition, sleep, muscle relaxation</td></tr>
+        <tr><td>NMN or NR</td><td>500–1000 mg oral daily</td><td>NAD+ precursor between injections</td></tr>
+        <tr><td>Curcumin (Liposomal)</td><td>1500–2000 mg daily</td><td>Potent NF-κB and COX-2 inhibition</td></tr>
+        <tr><td>Collagen Peptides (Type II)</td><td>10 g daily</td><td>Joint cartilage support</td></tr>
+        <tr><td>Probiotics</td><td>50B+ CFU daily</td><td>Gut-immune axis repair</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <h2>Lifestyle Protocol</h2>
+    <div class="lifestyle-grid">
+      <div class="lifestyle-card">
+        <h3>Exercise</h3>
+        <ul>
+          <li>Resistance training — 3x per week</li>
+          <li>Swimming or hydrotherapy — ideal during flares</li>
+          <li>Daily walking — 20–40 min</li>
+          <li>Yoga or Tai Chi — improves joint mobility</li>
+          <li>Avoid high-impact during active flares</li>
+        </ul>
+      </div>
+      <div class="lifestyle-card">
+        <h3>Sleep</h3>
+        <ul>
+          <li>Target 8–9 hours nightly</li>
+          <li>Consistent sleep/wake time</li>
+          <li>No screens 60 min before bed</li>
+          <li>Room temperature 18–20°C</li>
+          <li>Magnesium glycinate 400 mg + glycine 3 g before bed</li>
+        </ul>
+      </div>
+      <div class="lifestyle-card">
+        <h3>Stress</h3>
+        <ul>
+          <li>Daily breathwork (5 min minimum)</li>
+          <li>Cold shower 2–3 min — reduces systemic inflammation</li>
+          <li>Morning sunlight — regulates cortisol rhythm</li>
+          <li>Sauna 3–4x per week — reduces joint stiffness</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="section">
+    <h2>Monitoring & Bloodwork</h2>
+    <p>Regular monitoring is non-negotiable — especially while on biologics alongside research peptides.</p>
+    <table class="styled" style="margin-bottom:24px">
+      <thead><tr><th>Marker</th><th>Why It Matters</th></tr></thead>
+      <tbody>
+        <tr><td>CRP (C-Reactive Protein)</td><td>Primary RA inflammation marker — track monthly</td></tr>
+        <tr><td>ESR</td><td>Secondary inflammation marker</td></tr>
+        <tr><td>RF + Anti-CCP</td><td>Autoantibody load — track every 3 months</td></tr>
+        <tr><td>Full Blood Count</td><td>Monitor immune cell populations on biologics</td></tr>
+        <tr><td>Liver Function Tests</td><td>Biologics affect liver — monitor quarterly</td></tr>
+        <tr><td>NAD+ plasma level</td><td>Confirm NAD+ depletion and restoration</td></tr>
+        <tr><td>Vitamin D (25-OH)</td><td>Target 100–150 nmol/L for immune regulation</td></tr>
+        <tr><td>Fasting Glucose + HbA1c</td><td>Metabolic baseline</td></tr>
+      </tbody>
+    </table>
+    <h3>Monitoring Timeline</h3>
+    <div class="timeline" style="margin-top:12px">
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><strong>Week 2:</strong> Check in — injection site reactions, new symptoms, infection signs</div></div>
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><strong>Month 1:</strong> CRP, FBC, LFTs — confirm no adverse interactions with biologics</div></div>
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><strong>Month 3:</strong> Full panel — CRP, ESR, RF, Anti-CCP, NAD+, Vitamin D, LFTs</div></div>
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><strong>Month 6:</strong> Full review with doctor — assess whether biologic dose reduction is appropriate</div></div>
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><strong>Ongoing:</strong> CRP + FBC quarterly at minimum</div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="section">
+    <h2>Phase Plan</h2>
+    <table class="styled phase-table">
+      <thead><tr><th>Phase</th><th>Timeframe</th><th>Focus</th><th>Target Outcome</th></tr></thead>
+      <tbody>
+        <tr><td>Phase 1: Foundation</td><td>Weeks 1–4</td><td>KPV + BPC-157 + NAD+ + GHK-Cu</td><td>Reduce acute inflammation, start tissue repair</td></tr>
+        <tr><td>Phase 2: Recalibration</td><td>Months 2–3</td><td>Add Thymosin Alpha-1</td><td>Begin immune retraining, reduce flare frequency</td></tr>
+        <tr><td>Phase 3: Optimisation</td><td>Months 4–6</td><td>Full stack, refine doses</td><td>Seek reduction in CRP/ESR, review biologic dose with doctor</td></tr>
+        <tr><td>Phase 4: Maintenance</td><td>Month 7+</td><td>Sustain key peptides, nutrition and lifestyle</td><td>Long-term remission, assess whether biologic taper is appropriate</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <p>This protocol is designed to work WITH existing biologic treatment — not replace it.</p>
+    <p style="margin-top:4px">Start slowly. Add one peptide at a time. Track everything. Get bloods. Work with a doctor who understands integrative medicine.</p>
+    <p style="margin-top:12px;color:#1f2937">Prepared by BEPRIME Health · April 2026 · For informational purposes only</p>
+  </div>
+
+</div>
+</body>
+</html>
