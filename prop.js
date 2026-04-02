@@ -284,13 +284,10 @@ function propOpenModal(idx) {
   if (!d) return;
   document.getElementById('prop-modal-title').textContent = d.address || 'Offer Draft';
   document.getElementById('prop-modal-sub').textContent = (d.price||'') + ' · ' + (d.beds||0) + 'b ' + (d.baths||0) + 'ba · ' + (d.type||'');
-  var brief = document.getElementById('prop-modal-brief');
   var briefContent = document.getElementById('prop-brief-content');
-  if (brief && briefContent && d.brief) {
-    briefContent.textContent = d.brief;
-    brief.style.display = 'block';
-  }
-  document.getElementById('prop-modal-email').textContent = d.email || '';
+  if (briefContent) briefContent.textContent = d.brief || '';
+  var emailEl = document.getElementById('prop-modal-email');
+  if (emailEl) emailEl.textContent = d.email || '';
   document.getElementById('prop-modal-overlay').classList.add('active');
 }
 
