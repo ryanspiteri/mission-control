@@ -258,6 +258,8 @@ function _propRender() {
     var daysEl = days >= 60 ? '<span style="color:#ef4444;font-weight:700">' + days + 'd 🔥</span>' : days > 0 ? days + 'd' : '—';
     var stamp = priceNum > 0 ? '$' + Math.round(priceNum * 0.035 / 1000) + 'K' : '—';
     var repay = priceNum > 0 ? '$' + Math.round(priceNum * 0.8 * 0.065 / 52) + '/wk' : '—';
+    var offerNum = priceNum > 0 ? Math.round(priceNum * 0.88) : 0;
+    var offerStr = offerNum > 0 ? '$' + offerNum.toLocaleString() : '—';
     return '<tr onclick="window.open(\'' + d.url + '\',\'_blank\')" style="cursor:pointer">' +
       '<td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + (d.address||'—') + '</td>' +
       '<td>' + suburb + '</td>' +
@@ -271,8 +273,8 @@ function _propRender() {
       '<td>' + stamp + '</td>' +
       '<td>' + repay + '</td>' +
       '<td>—</td>' +
-      '<td><button onclick="event.stopPropagation();propOpenModal(' + i + ')" style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640;border-radius:4px;padding:2px 8px;font-size:10px;cursor:pointer">Draft</button></td>' +
-      '<td>—</td>' +
+      '<td onclick="event.stopPropagation();propOpenModal(' + i + ')" style="color:#f59e0b;font-weight:600;cursor:pointer;white-space:nowrap">' + offerStr + '</td>' +
+      '<td onclick="event.stopPropagation();propOpenModal(' + i + ')" style="cursor:pointer"><button style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640;border-radius:4px;padding:2px 8px;font-size:10px;cursor:pointer">View</button></td>' +
     '</tr>';
   }).join('');
 }
