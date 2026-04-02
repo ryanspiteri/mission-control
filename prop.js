@@ -280,7 +280,7 @@ function _propRender() {
 }
 
 function propOpenModal(idx) {
-  var d = _propFiltered[idx];
+  var d = (_propFiltered && _propFiltered.length > idx) ? _propFiltered[idx] : PROP_DEALS[idx];
   if (!d) return;
   document.getElementById('prop-modal-title').textContent = d.address || 'Offer Draft';
   document.getElementById('prop-modal-sub').textContent = (d.price||'') + ' · ' + (d.beds||0) + 'b ' + (d.baths||0) + 'ba · ' + (d.type||'');
