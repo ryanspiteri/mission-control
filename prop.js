@@ -258,7 +258,7 @@ function _propRender() {
     var daysEl = days >= 60 ? '<span style="color:#ef4444;font-weight:700">' + days + 'd 🔥</span>' : days > 0 ? days + 'd' : '—';
     var stamp = priceNum > 0 ? '$' + Math.round(priceNum * 0.035 / 1000) + 'K' : '—';
     var repay = priceNum > 0 ? '$' + Math.round(priceNum * 0.8 * 0.065 / 52) + '/wk' : '—';
-    return '<tr onclick="propOpenModal(' + i + ')" style="cursor:pointer">' +
+    return '<tr onclick="window.open(\'' + d.url + '\',\'_blank\')" style="cursor:pointer">' +
       '<td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + (d.address||'—') + '</td>' +
       '<td>' + suburb + '</td>' +
       '<td>' + (d.beds||'?') + 'b ' + (d.baths||'?') + 'ba</td>' +
