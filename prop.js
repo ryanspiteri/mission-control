@@ -1,4 +1,4 @@
-// Property Finder — auto-generated 2026-04-02 21:07
+// Property Finder — auto-generated 2026-04-02 21:20
 var PROP_DEALS = [
   {
     "url": "https://www.domain.com.au/24-62-66-brown-street-labrador-qld-4215-2020628543",
@@ -136,3 +136,55 @@ var PROP_DEALS = [
     "type": "House"
   }
 ];
+
+function initProp() {
+  var deals = PROP_DEALS;
+  var tbody = document.getElementById('prop-tbody');
+  if (!tbody) return;
+  
+  // Update stats
+  var total = document.getElementById('prop-stat-total');
+  var hot = document.getElementById('prop-stat-hot');
+  if (total) total.textContent = deals.length;
+  if (hot) hot.textContent = deals.filter(function(d) { return d.days >= 60; }).length;
+  
+  // Update header
+  var sub = document.getElementById('prop-header-sub');
+  if (sub) sub.textContent = 'Gold Coast | $600K–$1.5M | ' + deals.length + ' listings';
+  
+  // Update result count
+  var rc = document.getElementById('prop-result-count');
+  if (rc) rc.textContent = deals.length;
+  
+  // Populate suburb filter
+  var suburbSel = document.getElementById('pf-suburb');
+  if (suburbSel) {
+    var suburbs = [...new Set(deals.map(function(d) { return d.address.split(',').slice(-2,-1)[0] || ''; }).filter(Boolean))].sort();
+    suburbs.forEach(function(s) {
+      var opt = document.createElement('option');
+      opt.value = s.trim();
+      opt.textContent = s.trim();
+      suburbSel.appendChild(opt);
+    });
+  }
+  
+  // Render rows
+  tbody.innerHTML = deals.map(function(d) {
+    var priceNum = parseInt((d.price.match(/[\d,]+/) || ['0'])[0].replace(/,/g,'')) || 0;
+    var weeklyRent = priceNum > 0 ? Math.round(priceNum * 0.04 / 52) : 0;
+    var yieldPct = priceNum > 0 ? (weeklyRent * 52 / priceNum * 100).toFixed(1) : '—';
+    var hotBadge = d.days >= 60 ? '<span style="background:#ef444420;color:#ef4444;padding:1px 6px;border-radius:4px;font-size:10px;margin-left:4px">' + d.days + 'd</span>' : '';
+    return '<tr onclick="window.open(\'' + d.url + '\', \'_blank\')" style="cursor:pointer">' +
+      '<td>' + (d.address || 'Unknown') + hotBadge + '</td>' +
+      '<td style="color:#22c55e;font-weight:600">' + (d.price || '—') + '</td>' +
+      '<td>' + (d.beds || '?') + 'b ' + (d.baths || '?') + 'ba</td>' +
+      '<td>' + (d.type || '—') + '</td>' +
+      '<td>' + (weeklyRent ? '$' + weeklyRent + '/wk' : '—') + '</td>' +
+      '<td>' + yieldPct + (yieldPct !== '—' ? '%' : '') + '</td>' +
+      '<td>' + (d.days > 0 ? d.days + 'd' : '—') + '</td>' +
+      '<td><a href="' + d.url + '" target="_blank" style="color:#3b82f6;font-size:11px">View →</a></td>' +
+    '</tr>';
+  }).join('');
+  
+  document.getElementById('prop-no-results').style.display = deals.length ? 'none' : 'block';
+}
