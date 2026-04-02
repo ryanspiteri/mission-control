@@ -212,6 +212,8 @@ function propFilter() {
   _propStats();
 }
 
+function propReset() { propResetFilters(); }
+
 function propResetFilters() {
   ['pf-suburb','pf-beds','pf-days','pf-price','pf-yield','pf-rating','pf-draft'].forEach(function(id) {
     var el = document.getElementById(id);
@@ -274,7 +276,7 @@ function _propRender() {
       '<td>' + repay + '</td>' +
       '<td>—</td>' +
       '<td onclick="event.stopPropagation();propOpenModal(' + i + ')" style="color:#f59e0b;font-weight:600;cursor:pointer;white-space:nowrap">' + offerStr + '</td>' +
-      '<td onclick="event.stopPropagation();propOpenModal(' + i + ')" style="cursor:pointer"><button style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640;border-radius:4px;padding:2px 8px;font-size:10px;cursor:pointer">View</button></td>' +
+      '<td onclick="event.stopPropagation();propOpenModal(' + i + ')" style="cursor:pointer"><button style="background:#3b82f620;color:#3b82f6;border:1px solid #3b82f640;border-radius:4px;padding:2px 8px;font-size:10px;cursor:pointer">Draft</button></td>' +
     '</tr>';
   }).join('');
 }
