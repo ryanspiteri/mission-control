@@ -1,15 +1,92 @@
-// Property Finder — auto-generated 2026-04-02 21:26
+// Property Finder — auto-generated 2026-04-09 22:07
 var PROP_DEALS = [
   {
-    "url": "https://www.domain.com.au/24-62-66-brown-street-labrador-qld-4215-2020628543",
-    "address": "24/62-66 Brown Street, Labrador QLD 4215",
-    "price": "Offers Over $900,000",
+    "url": "https://www.domain.com.au/tugun-1-pendraat-parade-hope-island-qld-4212-2018399356",
+    "address": "Tugun/1 Pendraat Parade, Hope Island QLD 4212",
+    "price": "$1,090,000",
     "beds": 3,
-    "baths": 1,
+    "baths": 2,
+    "days": 0,
+    "type": "Unknown",
+    "brief": "3bed Unknown in Hope Island QLD 4212. Est. rent $880/wk, gross yield 4.2%. Standard market offer.",
+    "email": "Hi,\n\nI'm writing to express interest in Tugun/1 Pendraat Parade, Hope Island QLD 4212.\n\nI've reviewed the listing and would like to submit an offer of $959,200 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
+  },
+  {
+    "url": "https://www.domain.com.au/pelican-1-pendraat-parade-hope-island-qld-4212-2019328017",
+    "address": "Pelican//1 Pendraat Parade, Hope Island QLD 4212",
+    "price": "$975,000",
+    "beds": 3,
+    "baths": 2,
+    "days": 0,
+    "type": "Unknown",
+    "brief": "3bed Unknown in Hope Island QLD 4212. Est. rent $787/wk, gross yield 4.2%. Standard market offer.",
+    "email": "Hi,\n\nI'm writing to express interest in Pelican//1 Pendraat Parade, Hope Island QLD 4212.\n\nI've reviewed the listing and would like to submit an offer of $858,000 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
+  },
+  {
+    "url": "https://www.domain.com.au/91-poinsettia-avenue-hollywell-qld-4216-2020669740",
+    "address": "91 Poinsettia Avenue, Hollywell QLD 4216",
+    "price": "Offers Over $1,275,000",
+    "beds": 4,
+    "baths": 3,
+    "days": 0,
+    "type": "House",
+    "brief": "4bed House in Hollywell QLD 4216. Est. rent $1029/wk, gross yield 4.2%. Standard market offer.",
+    "email": "Hi,\n\nI'm writing to express interest in 91 Poinsettia Avenue, Hollywell QLD 4216.\n\nI've reviewed the listing and would like to submit an offer of $1,122,000 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
+  },
+  {
+    "url": "https://www.domain.com.au/18-156-marina-quays-boulevard-hope-island-qld-4212-2020747473",
+    "address": "18/156 Marina Quays Boulevard, Hope Island QLD 4212",
+    "price": "$1,349,000+",
+    "beds": 3,
+    "baths": 2,
     "days": 0,
     "type": "Townhouse",
-    "brief": "3bed Townhouse in Labrador QLD 4215. Est. rent $726/wk, gross yield 4.2%. Standard market offer.",
-    "email": "Hi,\n\nI'm writing to express interest in 24/62-66 Brown Street, Labrador QLD 4215.\n\nI've reviewed the listing and would like to submit an offer of $792,000 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
+    "brief": "3bed Townhouse in Hope Island QLD 4212. Est. rent $1089/wk, gross yield 4.2%. Standard market offer.",
+    "email": "Hi,\n\nI'm writing to express interest in 18/156 Marina Quays Boulevard, Hope Island QLD 4212.\n\nI've reviewed the listing and would like to submit an offer of $1,187,120 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
+  },
+  {
+    "url": "https://www.domain.com.au/106-merridown-drive-merrimac-qld-4226-2020741292",
+    "address": "106 Merridown Drive, Merrimac QLD 4226",
+    "price": "Offers Over $1,100,000",
+    "beds": 3,
+    "baths": 2,
+    "days": 0,
+    "type": "House",
+    "brief": "3bed House in Merrimac QLD 4226. Est. rent $888/wk, gross yield 4.2%. Standard market offer.",
+    "email": "Hi,\n\nI'm writing to express interest in 106 Merridown Drive, Merrimac QLD 4226.\n\nI've reviewed the listing and would like to submit an offer of $968,000 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
+  },
+  {
+    "url": "https://www.domain.com.au/5-stonewood-circuit-oxenford-qld-4210-2020742045",
+    "address": "5 Stonewood Circuit, Oxenford QLD 4210",
+    "price": "Offers Over $980,000",
+    "beds": 4,
+    "baths": 2,
+    "days": 0,
+    "type": "House",
+    "brief": "4bed House in Oxenford QLD 4210. Est. rent $791/wk, gross yield 4.2%. Standard market offer.",
+    "email": "Hi,\n\nI'm writing to express interest in 5 Stonewood Circuit, Oxenford QLD 4210.\n\nI've reviewed the listing and would like to submit an offer of $862,400 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
+  },
+  {
+    "url": "https://www.domain.com.au/16-155-baileys-mountain-road-upper-coomera-qld-4209-2020646625",
+    "address": "16/155 Baileys Mountain Road, Upper Coomera QLD 4209",
+    "price": "$995,000",
+    "beds": 3,
+    "baths": 3,
+    "days": 0,
+    "type": "Townhouse",
+    "brief": "3bed Townhouse in Upper Coomera QLD 4209. Est. rent $803/wk, gross yield 4.2%. Standard market offer.",
+    "email": "Hi,\n\nI'm writing to express interest in 16/155 Baileys Mountain Road, Upper Coomera QLD 4209.\n\nI've reviewed the listing and would like to submit an offer of $875,600 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
+  },
+  {
+    "url": "https://www.domain.com.au/21-binalong-drive-ashmore-qld-4214-2020728332",
+    "address": "21 Binalong Drive, Ashmore QLD 4214",
+    "price": "Offers Over $1,395,000",
+    "beds": 3,
+    "baths": 2,
+    "days": 0,
+    "type": "House",
+    "brief": "3bed House in Ashmore QLD 4214. Est. rent $1126/wk, gross yield 4.2%. Standard market offer.",
+    "email": "Hi,\n\nI'm writing to express interest in 21 Binalong Drive, Ashmore QLD 4214.\n\nI've reviewed the listing and would like to submit an offer of $1,227,600 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
   },
   {
     "url": "https://www.domain.com.au/9-ragamuffin-drive-west-coomera-waters-qld-4209-2020733053",
@@ -21,6 +98,28 @@ var PROP_DEALS = [
     "type": "House",
     "brief": "4bed House in Coomera Waters QLD 4209. Est. rent $1251/wk, gross yield 4.2%. Standard market offer.",
     "email": "Hi,\n\nI'm writing to express interest in 9 Ragamuffin Drive West, Coomera Waters QLD 4209.\n\nI've reviewed the listing and would like to submit an offer of $1,364,000 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
+  },
+  {
+    "url": "https://www.domain.com.au/30-studio-drive-oxenford-qld-4210-2020721586",
+    "address": "30 Studio Drive, Oxenford QLD 4210",
+    "price": "Pool & Dual Street Access! Offers Over $1,179,000",
+    "beds": 4,
+    "baths": 1,
+    "days": 0,
+    "type": "House",
+    "brief": "4bed House in Oxenford QLD 4210. Est. rent $952/wk, gross yield 4.2%. Standard market offer.",
+    "email": "Hi,\n\nI'm writing to express interest in 30 Studio Drive, Oxenford QLD 4210.\n\nI've reviewed the listing and would like to submit an offer of $1,037,520 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
+  },
+  {
+    "url": "https://www.domain.com.au/57-flora-terrace-pimpama-qld-4209-2020723569",
+    "address": "57 Flora Terrace, Pimpama QLD 4209",
+    "price": "Offers Over $950,000",
+    "beds": 4,
+    "baths": 2,
+    "days": 0,
+    "type": "House",
+    "brief": "4bed House in Pimpama QLD 4209. Est. rent $767/wk, gross yield 4.2%. Standard market offer.",
+    "email": "Hi,\n\nI'm writing to express interest in 57 Flora Terrace, Pimpama QLD 4209.\n\nI've reviewed the listing and would like to submit an offer of $836,000 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
   },
   {
     "url": "https://www.domain.com.au/208-641-pine-ridge-road-biggera-waters-qld-4216-2020726377",
@@ -54,116 +153,6 @@ var PROP_DEALS = [
     "type": "House",
     "brief": "4bed House in Coomera QLD 4209. Est. rent $887/wk, gross yield 4.2%. Standard market offer.",
     "email": "Hi,\n\nI'm writing to express interest in 10 Mackenzie Street, Coomera QLD 4209.\n\nI've reviewed the listing and would like to submit an offer of $967,120 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
-  },
-  {
-    "url": "https://www.domain.com.au/21-binalong-drive-ashmore-qld-4214-2020728332",
-    "address": "21 Binalong Drive, Ashmore QLD 4214",
-    "price": "Offers Over $1,395,000",
-    "beds": 3,
-    "baths": 2,
-    "days": 0,
-    "type": "House",
-    "brief": "3bed House in Ashmore QLD 4214. Est. rent $1126/wk, gross yield 4.2%. Standard market offer.",
-    "email": "Hi,\n\nI'm writing to express interest in 21 Binalong Drive, Ashmore QLD 4214.\n\nI've reviewed the listing and would like to submit an offer of $1,227,600 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
-  },
-  {
-    "url": "https://www.domain.com.au/30-studio-drive-oxenford-qld-4210-2020721586",
-    "address": "30 Studio Drive, Oxenford QLD 4210",
-    "price": "Pool & Dual Street Access! Offers Over $1,179,000",
-    "beds": 4,
-    "baths": 1,
-    "days": 0,
-    "type": "House",
-    "brief": "4bed House in Oxenford QLD 4210. Est. rent $952/wk, gross yield 4.2%. Standard market offer.",
-    "email": "Hi,\n\nI'm writing to express interest in 30 Studio Drive, Oxenford QLD 4210.\n\nI've reviewed the listing and would like to submit an offer of $1,037,520 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
-  },
-  {
-    "url": "https://www.domain.com.au/57-flora-terrace-pimpama-qld-4209-2020723569",
-    "address": "57 Flora Terrace, Pimpama QLD 4209",
-    "price": "Offers Over $950,000",
-    "beds": 4,
-    "baths": 2,
-    "days": 0,
-    "type": "House",
-    "brief": "4bed House in Pimpama QLD 4209. Est. rent $767/wk, gross yield 4.2%. Standard market offer.",
-    "email": "Hi,\n\nI'm writing to express interest in 57 Flora Terrace, Pimpama QLD 4209.\n\nI've reviewed the listing and would like to submit an offer of $836,000 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
-  },
-  {
-    "url": "https://www.domain.com.au/4-14-victor-avenue-paradise-point-qld-4216-2020462373",
-    "address": "4/14 Victor Avenue, Paradise Point QLD 4216",
-    "price": "$1,390,000 LAST REMAINING",
-    "beds": 3,
-    "baths": 2,
-    "days": 0,
-    "type": "Villa",
-    "brief": "3bed Villa in Paradise Point QLD 4216. Est. rent $1122/wk, gross yield 4.2%. Standard market offer.",
-    "email": "Hi,\n\nI'm writing to express interest in 4/14 Victor Avenue, Paradise Point QLD 4216.\n\nI've reviewed the listing and would like to submit an offer of $1,223,200 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
-  },
-  {
-    "url": "https://www.domain.com.au/73-girtin-circuit-pimpama-qld-4209-2020648188",
-    "address": "73 Girtin Circuit, Pimpama QLD 4209",
-    "price": "Offers Over $1,250,000",
-    "beds": 4,
-    "baths": 2,
-    "days": 0,
-    "type": "House",
-    "brief": "4bed House in Pimpama QLD 4209. Est. rent $1009/wk, gross yield 4.2%. Standard market offer.",
-    "email": "Hi,\n\nI'm writing to express interest in 73 Girtin Circuit, Pimpama QLD 4209.\n\nI've reviewed the listing and would like to submit an offer of $1,100,000 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
-  },
-  {
-    "url": "https://www.domain.com.au/145-125-santa-cruz-boulevard-clear-island-waters-qld-4226-2020682537",
-    "address": "145/125 Santa Cruz Boulevard, Clear Island Waters QLD 4226",
-    "price": "$1,475,000 plus",
-    "beds": 3,
-    "baths": 2,
-    "days": 0,
-    "type": "Townhouse",
-    "brief": "3bed Townhouse in Clear Island Waters QLD 4226. Est. rent $1191/wk, gross yield 4.2%. Standard market offer.",
-    "email": "Hi,\n\nI'm writing to express interest in 145/125 Santa Cruz Boulevard, Clear Island Waters QLD 4226.\n\nI've reviewed the listing and would like to submit an offer of $1,298,000 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
-  },
-  {
-    "url": "https://www.domain.com.au/57-1-residences-circuit-pimpama-qld-4209-2020716301",
-    "address": "57/1 Residences Circuit, Pimpama QLD 4209",
-    "price": "Asking Over $900,000",
-    "beds": 3,
-    "baths": 2,
-    "days": 0,
-    "type": "House",
-    "brief": "3bed House in Pimpama QLD 4209. Est. rent $726/wk, gross yield 4.2%. Standard market offer.",
-    "email": "Hi,\n\nI'm writing to express interest in 57/1 Residences Circuit, Pimpama QLD 4209.\n\nI've reviewed the listing and would like to submit an offer of $792,000 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
-  },
-  {
-    "url": "https://www.domain.com.au/tugun-1-pendraat-parade-hope-island-qld-4212-2018399356",
-    "address": "Tugun/1 Pendraat Parade, Hope Island QLD 4212",
-    "price": "$1,090,000",
-    "beds": 3,
-    "baths": 2,
-    "days": 0,
-    "type": "Unknown",
-    "brief": "3bed Unknown in Hope Island QLD 4212. Est. rent $880/wk, gross yield 4.2%. Standard market offer.",
-    "email": "Hi,\n\nI'm writing to express interest in Tugun/1 Pendraat Parade, Hope Island QLD 4212.\n\nI've reviewed the listing and would like to submit an offer of $959,200 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
-  },
-  {
-    "url": "https://www.domain.com.au/pelican-1-pendraat-parade-hope-island-qld-4212-2019328017",
-    "address": "Pelican//1 Pendraat Parade, Hope Island QLD 4212",
-    "price": "$975,000",
-    "beds": 3,
-    "baths": 2,
-    "days": 0,
-    "type": "Unknown",
-    "brief": "3bed Unknown in Hope Island QLD 4212. Est. rent $787/wk, gross yield 4.2%. Standard market offer.",
-    "email": "Hi,\n\nI'm writing to express interest in Pelican//1 Pendraat Parade, Hope Island QLD 4212.\n\nI've reviewed the listing and would like to submit an offer of $858,000 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
-  },
-  {
-    "url": "https://www.domain.com.au/2-12-goldwyn-way-oxenford-qld-4210-2020709483",
-    "address": "2/12 Goldwyn Way, Oxenford QLD 4210",
-    "price": "Offers Over $875,000",
-    "beds": 3,
-    "baths": 1,
-    "days": 0,
-    "type": "House",
-    "brief": "3bed House in Oxenford QLD 4210. Est. rent $706/wk, gross yield 4.2%. Standard market offer.",
-    "email": "Hi,\n\nI'm writing to express interest in 2/12 Goldwyn Way, Oxenford QLD 4210.\n\nI've reviewed the listing and would like to submit an offer of $770,000 (unconditional, 30-day settlement).\n\nPlease confirm the vendor's position and whether this offer will be considered. I'm ready to proceed quickly.\n\nKind regards,\nRyan Spiteri"
   }
 ];
 
