@@ -1010,11 +1010,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sa
     .prop-table thead th.prop-sorted{color:#fff}
     .prop-table tbody td{padding:10px 14px;border-bottom:1px solid var(--border);font-size:12px;vertical-align:middle}
     @media(max-width:768px){
-      .prop-filters{flex-direction:column}
+      .prop-filters{flex-direction:row;overflow-x:auto;flex-wrap:nowrap;padding:10px;gap:8px;-webkit-overflow-scrolling:touch}
+      .prop-filter-group{min-width:120px;flex-shrink:0}
+      .prop-filter-group select{min-width:110px}
+      .prop-reset{flex-shrink:0;align-self:flex-end}
       .prop-table thead th,.prop-table tbody td{padding:8px 10px;font-size:11px}
       .prop-stats{flex-wrap:wrap}
       .prop-stat{min-width:calc(50% - 6px)}
       #page-property .page-header{margin-bottom:12px}
+    }
+    @media(max-width:768px){
+      .prop-table-wrap::after{
+        content:"← Swipe to see more →";
+        display:block;
+        text-align:center;
+        font-size:10px;
+        color:var(--text2);
+        padding:6px;
+        opacity:0.7;
+      }
     }
     .prop-table tbody tr:last-child td{border-bottom:none}
     .prop-table tbody tr:hover td{background:var(--bg3)}
