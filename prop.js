@@ -172,6 +172,16 @@ function _propStats() {
   if (el('prop-stat-hot')) el('prop-stat-hot').textContent = d.filter(function(x) { return (x.days||0)>=60; }).length;
   if (el('prop-result-count')) el('prop-result-count').textContent = d.length;
   if (el('prop-header-sub')) el('prop-header-sub').textContent = 'Gold Coast & Brisbane | $600K–$1.5M | ' + PROP_DEALS.length + ' listings';
+  // Calculate yield and offer stats
+  var highYield = d.filter(function(x) {
+    var pn = 0; var pm = (x.price||'').match(/[\d,]+/g);
+    if (pm) pn = parseInt(pm[0].replace(/,/g,''))||0;
+    var rent = pn > 0 ? Math.round(pn * 0.042 / 52) : 0;
+    var yld = pn > 0 ? (rent * 52 / pn * 100) : 0;
+    return yld >= 4.5;
+  }).length;
+  if (el('prop-stat-warm')) el('prop-stat-warm').textContent = highYield;
+  if (el('prop-stat-emails')) el('prop-stat-emails').textContent = d.filter(function(x) { return x.email && x.email.length > 10; }).length;
 }
 
 function _propPopulateFilters() {
@@ -243,8 +253,21 @@ function _propRender() {
     var yld = priceNum > 0 ? (rent * 52 / priceNum * 100).toFixed(1) + '%' : '—';
     var cashflow = rent > 0 ? Math.round(rent - (priceNum * 0.8 * 0.065 / 52)) : 0;
     var cfStr = cashflow > 0 ? '<span style="color:#22c55e">+$' + cashflow + '/wk</span>' : cashflow < 0 ? '<span style="color:#ef4444">-$' + Math.abs(cashflow) + '/wk</span>' : '—';
-    var suburb = ''; var parts = (d.address||'').split(',');
-    if (parts.length > 1) suburb = parts[parts.length-2].trim();
+    // Extract suburb - handle "Unit/Street, Suburb QLD Postcode" format
+    var suburb = '';
+    var addr = d.address || '';
+    var commaparts = addr.split(',');
+    if (commaparts.length >= 2) {
+      // Second-to-last comma part usually has "Suburb STATE postcode"
+      var suburbPart = commaparts[commaparts.length-2].trim();
+      // Remove state and postcode if present
+      suburb = suburbPart.replace(/\s*(QLD|NSW|VIC|WA|SA|TAS|ACT|NT)\s*\d{4}/i, '').trim();
+    }
+    if (!suburb && addr) {
+      // Fallback: try to find suburb from URL
+      var urlparts = (d.url || '').split('-');
+      if (urlparts.length > 3) suburb = urlparts[urlparts.length-4] || '';
+    }
     var days = d.days || 0;
     var daysEl = days >= 60 ? '<span style="color:#ef4444;font-weight:700">' + days + 'd 🔥</span>' : days > 0 ? days + 'd' : '—';
     var stamp = priceNum > 0 ? '$' + Math.round(priceNum * 0.035 / 1000) + 'K' : '—';
