@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JXL-069 — Business Financials</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d0d0d;color:#e2e8f0;padding:24px;font-size:14px}
+h1{font-size:22px;font-weight:800;color:#fff;margin-bottom:4px}
+.sub{font-size:12px;color:#64748b;margin-bottom:28px}
+h2{font-size:13px;font-weight:700;color:#00897b;text-transform:uppercase;letter-spacing:.8px;margin:28px 0 12px;border-bottom:1px solid #1e2a2a;padding-bottom:6px}
+table{width:100%;border-collapse:collapse;background:#111;border-radius:10px;overflow:hidden;margin-bottom:8px}
+th{background:#161616;padding:10px 14px;text-align:left;font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px}
+td{padding:10px 14px;border-bottom:1px solid #1a1a1a;font-size:13px}
+tr:last-child td{border-bottom:none}
+td:nth-child(2),td:nth-child(3),td:nth-child(4){text-align:right}
+.num{font-family:monospace;font-size:13px}
+.green{color:#22c55e;font-weight:700}
+.red{color:#ef4444}
+.amber{color:#f59e0b;font-weight:700}
+.total-row td{background:#0d1f1c;color:#00897b;font-weight:700;font-size:14px}
+.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:28px}
+.kpi{background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:16px;border-left:3px solid #00897b}
+.kpi-val{font-size:26px;font-weight:800;color:#fff}
+.kpi-label{font-size:11px;color:#64748b;margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
+.kpi-sub{font-size:11px;color:#00897b;margin-top:2px}
+.note{font-size:11px;color:#374151;margin-top:6px;line-height:1.5}
+.section{background:#111;border-radius:10px;padding:16px 20px;margin-bottom:16px;border:1px solid #1e1e1e}
+@media(max-width:600px){.kpi-grid{grid-template-columns:1fr}.kpi-val{font-size:22px}}
+</style>
+</head>
+<body>
+
+<h1>JXL-069 Research Serum</h1>
+<div class="sub">Business Financials — Batch 1 (100 units) | Updated April 2026</div>
+
+<!-- KPIs -->
+<div class="kpi-grid">
+  <div class="kpi">
+    <div class="kpi-val">$394</div>
+    <div class="kpi-label">Total Investment (AUD)</div>
+    <div class="kpi-sub">All-in for 100 bottles</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-val">$8,900</div>
+    <div class="kpi-label">Gross Revenue (AUD)</div>
+    <div class="kpi-sub">100 bottles × $89</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-val">$8,506</div>
+    <div class="kpi-label">Gross Profit (AUD)</div>
+    <div class="kpi-sub">After COGS only</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-val">95.6%</div>
+    <div class="kpi-label">Gross Margin</div>
+    <div class="kpi-sub">Extremely high — raw material business</div>
+  </div>
+</div>
+
+<h2>Startup Investment — One-Time Costs</h2>
+<table>
+  <thead><tr><th>Item</th><th>Supplier</th><th>Qty</th><th>Cost (AUD)</th></tr></thead>
+  <tbody>
+    <tr><td>JXL-069 Raw Powder (2g)</td><td>Excenen Pharmatech</td><td>2g</td><td class="num amber">~$240</td></tr>
+    <tr><td>Micro scale (0.001g)</td><td>eBay AU</td><td>1</td><td class="num">$25</td></tr>
+    <tr><td>Glass beakers + stirrer</td><td>eBay AU</td><td>set</td><td class="num">$20</td></tr>
+    <tr><td>Syringes / pipettes</td><td>eBay AU</td><td>10pk</td><td class="num">$10</td></tr>
+    <tr class="total-row"><td colspan="3">One-Time Equipment Total</td><td class="num">~$295</td></tr>
+  </tbody>
+</table>
+<div class="note">* Equipment is reusable across all future batches — cost amortises to near-zero after batch 1</div>
+
+<h2>Per-Batch COGS — 100 Bottles</h2>
+<table>
+  <thead><tr><th>Item</th><th>Supplier</th><th>Qty</th><th>Cost (AUD)</th></tr></thead>
+  <tbody>
+    <tr><td>JXL-069 Raw Powder (15mg × 100 bottles = 1.5g)</td><td>Excenen</td><td>1.5g</td><td class="num">~$180</td></tr>
+    <tr><td>30mL Amber Glass Spray Bottles</td><td>Amber Jars AU</td><td>100</td><td class="num">$21</td></tr>
+    <tr><td>DMI (Dimethyl Isosorbide)</td><td>Crafting Cosmetics AU</td><td>500mL</td><td class="num">$38</td></tr>
+    <tr><td>Propylene Glycol</td><td>Pharmacy/Amazon</td><td>500mL</td><td class="num">$15</td></tr>
+    <tr><td>Ethanol 99%</td><td>Lab supply</td><td>1L</td><td class="num">$25</td></tr>
+    <tr><td>Labels (printed, waterproof)</td><td>Vistaprint / local</td><td>100</td><td class="num">$30</td></tr>
+    <tr><td>Shipping / packaging materials</td><td>various</td><td>-</td><td class="num">$20</td></tr>
+    <tr class="total-row"><td colspan="3">Total COGS (100 units)</td><td class="num">$329</td></tr>
+    <tr><td colspan="3" style="color:#64748b;font-size:12px">Cost per bottle</td><td class="num green">$3.29</td></tr>
+  </tbody>
+</table>
+
+<h2>Revenue & Profit — Batch 1</h2>
+<table>
+  <thead><tr><th>Metric</th><th>Formula</th><th colspan="2">Value (AUD)</th></tr></thead>
+  <tbody>
+    <tr><td>Selling price per bottle</td><td>Fixed</td><td colspan="2" class="num">$89.00</td></tr>
+    <tr><td>Units — Batch 1</td><td>-</td><td colspan="2" class="num">100</td></tr>
+    <tr><td>Gross Revenue</td><td>100 × $89</td><td colspan="2" class="num green">$8,900</td></tr>
+    <tr><td>COGS</td><td>as above</td><td colspan="2" class="num red">-$329</td></tr>
+    <tr><td>Payment processing (Nowpayments ~1%)</td><td>$8,900 × 1%</td><td colspan="2" class="num red">-$89</td></tr>
+    <tr><td>Shipping to customers (est. avg $12/order)</td><td>100 × $12</td><td colspan="2" class="num red">-$1,200</td></tr>
+    <tr><td>Ads / marketing (optional test budget)</td><td>est.</td><td colspan="2" class="num red">-$500</td></tr>
+    <tr class="total-row"><td colspan="2">Net Profit — Batch 1</td><td colspan="2" class="num green">$6,782</td></tr>
+    <tr><td colspan="2" style="color:#64748b;font-size:12px">Net margin</td><td colspan="2" class="num green">76.2%</td></tr>
+  </tbody>
+</table>
+
+<h2>Payment Processor Options</h2>
+<div class="section">
+  <table>
+    <thead><tr><th>Processor</th><th>Fee</th><th>Risk Level</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>NowPayments</strong> (crypto)</td><td>~0.5-1%</td><td class="green">✓ Safe</td><td>Accept BTC, ETH, USDT. No chargebacks. Best for research chemicals.</td></tr>
+      <tr><td><strong>Coinbase Commerce</strong></td><td>1%</td><td class="green">✓ Safe</td><td>Easy setup, crypto only. Converts to AUD automatically.</td></tr>
+      <tr><td><strong>Stripe</strong></td><td>1.75%</td><td class="red">✗ High risk</td><td>Will likely ban within weeks for research chemicals. Not recommended.</td></tr>
+      <tr><td><strong>PayPal</strong></td><td>2.6%</td><td class="red">✗ High risk</td><td>Very likely to freeze funds. Avoid.</td></tr>
+      <tr><td><strong>Paydock / Windcave</strong></td><td>~2%</td><td class="amber">⚠ Medium</td><td>Some high-risk merchant accounts available. Worth exploring.</td></tr>
+    </tbody>
+  </table>
+  <div class="note" style="margin-top:12px">Recommendation: Start with <strong>NowPayments (crypto)</strong> — zero ban risk, lower fees, and the research chemical customer base is comfortable with crypto. Add a card option via a high-risk processor once you have volume.</div>
+</div>
+
+<h2>Scale Projection</h2>
+<table>
+  <thead><tr><th>Batch Size</th><th>Raw Powder</th><th>COGS</th><th>Revenue</th><th>Net Profit</th></tr></thead>
+  <tbody>
+    <tr><td>100 bottles (Batch 1)</td><td>1.5g</td><td class="num">$329</td><td class="num">$8,900</td><td class="num green">$6,782</td></tr>
+    <tr><td>500 bottles</td><td>7.5g</td><td class="num">$1,100</td><td class="num">$44,500</td><td class="num green">$37,400</td></tr>
+    <tr><td>1,000 bottles</td><td>15g</td><td class="num">$1,900</td><td class="num">$89,000</td><td class="num green">$77,000</td></tr>
+  </tbody>
+</table>
+<div class="note">* 2g of raw powder yields ~133 bottles at 0.05% concentration. Powder cost drops significantly at 10g+ quantities.</div>
+
+<p style="font-size:10px;color:#1f2937;margin-top:24px;text-align:center">JXL-069 Financial Model · April 2026 · Prepared by Elara Voss</p>
+
+</body>
+</html>
