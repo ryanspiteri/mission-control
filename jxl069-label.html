@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JXL-069 Label</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #f0f0f0; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; }
+
+/* Label dimensions: 80mm x 45mm (standard 30mL bottle wrap label) */
+.label {
+  width: 302px; /* 80mm at 96dpi */
+  height: 170px; /* 45mm at 96dpi */
+  background: #0a0a0a;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.label::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00897b, #00bcd4);
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.brand {
+  font-size: 8px;
+  font-weight: 700;
+  color: #00897b;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.batch {
+  font-size: 7px;
+  color: #444;
+  letter-spacing: 0.5px;
+}
+
+.product-name {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.product-sub {
+  font-size: 8px;
+  color: #00897b;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.specs-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.spec {
+  text-align: center;
+}
+
+.spec-val {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.spec-label {
+  font-size: 6.5px;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background: #222;
+}
+
+.bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.disclaimer {
+  font-size: 5.5px;
+  color: #333;
+  line-height: 1.4;
+  max-width: 180px;
+}
+
+.cas {
+  font-size: 6px;
+  color: #333;
+  text-align: right;
+  font-family: monospace;
+}
+
+/* Print button */
+.print-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #00897b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media print {
+  body { background: white; }
+  .print-btn { display: none; }
+  .label { box-shadow: none; }
+}
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">Print Label</button>
+
+<div class="label">
+  <div class="top-row">
+    <div class="brand">Research Grade</div>
+    <div class="batch">Lot: RG-001</div>
+  </div>
+
+  <div>
+    <div class="product-name">JXL-069</div>
+    <div class="product-sub">MPC Inhibitor · Topical Research Serum</div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec">
+      <div class="spec-val">30mL</div>
+      <div class="spec-label">Volume</div>
+    </div>
+    <div class="divider"></div>
+    <div class="spec">
+      <div class="spec-val">0.05%</div>
+      <div class="spec-label">Concentration</div>
+    </div>
+    <div class="divider"></div>
+    <div class="spec">
+      <div class="spec-val">500mcg/mL</div>
+      <div class="spec-label">Strength</div>
+    </div>
+    <div class="divider"></div>
+    <div class="spec">
+      <div class="spec-val">≥98%</div>
+      <div class="spec-label">Purity</div>
+    </div>
+  </div>
+
+  <div class="bottom-row">
+    <div class="disclaimer">For laboratory research use only.<br>Not for human consumption. Not TGA approved.<br>Store at 2–8°C. Keep out of reach of children.</div>
+    <div class="cas">CAS: 2260696-63-5</div>
+  </div>
+</div>
+
+</body>
+</html>
